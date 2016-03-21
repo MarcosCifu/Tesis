@@ -57,6 +57,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <section class="content">
             <!-- Your Page Content Here -->
             @yield('content')
+
+
+
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
 
@@ -83,6 +86,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <script src="{{ asset ("/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js") }}"></script>
 
+<script src="{{ asset ("/plugins/chartjs/Chart.js") }}"></script>
 
+<script src="{{ asset ("/plugins/chartjs/Chart.min.js") }}"></script>
 </body>
 </html>
