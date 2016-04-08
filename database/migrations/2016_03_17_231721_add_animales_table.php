@@ -18,7 +18,7 @@ class AddAnimalesTable extends Migration
             $table->bigInteger('numero_Guia');
             $table->string('tipo');
             $table->integer('id_corral')->unsigned();
-            $table->foreign('id_corral')->references('id')->on('Corral');
+            $table->foreign('id_corral')->references('id')->on('corrales');
             $table->timestamps();
         });
 
@@ -27,10 +27,10 @@ class AddAnimalesTable extends Migration
             $table->increments('id');
             $table->integer('id_animales')->unsigned();
             $table->integer('id_user')->unsigned();
-            $table->date('fecha_compra');
-            $table->date('fecha_venta');
-            $table->integer('precio_compra');
-            $table->integer('precio_venta');
+            $table->date('fecha_ingreso');
+            $table->date('fecha_salida');
+            $table->integer('precio_ingreso');
+            $table->integer('precio_salida');
             $table->string('procedencia');
             $table->foreign('id_animales')->references('id')->on('animales');
             $table->foreign('id_user')->references('id')->on('users');

@@ -12,7 +12,7 @@ class AddPesoTable extends Migration
      */
     public function up()
     {
-        Schema::create('peso', function (Blueprint $table) {
+        Schema::create('pesos', function (Blueprint $table) {
             $table->increments('id');
             $table->float('pesaje');
             $table->date('fecha');
@@ -29,6 +29,6 @@ class AddPesoTable extends Migration
      */
     public function down()
     {
-        Schema::drop('peso');
+        Schema::drop('pesos');
     }
 }

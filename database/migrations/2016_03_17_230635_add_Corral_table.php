@@ -12,9 +12,10 @@ class AddCorralTable extends Migration
      */
     public function up()
     {
-        Schema::create('Corral', function (Blueprint $table) {
+        Schema::create('corrales', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('numero');
+            $table->integer('cantidad');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ class AddCorralTable extends Migration
      */
     public function down()
     {
-        Schema::drop('Corral');
+        Schema::drop('corrales');
     }
 }
