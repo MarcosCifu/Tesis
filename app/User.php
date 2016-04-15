@@ -23,8 +23,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    public function Animales()
+    public function animals()
     {
-        return $this->belongsTo('App\Animal');
+        return $this->belongsToMany('App\Animal','user_animal','id_animales')->wherePivot('fecha_ingreso','fecha_salida','precio_ingreso','precio_salida','procedencia')->withTimestamps();
     }
 }

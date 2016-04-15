@@ -8,8 +8,8 @@ class Corral extends Model
 {
     protected $table = "corrales";
     protected $fillable = ['numero','cantidad'];
-    public function Animales()
+    public function animals()
     {
-        return $this->$this->hasMany('App\Animal');
+        return $this->hasMany('App\Animal');
     }
 }

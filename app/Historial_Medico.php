@@ -8,8 +8,8 @@ class Historial_Medico extends Model
 {
     protected $table = "historial_Medico";
     protected $fillable = ['enfermedad','fecha','id_animales'];
-    public function Animal()
+    public function animal()
     {
-        return $this->belongsTo('App\Animal');
+        return $this->belongsTo('App\Animal','id_animales');
     }
 }

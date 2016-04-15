@@ -8,9 +8,9 @@ class Peso extends Model
 {
     protected $table = "pesos";
     protected $fillable = ['pesaje','fecha','id_animales'];
-    public function Animal()
+    public function animal()
     {
-        return $this->belongsTo('App\Animal');
+        return $this->belongsTo('App\Animal', 'id_animales');
     }
         
 }

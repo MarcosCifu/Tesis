@@ -12,17 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
 Route::get('home', function () {
     return view('home');
 });
-Route::get('login', function () {
-    return view('login');
+Route::group(['prefix' => 'admin'], function () {
+
+    Route::resource('users','UsersController');
+    Route::get('admin', function () {
+        return view('template');
+    });
 });
-Route::get('admin', function () {
-    return view('template');
-});
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -41,3 +43,10 @@ Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
+Route::group(['prefix' => 'animales'], function() {
+
+    Route::get('view/{id}',[
+        'uses' => 'TestController@view',
+        'as'   => 'animalesview'
+    ]);
+});

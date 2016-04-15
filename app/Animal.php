@@ -3,25 +3,35 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 
-class Animal extends Model
+class Animal extends Model implements SluggableInterface
 {
+    use SluggableTrait;
+
+    protected $sluggable = [
+        'build_from' => 'DIIO',
+        'save_to'    => 'slug',
+    ];
+
     protected $table = "animales";
     protected $fillable = ['DIIO','numeroGuia','tipo','id_corral'];
-    public function Corral()
+
+    public function corral()
     {
-        return $this->belongsTo('App\Corral');
+        return $this->belongsTo('App\Corral','id_corral');
     }
-    public function Historiales_Medicos()
+    public function historialesmedicos()
     {
-        return $this->hasMany('App\Historial_Medico');
+        return $this->hasMany('App\Historial_Medico','id_animales');
     }
-    public function Pesos()
+    public function pesos()
     {
-        return $this->hasMany('App\Peso');
+        return $this->hasMany('App\Peso', 'id_animales');
     }
-    public function Users()
+    public function users()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsToMany('App\User', 'id_animales');
     }
 }

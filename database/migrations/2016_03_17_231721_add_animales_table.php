@@ -15,7 +15,6 @@ class AddAnimalesTable extends Migration
         Schema::create('animales', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('DIIO');
-            $table->bigInteger('numero_Guia');
             $table->string('tipo');
             $table->integer('id_corral')->unsigned();
             $table->foreign('id_corral')->references('id')->on('corrales');
@@ -27,6 +26,7 @@ class AddAnimalesTable extends Migration
             $table->increments('id');
             $table->integer('id_animales')->unsigned();
             $table->integer('id_user')->unsigned();
+            $table->bigInteger('numero_Guia');
             $table->date('fecha_ingreso');
             $table->date('fecha_salida');
             $table->integer('precio_ingreso');
