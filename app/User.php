@@ -25,6 +25,6 @@ class User extends Authenticatable
     ];
     public function animals()
     {
-        return $this->belongsToMany('App\Animal','user_animal','id_animales')->wherePivot('fecha_ingreso','fecha_salida','precio_ingreso','precio_salida','procedencia')->withTimestamps();
+        return $this->belongsToMany('App\Animal','user_animal','id','id_user')->wherePivot('fecha_ingreso','fecha_salida','precio_ingreso','precio_salida','procedencia')->withTimestamps();
     }
 }

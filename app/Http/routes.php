@@ -20,9 +20,14 @@ Route::get('home', function () {
 Route::group(['prefix' => 'admin'], function () {
 
     Route::resource('users','UsersController');
-    Route::get('admin', function () {
-        return view('template');
-    });
+    Route::get('users/{id}/destroy', [
+            'uses' => 'UsersController@destroy',
+            'as' => 'admin.users.destroy'
+    ]);
+    Route::get('users/{id}/edit', [
+            'uses' => 'UsersController@edit',
+            'as' => 'admin.users.edit'
+    ]);
 });
 
 /*
@@ -43,10 +48,3 @@ Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
-Route::group(['prefix' => 'animales'], function() {
-
-    Route::get('view/{id}',[
-        'uses' => 'TestController@view',
-        'as'   => 'animalesview'
-    ]);
-});

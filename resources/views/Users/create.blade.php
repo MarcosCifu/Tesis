@@ -3,7 +3,8 @@
 @section('title','Crear Usuario')
 
 @section('content')
-    {!! Form::open() !!}
+    {!! Form::open(['route' => 'admin.users.store', 'method' => 'POST']) !!}
+
         <div class="form-group">
             {!! Form::label('name','Nombre') !!}
             {!! Form::text('name',null,['class'=> 'form-control','placeholder' => 'Nombre Completo' ,'required']) !!}

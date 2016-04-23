@@ -32,6 +32,6 @@ class Animal extends Model implements SluggableInterface
     }
     public function users()
     {
-        return $this->belongsToMany('App\User', 'id_animales');
+        return $this->belongsToMany('App\User','user_animal','id_animales', 'id_user');
     }
 }
