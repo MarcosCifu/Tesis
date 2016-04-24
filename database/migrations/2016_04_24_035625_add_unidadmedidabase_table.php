@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPesoTable extends Migration
+class AddUnidadmedidabaseTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,9 @@ class AddPesoTable extends Migration
      */
     public function up()
     {
-        Schema::create('pesos', function (Blueprint $table) {
+        Schema::create('unidadmedidasbase', function (Blueprint $table) {
             $table->increments('id');
-            $table->float('pesaje');
-            $table->date('fecha');
-            $table->integer('id_animales')->unsigned();
-            $table->foreign('id_animales')->references('id')->on('animales')->onDelete('cascade');
+            $table->string('tipo');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ class AddPesoTable extends Migration
      */
     public function down()
     {
-        Schema::drop('pesos');
+        Schema::drop('unidadmedidasbase');
     }
 }

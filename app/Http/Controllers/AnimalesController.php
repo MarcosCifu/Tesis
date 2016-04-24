@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\User;
-use Laracasts\Flash\Flash;
-use App\Http\Requests\UserRequest;
 
-class UsersController extends Controller
+use App\Http\Requests;
+
+class AnimalesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +15,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-       $users = User::orderBy('id','ASC')->paginate(5);
-        return view('Users.index')->with('users',$users);
+        //
     }
 
     /**
@@ -28,7 +25,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('Users.create');
+        return view('Animales.create');
     }
 
     /**
@@ -37,17 +34,9 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
-        $user = new User($request ->all());
-        $user->password = bcrypt($request->password);
-        $user->save();
-
-
-
-        Flash::success("Se ha registrado " . $user->name . " de forma exitosa");
-
-        return redirect()->route('admin.users.index');
+        //
     }
 
     /**
@@ -69,8 +58,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        return view('Users.edit')->with('user', $user);
+        //
     }
 
     /**
@@ -82,12 +70,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        $user->fill($request->all());
-        $user->save();
-
-        Flash::warning('El usuario ' . $user->name . ' ha sido editado con exito!');
-        return redirect()->route('admin.users.index');
+        //
     }
 
     /**
@@ -98,9 +81,6 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->delete();
-        Flash::error('El usuario ' . $user->name . 'ha sido borrado de forma exitosa!');
-        return redirect()->route('admin.users.index');
+        //
     }
 }

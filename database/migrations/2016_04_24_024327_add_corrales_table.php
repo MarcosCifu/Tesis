@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCorralTable extends Migration
+class AddCorralesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,6 +16,8 @@ class AddCorralTable extends Migration
             $table->increments('id');
             $table->integer('numero');
             $table->integer('cantidad');
+            $table->integer('id_galpon')->unsigned();
+            $table->foreign('id_galpon')->references('id')->on('galpones');
             $table->timestamps();
         });
     }

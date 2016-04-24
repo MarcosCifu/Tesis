@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddHistorialMedicoTable extends Migration
+class AddHistorialesMedicosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class AddHistorialMedicoTable extends Migration
      */
     public function up()
     {
-        Schema::create('historial_Medico', function (Blueprint $table) {
+        Schema::create('historiales_medicos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('enfermedad');
             $table->date('fecha');
@@ -29,6 +29,6 @@ class AddHistorialMedicoTable extends Migration
      */
     public function down()
     {
-        Schema::drop('historial_Medico');
+        Schema::drop('historiales_medicos');
     }
 }

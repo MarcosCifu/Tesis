@@ -10,6 +10,22 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::group(['middleware' => ['web']], function () {
+    Route::group(['prefix' => 'admin'], function () {
+
+        Route::resource('users','UsersController');
+        Route::get('users/{id}/destroy', [
+            'uses' => 'UsersController@destroy',
+            'as' => 'admin.users.destroy'
+        ]);
+        Route::get('users/{id}/edit', [
+            'uses' => 'UsersController@edit',
+            'as' => 'admin.users.edit'
+        ]);
+        
+        Route::resource ('animales','AnimalesController');
+    });
+});
 
 Route::get('/', function () {
     return view('login');
@@ -17,18 +33,7 @@ Route::get('/', function () {
 Route::get('home', function () {
     return view('home');
 });
-Route::group(['prefix' => 'admin'], function () {
 
-    Route::resource('users','UsersController');
-    Route::get('users/{id}/destroy', [
-            'uses' => 'UsersController@destroy',
-            'as' => 'admin.users.destroy'
-    ]);
-    Route::get('users/{id}/edit', [
-            'uses' => 'UsersController@edit',
-            'as' => 'admin.users.edit'
-    ]);
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -41,9 +46,7 @@ Route::group(['prefix' => 'admin'], function () {
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
+
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
