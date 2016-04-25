@@ -34,4 +34,8 @@ class Animal extends Model implements SluggableInterface
     {
         return $this->belongsToMany('App\User','user_animal','id_animales', 'id_user');
     }
+    public function images()
+    {
+        return $this->hasMany('App\image', 'id_image');
+    }
 }

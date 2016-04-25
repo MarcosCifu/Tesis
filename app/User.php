@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'type',
     ];
 
     /**
@@ -23,6 +23,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    public function images()
+    {
+        return $this->hasMany('App\Image', 'id_image');
+    }
     public function animals()
     {
         return $this->belongsToMany('App\Animal','user_animal','id','id_user')->wherePivot('fecha_ingreso','fecha_salida','precio_ingreso','precio_salida','procedencia')->withTimestamps();
