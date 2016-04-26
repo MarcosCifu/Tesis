@@ -10,6 +10,6 @@ class Umb extends Model
     protected $fillable = ['tipo'];
     public function materiales()
     {
-        return $this->hasMany('App\Material');
+        return $this->hasMany('App\Material','id_material');
     }
 }

@@ -13,4 +13,8 @@ class Material extends Model
     {
         return $this->belongsTo('App\Umb','id_umb');
     }
+    public function user()
+    {
+        return $this->belongsTo('App\User','id_user');
+    }
 }

@@ -25,10 +25,14 @@ class User extends Authenticatable
     ];
     public function images()
     {
-        return $this->hasMany('App\Image', 'id_image');
+        return $this->hasMany('App\Image', 'id_user');
     }
     public function animals()
     {
         return $this->belongsToMany('App\Animal','user_animal','id','id_user')->wherePivot('fecha_ingreso','fecha_salida','precio_ingreso','precio_salida','procedencia')->withTimestamps();
+    }
+    public function materiales()
+    {
+        return $this->hasMany('App\Material', 'id_user');
     }
 }
