@@ -18,8 +18,8 @@ class AddImagesTable extends Migration
             $table->integer('id_user')->unsigned();
             $table->string('name');
             $table->timestamps();
-            $table->foreign('id_animales')->references('id')->on('animales');
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_animales')->references('id')->on('animales')->on('galpones')->onDelete('cascade');
+            $table->foreign('id_user')->references('id')->on('users')->on('galpones')->onDelete('cascade');
         });
     }
 

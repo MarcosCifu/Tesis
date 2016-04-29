@@ -22,14 +22,40 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'UsersController@edit',
             'as' => 'admin.users.edit'
         ]);
-        
+
+
+
+        Route::resource ('galpones','GalponesController');
+        Route::get('galpones/{id}/destroy', [
+            'uses' => 'GalponesController@destroy',
+            'as' => 'admin.galpones.destroy'
+        ]);
+        Route::get('galpones/{id}/edit', [
+            'uses' => 'GalponesController@edit',
+            'as' => 'admin.galpones.edit'
+        ]);
+
+
         Route::resource ('animales','AnimalesController');
     });
 });
+Route::get('admin/auth/login', [
+        'uses' => 'Auth\AuthController@getLogin',
+        'as'   => 'admin.auth.login'
+]);
 
-Route::get('/', function () {
-    return view('login');
-});
+
+Route::post('admin/auth/login', [
+        'uses' => 'Auth\AuthController@postLogin',
+        'as'   => 'admin.auth.loguin'
+]);
+Route::get('admin/auth/logout', [
+        'uses' => 'Auth\AuthController@getLogout',
+        'as'   => 'admin.auth.login'
+]);
+
+
+
 Route::get('home', function () {
     return view('home');
 });

@@ -28,7 +28,9 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/home';
+    protected $redirectPath = '/home';
+    protected $loginPath = '/admin/auth/login';
 
     /**
      * Create a new authentication controller instance.
@@ -39,6 +41,7 @@ class AuthController extends Controller
     {
         $this->middleware('guest', ['except' => 'logout']);
     }
+
 
     /**
      * Get a validator for an incoming registration request.
@@ -69,4 +72,9 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+    protected function getLogin()
+    {
+        return view('login');
+    }
+
 }

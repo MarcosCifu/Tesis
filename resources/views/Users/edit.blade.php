@@ -1,8 +1,9 @@
 @extends('template')
 
-@section('title','Editar Usuario')
+@section('title','Editar Usuario ' . $user->name)
 
 @section('content')
+    @include('errors')
     {!! Form::model($user, ['route' => ['admin.users.update', $user->id], 'method' => 'PUT']) !!}
 
     <div class="form-group">

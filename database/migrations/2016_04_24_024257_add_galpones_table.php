@@ -16,6 +16,7 @@ class AddGalponesTable extends Migration
             $table->increments('id');
             $table->integer('numero');
             $table->integer('cantidad');
+            $table->integer('cantidad_actual');
             $table->timestamps();
         });
     }

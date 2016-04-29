@@ -32,8 +32,8 @@ class AddAnimalesTable extends Migration
             $table->integer('precio_ingreso');
             $table->integer('precio_salida');
             $table->string('procedencia');
-            $table->foreign('id_animales')->references('id')->on('animales');
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_animales')->references('id')->on('animales')->on('galpones')->onDelete('cascade');
+            $table->foreign('id_user')->references('id')->on('users')->on('galpones')->onDelete('cascade');
         });
     }
 
@@ -44,6 +44,7 @@ class AddAnimalesTable extends Migration
      */
     public function down()
     {
+        Schema::drop('user_animal');
         Schema::drop('animales');
     }
 }

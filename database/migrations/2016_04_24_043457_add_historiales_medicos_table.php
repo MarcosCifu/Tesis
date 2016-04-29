@@ -17,7 +17,7 @@ class AddHistorialesMedicosTable extends Migration
             $table->string('enfermedad');
             $table->date('fecha');
             $table->integer('id_animales')->unsigned();
-            $table->foreign('id_animales')->references('id')->on('animales')->onDelete('cascade');
+            $table->foreign('id_animales')->references('id')->on('animales')->onDelete('cascade')->on('galpones')->onDelete('cascade');
             $table->timestamps();
         });
     }

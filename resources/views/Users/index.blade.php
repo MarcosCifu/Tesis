@@ -3,6 +3,7 @@
 @section('title','Lista de Usuarios')
 
 @section('content')
+    @include('errors')
     <a href="{{route('admin.users.create')}}" class="btn btn-info">Registar nuevo usuario</a><hr>
     <table class="table table-striped">
         <thead>

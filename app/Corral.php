@@ -14,6 +14,6 @@ class Corral extends Model
     }
     public function galpon()
     {
-        return $this->belongsTo('App\Galpon','id_galpon');
+        return $this->belongsTo('App\Galpon','id_corral');
     }
 }
