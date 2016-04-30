@@ -10,9 +10,18 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-Route::group(['middleware' => ['web']], function () {
-    Route::group(['prefix' => 'admin'], function () {
 
+Route::get('home', function () {
+    return view('home');
+});
+
+Route::group(['middleware' => ['web']], function () {
+    Route::resource('log','LogController');
+    Route::get('logout', 'LogController@logout');
+    
+    Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+
+        
         Route::resource('users','UsersController');
         Route::get('users/{id}/destroy', [
             'uses' => 'UsersController@destroy',
@@ -39,26 +48,23 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource ('animales','AnimalesController');
     });
 });
-Route::get('admin/auth/login', [
+
+
+/*Route::get('auth/login', [
         'uses' => 'Auth\AuthController@getLogin',
         'as'   => 'admin.auth.login'
 ]);
 
 
-Route::post('admin/auth/login', [
+Route::post('auth/login', [
         'uses' => 'Auth\AuthController@postLogin',
-        'as'   => 'admin.auth.loguin'
-]);
-Route::get('admin/auth/logout', [
-        'uses' => 'Auth\AuthController@getLogout',
         'as'   => 'admin.auth.login'
 ]);
+Route::get('auth/logout', [
+        'uses' => 'Auth\AuthController@getLogout',
+        'as'   => 'admin.auth.logout'
+]);
 
-
-
-Route::get('home', function () {
-    return view('home');
-});
 
 
 /*

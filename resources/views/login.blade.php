@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -20,13 +21,15 @@
 
 </head>
 <body class="hold-transition login-page">
+
 <div class="login-box">
     <div class="login-logo">
         <a href="#"><b>Ancali</b>Beef</a>
     </div><!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">Ingrese al sistema</p>
-        {!! Form::open(['rote'=> 'admin.auth.login', 'method' => 'POST']) !!}
+        @include('errors')
+        {!! Form::open(['route'=> 'log.store', 'method' => 'POST']) !!}
             <div class="form-group">
                 {!! Form::label('email' ,'Correo Electronico') !!}
                 {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'example@email.com']) !!}
