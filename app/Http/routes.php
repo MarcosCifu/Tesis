@@ -44,6 +44,16 @@ Route::group(['middleware' => ['web']], function () {
             'as' => 'admin.galpones.edit'
         ]);
 
+        Route::resource ('corrales','CorralesController');
+        Route::get('corrales/{id}/destroy', [
+            'uses' => 'CorralesController@destroy',
+            'as' => 'admin.corrales.destroy'
+        ]);
+        Route::get('corrales/{id}/edit', [
+            'uses' => 'CorralesController@edit',
+            'as' => 'admin.corrales.edit'
+        ]);
+
 
         Route::resource ('animales','AnimalesController');
     });

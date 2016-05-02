@@ -29,7 +29,7 @@ class GalponesController extends Controller
     public function create()
     {
 
-        return view ('Galpones.Create');
+        return view ('Galpones.create');
     }
 
     /**
@@ -42,7 +42,7 @@ class GalponesController extends Controller
     {
         $galpon = new Galpon($request->all());
         $galpon->save();
-        Flash::success('El galpón ' . $galpon->numero . ' hasido creado con exito!');
+        Flash::success('El galpón ' . $galpon->numero . ' ha sido creado con exito!');
         return redirect()->route('admin.galpones.index');
     }
 
