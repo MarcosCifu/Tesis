@@ -15,12 +15,14 @@ class AddMaterialesTable extends Migration
         Schema::create('materiales', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('numero');
-            $table->string('descripcion');
-            $table->integer('cantudad');
+            $table->string('nombre');
+            $table->enum('umb',['KG','UN','L']);
+            $table->integer('cantidad');
+            $table->text('observacion',300);
+            
             $table->integer('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users');
-            $table->integer('id_umb')->unsigned();
-            $table->foreign('id_umb')->references('id')->on('unidadmedidasbase');
+
 
             $table->timestamps();
         });
