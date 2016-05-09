@@ -1,6 +1,6 @@
 @extends('template')
 
-@section('title','Ingresar Corral')
+@section('title','Editar Corral '. $corral->numero)
 
 
 @section('content')

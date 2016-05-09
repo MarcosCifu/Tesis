@@ -56,6 +56,44 @@ Route::group(['middleware' => ['web']], function () {
 
 
         Route::resource ('animales','AnimalesController');
+        Route::get('animales/{id}/destroy', [
+            'uses' => 'AnimalesController@destroy',
+            'as' => 'admin.animales.destroy'
+        ]);
+        Route::get('animales/{id}/edit', [
+            'uses' => 'AnimalesController@edit',
+            'as' => 'admin.animales.edit'
+        ]);
+
+        Route::resource('materiales','MaterialesController');
+        Route::get('materiales/{id}/destroy', [
+            'uses' => 'MaterialesController@destroy',
+            'as' => 'admin.materiales.destroy'
+        ]);
+        Route::get('materiales/{id}/edit', [
+            'uses' => 'MaterialesController@edit',
+            'as' => 'admin.materiales.edit'
+        ]);
+
+        Route::resource('historiales','HistorialesMedicosController');
+        Route::get('historiales/{id}/destroy', [
+            'uses' => 'HistorialesMedicosController@destroy',
+            'as' => 'admin.historiales.destroy'
+        ]);
+        Route::get('historiales/{id}/edit', [
+            'uses' => 'HistorialesMedicosController@edit',
+            'as' => 'admin.historiales.edit'
+        ]);
+
+        Route::resource('pesos','PesosController');
+        Route::get('pesos/{id}/destroy', [
+            'uses' => 'PesosController@destroy',
+            'as' => 'admin.pesos.destroy'
+        ]);
+        Route::get('pesos/{id}/edit', [
+            'uses' => 'PesosController@edit',
+            'as' => 'admin.pesos.edit'
+        ]);
     });
 });
 

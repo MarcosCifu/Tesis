@@ -3,25 +3,25 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPesosTable extends Migration
+class AddImagesTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-        public function up()
+    public function up()
     {
-        Schema::create('pesos', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->increments('id');
-            $table->float('pesaje');
-            $table->date('fecha');
             $table->integer('id_animales')->unsigned();
-            $table->foreign('id_animales')->references('id')->on('animales')->onDelete('cascade');
+            $table->integer('id_user')->unsigned();
+            $table->string('name');
             $table->timestamps();
+            $table->foreign('id_animales')->references('id')->on('animales');
+            $table->foreign('id_user')->references('id')->on('users');
         });
     }
-
 
     /**
      * Reverse the migrations.
@@ -30,6 +30,6 @@ class AddPesosTable extends Migration
      */
     public function down()
     {
-        Schema::drop('pesos');
+        Schema::drop('images');
     }
 }

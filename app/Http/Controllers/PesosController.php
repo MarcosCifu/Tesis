@@ -3,19 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Peso;
 use App\Animal;
-use App\User;
-use App\Historial_Medico;
-use App\Corral;
-use App\Http\Requests;
-use App\Http\Requests\AnimalRequest;
-use Illuminate\Support\Facades\Auth;
-use Laracasts\Flash\Flash;
 use Carbon\Carbon;
+use App\Http\Requests;
+use Laracasts\Flash\Flash;
 
-
-
-class AnimalesController extends Controller
+class PesosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,18 +18,12 @@ class AnimalesController extends Controller
      */
     public function index()
     {
-
-        $animales = Animal::orderBy('numero_Guia', 'ASC')->paginate(7);
-        $animales->each(function($animales){
-            $animales->corral->galpon;
-            $animales->corral;
-            $animales->historiales_medicos;
-            
-            
-            
+        $pesos = Peso::groupBy('id_animales')->paginate(5);
+        $pesos->each(function($pesos){
+            $pesos->animal;
 
         });
-        return view('Animales.index')->with('animales',$animales);
+        return view('Pesos.index')->with('pesos',$pesos);
     }
 
     /**
@@ -45,10 +33,11 @@ class AnimalesController extends Controller
      */
     public function create()
     {
-        $corrales = Corral::orderBy('numero', 'ASC')->lists('numero', 'id' );
+        $animales = Animal::orderBy('DIIO', 'ASC')->lists('DIIO', 'id');
         $fecha = Carbon::now();
 
-        return view('Animales.create')->with('corrales', $corrales)->with('fecha',$fecha);
+        return view('Pesos.create')
+            ->with('animales', $animales)->with('fecha',$fecha);
     }
 
     /**
@@ -57,13 +46,12 @@ class AnimalesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AnimalRequest $request)
+    public function store(Request $request)
     {
-        $animal = new Animal($request->all());
-        $animal->save();
-
-        Flash::success('El animal ' . $animal->DIIO . ' ha sido creado con exito!');
-        return redirect()->route('admin.animales.index');
+        $peso = new Peso ($request->all());
+        $peso->save();
+        Flash::success('El pesaje del animal ' . $peso->animal->DIIO . ' ha sido registrado con exito!');
+        return redirect()->route('admin.pesos.index');
     }
 
     /**
@@ -108,16 +96,6 @@ class AnimalesController extends Controller
      */
     public function destroy($id)
     {
-        $animal = Animal::find($id);
-        $animal->each(function($animal){
-            $animal->corral->galpon;
-            $animal->corral;
-            $animal->historiales_medicos;
-
-        });
-        $animal->delete();
-
-        Flash::error('El animal ' . $animal->DIIO . ' ha sido eliminado con exito!');
-        return redirect()->route('admin.animales.index');
+        //
     }
 }

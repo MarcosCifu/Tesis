@@ -7,12 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Material extends Model
 {
     protected $table = 'materiales';
-    protected $fillable = ['numero', 'descripcion', 'cantudad', 'id_umb'];
+    protected $fillable = ['numero', 'nombre', 'umb', 'cantidad','observacion'];
 
-    public function umb()
-    {
-        return $this->belongsTo('App\Umb','id_umb');
-    }
+    
     public function user()
     {
         return $this->belongsTo('App\User','id_user');

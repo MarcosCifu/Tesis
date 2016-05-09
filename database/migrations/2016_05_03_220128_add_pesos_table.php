@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddHistorialesMedicosTable extends Migration
+class AddPesosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,16 @@ class AddHistorialesMedicosTable extends Migration
      */
     public function up()
     {
-        Schema::create('historiales_medicos', function (Blueprint $table) {
+        Schema::create('pesos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('enfermedad');
+            $table->float('pesaje');
             $table->date('fecha');
             $table->integer('id_animales')->unsigned();
-            $table->foreign('id_animales')->references('id')->on('animales')->onDelete('cascade')->on('galpones')->onDelete('cascade');
+            $table->foreign('id_animales')->references('id')->on('animales')->onDelete('cascade');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
@@ -29,6 +30,6 @@ class AddHistorialesMedicosTable extends Migration
      */
     public function down()
     {
-        Schema::drop('historiales_medicos');
+        Schema::drop('pesos');
     }
 }

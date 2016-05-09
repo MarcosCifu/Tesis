@@ -10,7 +10,7 @@ class Corral extends Model
     protected $fillable = ['id','numero','cantidad','id_galpon'];
     public function animals()
     {
-        return $this->hasMany('App\Animal');
+        return $this->hasMany('App\Animal','id_animal');
     }
     public function galpon()
     {

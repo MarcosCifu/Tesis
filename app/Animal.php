@@ -11,12 +11,12 @@ class Animal extends Model implements SluggableInterface
     use SluggableTrait;
 
     protected $sluggable = [
-        'build_from' => 'DIIO',
+        'build_from' => 'id',
         'save_to'    => 'slug',
     ];
 
     protected $table = "animales";
-    protected $fillable = ['DIIO','numeroGuia','tipo','id_corral'];
+    protected $fillable = ['DIIO','numero_Guia','tipo','id_corral','estado'];
 
     public function corral()
     {
@@ -24,18 +24,19 @@ class Animal extends Model implements SluggableInterface
     }
     public function historialesmedicos()
     {
-        return $this->hasMany('App\Historial_Medico','id_animales');
+        return $this->hasMany('App\Historial_Medico','id_historiales');
     }
     public function pesos()
     {
-        return $this->hasMany('App\Peso', 'id_animales');
+        return $this->hasMany('App\Peso', 'id_peso');
     }
     public function users()
     {
-        return $this->belongsToMany('App\User','user_animal','id_animales', 'id_user');
+        return $this->belongsToMany('App\User','user_animal','id_animales', 'id_user')->withPivot('fecha_compra','fecha_venta','precio_compra','precio_venta')->withTimestamps();
     }
     public function images()
     {
         return $this->hasMany('App\image', 'id_image');
     }
+    
 }

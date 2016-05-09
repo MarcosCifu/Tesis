@@ -7,22 +7,17 @@
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.2 -->
     <link href="{{ asset("/bootstrap/css/bootstrap.min.css") }}" rel="stylesheet" type="text/css" />
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link href="{{asset("/bootstrap/css/ionicons.css")}}" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="{{ asset("/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
 
     <link href="{{ asset("/dist/css/skins/skin-yellow.min.css")}}" rel="stylesheet" type="text/css" />
-
-
-
-    <![endif]-->
 </head>
 <body class="hold-transition skin-yellow sidebar-mini">
 <div class="wrapper">
-
             <!-- Header -->
     @include('header')
             <!-- Sidebar -->
@@ -30,39 +25,19 @@
             <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-
         <section class="content-header">
             <h1>
                 @yield('title')
                 <small>{{ $page_description or null }}</small>
             </h1>
-
-            <!-- You can dynamically generate breadcrumbs here -->
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-                <li class="active">@yield('title')</li>
-            </ol>
         </section>
-
-
         <!-- Main content -->
         <section class="panel-body">
             <!-- Your Page Content Here -->
-
-
-
-
             @include('flash::message')
             @yield('content')
-
-
-
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
-
-    <!-- Footer -->
-    @include('footer')
-
 </div><!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Historial_Medico extends Model
 {
-    protected $table = "historial_Medico";
+    protected $table = "historiales_medicos";
     protected $fillable = ['enfermedad','fecha','id_animales'];
     public function animal()
     {
