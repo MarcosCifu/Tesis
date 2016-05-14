@@ -1,19 +1,21 @@
 @extends ('template')
 @section('content')
     @include('errors')
-            <div class="box">
-                <div class="box-header">
-                    <h4>Lista de Usuarios</h4>
-                    <div class="box-tools">
-                        {!! Form::open(['route'=>'admin.corrales.index', 'method' => 'GET', 'class' => 'navbar-form pull-right' ]) !!}
-                        <div class="input-group">
-                            <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                            <span class="input-group-btn"><button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button></span>
-                        </div>
-                        {!! Form::close() !!}
-                    </div>
-                </div><!-- /.box-header -->
-                <div class="box-body table-responsive no-padding">
+    <div class="animated flipInY">
+        <div class="box-tools">
+            {!! Form::open(['route'=>'admin.users.index', 'method' => 'GET', 'class' => 'navbar-form pull-right' ]) !!}
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search..."/>
+                <span class="input-group-btn"><button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button></span>
+            </div>
+            {!! Form::close() !!}
+        </div>
+        <div class="box">
+            <div class="box-header">
+                <h3>Listado de <b>Usuarios</b></h3>
+                <a href="{{route('admin.users.create')}}" class="btn btn-info btn-lg"><i class="fa fa-folder-open-o"></i> Registar nuevo Usuario</a><hr>
+            </div><!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
                         <tr>
                             <th>ID</th>
@@ -45,6 +47,7 @@
                     </table>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
-    <a href="{{route('admin.users.create')}}" class="btn btn-info">Registar nuevo usuario</a><hr>
+        </div>
+
     {!! $users->render() !!}
 @endsection

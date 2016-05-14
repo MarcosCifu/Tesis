@@ -24,7 +24,7 @@ class HistorialesRequest extends Request
     public function rules()
     {
         return [
-            'enfermedad' => 'alpha|min:4|max:250|required',
+            'enfermedad' => 'min:4|max:250|required',
             'fecha' => 'date|required',
             'id_animales' =>'required'
         ];

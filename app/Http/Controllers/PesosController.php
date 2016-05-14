@@ -18,7 +18,7 @@ class PesosController extends Controller
      */
     public function index()
     {
-        $pesos = Peso::groupBy('id_animales')->paginate(5);
+        $pesos = Peso::orderBy('id_animales')->paginate(5);
         $pesos->each(function($pesos){
             $pesos->animal;
 

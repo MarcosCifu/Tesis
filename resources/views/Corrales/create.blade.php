@@ -1,8 +1,5 @@
 @extends('template')
-
 @section('title','Ingresar Corral')
-
-
 @section('content')
     @include('errors')
     {{ Form::open(['route' => 'admin.corrales.store', 'method' => 'POST']) }}
@@ -23,4 +20,5 @@
 
     </div>
     {{ Form::close() }}
+
 @endsection

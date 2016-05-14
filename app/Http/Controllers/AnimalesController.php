@@ -120,4 +120,9 @@ class AnimalesController extends Controller
         Flash::error('El animal ' . $animal->DIIO . ' ha sido eliminado con exito!');
         return redirect()->route('admin.animales.index');
     }
+    public function perfil($id)
+    {
+        $animal = Animal::find($id);
+        return view ('Animales.perfil')->with('animal',$animal);
+    }
 }

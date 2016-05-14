@@ -1,6 +1,7 @@
 @extends('template')
 @section('content')
     @include('errors')
+    <div class="animated flipInY">
     <div class="box-tools">
         {!! Form::open(['route'=>'admin.corrales.index', 'method' => 'GET', 'class' => 'navbar-form pull-right' ]) !!}
         <div class="input-group">
@@ -11,8 +12,8 @@
     </div>
             <div class="box">
                 <div class="box-header">
-                    <h4>Listado de Materiales</h4>
-
+                    <h3>Listado de <b>Materiales</b></h3>
+                    <a href="{{route('admin.materiales.create')}}" class="btn btn-info btn-lg"><i class="fa fa-folder-open-o"></i> Registar nuevo Material</a><hr>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
@@ -46,12 +47,11 @@
 
                                     <a href="{{ route('admin.materiales.destroy', $material->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este material?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
                                 </td>
-
                             </tr>
                         @endforeach
                     </table>
+                    {!! $materiales->render() !!}
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
-    <a href="{{route('admin.materiales.create')}}" class="btn btn-info">Registar nuevo Material</a><hr>
-    {!! $materiales->render() !!}
+    </div>
 @endsection

@@ -1,28 +1,25 @@
 @extends('template')
 @section('content')
     @include('errors')
-    <div class="box">
-        <div class="box-header">
-            <h4>Listado de Historiales Medicos</h4>
-            <div class="box-tools">
-                {!! Form::open(['route'=>'admin.corrales.index', 'method' => 'GET', 'class' => 'navbar-form pull-right' ]) !!}
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                    <span class="input-group-btn"><button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button></span>
-                </div>
-                {!! Form::close() !!}
-            </div>
-        </div><!-- /.box-header -->
-        <div class="box-body table-responsive no-padding">
-            <table class="table table-hover">
-                <tr>
-                    <th>Animal</th>
-                    <th>Diagnostico</th>
-                    <th>Fecha</th>
-                    <th>Estado</th>
-                    <th>Acción</th>
-                </tr>
-                @foreach($historiales as $historial)
+    <div class="animated flipInY">
+        <div class="box">
+            <div class="box-header">
+                <h3>Listado de Historiales Medicos</h3>
+                <a href="{{route('admin.historiales.create')}}" class="btn btn-info btn-lg"><i class="fa fa-folder-open-o"></i> Registar nuevo Diagnostico</a><hr>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <table id="historiales" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Animal</th>
+                            <th>Diagnostico</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($historiales as $historial)
                     <tr>
                         <td>{{$historial->animal->DIIO}}</td>
                         <td>{{$historial->enfermedad}}</td>
@@ -46,9 +43,25 @@
 
                     </tr>
                 @endforeach
+                    </tbody>
             </table>
-        </div><!-- /.box-body -->
+                    {!! $historiales->render() !!}
+            </div><!-- /.box-body -->
     </div><!-- /.box -->
-    <a href="{{route('admin.historiales.create')}}" class="btn btn-info">Registar nuevo Historial</a><hr>
-    {!! $historiales->render() !!}
+    </div>
+@endsection
+@section('chartjs')
+    <script>
+        $(function () {
+            $("#historiales").DataTable();
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
+            });
+        });
+    </script>
 @endsection

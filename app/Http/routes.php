@@ -64,6 +64,10 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'AnimalesController@edit',
             'as' => 'admin.animales.edit'
         ]);
+        Route::get('animales/{id}/perfil', [
+            'uses' => 'AnimalesController@perfil',
+            'as' => 'admin.animales.perfil'
+        ]);
 
         Route::resource('materiales','MaterialesController');
         Route::get('materiales/{id}/destroy', [

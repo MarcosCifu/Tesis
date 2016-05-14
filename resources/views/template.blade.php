@@ -8,13 +8,20 @@
     <!-- Bootstrap 3.3.2 -->
     <link href="{{ asset("/bootstrap/css/bootstrap.min.css") }}" rel="stylesheet" type="text/css" />
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="{{asset("/bootstrap/fonts/css/font-awesome.css")}}" rel="stylesheet">
     <!-- Ionicons -->
     <link href="{{asset("/bootstrap/css/ionicons.css")}}" rel="stylesheet" type="text/css" />
+    <!-- Animate -->
+    <link href="{{asset("/bootstrap/css/animate.min.css")}}" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="{{ asset("/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
-
     <link href="{{ asset("/dist/css/skins/skin-yellow.min.css")}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset("/bootstrap/js/custom.js")}}" rel="stylesheet"/>
+    <link href="{{asset("/bootstrap/css/floatexampless.css")}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset("/plugins/datatables/dataTables.bootstrap.css") }}" rel="stylesheet" >
+
+    <script src="{{asset("/bootstrap/js/jquery.min.js")}}"></script>
+
 </head>
 <body class="hold-transition skin-yellow sidebar-mini">
 <div class="wrapper">
@@ -23,21 +30,20 @@
             <!-- Sidebar -->
     @include('sidebar')
             <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="right_col" role="main">
+        <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                @yield('title')
-                <small>{{ $page_description or null }}</small>
-            </h1>
-        </section>
-        <!-- Main content -->
-        <section class="panel-body">
-            <!-- Your Page Content Here -->
-            @include('flash::message')
-            @yield('content')
-        </section><!-- /.content -->
-    </div><!-- /.content-wrapper -->
+            <!-- Main content -->
+            <section class="panel-body">
+                    <!-- Your Page Content Here -->
+                    @include('flash::message')
+                    @yield('content')
+                    @yield('chart')
+
+
+            </section><!-- /.content -->
+        </div><!-- /.content-wrapper -->
+    </div>
 </div><!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
@@ -58,8 +64,12 @@
 
 <script src="{{ asset ("/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js") }}"></script>
 
-<script src="{{ asset ("/plugins/chartjs/Chart.js") }}"></script>
+<script src="{{ asset("/plugins/datatables/jquery.dataTables.min.js") }}"></script>
+<script src="{{ asset("/plugins/datatables/dataTables.bootstrap.min.js") }}"></script>
 
-<script src="{{ asset ("/plugins/chartjs/Chart.min.js") }}"></script>
+<script src="{{ asset ("/plugins/chartjs/Chart.js") }}"></script>
+@yield('chartjs')
+
+
 </body>
 </html>
