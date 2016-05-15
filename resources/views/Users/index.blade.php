@@ -2,21 +2,14 @@
 @section('content')
     @include('errors')
     <div class="animated flipInY">
-        <div class="box-tools">
-            {!! Form::open(['route'=>'admin.users.index', 'method' => 'GET', 'class' => 'navbar-form pull-right' ]) !!}
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                <span class="input-group-btn"><button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button></span>
-            </div>
-            {!! Form::close() !!}
-        </div>
         <div class="box">
             <div class="box-header">
                 <h3>Listado de <b>Usuarios</b></h3>
-                <a href="{{route('admin.users.create')}}" class="btn btn-info btn-lg"><i class="fa fa-folder-open-o"></i> Registar nuevo Usuario</a><hr>
+                <a href="{{route('admin.users.create')}}" class="btn btn-info btn-lg"><i class="fa fa-folder-open-o"></i> Registar nuevo Usuario</a>
             </div><!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-                    <table class="table table-hover">
+            <div class="box-body">
+                <table id="users" class="table table-bordered table-hover">
+                    <thead>
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
@@ -24,6 +17,8 @@
                             <th>Tipo</th>
                             <th>Acción</th>
                         </tr>
+                    </thead>
+                    <tbody>
                         @foreach($users as $user)
                             <tr>
                                 <td>{{$user->id}}</td>
@@ -44,10 +39,22 @@
                                 </td>
                             </tr>
                         @endforeach
+                    </tbody>
                     </table>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
         </div>
 
     {!! $users->render() !!}
+@endsection
+@section('tablejs')
+    <script>
+        $(function () {
+            $('#users').DataTable({
+                "info": false,
+                "scrollX" : true
+
+            });
+        });
+    </script>
 @endsection

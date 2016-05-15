@@ -41,7 +41,7 @@ class LogController extends Controller
     public function store(loginRequest $request)
     {
         if(Auth::attempt(['email' => $request['email'], 'password' => $request['password']])){
-            return redirect()->route('admin.users.index');
+            return redirect()->route('index');
         }
         Flash::error("Datos incorrectos");
         return redirect()->route('log.index');

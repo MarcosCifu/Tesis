@@ -19,7 +19,7 @@ class HistorialesMedicosController extends Controller
      */
     public function index()
     {
-        $historiales = Historial_Medico::orderBy('id_animales','ASC')->paginate(5);
+        $historiales = Historial_Medico::orderBy('id_animales','ASC')->paginate();
         $historiales->each(function($historiales){
             $historiales->animal;
 

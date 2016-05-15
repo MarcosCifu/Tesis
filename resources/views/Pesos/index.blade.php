@@ -15,7 +15,7 @@
                 <h3>Listado de Pesajes</h3>
                 <a href="{{route('admin.pesos.create')}}" class="btn btn-info btn-lg"><i class="fa fa-folder-open-o"></i> Registar nuevo Peso</a><hr>
             </div><!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
+            <div class="box-body">
             <table class="table table-hover">
                 <tr>
                     <th>Animal</th>

@@ -31,6 +31,14 @@
         {!! Form::label('fecha_ingreso','Fecha de Ingreso') !!}<br>
         {!! Form::date('fecha_compra', $fecha) !!}
     </div>
+    <div class="form-group">
+        {!! Form::label('image','Imagen del Animal') !!}
+        {!! Form::file('image') !!}
+    </div>
+    <div class="form-group">
+        {!! Form::hidden('user_id', Auth::user()->id , null , ['class'=>'form-control']) !!}
+
+    </div>
 
     <div class="form-group">
         {!! Form::submit('Registrar' ,['class' => 'btn btn-primary']) !!}

@@ -5,10 +5,10 @@
         <div class="box">
             <div class="box-header">
                 <h3>Listado de Historiales Medicos</h3>
-                <a href="{{route('admin.historiales.create')}}" class="btn btn-info btn-lg"><i class="fa fa-folder-open-o"></i> Registar nuevo Diagnostico</a><hr>
+                <a href="{{route('admin.historiales.create')}}" class="btn btn-info btn-lg"><i class="fa fa-folder-open-o"></i> Registar nuevo Diagnostico</a>
             </div><!-- /.box-header -->
             <div class="box-body">
-                <table id="historiales" class="table table-bordered table-hover">
+                <table id="historiales" class="table table-bordered table-hover no-padding">
                     <thead>
                         <tr>
                             <th>Animal</th>
@@ -50,17 +50,12 @@
     </div><!-- /.box -->
     </div>
 @endsection
-@section('chartjs')
+@section('tablejs')
     <script>
         $(function () {
-            $("#historiales").DataTable();
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false
+            $('#historiales').DataTable({
+                "info": false,
+                "scrollX" : true
             });
         });
     </script>

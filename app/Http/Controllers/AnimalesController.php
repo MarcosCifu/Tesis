@@ -25,7 +25,7 @@ class AnimalesController extends Controller
     public function index()
     {
 
-        $animales = Animal::orderBy('numero_Guia', 'ASC')->paginate(7);
+        $animales = Animal::orderBy('numero_Guia', 'ASC')->paginate();
         $animales->each(function($animales){
             $animales->corral->galpon;
             $animales->corral;
@@ -59,12 +59,13 @@ class AnimalesController extends Controller
      */
     public function store(AnimalRequest $request)
     {
-        $animal = new Animal($request->all());
-        $animal->save();
-
-        Flash::success('El animal ' . $animal->DIIO . ' ha sido creado con exito!');
-        return redirect()->route('admin.animales.index');
+        $file = $request->file('image');
+        dd($file);
+        $name = 'ancalibeef' | time() . '.' . $file->getClientOriginalExtension();
+        $path = public_path() . '/images/animales/';
+        $file->move($path, $name);
     }
+
 
     /**
      * Display the specified resource.

@@ -69,6 +69,7 @@
 
 <script src="{{ asset ("/plugins/chartjs/Chart.js") }}"></script>
 @yield('chartjs')
+@yield('tablejs')
 
 
 </body>

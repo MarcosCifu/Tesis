@@ -11,17 +11,14 @@
 |
 */
 
-Route::get('home', function () {
-    return view('home');
-});
-
 Route::group(['middleware' => ['web']], function () {
     Route::resource('log','LogController');
     Route::get('logout', 'LogController@logout');
+    Route::resource('/','HomeController');
     
     Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
-        
+
         Route::resource('users','UsersController');
         Route::get('users/{id}/destroy', [
             'uses' => 'UsersController@destroy',
@@ -98,11 +95,13 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'PesosController@edit',
             'as' => 'admin.pesos.edit'
         ]);
+
+
     });
 });
 
 
-/*Route::get('auth/login', [
+Route::get('auth/login', [
         'uses' => 'Auth\AuthController@getLogin',
         'as'   => 'admin.auth.login'
 ]);

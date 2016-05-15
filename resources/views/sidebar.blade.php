@@ -8,6 +8,7 @@
         <ul class="sidebar-menu">
             <li class="header"><i class="fa fa-gears"></i> Panel de Control</li>
             <!-- Optionally, you can add icons to the links -->
+            <li><a href="{{ route('index')}}"><i class="glyphicon glyphicon-home"></i> <span>Inicio</span></a></li>
             <li><a href="{{ route('admin.users.index')}}"><i class="fa fa-users"></i> <span>Usuarios</span></a></li>
             <li>
                 <a href="#">
