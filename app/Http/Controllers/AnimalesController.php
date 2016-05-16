@@ -59,11 +59,10 @@ class AnimalesController extends Controller
      */
     public function store(AnimalRequest $request)
     {
-        $file = $request->file('image');
-        dd($file);
-        $name = 'ancalibeef' | time() . '.' . $file->getClientOriginalExtension();
-        $path = public_path() . '/images/animales/';
-        $file->move($path, $name);
+        $animal = new Animal($request->all());
+        $animal->save();
+        Flash::success('El animal ' . $animal->DIIO . ' ha sido creado con exito!');
+        return redirect()->route('admin.animales.index');
     }
 
 

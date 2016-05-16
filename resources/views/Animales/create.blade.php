@@ -5,7 +5,7 @@
 
 @section('content')
     @include('errors')
-    {{ Form::open(['route' => 'admin.animales.store', 'method' => 'POST']) }}
+    {{ Form::open(['route' => 'admin.animales.store', 'method' => 'POST', 'files'=>true]) }}
     <div class="form-group">
         {!! Form::label('diio' ,'DIIO') !!}
         {!! Form::text('DIIO', null, ['class' => 'form-control', 'placeholder' => 'DIIO del animal' , 'required' ]) !!}
@@ -33,7 +33,7 @@
     </div>
     <div class="form-group">
         {!! Form::label('image','Imagen del Animal') !!}
-        {!! Form::file('image') !!}
+        {!! Form::file('path') !!}
     </div>
     <div class="form-group">
         {!! Form::hidden('user_id', Auth::user()->id , null , ['class'=>'form-control']) !!}

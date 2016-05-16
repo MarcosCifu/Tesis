@@ -24,7 +24,7 @@
                     @foreach($animales as $animal)
                         <tr>
                             <td>{{$animal->numero_Guia}}</td>
-                            <td>{{$animal->DIIO}}</td>
+                            <td><a href="{{ route('admin.animales.perfil', $animal->id) }}">{{$animal->DIIO}}</a></td>
                             <td>{{$animal->tipo}}</td>
                             <td>Galpón {{$animal->corral->galpon->numero}}</td>
                             <td>Corral {{$animal->corral->numero}}</td>

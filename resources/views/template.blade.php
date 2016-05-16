@@ -20,6 +20,7 @@
     <link href="{{asset("/bootstrap/css/floatexampless.css")}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset("/plugins/datatables/dataTables.bootstrap.css") }}" rel="stylesheet" >
 
+
     <script src="{{asset("/bootstrap/js/jquery.min.js")}}"></script>
 
 </head>
@@ -68,6 +69,7 @@
 <script src="{{ asset("/plugins/datatables/dataTables.bootstrap.min.js") }}"></script>
 
 <script src="{{ asset ("/plugins/chartjs/Chart.js") }}"></script>
+<script src="{{ asset ("/plugins/chartjs/Chart.min.js") }}"></script>
 @yield('chartjs')
 @yield('tablejs')
 

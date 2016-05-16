@@ -16,7 +16,20 @@ class Animal extends Model implements SluggableInterface
     ];
 
     protected $table = "animales";
-    protected $fillable = ['DIIO','numero_Guia','tipo','id_corral','estado'];
+    protected $fillable = ['DIIO','numero_Guia','tipo','id_corral','estado','path'];
+
+    /**
+     * @return array
+     */
+    public function setPathAttribute($path)
+    {
+        if(!empty($path))
+        {
+            $nombre = 'ancalibeef' . time() . '.' . $path->getClientOriginalName();
+            $this->attributes['path'] = $nombre;
+            \Storage::disk('local')->put($nombre, \File::get($path));
+        }
+    }
 
     public function corral()
     {

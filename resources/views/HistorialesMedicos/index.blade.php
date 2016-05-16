@@ -55,7 +55,6 @@
         $(function () {
             $('#historiales').DataTable({
                 "info": false,
-                "scrollX" : true
             });
         });
     </script>
