@@ -33,8 +33,8 @@ class AddAnimalesTable extends Migration
             $table->integer('precio_compra');
             $table->integer('precio_venta');
             $table->string('procedencia');
-            $table->foreign('id_animales')->references('id')->on('animales');
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreign('id_animales')->references('id')->on('animales')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 }

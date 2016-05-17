@@ -19,13 +19,10 @@
         {!! Form::select('tipo',[ 'vaca' => 'Vaca' , 'novillo' => 'Novillo', 'vaquilla' => 'Vaquilla' , 'ternero' => 'Ternero', 'ternera' => 'Ternera'],null,['class'=> 'form-control', 'placeholder' => 'Seleccione un tipo' , 'required' ]) !!}
     </div>
     <div class="form-group">
-        {!! Form::label('procedencia' ,'Procedencia') !!}
-        {!! Form::text('procedencia', null, ['class' => 'form-control', 'placeholder' => 'Procedencia del animal' , 'required' ]) !!}
-    </div>
-    <div class="form-group">
         {!! Form::label('id_corral','Corral') !!}
         {!! Form::select('id_corral', $corrales , null ,['class'=> 'form-control', 'placeholder' => 'Seleccione un corral' , 'required']) !!}
     </div>
+
     <div class="form-group">
         {!! Form::label('estado','Estado') !!}
         {!! Form::select('estado',[ 'vivo' => 'Vivo' , 'muerto' => 'Muerto', 'enfermo' => 'Enfermo' ],null,['class'=> 'form-control', 'placeholder' => 'Seleccione un estado' , 'required' ]) !!}
@@ -33,10 +30,6 @@
     <div class="form-group">
         {!! Form::label('fecha_ingreso','Fecha de Ingreso') !!}<br>
         {!! Form::date('fecha_compra', $fecha) !!}
-    </div>
-    <div class="form-group">
-        {!! Form::label('valor' ,'Precio de compra') !!}
-        {!! Form::text('valor', null, ['class' => 'form-control', 'placeholder' => 'Precio del animal' , 'required' ]) !!}
     </div>
     <div class="form-group">
         {!! Form::label('image','Imagen del Animal') !!}

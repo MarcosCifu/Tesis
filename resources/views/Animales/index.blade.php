@@ -46,7 +46,6 @@
                     @endforeach
                     </tbody>
                 </table>
-                {!! $animales->render() !!}
             </div><!-- /.box-body -->
         </div><!-- /.box -->
     </div>
@@ -57,7 +56,7 @@
             $('#animales').DataTable({
                 "info": false,
                 "scrollX" : true,
-                "lengthMenu": [[5,10, 25, -1], [5,10, 25, "Todos"]]
+                "lengthMenu": [[5,10, 20, -1], [5,10, 20, "Todos"]]
             });
         });
     </script>

@@ -25,11 +25,12 @@ class AnimalesController extends Controller
     public function index()
     {
 
-        $animales = Animal::orderBy('numero_Guia', 'ASC')->paginate();
+        $animales = Animal::all();
         $animales->each(function($animales){
             $animales->corral->galpon;
             $animales->corral;
-            $animales->historiales_medicos;
+            $animales->users;
+
             
             
             
@@ -60,7 +61,10 @@ class AnimalesController extends Controller
     public function store(AnimalRequest $request)
     {
         $animal = new Animal($request->all());
+        $user = Auth::user();
         $animal->save();
+        $precio= $request->input('valor');
+        $animal->users()->attach($user->id, ['precio_compra'=> $precio]);
         Flash::success('El animal ' . $animal->DIIO . ' ha sido creado con exito!');
         return redirect()->route('admin.animales.index');
     }
@@ -125,4 +129,6 @@ class AnimalesController extends Controller
         $animal = Animal::find($id);
         return view ('Animales.perfil')->with('animal',$animal);
     }
+
+
 }

@@ -45,11 +45,7 @@ class Animal extends Model implements SluggableInterface
     }
     public function users()
     {
-        return $this->belongsToMany('App\User','user_animal','id_animales', 'id_user')->withPivot('fecha_compra','fecha_venta','precio_compra','precio_venta')->withTimestamps();
-    }
-    public function images()
-    {
-        return $this->hasMany('App\image', 'id_image');
+        return $this->belongsToMany('App\User','user_animal','id_animales','id_user')->withPivot('fecha_compra','fecha_venta','precio_compra','precio_venta');
     }
     
 }

@@ -69,7 +69,7 @@
 <script src="{{ asset("/plugins/datatables/dataTables.bootstrap.min.js") }}"></script>
 
 <script src="{{ asset ("/plugins/chartjs/Chart.js") }}"></script>
-<script src="{{ asset ("/plugins/chartjs/Chart.min.js") }}"></script>
+
 @yield('chartjs')
 @yield('tablejs')
 
