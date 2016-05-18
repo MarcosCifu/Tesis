@@ -88,7 +88,7 @@
             var areaChart = new Chart(areaChartCanvas);
 
             var areaChartData = {
-                labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"],
+                labels: [1,2,3,4,5,6,7,8,9,10,11,12],
                 datasets: [
                     {
                         label: "Pesajes",
@@ -98,7 +98,7 @@
                         pointStrokeColor: "rgba(60,141,188,1)",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(60,141,188,1)",
-                        data: [454, 510, 490, 505, 560 , 601, 580]
+                        data: {!! json_encode($pesos) !!}
                     }
                 ]
             };
@@ -152,7 +152,7 @@
             var barChartCanvas = $("#barChart").get(0).getContext("2d");
             var barChart = new Chart(barChartCanvas);
             var barChartData = {
-                labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"],
+                labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio","Agosto","Septiembre","Octubre", "Noviembre","Diciembre"],
                 datasets: [
                     {
                         label: "Pesajes",

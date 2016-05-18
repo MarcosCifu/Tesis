@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Animal;
 use App\User;
 use App\Historial_Medico;
+use App\Peso;
 use App\Corral;
 use App\Http\Requests;
 use App\Http\Requests\AnimalRequest;
@@ -64,7 +65,9 @@ class AnimalesController extends Controller
         $user = Auth::user();
         $animal->save();
         $precio= $request->input('valor');
-        $animal->users()->attach($user->id, ['precio_compra'=> $precio]);
+        $fecha = $request->input('fecha_compra');
+        $procedencia = $request->input('procedencia');
+        $animal->users()->attach($user->id, ['precio_compra'=> $precio, 'fecha_compra'=> $fecha, 'procedencia'=>$procedencia]);
         Flash::success('El animal ' . $animal->DIIO . ' ha sido creado con exito!');
         return redirect()->route('admin.animales.index');
     }
@@ -127,7 +130,8 @@ class AnimalesController extends Controller
     public function perfil($id)
     {
         $animal = Animal::find($id);
-        return view ('Animales.perfil')->with('animal',$animal);
+        $pesos = Peso::where('id_animales','=', $animal->id)->orderBy('created_at', 'ASC')->lists('pesaje');
+        return view ('Animales.perfil')->with('animal',$animal)->with('pesos',$pesos);
     }
 
 

@@ -17,6 +17,7 @@
                             <th>Galpón</th>
                             <th>Corral</th>
                             <th>Estado</th>
+                            <th>Fecha Ingreso</th>
                             <th>Acción</th>
                         </tr>
                     </thead>
@@ -38,6 +39,7 @@
                                     @endif
                                 @endif
                             </td>
+                            <td>{{$animal->created_at->format('m/d/Y')}}</td>
                             <td>
                                 <a href="{{ route('admin.animales.edit', $animal->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
                                 <a href="{{ route('admin.animales.destroy', $animal->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este animal?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>

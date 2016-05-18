@@ -16,7 +16,7 @@ class Animal extends Model implements SluggableInterface
     ];
 
     protected $table = "animales";
-    protected $fillable = ['DIIO','numero_Guia','tipo','id_corral','estado','path'];
+    protected $fillable = ['DIIO','numero_Guia','tipo','id_corral','estado','path','fecha_compra','fecha_venta','precio_compra','precio_venta'];
 
     /**
      * @return array
