@@ -14,8 +14,10 @@
 Route::group(['middleware' => ['web']], function () {
     Route::resource('log','LogController');
     Route::get('logout', 'LogController@logout');
-    Route::resource('/','HomeController');
-    
+
+    Route::group(['middleware' => 'auth'],function (){
+        Route::resource('/','HomeController');
+    });
     Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
 
@@ -64,6 +66,14 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('animales/{id}/perfil', [
             'uses' => 'AnimalesController@perfil',
             'as' => 'admin.animales.perfil'
+        ]);
+        Route::get('animales/{id}/pesoperfil', [
+            'uses' => 'AnimalesController@pesoperfil',
+            'as' => 'admin.animales.pesoperfil'
+        ]);
+        Route::get('animales/{id}/historialperfil', [
+            'uses' => 'AnimalesController@historialperfil',
+            'as' => 'admin.animales.historialperfil'
         ]);
 
         Route::resource('materiales','MaterialesController');

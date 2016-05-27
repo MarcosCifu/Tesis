@@ -21,7 +21,7 @@
                     <tbody>
                     @foreach($historiales as $historial)
                     <tr>
-                        <td>{{$historial->animal->DIIO}}</td>
+                        <td><a href="{{ route('admin.animales.perfil', $historial->animal->id) }}">{{$historial->animal->DIIO}}</a></td>
                         <td>{{$historial->enfermedad}}</td>
                         <td>{{$historial->created_at->diffForHumans()}}</td>
                         <td> @if($historial->animal->estado == "vivo")

@@ -18,7 +18,7 @@ class PesosController extends Controller
      */
     public function index()
     {
-        $pesos = Peso::orderBy('id_animales')->paginate(5);
+        $pesos = Peso::orderBy('id_animales')->paginate();
         $pesos->each(function($pesos){
             $pesos->animal;
 
@@ -98,4 +98,6 @@ class PesosController extends Controller
     {
         //
     }
+    
+    
 }

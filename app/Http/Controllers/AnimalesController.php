@@ -64,10 +64,10 @@ class AnimalesController extends Controller
         $animal = new Animal($request->all());
         $user = Auth::user();
         $animal->save();
-        $precio= $request->input('valor');
-        $fecha = $request->input('fecha_compra');
+        $precio = $request->input('valor');
+        $fechacompra = $request->input('fecha');
         $procedencia = $request->input('procedencia');
-        $animal->users()->attach($user->id, ['precio_compra'=> $precio, 'fecha_compra'=> $fecha, 'procedencia'=>$procedencia]);
+        $animal->users()->attach($user->id, ['precio_compra'=> $precio, 'fecha_compra'=> $fechacompra, 'procedencia'=>$procedencia]);
         Flash::success('El animal ' . $animal->DIIO . ' ha sido creado con exito!');
         return redirect()->route('admin.animales.index');
     }
@@ -131,8 +131,22 @@ class AnimalesController extends Controller
     {
         $animal = Animal::find($id);
         $pesos = Peso::where('id_animales','=', $animal->id)->orderBy('created_at', 'ASC')->lists('pesaje');
-        return view ('Animales.perfil')->with('animal',$animal)->with('pesos',$pesos);
+        $fecha = Peso::where('id_animales','=', $animal->id)->orderBy('fecha', 'ASC')->lists('fecha');
+        return view ('Animales.perfil')->with('animal',$animal)->with('pesos',$pesos)->with('fecha',$fecha);
     }
+    public function pesoperfil($id)
+    {
+        $animal = Animal::find($id);
+        $fecha = Carbon::now();
+        return view ('Animales.pesoperfil')->with('animal', $animal)->with('fecha', $fecha);
+    }
+    public function historialperfil($id)
+    {
+        $animal = Animal::find($id);
+        $fecha = Carbon::now();
+        return view ('Animales.pesoperfil')->with('animal', $animal)->with('fecha', $fecha);
+    }
+
 
 
 }

@@ -18,7 +18,7 @@ class MaterialesController extends Controller
      */
     public function index()
     {
-        $materiales = Material::orderBy('numero','ASC')->paginate(10);
+        $materiales = Material::orderBy('numero','ASC')->paginate();
         return view('Materiales.index')->with('materiales', $materiales);
     }
 

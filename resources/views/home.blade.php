@@ -3,6 +3,70 @@
     <div class="animated flipInY">
         <h3>Información General</h3>
     </div>
+    <div class="row tile_count">
+        <div class="animated flipInY col-lg-3 col-xs-6 tile_stats_count">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>{{$cantidad}}</h3>
+                        <p>Animales Registrados</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-ios-paw"></i>
+                    </div>
+                    <a href="{{ route('admin.animales.index') }}" class="small-box-footer">
+                        Listado de Animales <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+
+            </div>
+            <div class="animated flipInY col-lg-3 col-xs-6 tile_stats_count">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>{{ round($promedio) }}<sup style="font-size: 20px">KG</sup></h3>
+                    <p>Pesaje Promedio</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-speedometer"></i>
+                </div>
+                <a href="{{ route('admin.pesos.index') }}" class="small-box-footer">
+                    Listado de Pesajes <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+                <div class="animated flipInY col-lg-3 col-xs-6 tile_stats_count">
+            <!-- small box -->
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3>44</h3>
+                        <p>User Registrations</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        More info <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+                </div>
+                    <div class="animated flipInY col-lg-3 col-xs-6 tile_stats_count">
+            <!-- small box -->
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>65</h3>
+                            <p>Unique Visitors</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+        </div>
+    </div><!-- /.row -->
+
     <div class="row">
         <div class="col-md-6">
             <!-- AREA CHART -->
@@ -24,7 +88,7 @@
             <!-- DONUT CHART -->
             <div class="box box-danger">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Donut Chart</h3>
+                    <h3 class="box-title">Estado de los Animales</h3>
                     <div class="box-tools pull-right">
                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -173,40 +237,22 @@
         var pieChart = new Chart(pieChartCanvas);
         var PieData = [
           {
-            value: 700,
+            value: {!! $muertos !!},
             color: "#f56954",
             highlight: "#f56954",
-            label: "Chrome"
+            label: "Animales Muertos"
           },
           {
-            value: 500,
+            value: {!! $vivos !!},
             color: "#00a65a",
             highlight: "#00a65a",
-            label: "IE"
+            label: "Animales Vivos"
           },
           {
-            value: 400,
+            value: {!! $enfermos !!},
             color: "#f39c12",
             highlight: "#f39c12",
-            label: "FireFox"
-          },
-          {
-            value: 600,
-            color: "#00c0ef",
-            highlight: "#00c0ef",
-            label: "Safari"
-          },
-          {
-            value: 300,
-            color: "#3c8dbc",
-            highlight: "#3c8dbc",
-            label: "Opera"
-          },
-          {
-            value: 100,
-            color: "#d2d6de",
-            highlight: "#d2d6de",
-            label: "Navigator"
+            label: "Animales Enfermos"
           }
         ];
         var pieOptions = {

@@ -1,27 +1,22 @@
 @extends('template')
 @section('content')
     @include('errors')
-    <div class="animated flipInY">
-        <div class="box-tools">
-            {!! Form::open(['route'=>'admin.galpones.index', 'method' => 'GET', 'class' => 'navbar-form pull-right' ]) !!}
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                <span class="input-group-btn"><button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button></span>
-            </div>
-            {!! Form::close() !!}
-        </div>
+    <div class="animated pulse slow go">
         <div class="box">
             <div class="box-header">
-                <h3>Listado de <b>Galpones</b></h3>
-                <a href="{{route('admin.galpones.create')}}" class="btn btn-info btn-lg"><i class="fa fa-folder-open-o"></i> Registar nuevo Galpón</a><hr>
+                <h3>Listado de Galpones</h3>
+                <a href="{{route('admin.galpones.create')}}" class="btn btn-info btn-lg"><i class="fa fa-folder-open-o"></i> Registar nuevo Galpon</a>
             </div><!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-                    <table class="table table-hover">
+            <div class="box-body ">
+                <table id="galpones" class="table table-bordered table-hover">
+                    <thead>
                         <tr>
                             <th>Número</th>
                             <th>Cantidad Estimada</th>
                             <th>Acción</th>
                         </tr>
+                        </thead>
+                    <tbody>
                         @foreach($galpones as $galpon)
                             <tr>
                                 <td>{{$galpon->numero}}</td>
@@ -35,9 +30,20 @@
 
                             </tr>
                         @endforeach
+                    </tbody>
                     </table>
-                    {!! $galpones->render() !!}
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
     </div>
+@endsection
+@section('tablejs')
+    <script>
+        $(function () {
+            $('#galpones').DataTable({
+                "info": false,
+                "scrollX" : true,
+                "lengthMenu": [[5,10, 20, -1], [5,10, 20, "Todos"]]
+            });
+        });
+    </script>
 @endsection

@@ -1,13 +1,13 @@
 @extends('template')
 @section('content')
     @include('errors')
-    <div class="animated flipInY">
+    <div class="animated pulse slow go">
         <div class="box">
             <div class="box-header">
                 <h3>Listado de Animales</h3>
                 <a href="{{route('admin.animales.create')}}" class="btn btn-info btn-lg"><i class="fa fa-folder-open-o"></i> Registar nuevo Animal</a>
             </div><!-- /.box-header -->
-            <div class="box-body ">
+            <div class="box-body">
                 <table id="animales" class="table table-bordered table-hover">
                     <thead>
                         <tr>
@@ -39,7 +39,7 @@
                                     @endif
                                 @endif
                             </td>
-                            <td>{{$animal->created_at->format('m/d/Y')}}</td>
+                            <td>{{$animal->created_at->format('d/m/Y')}}</td>
                             <td>
                                 <a href="{{ route('admin.animales.edit', $animal->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
                                 <a href="{{ route('admin.animales.destroy', $animal->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este animal?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
@@ -58,7 +58,7 @@
             $('#animales').DataTable({
                 "info": false,
                 "scrollX" : true,
-                "lengthMenu": [[5,10, 20, -1], [5,10, 20, "Todos"]]
+                "lengthMenu": [[10, 20, -1], [10, 20, "Todos"]]
             });
         });
     </script>

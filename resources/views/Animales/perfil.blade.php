@@ -18,7 +18,7 @@
 
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Fecha de ingreso</b> <a class="pull-right">{{$animal->created_at->format('m/d/Y')}}</a>
+                            <b>Fecha de ingreso</b> <a class="pull-right">{{$animal->created_at->format('d/m/Y')}}</a>
                         </li>
                         <li class="list-group-item">
                             <b>Número de Guía</b> <a class="pull-right">{{$animal->numero_Guia}}</a>
@@ -28,6 +28,13 @@
                         </li>
                         <li class="list-group-item">
                             <b>Estado</b> <a class="pull-right">{{$animal->estado}}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Acción</b>
+                            <td>
+                                <a href="{{ route('admin.animales.pesoperfil', $animal->id) }}" class="btn btn-info pull-right"><spam  class="glyphicon glyphicon-scale" aria-hidden="true"></spam></a>
+                                <a href="{{ route('admin.animales.historialperfil', $animal->id) }}" class="btn btn-danger pull-right"><spam  class="fa fa-stethoscope" aria-hidden="true"></spam></a>
+                            </td>
                         </li>
                     </ul>
                 </div><!-- /.box-body -->
@@ -68,6 +75,7 @@
             </div><!-- /.box -->
         </div><!-- /.col (RIGHT) -->
     </div><!-- /.nav-tabs-custom -->
+
 @endsection
 
 @section('chartjs')
@@ -88,7 +96,7 @@
             var areaChart = new Chart(areaChartCanvas);
 
             var areaChartData = {
-                labels: [1,2,3,4,5,6,7,8,9,10,11,12],
+                labels: {!! json_encode($fecha) !!},
                 datasets: [
                     {
                         label: "Pesajes",
