@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Corral;
+use App\Animal;
 use App\Galpon;
 use Laracasts\Flash\Flash;
 use App\Http\Requests\CorralRequest;
@@ -20,7 +21,7 @@ class CorralesController extends Controller
      */
     public function index()
     {
-        $corrales = Corral::orderBy('numero','ASC')->paginate(5);
+        $corrales = Corral::all();
         $corrales->each(function($corrales){
             $corrales->galpon;
 

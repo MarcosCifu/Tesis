@@ -1,7 +1,7 @@
 @extends ('template')
 @section('content')
     @include('errors')
-    <div class="animated flipInY">
+    <div class="animated pulse slow go">
         <div class="box">
             <div class="box-header">
                 <h3>Listado de <b>Usuarios</b></h3>

@@ -17,7 +17,6 @@
     <link href="{{ asset("/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset("/dist/css/skins/skin-yellow.min.css")}}" rel="stylesheet" type="text/css" />
     <link href="{{asset("/bootstrap/js/custom.js")}}" rel="stylesheet"/>
-    <link href="{{asset("/bootstrap/css/floatexampless.css")}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset("/plugins/datatables/dataTables.bootstrap.css") }}" rel="stylesheet" >
 
 
@@ -72,6 +71,7 @@
 
 @yield('chartjs')
 @yield('tablejs')
+@yield('ajaxjs')
 
 
 </body>

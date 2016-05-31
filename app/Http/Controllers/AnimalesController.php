@@ -8,6 +8,7 @@ use App\User;
 use App\Historial_Medico;
 use App\Peso;
 use App\Corral;
+use App\Galpon;
 use App\Http\Requests;
 use App\Http\Requests\AnimalRequest;
 use Illuminate\Support\Facades\Auth;
@@ -47,10 +48,11 @@ class AnimalesController extends Controller
      */
     public function create()
     {
-        $corrales = Corral::orderBy('numero', 'ASC')->lists('numero', 'id' );
+        $galpones = Galpon::orderBy('numero','ASC')->lists('id');
+        $corrales = Corral::orderBy('numero','ASC')->lists('numero','id');
         $fecha = Carbon::now();
 
-        return view('Animales.create')->with('corrales', $corrales)->with('fecha',$fecha);
+        return view('Animales.create')->with('corrales', $corrales)->with('fecha',$fecha)->with('galpones',$galpones);
     }
 
     /**
@@ -63,11 +65,12 @@ class AnimalesController extends Controller
     {
         $animal = new Animal($request->all());
         $user = Auth::user();
+        $animal->id_corral = $request->input('corral');
+        $animal->corral()->increment('cantidad',1);
         $animal->save();
-        $precio = $request->input('valor');
         $fechacompra = $request->input('fecha');
         $procedencia = $request->input('procedencia');
-        $animal->users()->attach($user->id, ['precio_compra'=> $precio, 'fecha_compra'=> $fechacompra, 'procedencia'=>$procedencia]);
+        $animal->users()->attach($user->id, ['fecha_compra'=> $fechacompra, 'procedencia'=>$procedencia]);
         Flash::success('El animal ' . $animal->DIIO . ' ha sido creado con exito!');
         return redirect()->route('admin.animales.index');
     }

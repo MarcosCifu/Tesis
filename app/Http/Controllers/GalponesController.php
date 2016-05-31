@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Galpon;
+use App\Animal;
+use App\Corral;
 use Laracasts\Flash\Flash;
 use App\Http\Requests\GalponRequest;
 
@@ -41,6 +43,7 @@ class GalponesController extends Controller
     public function store(GalponRequest $request)
     {
         $galpon = new Galpon($request->all());
+        
         $galpon->save();
         Flash::success('El galpón ' . $galpon->numero . ' ha sido creado con exito!');
         return redirect()->route('admin.galpones.index');
@@ -67,7 +70,7 @@ class GalponesController extends Controller
     {
         $galpon = Galpon::find($id);
 
-        return view('Galpones.edit')->with('galpon',$galpon);;
+        return view('Galpones.edit')->with('galpon',$galpon);
     }
 
     /**
@@ -100,5 +103,12 @@ class GalponesController extends Controller
 
         Flash::error('El galpón ' . $galpon->numero . ' ha sido eliminado con exito!');
         return redirect()->route('admin.galpones.index');
+    }
+    public function perfil($id)
+    {
+        $galpon = Galpon::find($id);
+        $corrales = Corral::where('id_galpon','=', $galpon->id);
+        $animales = $corrales->sum('cantidad');
+        return view ('Galpones.perfil')->with('galpon',$galpon)->with('corrales',$corrales)->with('animales',$animales);
     }
 }

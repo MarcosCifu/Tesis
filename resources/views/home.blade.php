@@ -4,39 +4,35 @@
         <h3>Información General</h3>
     </div>
     <div class="row tile_count">
-        <div class="animated flipInY col-lg-3 col-xs-6 tile_stats_count">
-                <!-- small box -->
+            <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
                 <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3>{{$cantidad}}</h3>
+                            <p>Animales Registrados</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-ios-paw"></i>
+                        </div>
+                        <a href="{{ route('admin.animales.index') }}" class="small-box-footer">
+                            Listado de Animales <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                </div>
+            </div>
+            <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
+                <div class="small-box bg-green">
                     <div class="inner">
-                        <h3>{{$cantidad}}</h3>
-                        <p>Animales Registrados</p>
+                        <h3>{{ round($promedio) }}<sup style="font-size: 20px">KG</sup></h3>
+                        <p>Pesaje Promedio</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-ios-paw"></i>
+                        <i class="ion ion-speedometer"></i>
                     </div>
-                    <a href="{{ route('admin.animales.index') }}" class="small-box-footer">
-                        Listado de Animales <i class="fa fa-arrow-circle-right"></i>
+                    <a href="{{ route('admin.pesos.index') }}" class="small-box-footer">
+                        Listado de Pesajes <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
-
             </div>
-            <div class="animated flipInY col-lg-3 col-xs-6 tile_stats_count">
-            <!-- small box -->
-            <div class="small-box bg-green">
-                <div class="inner">
-                    <h3>{{ round($promedio) }}<sup style="font-size: 20px">KG</sup></h3>
-                    <p>Pesaje Promedio</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-speedometer"></i>
-                </div>
-                <a href="{{ route('admin.pesos.index') }}" class="small-box-footer">
-                    Listado de Pesajes <i class="fa fa-arrow-circle-right"></i>
-                </a>
-            </div>
-        </div>
-                <div class="animated flipInY col-lg-3 col-xs-6 tile_stats_count">
-            <!-- small box -->
+            <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
                 <div class="small-box bg-yellow">
                     <div class="inner">
                         <h3>44</h3>
@@ -49,28 +45,27 @@
                         More info <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
-                </div>
-                    <div class="animated flipInY col-lg-3 col-xs-6 tile_stats_count">
-            <!-- small box -->
-                    <div class="small-box bg-red">
-                        <div class="inner">
-                            <h3>65</h3>
-                            <p>Unique Visitors</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">
-                            More info <i class="fa fa-arrow-circle-right"></i>
-                        </a>
+            </div>
+            <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
+                <div class="small-box bg-red">
+                    <div class="inner">
+                        <h3>65</h3>
+                        <p>Unique Visitors</p>
                     </div>
-        </div>
-    </div><!-- /.row -->
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">
+                        More info <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+    </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 ">
             <!-- AREA CHART -->
-            <div class="box box-primary">
+            <div class="box box-primary animated pulse slow go">
                 <div class="box-header with-border">
                     <h3 class="box-title">Area Chart</h3>
                     <div class="box-tools pull-right">
@@ -86,7 +81,7 @@
             </div><!-- /.box -->
 
             <!-- DONUT CHART -->
-            <div class="box box-danger">
+            <div class="box box-danger animated pulse slow go">
                 <div class="box-header with-border">
                     <h3 class="box-title">Estado de los Animales</h3>
                     <div class="box-tools pull-right">
@@ -102,7 +97,7 @@
         </div><!-- /.col (LEFT) -->
         <div class="col-md-6">
             <!-- LINE CHART -->
-            <div class="box box-info">
+            <div class="box box-info animated pulse slow go">
                 <div class="box-header with-border">
                     <h3 class="box-title">Line Chart</h3>
                     <div class="box-tools pull-right">
@@ -118,9 +113,9 @@
             </div><!-- /.box -->
 
             <!-- BAR CHART -->
-            <div class="box box-success">
+            <div class="box box-success animated pulse slow go">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Bar Chart</h3>
+                    <h3 class="box-title">Rendimiento Mensual</h3>
                     <div class="box-tools pull-right">
                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -128,7 +123,7 @@
                 </div>
                 <div class="box-body">
                     <div class="chart">
-                        <canvas id="barChart" style="height:230px"></canvas>
+                        <canvas id="barChart" style="height:264px"></canvas>
                     </div>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
@@ -183,7 +178,7 @@
                 //Boolean - If we should show the scale at all
                 showScale: true,
                 //Boolean - Whether grid lines are shown across the chart
-                scaleShowGridLines: false,
+                scaleShowGridLines: true,
                 //String - Colour of the grid lines
                 scaleGridLineColor: "rgba(0,0,0,.05)",
                 //Number - Width of the grid lines
@@ -197,7 +192,7 @@
                 //Number - Tension of the bezier curve between points
                 bezierCurveTension: 0.3,
                 //Boolean - Whether to show a dot for each point
-                pointDot: false,
+                pointDot: true,
                 //Number - Radius of each point dot in pixels
                 pointDotRadius: 4,
                 //Number - Pixel width of point dot stroke

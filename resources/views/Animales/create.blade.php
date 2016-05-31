@@ -23,19 +23,12 @@
                             {!! Form::text('procedencia', null, ['class' => 'form-control', 'placeholder' => 'Procedencia del animal' , 'required' ]) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('id_corral','Corral') !!}
-                            {!! Form::select('id_corral', $corrales , null ,['class'=> 'form-control', 'placeholder' => 'Seleccione un corral' , 'required']) !!}
+                            {!! Form::label('corral','Corral') !!}
+                            {!! Form::select('corral', $corrales, null ,['class'=> 'form-control', 'placeholder' => 'Seleccione un corral' , 'required']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('estado','Estado') !!}
                             {!! Form::select('estado',[ 'vivo' => 'Vivo' , 'muerto' => 'Muerto', 'enfermo' => 'Enfermo' ],null,['class'=> 'form-control', 'placeholder' => 'Seleccione un estado' , 'required' ]) !!}
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('valor' ,'Precio de compra') !!}
-                            <div class="input-group">
-                                <span class="input-group-addon">$</span>
-                                {!! Form::text('valor', null, ['class' => 'form-control', 'placeholder' => 'Precio del animal' , 'required' ]) !!}
-                            </div>
                         </div>
                         <div class="form-group">
                             {!! Form::label('fecha_compra','Fecha de Ingreso') !!}<br>
@@ -58,6 +51,5 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 @endsection

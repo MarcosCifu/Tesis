@@ -12,7 +12,7 @@
     </div>
     <div class="form-group">
         {!! Form::label('cantidad' ,'Cantidad Estimada') !!}
-        {!! Form::text('cantidad', null, ['class' => 'form-control', 'placeholder' => 'Cantidad Estimada de Animales' , 'required' ]) !!}
+        {!! Form::text('cantidad', null, ['class' => 'form-control', 'placeholder' => 'Cantidad Estimada de Animales'  ]) !!}
     </div>
     <div class="form-group">
         {!! Form::label('id_galpon' ,'Galpón') !!}

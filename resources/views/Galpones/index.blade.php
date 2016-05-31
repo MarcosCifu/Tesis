@@ -12,14 +12,16 @@
                     <thead>
                         <tr>
                             <th>Número</th>
-                            <th>Cantidad Estimada</th>
+                            <th>Cantidad de Corrales</th>
+                            <th>Cantidad de Animales</th>
                             <th>Acción</th>
                         </tr>
                         </thead>
                     <tbody>
                         @foreach($galpones as $galpon)
                             <tr>
-                                <td>{{$galpon->numero}}</td>
+                                <td><a href="{{ route('admin.galpones.perfil', $galpon->id) }}">{{$galpon->numero}}</td>
+                                <td>{{$galpon->cantidad}}</td>
                                 <td>{{$galpon->cantidad}}</td>
                                 <td>
                                     <a href="{{ route('admin.galpones.edit', $galpon->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>

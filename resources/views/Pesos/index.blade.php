@@ -1,7 +1,7 @@
 @extends('template')
 @section('content')
     @include('errors')
-    <div class="animated flipInY">
+    <div class="animated pulse slow go">
         <div class="box">
             <div class="box-header">
                 <h3>Listado de Pesajes</h3>
@@ -43,7 +43,7 @@
             $('#pesos').DataTable({
                 "info": false,
                 "scrollX" : true,
-                "lengthMenu": [[5,10, 20, -1], [5,10, 20, "Todos"]]
+                "lengthMenu": [[10, 20, -1], [10, 20, "Todos"]]
             });
         });
     </script>

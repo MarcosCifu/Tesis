@@ -12,7 +12,7 @@
                     <thead>
                         <tr>
                             <th>Número</th>
-                            <th>Cantidad Estimada</th>
+                            <th>Cantidad Actual de Animales</th>
                             <th>Galpón</th>
                             <th>Acción</th>
                         </tr>
@@ -20,9 +20,9 @@
                     <tbody>
                         @foreach($corrales as $corral)
                             <tr>
-                                <td>{{$corral->numero}}</td>
+                                <td>Corral número {{$corral->numero}}</td>
                                 <td>{{$corral->cantidad}}</td>
-                                <td>{{$corral->galpon->numero}}</td>
+                                <td>Galpón {{$corral->galpon->numero}}</td>
                                 <td>
                                     <a href="{{ route('admin.corrales.edit', $corral->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
                                     <a href="{{ route('admin.corrales.destroy', $corral->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este corral?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
@@ -41,7 +41,7 @@
             $('#corrales').DataTable({
                 "info": false,
                 "scrollX" : true,
-                "lengthMenu": [[5,10, 20, -1], [5,10, 20, "Todos"]]
+                "lengthMenu": [[10, 20, -1], [10, 20, "Todos"]]
             });
         });
     </script>

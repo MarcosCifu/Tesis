@@ -1,49 +1,59 @@
 @extends('template')
 @section('content')
     <div class="animated flipInY">
-        <h3>Información del Animal</h3>
+        <h3>Información del Galpón</h3>
     </div>
     <div class="row">
         <div class="col-md-4">
             <div class="animated pulse slow go">
-            <div class="box box-primary">
-                <div class="box-body box-profile">
-
-                    <td><img class="profile-user-img img-responsive " src="{{ asset('images') }}/{{$animal->path}}"  style="width: 300px;"></td>
-
-                      <h3 class="profile-username text-center">{{$animal->DIIO}}</h3>
-                    <p class="text-muted text-center">DIIO</p>
-
-                    <ul class="list-group list-group-unbordered">
-                        <li class="list-group-item">
-                            <b>Fecha de ingreso</b> <a class="pull-right">{{$animal->created_at->format('d/m/Y')}}</a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Número de Guía</b> <a class="pull-right">{{$animal->numero_Guia}}</a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Tipo</b> <a class="pull-right">{{$animal->tipo}}</a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Estado</b> <a class="pull-right">{{$animal->estado}}</a>
-                        </li>
-                        <li class="list-group-item">
-                            <b>Acción</b>
-                            <td>
-                                <a href="{{ route('admin.animales.pesoperfil', $animal->id) }}" class="btn btn-info pull-right"><spam  class="glyphicon glyphicon-scale" aria-hidden="true"></spam></a>
-                                <a href="{{ route('admin.animales.historialperfil', $animal->id) }}" class="btn btn-danger pull-right"><spam  class="fa fa-stethoscope" aria-hidden="true"></spam></a>
-                            </td>
-                        </li>
-                    </ul>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <div class="text-center">
+                            <div class="small-box bg-green-gradient">
+                                <div class="inner">
+                                    <div class="icon">
+                                        <i class="ion ion-ios-paw-center"></i>
+                                    </div>
+                                    <h2 class="text-center">Galpón Número</h2>
+                                    <h3 class="profile-username text-center">{{$galpon->numero}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body box-profile">
+                        <ul class="list-group list-group-unbordered">
+                            <li class="list-group-item">
+                                <b>Fecha de creación</b> <a class="pull-right">{{$galpon->created_at->format('d/m/Y')}}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Cantidad de Animales</b> <a class="pull-right">{{ $animales }}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Tipo de Animales</b> <a class="pull-right"></a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Estado</b> <a class="pull-right"></a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Acción</b>
+                                <td>
+                                    <a href="{{ route('admin.animales.pesoperfil', $galpon->id) }}" class="btn btn-info pull-right"><spam  class="glyphicon glyphicon-scale" aria-hidden="true"></spam></a>
+                                    <a href="{{ route('admin.animales.historialperfil', $galpon->id) }}" class="btn btn-danger pull-right"><spam  class="fa fa-stethoscope" aria-hidden="true"></spam></a>
+                                </td>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div><!-- /.tab-content -->
-        <div class="col-md-4">
-
         </div>
         <div class="col-md-4">
-                    <!-- LINE CHART -->
+            <div class="animated pulse slow go">
+                <div class="box box-primary">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- LINE CHART -->
             <div class="box box-primary animated pulse slow go">
                 <div class="box-header with-border">
                     <h3 class="box-title">Evolución</h3>
@@ -59,7 +69,7 @@
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
 
-                    <!-- BAR CHART -->
+            <!-- BAR CHART -->
             <div class="box box-success animated pulse slow go">
                 <div class="box-header with-border">
                     <h3 class="box-title">Beneficios</h3>
@@ -97,7 +107,7 @@
             var areaChart = new Chart(areaChartCanvas);
 
             var areaChartData = {
-                labels: {!! json_encode($fecha) !!},
+                labels: ,
                 datasets: [
                     {
                         label: "Pesajes",
@@ -107,17 +117,16 @@
                         pointStrokeColor: "rgba(60,141,188,1)",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(60,141,188,1)",
-                        data: {!! json_encode($pesos) !!},
-
+                        data:
                     }
-                ],
+                ]
             };
 
             var areaChartOptions = {
                 //Boolean - If we should show the scale at all
                 showScale: true,
                 //Boolean - Whether grid lines are shown across the chart
-                scaleShowGridLines: true,
+                scaleShowGridLines: false,
                 //String - Colour of the grid lines
                 scaleGridLineColor: "rgba(0,0,0,.05)",
                 //Number - Width of the grid lines
@@ -131,7 +140,7 @@
                 //Number - Tension of the bezier curve between points
                 bezierCurveTension: 0.3,
                 //Boolean - Whether to show a dot for each point
-                pointDot: true,
+                pointDot: false,
                 //Number - Radius of each point dot in pixels
                 pointDotRadius: 4,
                 //Number - Pixel width of point dot stroke
@@ -148,8 +157,7 @@
                 //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
                 maintainAspectRatio: true,
                 //Boolean - whether to make the chart responsive to window resizing
-                responsive: true,
-
+                responsive: true
             };
 
             //Create the line chart
@@ -163,7 +171,7 @@
             var barChartCanvas = $("#barChart").get(0).getContext("2d");
             var barChart = new Chart(barChartCanvas);
             var barChartData = {
-                labels: {!! json_encode($fecha) !!},
+                labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio","Agosto","Septiembre","Octubre", "Noviembre","Diciembre"],
                 datasets: [
                     {
                         label: "Pesajes",

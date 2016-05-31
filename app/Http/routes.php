@@ -30,9 +30,10 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'UsersController@edit',
             'as' => 'admin.users.edit'
         ]);
-
-
-
+        Route::get('galpones/{id}/perfil', [
+            'uses' => 'GalponesController@perfil',
+            'as' => 'admin.galpones.perfil'
+        ]);
         Route::resource ('galpones','GalponesController');
         Route::get('galpones/{id}/destroy', [
             'uses' => 'GalponesController@destroy',
@@ -55,6 +56,11 @@ Route::group(['middleware' => ['web']], function () {
 
 
         Route::resource ('animales','AnimalesController');
+        Route::get('/admin/animales/create/ajax-corral',function(){
+            $id_galpon = Input::get('id_galpon');
+            $corrales = Corral::where('id_galpon',$id_galpon)->get();
+            return $corrales;
+        });
         Route::get('animales/{id}/destroy', [
             'uses' => 'AnimalesController@destroy',
             'as' => 'admin.animales.destroy'
