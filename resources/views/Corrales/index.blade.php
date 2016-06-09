@@ -20,8 +20,7 @@
                     <tbody>
                         @foreach($corrales as $corral)
                             <tr>
-                                <td>Corral número {{$corral->numero}}</td>
-                                <td>{{$corral->cantidad}}</td>
+                                <td><a href="{{ route('admin.corrales.perfil', $corral->id) }}">Corral {{$corral->numero}}</a></td><td>{{$corral->cantidad}}</td>
                                 <td>Galpón {{$corral->galpon->numero}}</td>
                                 <td>
                                     <a href="{{ route('admin.corrales.edit', $corral->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>

@@ -118,4 +118,9 @@ class CorralesController extends Controller
         Flash::error('El corral ' . $corral->numero . ' del galpón '. $corral->galpon->numero .' ha sido eliminado con exito!');
         return redirect()->route('admin.corrales.index');
     }
+    public function perfil($id)
+    {
+        $corrales = Corral::find($id);
+        return view ('Corrales.perfil')->with('corrales',$corrales);
+    }
 }

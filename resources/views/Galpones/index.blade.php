@@ -20,9 +20,9 @@
                     <tbody>
                         @foreach($galpones as $galpon)
                             <tr>
-                                <td><a href="{{ route('admin.galpones.perfil', $galpon->id) }}">{{$galpon->numero}}</td>
+                                <td><a href="{{ route('admin.galpones.perfil', $galpon->id) }}">{{$galpon->numero}}</a></td>
                                 <td>{{$galpon->cantidad}}</td>
-                                <td>{{$galpon->cantidad}}</td>
+                                <td></td>
                                 <td>
                                     <a href="{{ route('admin.galpones.edit', $galpon->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
 

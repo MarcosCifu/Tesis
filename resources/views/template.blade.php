@@ -17,7 +17,7 @@
     <link href="{{ asset("/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset("/dist/css/skins/skin-yellow.min.css")}}" rel="stylesheet" type="text/css" />
     <link href="{{asset("/bootstrap/js/custom.js")}}" rel="stylesheet"/>
-    <link href="{{ asset("/plugins/datatables/dataTables.bootstrap.css") }}" rel="stylesheet" >
+    <link href="{{ asset("/plugins/datatables/dataTables.bootstrap.css") }}" rel="stylesheet" />
 
 
     <script src="{{asset("/bootstrap/js/jquery.min.js")}}"></script>

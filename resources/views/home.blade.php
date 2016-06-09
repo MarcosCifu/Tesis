@@ -35,13 +35,13 @@
             <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <h3>44</h3>
-                        <p>User Registrations</p>
+                        <h3>{{$minimo}}</h3>
+                        <p>Pesaje Minimo</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-person-add"></i>
+                        <i class="ion ion-arrow-graph-down-right"></i>
                     </div>
-                    <a href="#" class="small-box-footer">
+                    <a href="" class="small-box-footer">
                         More info <i class="fa fa-arrow-circle-right"></i>
                     </a>
                 </div>
@@ -49,11 +49,11 @@
             <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3>65</h3>
-                        <p>Unique Visitors</p>
+                        <h3>{{$maximo}}</h3>
+                        <p>Pesaje Maximo</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
+                        <i class="ion ion-arrow-graph-up-right"></i>
                     </div>
                     <a href="#" class="small-box-footer">
                         More info <i class="fa fa-arrow-circle-right"></i>
@@ -282,7 +282,34 @@
         //-------------
         var barChartCanvas = $("#barChart").get(0).getContext("2d");
         var barChart = new Chart(barChartCanvas);
-        var barChartData = areaChartData;
+        var barChartData = {
+            labels: {!! $galpones !!},
+            datasets: [
+                {
+                    label: "Electronics",
+                    fillColor: "rgba(210, 214, 222, 1)",
+                    strokeColor: "rgba(210, 214, 222, 1)",
+                    pointColor: "rgba(210, 214, 222, 1)",
+                    pointStrokeColor: "#c1c7d1",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: {!! $pesosnoapto !!}
+                },
+                {
+                    label: "Digital Goods",
+                    fillColor: "rgba(60,141,188,0.9)",
+                    strokeColor: "rgba(60,141,188,0.8)",
+                    pointColor: "#3b8bba",
+                    pointStrokeColor: "rgba(60,141,188,1)",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(60,141,188,1)",
+                    data: {!! $pesosnoapto !!}
+                }
+
+
+            ]
+        };
+
         barChartData.datasets[1].fillColor = "#00a65a";
         barChartData.datasets[1].strokeColor = "#00a65a";
         barChartData.datasets[1].pointColor = "#00a65a";
@@ -313,7 +340,7 @@
           maintainAspectRatio: true
         };
 
-        barChartOptions.datasetFill = false;
+        barChartOptions.datasetFill = true;
         barChart.Bar(barChartData, barChartOptions);
       });
     </script>

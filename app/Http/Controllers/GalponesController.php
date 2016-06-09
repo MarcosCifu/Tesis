@@ -19,7 +19,7 @@ class GalponesController extends Controller
      */
     public function index()
     {
-        $galpones = Galpon::orderBy('id','ASC')->paginate(5);
+        $galpones = Galpon::all();
         return view('Galpones.index')->with('galpones',$galpones);
     }
 

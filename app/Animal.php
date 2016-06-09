@@ -16,7 +16,7 @@ class Animal extends Model implements SluggableInterface
     ];
 
     protected $table = "animales";
-    protected $fillable = ['DIIO','numero_Guia','tipo','id_corral','estado','path','fecha_compra','fecha_venta','precio_compra','precio_venta'];
+    protected $fillable = ['DIIO','numero_Guia','tipo','id_corral','id_pesos','estado','path','fecha_compra','fecha_venta','precio_compra','precio_venta'];
 
     /**
      * @return array
@@ -41,7 +41,7 @@ class Animal extends Model implements SluggableInterface
     }
     public function pesos()
     {
-        return $this->hasMany('App\Peso', 'id_peso');
+        return $this->hasMany('App\Peso','id_animales');
     }
     public function users()
     {

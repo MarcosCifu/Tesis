@@ -31,13 +31,12 @@ class AnimalesController extends Controller
         $animales->each(function($animales){
             $animales->corral->galpon;
             $animales->corral;
+            $animales->pesos;
             $animales->users;
 
-            
-            
-            
-
         });
+        
+        
         return view('Animales.index')->with('animales',$animales);
     }
 
@@ -141,6 +140,8 @@ class AnimalesController extends Controller
     {
         $animal = Animal::find($id);
         $fecha = Carbon::now();
+       
+
         return view ('Animales.pesoperfil')->with('animal', $animal)->with('fecha', $fecha);
     }
     public function historialperfil($id)

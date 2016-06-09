@@ -22,53 +22,18 @@ Route::group(['middleware' => ['web']], function () {
 
 
         Route::resource('users','UsersController');
-        Route::get('users/{id}/destroy', [
-            'uses' => 'UsersController@destroy',
-            'as' => 'admin.users.destroy'
-        ]);
-        Route::get('users/{id}/edit', [
-            'uses' => 'UsersController@edit',
-            'as' => 'admin.users.edit'
-        ]);
         Route::get('galpones/{id}/perfil', [
             'uses' => 'GalponesController@perfil',
             'as' => 'admin.galpones.perfil'
         ]);
         Route::resource ('galpones','GalponesController');
-        Route::get('galpones/{id}/destroy', [
-            'uses' => 'GalponesController@destroy',
-            'as' => 'admin.galpones.destroy'
-        ]);
-        Route::get('galpones/{id}/edit', [
-            'uses' => 'GalponesController@edit',
-            'as' => 'admin.galpones.edit'
-        ]);
-
         Route::resource ('corrales','CorralesController');
-        Route::get('corrales/{id}/destroy', [
-            'uses' => 'CorralesController@destroy',
-            'as' => 'admin.corrales.destroy'
-        ]);
-        Route::get('corrales/{id}/edit', [
-            'uses' => 'CorralesController@edit',
-            'as' => 'admin.corrales.edit'
-        ]);
-
-
         Route::resource ('animales','AnimalesController');
         Route::get('/admin/animales/create/ajax-corral',function(){
             $id_galpon = Input::get('id_galpon');
             $corrales = Corral::where('id_galpon',$id_galpon)->get();
             return $corrales;
         });
-        Route::get('animales/{id}/destroy', [
-            'uses' => 'AnimalesController@destroy',
-            'as' => 'admin.animales.destroy'
-        ]);
-        Route::get('animales/{id}/edit', [
-            'uses' => 'AnimalesController@edit',
-            'as' => 'admin.animales.edit'
-        ]);
         Route::get('animales/{id}/perfil', [
             'uses' => 'AnimalesController@perfil',
             'as' => 'admin.animales.perfil'
@@ -81,35 +46,12 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'AnimalesController@historialperfil',
             'as' => 'admin.animales.historialperfil'
         ]);
-
         Route::resource('materiales','MaterialesController');
-        Route::get('materiales/{id}/destroy', [
-            'uses' => 'MaterialesController@destroy',
-            'as' => 'admin.materiales.destroy'
-        ]);
-        Route::get('materiales/{id}/edit', [
-            'uses' => 'MaterialesController@edit',
-            'as' => 'admin.materiales.edit'
-        ]);
-
         Route::resource('historiales','HistorialesMedicosController');
-        Route::get('historiales/{id}/destroy', [
-            'uses' => 'HistorialesMedicosController@destroy',
-            'as' => 'admin.historiales.destroy'
-        ]);
-        Route::get('historiales/{id}/edit', [
-            'uses' => 'HistorialesMedicosController@edit',
-            'as' => 'admin.historiales.edit'
-        ]);
-
         Route::resource('pesos','PesosController');
-        Route::get('pesos/{id}/destroy', [
-            'uses' => 'PesosController@destroy',
-            'as' => 'admin.pesos.destroy'
-        ]);
-        Route::get('pesos/{id}/edit', [
-            'uses' => 'PesosController@edit',
-            'as' => 'admin.pesos.edit'
+        Route::get('corrales/{id}/perfil', [
+            'uses' => 'CorralesController@perfil',
+            'as' => 'admin.corrales.perfil'
         ]);
 
 
