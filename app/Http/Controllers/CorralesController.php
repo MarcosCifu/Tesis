@@ -24,7 +24,6 @@ class CorralesController extends Controller
         $corrales = Corral::all();
         $corrales->each(function($corrales){
             $corrales->galpon;
-
         });
         return view('Corrales.index')->with('corrales',$corrales);
     }
@@ -90,7 +89,7 @@ class CorralesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CorralRequest $request, $id)
     {
         $corral = Corral::find($id);
         $corral->fill($request->all());

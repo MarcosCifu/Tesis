@@ -20,6 +20,10 @@ class GalponesController extends Controller
     public function index()
     {
         $galpones = Galpon::all();
+        $galpones->each(function ($galpones){
+            $galpones->corrales;
+        });
+        $corral = Corral::all();
         return view('Galpones.index')->with('galpones',$galpones);
     }
 
@@ -43,7 +47,6 @@ class GalponesController extends Controller
     public function store(GalponRequest $request)
     {
         $galpon = new Galpon($request->all());
-        
         $galpon->save();
         Flash::success('El galpón ' . $galpon->numero . ' ha sido creado con exito!');
         return redirect()->route('admin.galpones.index');
@@ -69,7 +72,6 @@ class GalponesController extends Controller
     public function edit($id)
     {
         $galpon = Galpon::find($id);
-
         return view('Galpones.edit')->with('galpon',$galpon);
     }
 
@@ -100,7 +102,6 @@ class GalponesController extends Controller
     {
         $galpon = Galpon::find($id);
         $galpon->delete();
-
         Flash::error('El galpón ' . $galpon->numero . ' ha sido eliminado con exito!');
         return redirect()->route('admin.galpones.index');
     }
@@ -110,5 +111,11 @@ class GalponesController extends Controller
         $corrales = Corral::where('id_galpon','=', $galpon->id);
         $animales = $corrales->sum('cantidad');
         return view ('Galpones.perfil')->with('galpon',$galpon)->with('corrales',$corrales)->with('animales',$animales);
+    }
+    public function corralcreate($id)
+    {
+        $galpones = Galpon::find($id);
+        $numero = $galpones->numero;
+        return view ('Corrales.create')->with('galpones', $galpones)->with('numero',$numero);
     }
 }

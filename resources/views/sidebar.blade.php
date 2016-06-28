@@ -10,14 +10,14 @@
             <!-- Optionally, you can add icons to the links -->
             <li><a href="{{ route('index')}}"><i class="glyphicon glyphicon-home"></i> <span>Inicio</span></a></li>
             <li><a href="{{ route('admin.users.index')}}"><i class="fa fa-users"></i> <span>Usuarios</span></a></li>
-            <li>
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-paw"></i><span>Animales</span><i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="{{ route('admin.animales.index')}}"><i class="fa  fa-table"></i>Listado de Animales</a></li>
-                    <li class="active"><a href="{{ route('admin.historiales.index')}}"><i class="fa fa-stethoscope"></i>Historiales Medicos</a></li>
-                    <li class="active"><a href="{{ route('admin.pesos.index')}}"><i class="glyphicon glyphicon-scale"></i> Pesos</a></li>
+                    <li><a href="{{ route('admin.animales.index')}}"><i class="fa  fa-table"></i>Listado de Animales</a></li>
+                    <li><a href="{{ route('admin.historiales.index')}}"><i class="fa fa-stethoscope"></i>Historiales Medicos</a></li>
+                    <li><a href="{{ route('admin.pesos.index')}}"><i class="glyphicon glyphicon-scale"></i> Pesos</a></li>
                 </ul>
             </li>
             <li>

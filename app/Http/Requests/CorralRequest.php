@@ -24,7 +24,7 @@ class CorralRequest extends Request
     public function rules()
     {
         return [
-            'numero' => 'integer|min:1|required',
+            'numero' => 'integer|min:1|required|unique:corrales',
             'cantidad' => 'integer|min:1'
         ];
     }

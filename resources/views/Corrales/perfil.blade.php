@@ -1,50 +1,44 @@
 @extends('template')
 @section('content')
-    <div class="animated flipInY">
-        <h3>Información del Corral</h3>
-    </div>
     <div class="row">
         <div class="col-md-4">
-            <div class="animated pulse slow go">
-                <div class="box box-primary">
-                    <div class="box-header">
-                        <div class="text-center">
-                            <div class="small-box bg-green-gradient">
-                                <div class="inner">
-                                    <div class="icon">
-                                        <i class="ion ion-ios-paw-center"></i>
-                                    </div>
-                                    <h2 class="text-center">Corral Número</h2>
-                                    <h3 class="profile-username text-center">{{$corrales->numero}}</h3>
-                                </div>
-                            </div>
+            <div class="box box-primary animated pulse slow go">
+                <div class="box-header">
+                    <h3>Información del <b>Corral</b></h3>
+                </div>
+                <div class="small-box bg-green-gradient">
+                    <div class="inner">
+                        <div class="icon">
+                            <i class="ion ion-ios-paw-center"></i>
                         </div>
-                    </div>
-                    <div class="box-body box-profile">
-                        <ul class="list-group list-group-unbordered">
-                            <li class="list-group-item">
-                                <b>Fecha de creación</b> <a class="pull-right">{{$corrales->created_at->format('d/m/Y')}}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Cantidad de Animales</b> <a class="pull-right">{{ $corrales->cantidad }}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Tipo de Animales</b> <a class="pull-right"></a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Estado</b> <a class="pull-right"></a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Acción</b>
-                                <td>
-                                    <a href="{{ route('admin.animales.pesoperfil', $corrales->id) }}" class="btn btn-info pull-right"><spam  class="glyphicon glyphicon-scale" aria-hidden="true"></spam></a>
-                                    <a href="{{ route('admin.animales.historialperfil', $corrales->id) }}" class="btn btn-danger pull-right"><spam  class="fa fa-stethoscope" aria-hidden="true"></spam></a>
-                                </td>
-                            </li>
-                        </ul>
+                            <h2 class="text-center">Corral Número</h2>
+                            <h3 class="profile-username text-center">{{$corrales->numero}}</h3>
                     </div>
                 </div>
+            <div class="box-body box-profile">
+                <ul class="list-group list-group-unbordered">
+                    <li class="list-group-item">
+                        <b>Fecha de creación</b> <a class="pull-right">{{$corrales->created_at->format('d/m/Y')}}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Cantidad de Animales</b> <a class="pull-right">{{ $corrales->cantidad }}</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Tipo de Animales</b> <a class="pull-right"></a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Estado</b> <a class="pull-right"></a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Acción</b>
+                        <td>
+                            <a href="{{ route('admin.animales.pesoperfil', $corrales->id) }}" class="btn btn-info pull-right"><spam  class="glyphicon glyphicon-scale" aria-hidden="true"></spam></a>
+                            <a href="{{ route('admin.animales.historialperfil', $corrales->id) }}" class="btn btn-danger pull-right"><spam  class="fa fa-stethoscope" aria-hidden="true"></spam></a>
+                        </td>
+                    </li>
+                </ul>
             </div>
+        </div>
         </div>
         <div class="col-md-4">
             <div class="animated pulse slow go">
@@ -85,8 +79,7 @@
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
         </div><!-- /.col (RIGHT) -->
-    </div><!-- /.nav-tabs-custom -->
-
+    </div>
 @endsection
 
 @section('chartjs')

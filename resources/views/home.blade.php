@@ -1,7 +1,7 @@
 @extends('template')
 @section('chart')
     <div class="animated flipInY">
-        <h3>Información General</h3>
+        <h3>Información <b>General</b></h3>
     </div>
     <div class="row tile_count">
             <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">

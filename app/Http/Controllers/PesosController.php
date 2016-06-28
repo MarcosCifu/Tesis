@@ -50,6 +50,7 @@ class PesosController extends Controller
     {
         $peso = new Peso ($request->all());
         $peso->save();
+        
         Flash::success('El pesaje del animal ' . $peso->animal->DIIO . ' ha sido registrado con exito!');
         return redirect()->route('admin.pesos.index');
     }
@@ -96,7 +97,11 @@ class PesosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $peso = Peso::find($id);
+        $peso->delete();
+
+        Flash::error('El peso del animal ' . $peso->animal->DIIO . ' ha sido eliminado con exito!');
+        return redirect()->route('admin.pesos.index');
     }
     
     

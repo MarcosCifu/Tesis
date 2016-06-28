@@ -1,8 +1,5 @@
 @extends('template')
 @section('content')
-    <div class="animated flipInY">
-        <h3>Información del Galpón</h3>
-    </div>
     <div class="row">
         <div class="col-md-4">
             <div class="animated pulse slow go">
@@ -35,11 +32,7 @@
                                 <b>Estado</b> <a class="pull-right"></a>
                             </li>
                             <li class="list-group-item">
-                                <b>Acción</b>
-                                <td>
-                                    <a href="{{ route('admin.animales.pesoperfil', $galpon->id) }}" class="btn btn-info pull-right"><spam  class="glyphicon glyphicon-scale" aria-hidden="true"></spam></a>
-                                    <a href="{{ route('admin.animales.historialperfil', $galpon->id) }}" class="btn btn-danger pull-right"><spam  class="fa fa-stethoscope" aria-hidden="true"></spam></a>
-                                </td>
+                                <b>Agregar Corral</b><a href="{{ route('admin.galpones.corralcreate', $galpon->id) }}" class="btn btn-info pull-right"><spam  class="fa fa-tags" aria-hidden="true"></spam></a>
                             </li>
                         </ul>
                     </div>

@@ -33,10 +33,10 @@ class AnimalesController extends Controller
             $animales->corral;
             $animales->pesos;
             $animales->users;
+            $animales->ultimopeso;
 
         });
-        
-        
+       
         return view('Animales.index')->with('animales',$animales);
     }
 
@@ -94,7 +94,13 @@ class AnimalesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $animal = Animal::find($id);
+        $galpones = Galpon::orderBy('numero','ASC')->lists('id');
+        $corrales = Corral::orderBy('numero','ASC')->lists('numero','id');
+        return view('Animales.edit')
+            ->with('animal', $animal)
+            ->with('corrales', $corrales)
+            ->with('galpones',$galpones);
     }
 
     /**
@@ -106,7 +112,11 @@ class AnimalesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $animal = Animal::find($id);
+        $animal->fill($request->all());
+        $animal->save();
+        Flash::warning('El animal ' . $animal->DIIO . ' ha sido editado con exito!');
+        return redirect()->route('admin.animales.index');
     }
 
     /**
@@ -132,9 +142,13 @@ class AnimalesController extends Controller
     public function perfil($id)
     {
         $animal = Animal::find($id);
-        $pesos = Peso::where('id_animales','=', $animal->id)->orderBy('created_at', 'ASC')->lists('pesaje');
+        $pesos = Peso::where('id_animales','=', $animal->id)->orderBy('fecha', 'ASC')->lists('pesaje');
         $fecha = Peso::where('id_animales','=', $animal->id)->orderBy('fecha', 'ASC')->lists('fecha');
-        return view ('Animales.perfil')->with('animal',$animal)->with('pesos',$pesos)->with('fecha',$fecha);
+
+        return view ('Animales.perfil')
+            ->with('animal',$animal)
+            ->with('pesos',$pesos)
+            ->with('fecha',$fecha);
     }
     public function pesoperfil($id)
     {
@@ -142,13 +156,17 @@ class AnimalesController extends Controller
         $fecha = Carbon::now();
        
 
-        return view ('Animales.pesoperfil')->with('animal', $animal)->with('fecha', $fecha);
+        return view ('Animales.pesoperfil')
+            ->with('animal', $animal)
+            ->with('fecha', $fecha);
     }
     public function historialperfil($id)
     {
         $animal = Animal::find($id);
         $fecha = Carbon::now();
-        return view ('Animales.pesoperfil')->with('animal', $animal)->with('fecha', $fecha);
+        return view ('Animales.historialperfil')
+            ->with('animal', $animal)
+            ->with('fecha', $fecha);
     }
 
 

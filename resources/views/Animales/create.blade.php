@@ -2,7 +2,7 @@
 @section('content')
     @include('errors')
     <div class="row">
-        <div class="col-lg-7">
+        <div class="col-lg-5">
             <div class="box box-primary">
                 <div class="box-body">
                         {{ Form::open(['route' => 'admin.animales.store', 'method' => 'POST', 'files'=>true]) }}

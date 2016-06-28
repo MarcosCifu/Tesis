@@ -10,6 +10,6 @@ class Galpon extends Model
     protected $fillable = ['id','numero', 'cantidad'];
     public function corrales()
     {
-        return $this->hasMany('App\Corral','id_corral');
+        return $this->hasMany('App\Corral','id_galpon');
     }
 }

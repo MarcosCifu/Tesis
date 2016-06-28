@@ -4,7 +4,7 @@
     <div class="animated pulse slow go">
         <div class="box">
             <div class="box-header">
-                <h3>Listado de Corrales</h3>
+                <h3>Listado de <b>Corrales</b></h3>
                 <a href="{{route('admin.corrales.create')}}" class="btn btn-info btn-lg"><i class="fa fa-folder-open-o"></i> Registar nuevo Corral</a>
             </div><!-- /.box-header -->
             <div class="box-body ">
@@ -20,7 +20,7 @@
                     <tbody>
                         @foreach($corrales as $corral)
                             <tr>
-                                <td><a href="{{ route('admin.corrales.perfil', $corral->id) }}">Corral {{$corral->numero}}</a></td><td>{{$corral->cantidad}}</td>
+                                <td><a href="{{ route('admin.corrales.perfil', $corral->id) }}" class="btn btn-primary">Corral {{$corral->numero}}</a></td><td>{{$corral->cantidad}}</td>
                                 <td>Galpón {{$corral->galpon->numero}}</td>
                                 <td>
                                     <a href="{{ route('admin.corrales.edit', $corral->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>

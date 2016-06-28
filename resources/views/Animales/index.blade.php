@@ -4,7 +4,7 @@
     <div class="animated pulse slow go">
         <div class="box">
             <div class="box-header">
-                <h3>Listado de Animales</h3>
+                <h3>Listado de <b>Animales</b></h3>
                 <a href="{{route('admin.animales.create')}}" class="btn btn-info btn-lg"><i class="fa fa-folder-open-o"></i> Registar nuevo Animal</a>
             </div><!-- /.box-header -->
             <div class="box-body">
@@ -40,8 +40,8 @@
                                     @endif
                                 @endif
                             </td>
-                            <td>{{$animal->created_at->format('d/m/Y')}}</td>
-                            <td>{!! $animal->pesos->last() !!}</td>
+                            <td>{{$animal->created_at->format('m/Y')}}</td>
+                            <td>{!! $animal->ultimopeso->pesaje !!}</td>
                             <td>
                                 <a href="{{ route('admin.animales.edit', $animal->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
                                 <a href="{{ route('admin.animales.destroy', $animal->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este animal?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>

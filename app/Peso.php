@@ -10,7 +10,7 @@ class Peso extends Model
     protected $fillable = ['pesaje','fecha','id_animales'];
     public function animal()
     {
-        return $this->belongsTo('App\Animal');
+        return $this->belongsTo('App\Animal', 'id_animales');
     }
         
 }

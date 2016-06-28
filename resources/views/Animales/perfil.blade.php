@@ -1,12 +1,11 @@
 @extends('template')
 @section('content')
-    <div class="animated flipInY">
-        <h3>Información del Animal</h3>
-    </div>
     <div class="row">
         <div class="col-md-4">
-            <div class="animated pulse slow go">
-            <div class="box box-primary">
+            <div class="box box-primary animated pulse slow go">
+                <div class="box-header">
+                    <h3>Información del <b>Animal</b></h3>
+                </div>
                 <div class="box-body box-profile">
 
                     <td><img class="profile-user-img img-responsive " src="{{ asset('images') }}/{{$animal->path}}"  style="width: 300px;"></td>
@@ -21,6 +20,13 @@
                         <li class="list-group-item">
                             <b>Número de Guía</b> <a class="pull-right">{{$animal->numero_Guia}}</a>
                         </li>
+                        @foreach($animal->users as $origen)
+                        <li class="list-group-item">
+
+                            <b>Procedencia</b> <a class="pull-right">{{$origen->pivot->procedencia}}</a>
+
+                        </li>
+                        @endforeach
                         <li class="list-group-item">
                             <b>Tipo</b> <a class="pull-right">{{$animal->tipo}}</a>
                         </li>
@@ -35,10 +41,9 @@
                             </td>
                         </li>
                     </ul>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
+                </div>
             </div>
-        </div><!-- /.tab-content -->
+        </div>
         <div class="col-md-4">
 
         </div>
@@ -97,7 +102,7 @@
             var areaChart = new Chart(areaChartCanvas);
 
             var areaChartData = {
-                labels: {!! json_encode($fecha) !!},
+                labels: {!! ($fecha) !!},
                 datasets: [
                     {
                         label: "Pesajes",
@@ -107,10 +112,10 @@
                         pointStrokeColor: "rgba(60,141,188,1)",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(60,141,188,1)",
-                        data: {!! json_encode($pesos) !!},
+                        data: {!! ($pesos) !!}
 
                     }
-                ],
+                ]
             };
 
             var areaChartOptions = {
@@ -163,7 +168,8 @@
             var barChartCanvas = $("#barChart").get(0).getContext("2d");
             var barChart = new Chart(barChartCanvas);
             var barChartData = {
-                labels: {!! json_encode($fecha) !!},
+                labels: {!! $fecha !!},
+
                 datasets: [
                     {
                         label: "Pesajes",
@@ -173,7 +179,7 @@
                         pointStrokeColor: "rgba(60,141,188,1)",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(60,141,188,1)",
-                        data: [454, 510, 490, 505, 560 , 601, 580]
+                        data: {!!  ($pesos) !!}
                     }
                 ]
             };
