@@ -115,7 +115,6 @@ class GalponesController extends Controller
     public function corralcreate($id)
     {
         $galpones = Galpon::find($id);
-        $numero = $galpones->numero;
-        return view ('Corrales.create')->with('galpones', $galpones)->with('numero',$numero);
+        return view ('Galpones.corralcreate')->with('galpones', $galpones);
     }
 }

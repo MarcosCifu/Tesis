@@ -15,8 +15,7 @@ class AddGalponesTable extends Migration
         Schema::create('galpones', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('numero');
-            $table->integer('cantidad');
-            $table->integer('cantidad_actual');
+            $table->integer('cantidad_corrales');
             $table->timestamps();
         });
     }

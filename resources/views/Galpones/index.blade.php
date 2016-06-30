@@ -12,19 +12,19 @@
                     <thead>
                         <tr>
                             <th>Número</th>
-                            <th>Cantidad de Corrales</th>
-                            <th>Cantidad de Animales</th>
+                            <th>Cantidad actual de Corrales</th>
+                            <th>Cantidad actual de Animales</th>
                             <th>Acción</th>
                         </tr>
-                        </thead>
+                    </thead>
                     <tbody>
                         @foreach($galpones as $galpon)
                             <tr>
-                                <td><a href="{{ route('admin.galpones.perfil', $galpon->id) }}" class="btn btn-success">Galpón {{$galpon->numero}}</td></a>
+                                <td><a href="{{ route('admin.galpones.perfil', $galpon->id) }}" class="btn btn-success">Galpón {{$galpon->numero}}</a></td>
                                 <td>{{$galpon->corrales()->count()}}</td>
                                 <td></td>
                                 <td>
-                                    <a href="{{ route('admin.corrales.create', $galpon->id) }}" class="btn btn-primary"><spam  class="fa fa-tags" aria-hidden="true"></spam></a>
+                                    <a href="{{ route('admin.galpones.corralcreate', $galpon->id) }}" class="btn btn-primary"><spam  class="fa fa-tags" aria-hidden="true"></spam></a>
                                     <a href="{{ route('admin.galpones.edit', $galpon->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
                                     <a href="{{ route('admin.galpones.destroy', $galpon->id) }}" class="btn btn-danger"><spam onclick = "return confirm('¿Seguro que deseas eliminar este gapón?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
                                 </td>

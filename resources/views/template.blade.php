@@ -69,6 +69,8 @@
 
 <script src="{{ asset ("/plugins/chartjs/Chart.js") }}"></script>
 
+<script src="{{ asset("/plugins/jquerysteps/jquery.steps.js") }}"></script>
+
 @yield('chartjs')
 @yield('tablejs')
 @yield('ajaxjs')

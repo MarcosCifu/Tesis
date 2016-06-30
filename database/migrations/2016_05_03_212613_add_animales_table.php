@@ -15,7 +15,6 @@ class AddAnimalesTable extends Migration
         Schema::create('animales', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('DIIO');
-            $table->bigInteger('numero_Guia');
             $table->enum('tipo',['Vaca','Novillo','Vaquilla','Ternero','Ternera']);
             $table->enum('estado',['vivo','muerto','enfermo']);
             $table->integer('id_corral')->unsigned();
@@ -28,13 +27,21 @@ class AddAnimalesTable extends Migration
             $table->increments('id');
             $table->integer('id_animales')->unsigned();
             $table->integer('id_user')->unsigned();
+            $table->bigInteger('numero_Guia');
+            $table->string('procedencia');
             $table->date('fecha_compra');
             $table->date('fecha_venta');
             $table->integer('precio_compra');
             $table->integer('precio_venta');
-            $table->string('procedencia');
             $table->foreign('id_animales')->references('id')->on('animales')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
+    }
+    public function down()
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+        Schema::drop('animales','user_animal');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+
     }
 }
