@@ -57,8 +57,18 @@
         $(function () {
             $('#materiales').DataTable({
                 "info": false,
-                "scrollX" : true
-
+                "scrollX" : true,
+                "language": {
+                    "emptyTable": "No hay datos disponibles",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Ultimo",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                    "lengthMenu": "Mostrar _MENU_ entradas"
+                }
             });
         });
     </script>

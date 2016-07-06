@@ -20,7 +20,8 @@
                     <tbody>
                         @foreach($corrales as $corral)
                             <tr>
-                                <td><a href="{{ route('admin.corrales.perfil', $corral->id) }}" class="btn btn-primary">Corral {{$corral->numero}}</a></td><td>{{$corral->cantidad}}</td>
+                                <td><a href="{{ route('admin.corrales.perfil', $corral->id) }}" class="btn btn-primary">Corral {{$corral->numero}}</a></td>
+                                <td>{{$corral->cantidad}}</td>
                                 <td>Galpón {{$corral->galpon->numero}}</td>
                                 <td>
                                     <a href="{{ route('admin.corrales.edit', $corral->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
@@ -40,6 +41,17 @@
             $('#corrales').DataTable({
                 "info": false,
                 "scrollX" : true,
+                "language": {
+                    "emptyTable": "No hay datos disponibles",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Ultimo",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                    "lengthMenu": "Mostrar _MENU_ entradas"
+                },
                 "lengthMenu": [[10, 20, -1], [10, 20, "Todos"]]
             });
         });

@@ -11,16 +11,8 @@
                             {!! Form::text('DIIO', null, ['class' => 'form-control', 'placeholder' => 'DIIO del animal' , 'required' ]) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('numero_Guia' ,'Numero de Guia') !!}
-                            {!! Form::text('numero_Guia', null, ['class' => 'form-control', 'placeholder' => 'Numero de Guia' , 'required' ]) !!}
-                        </div>
-                        <div class="form-group">
                             {!! Form::label('type','Tipo') !!}
                             {!! Form::select('tipo',[ 'vaca' => 'Vaca' , 'novillo' => 'Novillo', 'vaquilla' => 'Vaquilla' , 'ternero' => 'Ternero', 'ternera' => 'Ternera'],null,['class'=> 'form-control', 'placeholder' => 'Seleccione un tipo' , 'required' ]) !!}
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('procedencia' ,'Procedencia') !!}
-                            {!! Form::text('procedencia', null, ['class' => 'form-control', 'placeholder' => 'Procedencia del animal' , 'required' ]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('corral','Corral') !!}
@@ -28,7 +20,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('estado','Estado') !!}
-                            {!! Form::select('estado',[ 'vivo' => 'Vivo' , 'muerto' => 'Muerto', 'enfermo' => 'Enfermo' ],null,['class'=> 'form-control', 'placeholder' => 'Seleccione un estado' , 'required' ]) !!}
+                            {!! Form::select('estado',[ 'vivo' => 'Vivo' , 'muerto' => 'Muerto', 'enfermo' => 'Enfermo' ], 'vivo',['class'=> 'form-control', 'placeholder' => 'Seleccione un estado' , 'required' ]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('fecha_compra','Fecha de Ingreso') !!}<br>
@@ -39,8 +31,15 @@
                             {!! Form::file('path') !!}
                         </div>
                         <div class="form-group">
+                            {!! Form::label('numero_Guia' ,'Número de Guia') !!}
+                            {!! Form::text('numero_Guia', null, ['class' => 'form-control', 'placeholder' => 'Número de guia del animal' , 'required' ]) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('procedencia' ,'Procedencia') !!}
+                            {!! Form::text('procedencia', null, ['class' => 'form-control', 'placeholder' => 'Procedencia del animal' , 'required' ]) !!}
+                        </div>
+                        <div class="form-group">
                             {!! Form::hidden('user_id', Auth::user()->id , null , ['class'=>'form-control']) !!}
-
                         </div>
 
                         <div class="form-group">

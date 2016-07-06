@@ -11,7 +11,6 @@
                 <table id="users" class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Nombre</th>
                             <th>Correo</th>
                             <th>Tipo</th>
@@ -21,7 +20,6 @@
                     <tbody>
                         @foreach($users as $user)
                             <tr>
-                                <td>{{$user->id}}</td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>
@@ -52,8 +50,18 @@
         $(function () {
             $('#users').DataTable({
                 "info": false,
-                "scrollX" : true
-
+                "scrollX" : true,
+                "language": {
+                    "emptyTable": "No hay datos disponibles",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Ultimo",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                    "lengthMenu": "Mostrar _MENU_ entradas"
+                }
             });
         });
     </script>

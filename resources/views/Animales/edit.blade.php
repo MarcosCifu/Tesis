@@ -11,10 +11,6 @@
                         {!! Form::text('DIIO', null, ['class' => 'form-control', 'placeholder' => 'DIIO del animal' , 'required' ]) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::label('numero_Guia' ,'Numero de Guia') !!}
-                        {!! Form::text('numero_Guia', null, ['class' => 'form-control', 'placeholder' => 'Numero de Guia' , 'required' ]) !!}
-                    </div>
-                    <div class="form-group">
                         {!! Form::label('tipo','Tipo') !!}
                         {!! Form::select('tipo',[ 'vaca' => 'Vaca' , 'novillo' => 'Novillo', 'vaquilla' => 'Vaquilla' , 'ternero' => 'Ternero', 'ternera' => 'Ternera'], $animal->tipo,['class'=> 'form-control', 'placeholder' => 'Seleccione un tipo' , 'required' ]) !!}
                     </div>

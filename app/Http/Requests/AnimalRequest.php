@@ -24,8 +24,8 @@ class AnimalRequest extends Request
     public function rules()
     {
         return [
-            'DIIO' => 'integer|digits:7|required|unique:animales',
-            'numero_Guia' => 'integer|digits:6|required'
+            'DIIO' => 'integer|digits:7|required|unique:animales'
+
         ];
     }
 }

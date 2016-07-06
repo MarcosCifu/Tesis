@@ -17,15 +17,13 @@
                         <li class="list-group-item">
                             <b>Fecha de ingreso</b> <a class="pull-right">{{$animal->created_at->format('d/m/Y')}}</a>
                         </li>
-                        <li class="list-group-item">
-                            <b>Número de Guía</b> <a class="pull-right">{{$animal->numero_Guia}}</a>
-                        </li>
                         @foreach($animal->users as $origen)
-                        <li class="list-group-item">
-
-                            <b>Procedencia</b> <a class="pull-right">{{$origen->pivot->procedencia}}</a>
-
-                        </li>
+                            <li class="list-group-item">
+                                <b>Procedencia</b> <a class="pull-right">{{$origen->pivot->procedencia}}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Número de Guía</b> <a class="pull-right">{{($origen->pivot->numero_Guia)}}</a>
+                            </li>
                         @endforeach
                         <li class="list-group-item">
                             <b>Tipo</b> <a class="pull-right">{{$animal->tipo}}</a>

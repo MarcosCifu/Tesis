@@ -21,7 +21,7 @@
                         <b>Fecha de creación</b> <a class="pull-right">{{$corrales->created_at->format('d/m/Y')}}</a>
                     </li>
                     <li class="list-group-item">
-                        <b>Cantidad de Animales</b> <a class="pull-right">{{ $corrales->cantidad }}</a>
+                        <b>Cantidad de Animales</b> <a class="pull-right">{{ $corrales->cantidad_animales }}</a>
                     </li>
                     <li class="list-group-item">
                         <b>Tipo de Animales</b> <a class="pull-right"></a>

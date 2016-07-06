@@ -24,8 +24,9 @@
                     </thead>
                     <tbody>
                     @foreach($animales as $animal)
+                        @foreach($animal->users as $origen)
                         <tr>
-                            <td>{{$animal->numero_Guia}}</td>
+                            <td>{{$origen->pivot->numero_Guia or "Desconocido"}}</td>
                             <td><a href="{{ route('admin.animales.perfil', $animal->id) }}">{{$animal->DIIO}}</a></td>
                             <td>{{$animal->tipo}}</td>
                             <td>Galpón {{$animal->corral->galpon->numero}}</td>
@@ -41,12 +42,13 @@
                                 @endif
                             </td>
                             <td>{{$animal->created_at->format('m/Y')}}</td>
-                            <td>{!! $animal->ultimopeso->pesaje !!}</td>
+                            <td>{!! $animal->ultimopeso->pesaje or "0"!!}</td>
                             <td>
                                 <a href="{{ route('admin.animales.edit', $animal->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
                                 <a href="{{ route('admin.animales.destroy', $animal->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este animal?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
                             </td>
                         </tr>
+                    @endforeach
                     @endforeach
                     </tbody>
                 </table>
@@ -60,6 +62,17 @@
             $('#animales').DataTable({
                 "info": false,
                 "scrollX" : true,
+                "language": {
+                    "emptyTable": "No hay datos disponibles",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Ultimo",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                    "lengthMenu": "Mostrar _MENU_ entradas"
+                },
                 "lengthMenu": [[10, 20, -1], [10, 20, "Todos"]]
             });
         });

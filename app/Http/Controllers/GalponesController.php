@@ -110,6 +110,7 @@ class GalponesController extends Controller
         $galpon = Galpon::find($id);
         $corrales = Corral::where('id_galpon','=', $galpon->id);
         $animales = $corrales->sum('cantidad_animales');
+      
         return view ('Galpones.perfil')->with('galpon',$galpon)->with('corrales',$corrales)->with('animales',$animales);
     }
     public function corralcreate($id)

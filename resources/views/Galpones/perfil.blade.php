@@ -23,7 +23,7 @@
                                 <b>Fecha de creación</b> <a class="pull-right">{{$galpon->created_at->format('d/m/Y')}}</a>
                             </li>
                             <li class="list-group-item">
-                                <b>Cantidad de Animales</b> <a class="pull-right">{{ $animales }}</a>
+                                <b>Cantidad total de Animales</b> <a class="pull-right">{{ $animales }}</a>
                             </li>
                             <li class="list-group-item">
                                 <b>Tipo de Animales</b> <a class="pull-right"></a>
@@ -31,9 +31,7 @@
                             <li class="list-group-item">
                                 <b>Estado</b> <a class="pull-right"></a>
                             </li>
-                            <li class="list-group-item">
-                                <b>Agregar Corral</b><a href="{{ route('admin.galpones.corralcreate', $galpon->id) }}" class="btn btn-info pull-right"><spam  class="fa fa-tags" aria-hidden="true"></spam></a>
-                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -42,6 +40,26 @@
         <div class="col-md-4">
             <div class="animated pulse slow go">
                 <div class="box box-primary">
+                    <div class="box-header">
+                        <h3>Listado de <b>Corrales</b></h3>
+                        <a href="{{route('admin.galpones.corralcreate', $galpon->id)}}" class="btn btn-info btn-lg"><i class="fa fa-tags"></i> Registar nuevo Corral</a>
+                    </div><!-- /.box-header -->
+                    <table id="corrales" class="table table-bordered table">
+                        <thead>
+                        <tr>
+                            <th>Número</th>
+                            <th>Cantidad actual de Animales</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($galpon->corrales as $corral)
+                            <tr>
+                                <td><a href="{{ route('admin.corrales.perfil', $corral->id) }}" class="btn btn-success">Corral {{$corral->numero}}</a></td>
+                                <td>{{$corral->cantidad_animales}}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -207,6 +225,20 @@
 
             barChartOptions.datasetFill = false;
             barChart.Bar(barChartData, barChartOptions);
+        });
+    </script>
+@endsection
+@section('tablejs')
+    <script>
+        $(function () {
+            $('#corrales').DataTable({
+                "info": false,
+                "scrollX" : true,
+                "searching": false,
+                "lengthChange" : false,
+                "paging" : false,
+                "lengthMenu": [[10, 20, -1], [10, 20, "Todos"]]
+            });
         });
     </script>
 @endsection

@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id','name', 'email', 'password', 'type',
+        'id','name', 'email', 'password', 'type','fecha_compra','fecha_venta','precio_compra','precio_venta','numero_Guia','procedencia'
     ];
 
     /**
@@ -26,7 +26,7 @@ class User extends Authenticatable
 
     public function animals()
     {
-        return $this->belongsToMany('App\Animal','user_animal','id_user','id_animales')->withPivot('fecha_compra','fecha_venta','precio_compra','precio_venta','procedencia');
+        return $this->belongsToMany('App\Animal','user_animal','id_user','id_animales')->withPivot('fecha_compra','fecha_venta','precio_compra','precio_venta','numero_Guia','procedencia');
     }
     public function materiales()
     {

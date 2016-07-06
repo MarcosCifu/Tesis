@@ -53,7 +53,7 @@ class CorralesController extends Controller
         $corral = new Corral($request->all());
         $corral->save();
         Flash::success('El corral ' . $corral->numero . ' ha sido creado con exito!');
-        return redirect()->route('admin.corrales.index');
+        return redirect()->route('admin.corral.index');
 
         }
 

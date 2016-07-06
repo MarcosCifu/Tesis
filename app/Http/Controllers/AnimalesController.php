@@ -65,11 +65,12 @@ class AnimalesController extends Controller
         $animal = new Animal($request->all());
         $user = Auth::user();
         $animal->id_corral = $request->input('corral');
-        $animal->corral()->increment('cantidad',1);
         $animal->save();
+        $animal->corral()->increment('cantidad_animales',1);
         $fechacompra = $request->input('fecha');
         $procedencia = $request->input('procedencia');
-        $animal->users()->attach($user->id, ['fecha_compra'=> $fechacompra, 'procedencia'=>$procedencia]);
+        $numeroguia = $request->input('numero_Guia');
+        $animal->users()->attach($user->id, ['fecha_compra'=> $fechacompra, 'procedencia'=>$procedencia, 'numero_Guia'=>$numeroguia]);
         Flash::success('El animal ' . $animal->DIIO . ' ha sido creado con exito!');
         return redirect()->route('admin.animales.index');
     }
