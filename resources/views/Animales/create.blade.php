@@ -12,7 +12,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('type','Tipo') !!}
-                            {!! Form::select('tipo',[ 'vaca' => 'Vaca' , 'novillo' => 'Novillo', 'vaquilla' => 'Vaquilla' , 'ternero' => 'Ternero', 'ternera' => 'Ternera'],null,['class'=> 'form-control', 'placeholder' => 'Seleccione un tipo' , 'required' ]) !!}
+                            {!! Form::select('tipo',[ 'Vaca' => 'Vaca' , 'Novillo' => 'Novillo', 'Vaquilla' => 'Vaquilla' , 'Ternero' => 'Ternero', 'Ternera' => 'Ternera'],null,['class'=> 'form-control', 'placeholder' => 'Seleccione un tipo' , 'required' ]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('corral','Corral') !!}
@@ -20,7 +20,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('estado','Estado') !!}
-                            {!! Form::select('estado',[ 'vivo' => 'Vivo' , 'muerto' => 'Muerto', 'enfermo' => 'Enfermo' ], 'vivo',['class'=> 'form-control', 'placeholder' => 'Seleccione un estado' , 'required' ]) !!}
+                            {!! Form::select('estado',[ 'Vivo' => 'Vivo' , 'Muerto' => 'Muerto', 'Enfermo' => 'Enfermo' ], 'Vivo',['class'=> 'form-control', 'placeholder' => 'Seleccione un estado' , 'required' ]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('fecha_compra','Fecha de Ingreso') !!}<br>

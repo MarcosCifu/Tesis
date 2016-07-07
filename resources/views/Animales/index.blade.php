@@ -31,10 +31,11 @@
                             <td>{{$animal->tipo}}</td>
                             <td>Galpón {{$animal->corral->galpon->numero}}</td>
                             <td>Corral {{$animal->corral->numero}}</td>
-                            <td> @if($animal->estado == "vivo")
+                            <td>
+                                @if($animal->estado == "Vivo")
                                     <span class="label label-success">{{$animal->estado}}</span>
                                 @else
-                                    @if($animal->estado == "muerto")
+                                    @if($animal->estado == "Muerto")
                                         <span class="label label-danger">{{$animal->estado}}</span>
                                     @else
                                         <span class="label label-warning">{{$animal->estado}}</span>

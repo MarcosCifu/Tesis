@@ -5,14 +5,14 @@
         <div class="col-lg-5">
             <div class="box box-primary">
                 <div class="box-body">
-                    {{ Form::model($animal,['route' => ['admin.animales.update', $animal->id] , 'method' => 'PUT']) }}
+                    {{ Form::model($animal ,['route' => ['admin.animales.update', $animal->id] , 'method' => 'PUT']) }}
                     <div class="form-group">
                         {!! Form::label('diio' ,'DIIO') !!}
                         {!! Form::text('DIIO', null, ['class' => 'form-control', 'placeholder' => 'DIIO del animal' , 'required' ]) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('tipo','Tipo') !!}
-                        {!! Form::select('tipo',[ 'vaca' => 'Vaca' , 'novillo' => 'Novillo', 'vaquilla' => 'Vaquilla' , 'ternero' => 'Ternero', 'ternera' => 'Ternera'], $animal->tipo,['class'=> 'form-control', 'placeholder' => 'Seleccione un tipo' , 'required' ]) !!}
+                        {!! Form::select('tipo',[ 'Vaca' => 'Vaca' , 'Novillo' => 'Novillo', 'Vaquilla' => 'Vaquilla' , 'Ternero' => 'Ternero', 'Ternera' => 'Ternera'], $animal->tipo,['class'=> 'form-control', 'placeholder' => 'Seleccione un tipo' , 'required' ]) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('corral','Corral') !!}
@@ -20,7 +20,7 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('estado','Estado') !!}
-                        {!! Form::select('estado',[ 'vivo' => 'Vivo' , 'muerto' => 'Muerto', 'enfermo' => 'Enfermo' ],null,['class'=> 'form-control', 'placeholder' => 'Seleccione un estado' , 'required' ]) !!}
+                        {!! Form::select('estado',[ 'Vivo' => 'Vivo' , 'Muerto' => 'Muerto', 'Enfermo' => 'Enfermo' ],$animal->estado,['class'=> 'form-control', 'placeholder' => 'Seleccione un estado' , 'required' ]) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('fecha_compra','Fecha de Ingreso') !!}<br>

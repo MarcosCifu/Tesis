@@ -1,14 +1,9 @@
-<!-- Left side column. contains the sidebar -->
+
 <aside class="main-sidebar">
-
-    <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-
-        <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
             <li class="header"><i class="fa fa-gears"></i> Panel de Control</li>
-            <!-- Optionally, you can add icons to the links -->
-            <li><a href="{{ route('index')}}"><i class="glyphicon glyphicon-home"></i> <span>Inicio</span></a></li>
+            <li class="active treeview"><a href="{{ route('index')}}"><i class="glyphicon glyphicon-home"></i> <span>Inicio</span></a></li>
             <li><a href="{{ route('admin.users.index')}}"><i class="fa fa-users"></i> <span>Usuarios</span></a></li>
             <li class="treeview">
                 <a href="#">
@@ -20,7 +15,7 @@
                     <li><a href="{{ route('admin.pesos.index')}}"><i class="glyphicon glyphicon-scale"></i> Pesos</a></li>
                 </ul>
             </li>
-            <li>
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-map-marker"></i><span>Ubicaciones</span><i class="fa fa-angle-left pull-right"></i>
                 </a>
@@ -30,7 +25,6 @@
                 </ul>
             </li>
             <li><a href="{{ route('admin.materiales.index')}}"><i class="fa fa-home"></i> <span>Bodega</span></a></li>
-        </ul><!-- /.sidebar-menu -->
+        </ul>
     </section>
-    <!-- /.sidebar -->
 </aside>

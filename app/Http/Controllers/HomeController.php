@@ -30,9 +30,9 @@ class HomeController extends Controller
         $pesos = Peso::all();
         $cantidad = collect($animal)->count('id');
         $promedio = collect($pesos)->avg('pesaje');
-        $vivos = $animal->where("estado",'vivo')->count();
-        $muertos = $animal->where("estado",'muerto')->count();
-        $enfermos = $animal->where("estado",'enfermo')->count();
+        $vivos = $animal->where("estado",'Vivo')->count();
+        $muertos = $animal->where("estado",'Muerto')->count();
+        $enfermos = $animal->where("estado",'Enfermo')->count();
         $minimo = $pesos->min('pesaje');
         $maximo = $pesos->max('pesaje');
         $pesosnoapto = Peso::where('pesaje','<', 450)->groupBy('created_at')->orderBy('fecha', 'ASC')->lists('pesaje');
