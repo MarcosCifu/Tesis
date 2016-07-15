@@ -2,101 +2,116 @@
 @section('content')
     <div class="row">
         <div class="col-md-4">
-            <div class="animated pulse slow go">
-                <div class="box box-primary">
-                    <div class="box-header">
-                        <div class="text-center">
-                            <div class="small-box bg-green-gradient">
-                                <div class="inner">
-                                    <div class="icon">
-                                        <i class="ion ion-ios-paw-center"></i>
+            <div class="box box-primary animated pulse slow go">
+                <div class="box-header">
+                    <h3>Información del <b>Galpón</b></h3>
+                    <div class="text-center">
+                        <div class="small-box bg-red">
+                            <div class="inner">
+                                <div class="icon">
+                                    <i class="ion ion-ios-paw"></i>
+                                </div>
+                                <h2 class="text-center">Galpón Número</h2>
+                                <h3 class="profile-username text-center">{{$galpon->numero}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-body box-profile">
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <b>Fecha de creación</b> <a class="pull-right">{{$galpon->created_at->format('d/m/Y')}}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Cantidad total de Animales</b> <a class="pull-right">{{ $animales }}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Tipo de Animales</b> <a class="pull-right"></a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Estado</b> <a class="pull-right"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 animated pulse slow go">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#resumen" data-toggle="tab">Evolución</a></li>
+                    <li><a href="#corrales" data-toggle="tab">Corrales</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="active tab-pane" id="resumen">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box box-primary">
+                                    <div class="box-header">
+                                        <h3>Resumen <b>Evolutivo</b></h3>
                                     </div>
-                                    <h2 class="text-center">Galpón Número</h2>
-                                    <h3 class="profile-username text-center">{{$galpon->numero}}</h3>
+                                    <div class="box-body">
+                                        <div class="col-md-6">
+                                            <div class="box">
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title">Evolución</h3>
+                                                </div>
+                                                <div class="box-body">
+                                                    <div class="chart">
+                                                        <canvas id="areaChart" style="height:250px"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="box">
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title">Beneficios</h3>
+                                                </div>
+                                                <div class="box-body">
+                                                    <div class="chart">
+                                                        <canvas id="barChart" style="height:230px"></canvas>
+                                                    </div>
+                                                </div><!-- /.box-body -->
+                                            </div><!-- /.box -->
+                                        </div><!-- /.col (RIGHT) -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.nav-tabs-custom -->
+                    </div>
+                    <div class="tab-pane" id="corrales">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box box-primary">
+                                    <div class="box-header">
+                                        <h3>Listado de <b>Corrales</b></h3>
+                                        <a href="{{route('admin.galpones.corralcreate', $galpon->id)}}" class="btn btn-info btn-lg"><i class="fa fa-tags"></i> Registar nuevo Corral</a>
+                                    </div><!-- /.box-header -->
+                                    <table id="corrales" class="table table-bordered table">
+                                        <thead>
+                                        <tr>
+                                            <th>Número</th>
+                                            <th>Cantidad actual de Animales</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($galpon->corrales as $corral)
+                                            <tr>
+                                                <td><a href="{{ route('admin.corrales.perfil', $corral->id) }}" class="btn btn-success">Corral {{$corral->numero}}</a></td>
+                                                <td>{{$corral->cantidad_animales}}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="box-body box-profile">
-                        <ul class="list-group list-group-unbordered">
-                            <li class="list-group-item">
-                                <b>Fecha de creación</b> <a class="pull-right">{{$galpon->created_at->format('d/m/Y')}}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Cantidad total de Animales</b> <a class="pull-right">{{ $animales }}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Tipo de Animales</b> <a class="pull-right"></a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Estado</b> <a class="pull-right"></a>
-                            </li>
-
-                        </ul>
                     </div>
-                </div>
+
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="animated pulse slow go">
-                <div class="box box-primary">
-                    <div class="box-header">
-                        <h3>Listado de <b>Corrales</b></h3>
-                        <a href="{{route('admin.galpones.corralcreate', $galpon->id)}}" class="btn btn-info btn-lg"><i class="fa fa-tags"></i> Registar nuevo Corral</a>
-                    </div><!-- /.box-header -->
-                    <table id="corrales" class="table table-bordered table">
-                        <thead>
-                        <tr>
-                            <th>Número</th>
-                            <th>Cantidad actual de Animales</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($galpon->corrales as $corral)
-                            <tr>
-                                <td><a href="{{ route('admin.corrales.perfil', $corral->id) }}" class="btn btn-success">Corral {{$corral->numero}}</a></td>
-                                <td>{{$corral->cantidad_animales}}</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <!-- LINE CHART -->
-            <div class="box box-primary animated pulse slow go">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Evolución</h3>
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                    </div>
-                </div>
-                <div class="box-body">
-                    <div class="chart">
-                        <canvas id="areaChart" style="height:250px"></canvas>
-                    </div>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
 
-            <!-- BAR CHART -->
-            <div class="box box-success animated pulse slow go">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Beneficios</h3>
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                    </div>
-                </div>
-                <div class="box-body">
-                    <div class="chart">
-                        <canvas id="barChart" style="height:230px"></canvas>
-                    </div>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
-        </div><!-- /.col (RIGHT) -->
-    </div><!-- /.nav-tabs-custom -->
 
 @endsection
 

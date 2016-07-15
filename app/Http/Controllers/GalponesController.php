@@ -23,7 +23,6 @@ class GalponesController extends Controller
         $galpones->each(function ($galpones){
             $galpones->corrales;
         });
-        $corral = Corral::all();
         return view('Galpones.index')->with('galpones',$galpones);
     }
 

@@ -4,7 +4,7 @@
     <div class="animated pulse slow go">
         <div class="box">
             <div class="box-header">
-                <h3>Listado de Pesajes</h3>
+                <h3>Listado de <b>Pesajes</b></h3>
                 <a href="{{route('admin.pesos.create')}}" class="btn btn-info btn-lg"><i class="fa fa-folder-open-o"></i> Registar nuevo Pesaje</a>
             </div><!-- /.box-header -->
             <div class="box-body ">

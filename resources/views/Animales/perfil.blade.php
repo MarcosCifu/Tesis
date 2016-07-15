@@ -19,7 +19,7 @@
                         </li>
                         @foreach($animal->users as $origen)
                             <li class="list-group-item">
-                                <b>Procedencia</b> <a class="pull-right">{{$origen->pivot->procedencia}}</a>
+                                <b>Procedencia</b> <a class="pull-right">{{$origen->pivot->procedencia or 'Se Desconoce'}}</a>
                             </li>
                             <li class="list-group-item">
                                 <b>Número de Guía</b> <a class="pull-right">{{($origen->pivot->numero_Guia)}}</a>
@@ -31,57 +31,132 @@
                         <li class="list-group-item">
                             <b>Estado</b> <a class="pull-right">{{$animal->estado}}</a>
                         </li>
-                        <li class="list-group-item">
-                            <b>Acción</b>
-                            <td>
-                                <a href="{{ route('admin.animales.pesoperfil', $animal->id) }}" class="btn btn-info pull-right"><spam  class="glyphicon glyphicon-scale" aria-hidden="true"></spam></a>
-                                <a href="{{ route('admin.animales.historialperfil', $animal->id) }}" class="btn btn-danger pull-right"><spam  class="fa fa-stethoscope" aria-hidden="true"></spam></a>
-                            </td>
-                        </li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-8 animated pulse slow go">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#resumen" data-toggle="tab">Evolución</a></li>
+                    <li><a href="#pesajes" data-toggle="tab">Pesajes</a></li>
+                    <li><a href="#historialmedico" data-toggle="tab">Diagnosticos Medicos</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="active tab-pane" id="resumen">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box box-primary">
+                                    <div class="box-header">
+                                        <h3>Resumen <b>Evolutivo</b></h3>
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="col-md-6">
+                                            <div class="box">
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title">Evolución</h3>
+                                                </div>
+                                                <div class="box-body">
+                                                    <div class="chart">
+                                                        <canvas id="areaChart" style="height:250px"></canvas>
+                                                    </div>
+                                                </div><!-- /.box-body -->
+                                            </div><!-- /.box -->
+                                        </div>
+                                        <div class="col-md-6">
+                                                    <!-- LINE CHART -->
+                                            <div class="box">
+                                                <div class="box-header with-border">
+                                                    <h3 class="box-title">Beneficios</h3>
+                                                </div>
+                                                <div class="box-body">
+                                                    <div class="chart">
+                                                        <canvas id="barChart" style="height:250px"></canvas>
+                                                    </div>
+                                                </div><!-- /.box-body -->
+                                            </div><!-- /.box -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- /.col (RIGHT) -->
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="pesajes">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-primary">
+                                        <div class="box-header">
+                                            <h3>Listado de <b>Pesajes</b></h3>
+                                            <div>
+                                                <a href="{{route('admin.animales.pesoperfil', $animal->id)}}" class="btn btn-success"><spam class="glyphicon glyphicon-scale"></spam> Registar <b>Pesaje</b></a>
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <table id="pesos" class="table table-bordered table">
+                                            <thead>
+                                            <tr>
+                                                <th>Pesaje</th>
+                                                <th>Fecha</th>
+                                                <th>Acción</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($animal->pesos as $peso)
+                                                <tr>
+                                                    <td>{{$peso->pesaje}}</td>
+                                                    <td>{{$peso->created_at->format('m/Y')}}</td>
+                                                    <td>
+                                                        <a href="{{ route('admin.pesos.edit', $peso->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
+                                                        <a href="{{ route('admin.pesos.destroy', $peso->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este pesaje?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="historialmedico">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-primary">
+                                        <div class="box-header">
+                                            <h3>Listado de <b>Diagnostcos Medicos</b></h3>
+                                            <div>
+                                                <a href="{{route('admin.animales.historialperfil', $animal->id)}}" class="btn btn-success"><i class="fa fa-stethoscope"></i> Registar <b>Diagnostico</b></a>
+                                            </div>
+                                        </div><!-- /.box-header -->
 
-        </div>
-        <div class="col-md-4">
-                    <!-- LINE CHART -->
-            <div class="box box-primary animated pulse slow go">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Evolución</h3>
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        <table id="historial" class="table table-bordered table">
+                                            <thead>
+                                            <tr>
+                                                <th>Diagnostico</th>
+                                                <th>Fecha</th>
+                                                <th>Acción</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($animal->historialesmedicos as $historial)
+                                                <tr>
+                                                    <td>{{$historial->enfermedad}}</td>
+                                                    <td>{{$historial->created_at->format('m/Y')}}</td>
+                                                    <td>
+                                                        <a href="{{ route('admin.historiales.edit', $historial->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
+                                                        <a href="{{ route('admin.historiales.destroy', $historial->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este pesaje?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="box-body">
-                    <div class="chart">
-                        <canvas id="areaChart" style="height:250px"></canvas>
-                    </div>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
-
-                    <!-- BAR CHART -->
-            <div class="box box-success animated pulse slow go">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Beneficios</h3>
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                    </div>
-                </div>
-                <div class="box-body">
-                    <div class="chart">
-                        <canvas id="barChart" style="height:230px"></canvas>
-                    </div>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
-        </div><!-- /.col (RIGHT) -->
-    </div><!-- /.nav-tabs-custom -->
-
+            </div>
+        </div><!-- /.nav-tabs-custom -->
+    </div>
 @endsection
-
 @section('chartjs')
     <script>
         $(function () {
@@ -210,6 +285,42 @@
 
             barChartOptions.datasetFill = false;
             barChart.Bar(barChartData, barChartOptions);
+        });
+    </script>
+@endsection
+@section('tablejs')
+    <script>
+        $(function () {
+            $('#pesos').DataTable({
+                "info": false,
+                "language": {
+                    "emptyTable": "No hay datos disponibles",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Ultimo",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                    "lengthMenu": "Mostrar _MENU_ entradas"
+                }
+            });
+        });
+        $(function () {
+            $('#historial').DataTable({
+                "info": false,
+                "language": {
+                    "emptyTable": "No hay datos disponibles",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Ultimo",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                    "lengthMenu": "Mostrar _MENU_ entradas"
+                }
+            });
         });
     </script>
 @endsection

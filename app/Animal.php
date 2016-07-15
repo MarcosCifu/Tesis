@@ -16,7 +16,7 @@ class Animal extends Model implements SluggableInterface
     ];
 
     protected $table = "animales";
-    protected $fillable = ['DIIO','tipo','id_corral','id_pesos','estado','path','fecha_compra','fecha_venta','precio_compra','precio_venta',];
+    protected $fillable = ['id','DIIO','tipo','id_corral','id_pesos','estado','path','fecha_compra','fecha_venta','precio_compra','precio_venta',];
 
     /**
      * @return array
@@ -37,7 +37,7 @@ class Animal extends Model implements SluggableInterface
     }
     public function historialesmedicos()
     {
-        return $this->hasMany('App\Historial_Medico','id_historiales');
+        return $this->hasMany('App\Historial_Medico','id_animales');
     }
     public function pesos()
     {

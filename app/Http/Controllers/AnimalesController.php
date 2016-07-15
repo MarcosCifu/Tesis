@@ -115,6 +115,11 @@ class AnimalesController extends Controller
     {
         $animal = Animal::find($id);
         $animal->fill($request->all());
+        if ($animal->id_corral != $request->input('corral')){
+            $animal->corral()->decrement('cantidad_animales',1);
+            $animal->id_corral = $request->input('corral');
+            $animal->corral()->increment('cantidad_animales',1);
+        }
         $animal->save();
         Flash::warning('El animal ' . $animal->DIIO . ' ha sido editado con exito!');
         return redirect()->route('admin.animales.index');
@@ -136,6 +141,7 @@ class AnimalesController extends Controller
 
         });
         $animal->delete();
+        $animal->corral()->decrement('cantidad_animales',1);
 
         Flash::error('El animal ' . $animal->DIIO . ' ha sido eliminado con exito!');
         return redirect()->route('admin.animales.index');

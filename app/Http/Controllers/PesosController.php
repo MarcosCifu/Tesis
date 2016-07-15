@@ -74,7 +74,9 @@ class PesosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $peso = Peso::find($id);
+        $animal = Animal::lists('DIIO','id');
+        return view('Pesos.edit')->with('peso',$peso)->with('animal',$animal);
     }
 
     /**
@@ -86,7 +88,11 @@ class PesosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $peso = Peso::find($id);
+        $peso->fill($request->all());
+        $peso->save();
+        Flash::warning('El pesaje del animal ' . $peso->animal->DIIO . ' ha sido editado con exito!');
+        return redirect()->route('admin.pesos.index');
     }
 
     /**

@@ -49,7 +49,6 @@ class HistorialesMedicosController extends Controller
      */
     public function store(HistorialesRequest $request)
     {
-      
         $historial = new Historial_Medico($request->all());
         $historial->save();
         Flash::success('El diagnostico ' . $historial->enfermedad . ' ha sido creado con exito!');

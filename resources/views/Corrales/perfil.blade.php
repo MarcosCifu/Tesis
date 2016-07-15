@@ -5,91 +5,134 @@
             <div class="box box-primary animated pulse slow go">
                 <div class="box-header">
                     <h3>Información del <b>Corral</b></h3>
-                </div>
-                <div class="small-box bg-green-gradient">
-                    <div class="inner">
-                        <div class="icon">
-                            <i class="ion ion-ios-paw-center"></i>
+                    <div class="small-box bg-olive">
+                        <div class="inner">
+                            <div class="icon">
+                                <i class="ion ion-ios-paw"></i>
+                            </div>
+                                <h2 class="text-center">Corral Número</h2>
+                                <h3 class="profile-username text-center">{{$corrales->numero}}</h3>
                         </div>
-                            <h2 class="text-center">Corral Número</h2>
-                            <h3 class="profile-username text-center">{{$corrales->numero}}</h3>
                     </div>
                 </div>
-            <div class="box-body box-profile">
-                <ul class="list-group list-group-unbordered">
-                    <li class="list-group-item">
-                        <b>Fecha de creación</b> <a class="pull-right">{{$corrales->created_at->format('d/m/Y')}}</a>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Cantidad de Animales</b> <a class="pull-right">{{ $corrales->cantidad_animales }}</a>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Tipo de Animales</b> <a class="pull-right"></a>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Estado</b> <a class="pull-right"></a>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Acción</b>
-                        <td>
-                            <a href="{{ route('admin.animales.pesoperfil', $corrales->id) }}" class="btn btn-info pull-right"><spam  class="glyphicon glyphicon-scale" aria-hidden="true"></spam></a>
-                            <a href="{{ route('admin.animales.historialperfil', $corrales->id) }}" class="btn btn-danger pull-right"><spam  class="fa fa-stethoscope" aria-hidden="true"></spam></a>
-                        </td>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        </div>
-        <div class="col-md-4">
-            <div class="animated pulse slow go">
-                <div class="box box-primary">
+                <div class="box-body box-profile">
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <b>Fecha de creación</b> <a class="pull-right">{{$corrales->created_at->format('d/m/Y')}}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Cantidad de Animales</b> <a class="pull-right">{{ $corrales->cantidad_animales }}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Tipo de Animales</b> <a class="pull-right"></a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Estado</b> <a class="pull-right"></a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <!-- LINE CHART -->
-            <div class="box box-primary animated pulse slow go">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Evolución</h3>
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        <div class="col-md-8 animated pulse slow go">
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#resumen" data-toggle="tab">Estadisticas</a></li>
+                <li><a href="#animales" data-toggle="tab">Animales</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="active tab-pane" id="resumen">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box box-primary">
+                                <div class="box-header">
+                                    <h3>Resumen <b>Evolutivo</b></h3>
+                                </div>
+                                <div class="box-body">
+                                    <div class="col-md-6">
+                                        <div class="box">
+                                            <div class="box-header with-border">
+                                                <h3 class="box-title">Evolución</h3>
+                                            </div>
+                                            <div class="box-body">
+                                                <div class="chart">
+                                                    <canvas id="areaChart" style="height:250px"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="box">
+                                            <div class="box-header with-border">
+                                                <h3 class="box-title">Beneficios</h3>
+                                            </div>
+                                            <div class="box-body">
+                                                <div class="chart">
+                                                    <canvas id="barChart" style="height:230px"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="box-body">
-                    <div class="chart">
-                        <canvas id="areaChart" style="height:250px"></canvas>
-                    </div>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
-
-            <!-- BAR CHART -->
-            <div class="box box-success animated pulse slow go">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Beneficios</h3>
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                <div class="tab-pane" id="animales">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="box box-primary">
+                                <div class="box-header">
+                                    <h3>Listado de <b>Animales</b></h3>
+                                    <div>
+                                        <a href="{{route('admin.corrales.animalcorral', $corrales->id)}}" class="btn btn-success"><spam class="fa fa-paw"></spam> Registar <b>Animal</b></a>
+                                    </div>
+                                </div>
+                                <table id="animal" class="table table-bordered table">
+                                    <thead>
+                                    <tr>
+                                        <th>Pesaje</th>
+                                        <th>Tipo</th>
+                                        <th>Estado</th>
+                                        <th>Ingreso</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($corrales->animals as $animales)
+                                        <tr>
+                                            <td><a href="{{ route('admin.animales.perfil', $animales->id) }}">{{$animales->DIIO}}</a></td>
+                                            <td>{{$animales->tipo}}</td>
+                                            <td>
+                                                @if($animales->estado == "Vivo")
+                                                    <span class="label label-success">{{$animales->estado}}</span>
+                                                @else
+                                                    @if($animales->estado == "Muerto")
+                                                        <span class="label label-danger">{{$animales->estado}}</span>
+                                                    @else
+                                                        <span class="label label-warning">{{$animales->estado}}</span>
+                                                    @endif
+                                                @endif
+                                            </td>
+                                            <td>{{$animales->created_at->format('m/Y')}}</td>
+                                            <td>
+                                                <a href="{{ route('admin.animales.edit', $animales->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
+                                                <a href="{{ route('admin.animales.destroy', $animales->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este pesaje?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="box-body">
-                    <div class="chart">
-                        <canvas id="barChart" style="height:230px"></canvas>
-                    </div>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
-        </div><!-- /.col (RIGHT) -->
+            </div>
     </div>
 @endsection
 
 @section('chartjs')
     <script>
         $(function () {
-            /* ChartJS
-             * -------
-             * Here we will create a few charts using ChartJS
-             */
-
             //--------------
             //- AREA CHART -
             //--------------
@@ -207,6 +250,28 @@
 
             barChartOptions.datasetFill = false;
             barChart.Bar(barChartData, barChartOptions);
+
+
         });
     </script>
+@endsection
+            @section('tablejs')
+                <script>
+                    $(function () {
+                        $('#animal').DataTable({
+                            "info": false,
+                            "language": {
+                                "emptyTable": "No hay datos disponibles",
+                                "search": "Buscar:",
+                                "paginate": {
+                                    "first":      "Primero",
+                                    "last":       "Ultimo",
+                                    "next":       "Siguiente",
+                                    "previous":   "Anterior"
+                                },
+                                "lengthMenu": "Mostrar _MENU_ entradas"
+                            }
+                        });
+                    });
+                </script>
 @endsection

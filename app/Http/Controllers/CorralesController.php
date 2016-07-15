@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -121,5 +122,13 @@ class CorralesController extends Controller
     {
         $corrales = Corral::find($id);
         return view ('Corrales.perfil')->with('corrales',$corrales);
+    }
+    public function animalcorral($id)
+    {
+        $corral = Corral::find($id);
+        $fecha = Carbon::now();
+        return view ('Corrales.animalcorral')
+            ->with('corral', $corral)
+            ->with('fecha',$fecha);
     }
 }

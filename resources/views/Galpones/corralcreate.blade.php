@@ -9,7 +9,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('id_galpon' ,'Galpón') !!}
-            {!! Form::text('id_galpon', $galpones->numero, ['class' => 'form-control', 'placeholder' => 'Seleccione una opción' , 'required' ]) !!}
+            {!! Form::text('id_galpon', $galpones->numero, ['class' => 'form-control', 'placeholder' => 'Seleccione una opción' , 'required','disabled']) !!}
         </div>
         <div class="form-group">
             {!! Form::submit('Registrar' ,['class' => 'btn btn-primary']) !!}

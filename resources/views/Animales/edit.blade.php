@@ -16,7 +16,7 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('corral','Corral') !!}
-                        {!! Form::select('corral', $corrales ,$animal->corral->id,['class'=> 'form-control', 'placeholder' => 'Seleccione un corral' , 'required']) !!}
+                        {!! Form::select('corral', $corrales ,$animal->id_corral,['class'=> 'form-control', 'placeholder' => 'Seleccione un corral' , 'required']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('estado','Estado') !!}

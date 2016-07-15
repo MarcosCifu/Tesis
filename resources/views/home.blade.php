@@ -61,9 +61,8 @@
                 </div>
             </div>
     </div>
-
     <div class="row">
-        <div class="col-md-6 ">
+        <div class="col-md-6">
             <!-- AREA CHART -->
             <div class="box box-primary animated pulse slow go">
                 <div class="box-header with-border">
@@ -90,10 +89,30 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    <canvas id="pieChart" style="height:250px"></canvas>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="chart-responsive">
+                                <canvas id="pieChart" style="height:250px"></canvas>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <ul class="chart-legend clearfix pull-left">
+                                <li><i class="fa fa-circle-o text-green"></i> Vivos</li>
+                                <li><i class="fa fa-circle-o text-yellow"></i> Enfermos</li>
+                                <li><i class="fa fa-circle-o text-red"></i> Muertos</li>
 
+                            </ul>
+                        </div>
+                    </div>
+                </div><!-- /.box-body -->
+                <div class="box-footer no-padding">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li><a href="#"><span class="pull-right text-red"><i class="fa fa-angle"></i></span></a></li>
+                        <li><a href="#"><span class="pull-right text-green"><i class="fa fa-angle"></i></span></a></li>
+                        <li><a href="#"><span class="pull-right text-yellow"><i class="fa fa-angle"></i></span></a></li>
+                    </ul>
+                </div>
+            </div><!-- /.box -->
         </div><!-- /.col (LEFT) -->
         <div class="col-md-6">
             <!-- LINE CHART -->

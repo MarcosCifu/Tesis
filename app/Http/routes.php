@@ -50,6 +50,10 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'CorralesController@destroy',
             'as' => 'admin.corrales.destroy'
         ]);
+        Route::get('corrales/{id}/animalcorral', [
+            'uses' => 'CorralesController@animalcorral',
+            'as' => 'admin.corrales.animalcorral'
+        ]);
         //rutas animales
         Route::resource ('animales','AnimalesController');
         Route::get('animales/{id}/edit', [

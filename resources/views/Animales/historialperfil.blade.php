@@ -13,7 +13,7 @@
                         <td>
                             <div class="form-group">
                                 {!! Form::label('animal' ,'Animal') !!}<br>
-                                {!! Form::text('id_animales', $animal->DIIO, null, ['class' => 'form-control', 'placeholder' => 'Seleccione una opción' , 'required' ]) !!}
+                                {!! Form::text('id_animales', $animal->DIIO, null, ['class' => 'form-control', 'placeholder' => 'Seleccione una opción' , 'required','disabled' ]) !!}
                             </div>
                         </td>
                         {{ Form::close() }}

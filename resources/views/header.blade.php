@@ -123,20 +123,8 @@
                             <img src="{{ asset("/dist/img/user2-160x160.jpg") }}" class="img-circle" alt="User Image" />
                             <p>
                                 {{Auth::user()->name}}
-                                <small>Member since Nov. 2012</small>
+                                <small>Miembro desde {{Auth::user()->created_at->format('m/Y')}}</small>
                             </p>
-                        </li>
-                        <!-- Menu Body -->
-                        <li class="user-body">
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Followers</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Sales</a>
-                            </div>
-                            <div class="col-xs-4 text-center">
-                                <a href="#">Friends</a>
-                            </div>
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
