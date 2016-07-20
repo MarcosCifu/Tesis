@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Corral;
 use App\Animal;
+use App\Atributo;
 use App\Galpon;
 use Laracasts\Flash\Flash;
 use App\Http\Requests\CorralRequest;
@@ -25,6 +26,7 @@ class CorralesController extends Controller
         $corrales = Corral::all();
         $corrales->each(function($corrales){
             $corrales->galpon;
+            $corrales->atributos;
         });
         return view('Corrales.index')->with('corrales',$corrales);
     }
@@ -36,10 +38,12 @@ class CorralesController extends Controller
      */
     public function create()
     {
+        $atributos = Atributo::orderBy('nombre', 'ASC')->lists('nombre', 'id');
         $galpones = Galpon::orderBy('numero', 'ASC')->lists('numero', 'id');
 
         return view('Corrales.create')
-            ->with('galpones', $galpones);
+            ->with('galpones', $galpones)
+            ->with('atributos', $atributos);
     }
 
 
@@ -53,6 +57,7 @@ class CorralesController extends Controller
     {
         $corral = new Corral($request->all());
         $corral->save();
+        $corral->atributos()->sync($request->atributos);
         Flash::success('El corral ' . $corral->numero . ' ha sido creado con exito!');
         return redirect()->route('admin.corrales.index');
 
@@ -77,10 +82,16 @@ class CorralesController extends Controller
      */
     public function edit($id)
     {
+        $atributos = Atributo::orderBy('nombre', 'ASC')->lists('nombre', 'id');
         $galpones = Galpon::orderBy('numero', 'ASC')->lists('numero', 'id');
         $corral = Corral::find($id);
+        $losatributos = $corral->atributos->lists('id')->ToArray();
 
-        return view('Corrales.edit')->with('corral',$corral)->with('galpones', $galpones);
+        return view('Corrales.edit')
+            ->with('corral',$corral)
+            ->with('galpones', $galpones)
+            ->with('atributos',$atributos)
+            ->with('losatributos',$losatributos);
     }
 
     /**
@@ -90,12 +101,12 @@ class CorralesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CorralRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $corral = Corral::find($id);
         $corral->fill($request->all());
         $corral->save();
-
+        $corral->atributos()->sync($request->atributos);
         Flash::warning('El corral ' . $corral->numero . ' ha sido editado con exito!');
         return redirect()->route('admin.corrales.index');
     }
@@ -115,7 +126,7 @@ class CorralesController extends Controller
         });
         $corral->delete();
 
-        Flash::error('El corral ' . $corral->numero . ' del galpón '. $corral->galpon->numero .' ha sido eliminado con exito!');
+        Flash::error('El corral ' . $corral->numero . ' en el galpón '. $corral->galpon->numero .' ha sido eliminado con exito!');
         return redirect()->route('admin.corrales.index');
     }
     public function perfil($id)

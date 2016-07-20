@@ -31,19 +31,25 @@
                         <li class="list-group-item">
                             <b>Estado</b> <a class="pull-right">{{$animal->estado}}</a>
                         </li>
+                        <li class="list-group-item">
+                            <b>Ganancia de peso total</b> <a class="pull-right">{{$ultimopeso-$primerpeso}} KG</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Permanencia</b> <a class="pull-right">{{$permanencia}} Días</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="col-md-8 animated pulse slow go">
             <div class="nav-tabs-custom">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#resumen" data-toggle="tab">Evolución</a></li>
-                    <li><a href="#pesajes" data-toggle="tab">Pesajes</a></li>
-                    <li><a href="#historialmedico" data-toggle="tab">Diagnosticos Medicos</a></li>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#resumen" role="tab" data-toggle="tab">Evolución</a></li>
+                    <li role="presentation"><a href="#pesajes" role="tab" data-toggle="tab">Pesajes</a></li>
+                    <li role="presentation"><a href="#historialmedico" role="tab" data-toggle="tab">Diagnosticos Medicos</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div class="active tab-pane" id="resumen">
+                    <div role="tabpanel" class="tab-pane fade in active" id="resumen">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box box-primary">
@@ -81,7 +87,7 @@
                                 </div><!-- /.col (RIGHT) -->
                             </div>
                         </div>
-                        <div class="tab-pane" id="pesajes">
+                        <div role="tabpanel" class="tab-pane fade" id="pesajes">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="box box-primary">
@@ -116,7 +122,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="historialmedico">
+                        <div role="tabpanel" class="tab-pane fade" id="historialmedico">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="box box-primary">
@@ -252,7 +258,7 @@
                         pointStrokeColor: "rgba(60,141,188,1)",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(60,141,188,1)",
-                        data: {!!  ($pesos) !!}
+                        data: {!!  ($beneficios) !!}
                     }
                 ]
             };

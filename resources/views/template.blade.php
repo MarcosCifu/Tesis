@@ -14,9 +14,11 @@
     <!-- Animate -->
     <link href="{{asset("/bootstrap/css/animate.min.css")}}" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
+    <link href="{{ asset("/plugins/chosen/chosen.css") }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset("/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset("/dist/css/skins/skin-yellow.min.css")}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset("/plugins/datatables/dataTables.bootstrap.css") }}" rel="stylesheet" />
+
 
 </head>
 <body class="hold-transition skin-yellow sidebar-mini">
@@ -59,6 +61,7 @@
 <script src="{{ asset("/plugins/datatables/dataTables.bootstrap.min.js") }}"></script>
 
 <script src="{{ asset ("/plugins/chartjs/Chart.js") }}"></script>
+<script src="{{ asset ("/plugins/chosen/chosen.jquery.js") }}"></script>
 
 <script src="{{ asset("/plugins/nprogress/nprogress.js") }}"></script>
 <script src="{{ asset("/plugins/jQuery-Smart-Wizard/js/jquery.smartWizard.js") }}"></script>

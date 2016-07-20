@@ -10,6 +10,7 @@
             <li class="{{ Request::is('admin/galpones')? "active":""}}"><a href="{{ route('admin.galpones.index')}}"><i class="fa fa-building"></i><span>Galpones</span></a></li>
             <li class="{{ Request::is('admin/corrales')? "active":""}}"><a href="{{ route('admin.corrales.index')}}"><i class="fa fa-tags"></i><span>Corrales</span></a></li>
             <li class="{{ Request::is('admin/materiales')? "active":""}}"><a href="{{ route('admin.materiales.index')}}"><i class="fa fa-home"></i> <span>Bodega</span></a></li>
+            <li class="{{ Request::is('admin/reportes')? "active":""}}"><a href="{{ route('reportes.index')}}"><i class="fa fa-bar-chart"></i> <span>Reportes</span></a></li>
         </ul>
     </section>
 </aside>

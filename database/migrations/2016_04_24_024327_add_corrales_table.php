@@ -18,7 +18,7 @@ class AddCorralesTable extends Migration
             $table->integer('cantidad_animales');
             $table->integer('nivel_confort');
             $table->integer('id_galpon')->unsigned();
-            $table->foreign('id_galpon')->references('id')->on('galpones')->onDelete('cascade');
+            $table->foreign('id_galpon')->references('id')->on('galpones')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

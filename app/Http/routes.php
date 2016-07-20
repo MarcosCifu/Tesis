@@ -17,6 +17,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::group(['middleware' => 'auth'],function (){
         Route::resource('/','HomeController');
+        Route::resource('reportes', 'ReportesController@index');
     });
 
     Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
@@ -94,6 +95,13 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'PesosController@destroy',
             'as' => 'admin.pesos.destroy'
         ]);
+        //rutas atributos
+        Route::resource('atributos','AtributosController');
+        Route::get('atributoss/{id}/destroy', [
+            'uses' => 'AtributosController@destroy',
+            'as' => 'admin.atributos.destroy'
+        ]);
+
 
 
     });

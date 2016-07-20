@@ -36,8 +36,9 @@ class AnimalesController extends Controller
             $animales->ultimopeso;
 
         });
-       
-        return view('Animales.index')->with('animales',$animales);
+        $corrales = Corral::orderBy('numero','ASC')->lists('numero','id');
+        $fecha = Carbon::now();
+        return view('Animales.index')->with('animales',$animales)->with('corrales', $corrales)->with('fecha',$fecha);
     }
 
     /**
@@ -151,11 +152,24 @@ class AnimalesController extends Controller
         $animal = Animal::find($id);
         $pesos = Peso::where('id_animales','=', $animal->id)->orderBy('fecha', 'ASC')->lists('pesaje');
         $fecha = Peso::where('id_animales','=', $animal->id)->orderBy('fecha', 'ASC')->lists('fecha');
+        $primerpeso = collect($pesos)->first();
+        $ultimopeso = collect($pesos)->last();
+        $fechaactual = Carbon::now();
+        $permanencia= $animal->created_at->diff($fechaactual)->days;
+
+        $beneficios = collect($pesos)->map(function($beneficio){
+            return ($beneficio-642);
+        });
+
 
         return view ('Animales.perfil')
             ->with('animal',$animal)
             ->with('pesos',$pesos)
-            ->with('fecha',$fecha);
+            ->with('fecha',$fecha)
+            ->with('primerpeso',$primerpeso)
+            ->with('ultimopeso',$ultimopeso)
+            ->with('permanencia',$permanencia)
+            ->with('beneficios',$beneficios);
     }
     public function pesoperfil($id)
     {

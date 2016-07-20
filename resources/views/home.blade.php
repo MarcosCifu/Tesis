@@ -35,7 +35,7 @@
             <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <h3>{{$minimo}}</h3>
+                        <h3>{{$minimo or 0}}</h3>
                         <p>Pesaje Minimo</p>
                     </div>
                     <div class="icon">
@@ -49,7 +49,7 @@
             <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3>{{$maximo}}</h3>
+                        <h3>{{$maximo or 0}}</h3>
                         <p>Pesaje Maximo</p>
                     </div>
                     <div class="icon">

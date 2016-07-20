@@ -51,5 +51,5 @@ class Animal extends Model implements SluggableInterface
     {
         return $this->hasOne('App\Peso','id_animales')->latest();
     }
-    
+
 }

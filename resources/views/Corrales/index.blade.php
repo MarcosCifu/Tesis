@@ -14,6 +14,7 @@
                             <th>Número</th>
                             <th>Cantidad de Animales</th>
                             <th>Galpón</th>
+                            <th>Cantidad de Alimento</th>
                             <th>Acción</th>
                         </tr>
                     </thead>
@@ -23,6 +24,7 @@
                                 <td><a href="{{ route('admin.corrales.perfil', $corral->id) }}" class="btn btn-primary">Corral {{$corral->numero}}</a></td>
                                 <td>{{$corral->cantidad_animales}}</td>
                                 <td>Galpón {{$corral->galpon->numero}}</td>
+                                <td>{{$corral->cantidad_alimento}} KG</td>
                                 <td>
                                     <a href="{{ route('admin.corrales.edit', $corral->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
                                     <a href="{{ route('admin.corrales.destroy', $corral->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este corral?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>

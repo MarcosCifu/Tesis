@@ -1,11 +1,26 @@
 @extends('template')
 @section('content')
-    @include('errors')
+    <button type="button" class="btn btn-primary btn-lg animated pulse slow go" data-toggle="modal" data-target="#myModal">
+        <i class="fa fa-folder-open-o"></i> Registar nuevo Animal
+    </button>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" >
+            <div class="modal-content">
+                <div class="modal-header primary">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Datos del <b>Animal</b></h4>
+                </div>
+                <div class="modal-body">
+                    @include('Animales.create')
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="animated pulse slow go">
         <div class="box">
             <div class="box-header">
                 <h3>Listado de <b>Animales</b></h3>
-                <a href="{{route('admin.animales.create')}}" class="btn btn-info btn-lg"><i class="fa fa-folder-open-o"></i> Registar nuevo Animal</a>
             </div><!-- /.box-header -->
             <div class="box-body">
                 <table id="animales" class="table table-bordered table-hover">

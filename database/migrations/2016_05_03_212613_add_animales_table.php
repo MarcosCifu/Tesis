@@ -18,7 +18,7 @@ class AddAnimalesTable extends Migration
             $table->enum('tipo',['Vaca','Novillo','Vaquilla','Ternero','Ternera']);
             $table->enum('estado',['Vivo','Muerto','Enfermo']);
             $table->integer('id_corral')->unsigned();
-            $table->foreign('id_corral')->references('id')->on('corrales');
+            $table->foreign('id_corral')->references('id')->on('corrales')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -34,7 +34,7 @@ class AddAnimalesTable extends Migration
             $table->integer('precio_compra');
             $table->integer('precio_venta');
             $table->foreign('id_animales')->references('id')->on('animales')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_user')->references('id')->on('users')->onUpdate('cascade');
         });
     }
     public function down()

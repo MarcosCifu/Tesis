@@ -40,7 +40,7 @@
                 <li><a href="#animales" data-toggle="tab">Animales</a></li>
             </ul>
             <div class="tab-content">
-                <div class="active tab-pane" id="resumen">
+                <div class="tab-pane fade in active" id="resumen">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="box box-primary">
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane" id="animales">
+                <div class="tab-pane fade" id="animales">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="box box-primary">

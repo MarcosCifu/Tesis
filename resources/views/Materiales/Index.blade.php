@@ -47,10 +47,8 @@
                         </tbody>
                         </table>
                     </div>
-                    {!! $materiales->render() !!}
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
-    </div>
 @endsection
 @section('tablejs')
     <script>

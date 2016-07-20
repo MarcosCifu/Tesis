@@ -42,7 +42,7 @@
                     <li><a href="#corrales" data-toggle="tab">Corrales</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div class="active tab-pane" id="resumen">
+                    <div class="tab-pane fade in active" id="resumen">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box box-primary">
@@ -79,7 +79,7 @@
                             </div>
                         </div><!-- /.nav-tabs-custom -->
                     </div>
-                    <div class="tab-pane" id="corrales">
+                    <div class="tab-pane fade" id="corrales">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box box-primary">

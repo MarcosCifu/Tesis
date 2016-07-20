@@ -55,4 +55,5 @@ class HomeController extends Controller
         $pesos = $animal->pesos->list('pesaje');
         return view('home')->with('pesos', $pesos);
     }
+
 }

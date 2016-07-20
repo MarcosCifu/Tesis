@@ -17,7 +17,7 @@ class AddPesosTable extends Migration
             $table->float('pesaje');
             $table->date('fecha');
             $table->integer('id_animales')->unsigned();
-            $table->foreign('id_animales')->references('id')->on('animales')->onDelete('cascade');
+            $table->foreign('id_animales')->references('id')->on('animales')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
