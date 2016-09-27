@@ -82,10 +82,11 @@ class CorralesController extends Controller
      */
     public function edit($id)
     {
+        $corral = Corral::find($id);
         $atributos = Atributo::orderBy('nombre', 'ASC')->lists('nombre', 'id');
         $galpones = Galpon::orderBy('numero', 'ASC')->lists('numero', 'id');
-        $corral = Corral::find($id);
         $losatributos = $corral->atributos->lists('id')->ToArray();
+
 
         return view('Corrales.edit')
             ->with('corral',$corral)

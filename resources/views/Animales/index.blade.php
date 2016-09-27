@@ -1,8 +1,44 @@
 @extends('template')
 @section('content')
-    <button type="button" class="btn btn-primary btn-lg animated pulse slow go" data-toggle="modal" data-target="#myModal">
+    <!-- Modal -->
+    <div class="modal fade" id="registrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>Información del <b>Animal</b></h3>
+                </div>
+                <div class="modal-body">
+                    @include('Animales.create')
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<button type="button" class="btn btn-primary btn-lg animated pulse slow go" data-toggle="modal" data-target="#myModal">
         <i class="fa fa-folder-open-o"></i> Registar nuevo Animal
     </button>
+    -->
+    <a class="btn btn-primary animated pulse slow go" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        <i class="fa fa-folder-open-o"></i> Registar nuevo Animal
+    </a>
+    <div class="collapse" id="collapseExample">
+        <div class="well">
+            <div id="example-basic">
+                <h3>Keyboard</h3>
+                <section>
+                    <p>Try the keyboard navigation by clicking arrow left or right!</p>
+                </section>
+                <h3>Effects</h3>
+                <section>
+                    <p>Wonderful transition effects.</p>
+                </section>
+                <h3>Pager</h3>
+                <section>
+                    <p>The next and previous buttons help you to navigate through your content.</p>
+                </section>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document" >
             <div class="modal-content">
@@ -20,6 +56,9 @@
     <div class="animated pulse slow go">
         <div class="box">
             <div class="box-header">
+                <button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#registrar">
+                    <i class="fa fa-folder-open-o"></i> Registar nuevo Animal
+                </button>
                 <h3>Listado de <b>Animales</b></h3>
             </div><!-- /.box-header -->
             <div class="box-body">
@@ -91,6 +130,16 @@
                 },
                 "lengthMenu": [[10, 20, -1], [10, 20, "Todos"]]
             });
+        });
+    </script>
+@endsection
+@section('ajaxjs')
+    <script>
+        $("#example-basic").steps({
+            headerTag: "h3",
+            bodyTag: "section",
+            transitionEffect: "slideLeft",
+            autoFocus: true
         });
     </script>
 @endsection

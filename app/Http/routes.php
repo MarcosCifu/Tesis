@@ -45,7 +45,11 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource ('corrales','CorralesController');
         Route::get('corrales/{id}/perfil', [
             'uses' => 'CorralesController@perfil',
-            'as' => 'admin.corrales.perfil'
+            'as' => 'admin.corrales.perfil',
+            function ($id) {
+                return 'corral'.$id;
+            }
+
         ]);
         Route::get('corrales/{id}/destroy', [
             'uses' => 'CorralesController@destroy',
@@ -82,6 +86,12 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('materiales/{id}/destroy', [
             'uses' => 'MaterialesController@destroy',
             'as' => 'admin.materiales.destroy'
+        ]);
+        //rutas precios
+        Route::resource('precios','PreciosController');
+        Route::get('precios/{id}/destroy', [
+            'uses' => 'PreciosController@destroy',
+            'as' => 'admin.precios.destroy'
         ]);
         //rutas historiales
         Route::resource('historiales','HistorialesMedicosController');

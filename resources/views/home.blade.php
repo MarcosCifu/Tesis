@@ -1,7 +1,7 @@
 @extends('template')
 @section('chart')
     <div class="animated flipInY">
-        <h3>Información <b>General</b></h3>
+        <h1>Información <b>General</b></h1>
     </div>
     <div class="row tile_count">
             <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
@@ -66,7 +66,7 @@
             <!-- AREA CHART -->
             <div class="box box-primary animated pulse slow go">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Area Chart</h3>
+                    <h3 class="box-title">Evolución por Galpones</h3>
                     <div class="box-tools pull-right">
                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                         <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -171,24 +171,54 @@
                 labels: ["January", "February", "March", "April", "May", "June", "July"],
                 datasets: [
                     {
-                        label: "Electronics",
-                        fillColor: "rgba(210, 214, 222, 1)",
-                        strokeColor: "rgba(210, 214, 222, 1)",
-                        pointColor: "rgba(210, 214, 222, 1)",
-                        pointStrokeColor: "#c1c7d1",
+                        label: "Galpón 1",
+                        fillColor: "#00c0ef",
+                        strokeColor: "#00c0ef",
+                        pointColor: "#00c0ef",
+                        pointStrokeColor: "#00c0ef",
                         pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        pointHighlightStroke: "#00c0ef",
                         data: [65, 59, 80, 81, 56, 55, 40]
                     },
                     {
-                        label: "Digital Goods",
-                        fillColor: "rgba(60,141,188,0.9)",
-                        strokeColor: "rgba(60,141,188,0.8)",
+                        label: "Galpón 2",
+                        fillColor: "#f56954",
+                        strokeColor: "#f56954",
+                        pointColor: "#f56954",
+                        pointStrokeColor: "#f56954",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "#f56954",
+                        data: [28, 48, 40, 19, 86, 27, 90]
+                    },
+                    {
+                        label: "Galpón 3",
+                        fillColor: "rgba(60,141,188,1)",
+                        strokeColor: "rgba(60,141,188,1)",
                         pointColor: "#3b8bba",
                         pointStrokeColor: "rgba(60,141,188,1)",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(60,141,188,1)",
-                        data: [28, 48, 40, 19, 86, 27, 90]
+                        data: [32, 45, 87, 21, 10, 62, 11]
+                    },
+                    {
+                        label: "Galpón 4",
+                        fillColor: "#00a65a",
+                        strokeColor: "#00a65a",
+                        pointColor: "#00a65a",
+                        pointStrokeColor: "#00a65a",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "#00a65a",
+                        data: [10, 20, 10, 16, 56, 20, 40]
+                    },
+                    {
+                        label: "Galpón 5",
+                        fillColor: "#f39c12",
+                        strokeColor: "#f39c12",
+                        pointColor: "#f39c12",
+                        pointStrokeColor: "#f39c12",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "#f39c12",
+                        data: [10, 20, 10, 16, 56, 20, 40]
                     }
                 ]
             };

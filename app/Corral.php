@@ -18,6 +18,11 @@ class Corral extends Model
     }
     public function atributos()
     {
-        return $this->belongsToMany('App\Corral','corral_atributo','id_corral','id_atributo');
+        return $this->belongsToMany('App\Atributo','corral_atributo','id_corral','id_atributo');
     }
+    public function estadoanimales()
+    {
+        return $this->hasMany('App\Animal','id_corral')->where('estado','Enfermo')->count();
+    }
+
 }

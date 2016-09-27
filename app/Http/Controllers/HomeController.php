@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Peso;
 use App\Corral;
 use App\Galpon;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -26,8 +27,14 @@ class HomeController extends Controller
             $animales->users;
 
         });
-
+        $galpones = Galpon::all();
+        $fechaactual = Carbon::now()->month;
         $pesos = Peso::all();
+        $corral = Corral::all();
+        $cenfermoscorral = $corral->map(function ($corral){
+            return $corral->estadoanimales();
+        });
+
         $cantidad = collect($animal)->count('id');
         $promedio = collect($pesos)->avg('pesaje');
         $vivos = $animal->where("estado",'Vivo')->count();
@@ -36,11 +43,18 @@ class HomeController extends Controller
         $minimo = $pesos->min('pesaje');
         $maximo = $pesos->max('pesaje');
         $pesosnoapto = Peso::where('pesaje','<', 450)->groupBy('created_at')->orderBy('fecha', 'ASC')->lists('pesaje');
-        $galpones = Galpon::groupBy('numero')->lists('numero');
 
-        return view('home')->with('animal',$animal)->with('promedio', $promedio)->with('cantidad', $cantidad)
-            ->with('vivos',$vivos)->with('muertos',$muertos)->with('enfermos',$enfermos)
-           ->with('minimo',$minimo)->with('maximo',$maximo)->with('pesosnoapto', $pesosnoapto)
+
+
+        return view('home')->with('animal',$animal)
+            ->with('promedio', $promedio)
+            ->with('cantidad', $cantidad)
+            ->with('vivos',$vivos)
+            ->with('muertos',$muertos)
+            ->with('enfermos',$enfermos)
+            ->with('minimo',$minimo)
+            ->with('maximo',$maximo)
+            ->with('pesosnoapto', $pesosnoapto)
             ->with('galpones',$galpones);
     }
 

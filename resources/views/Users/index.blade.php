@@ -1,12 +1,29 @@
 @extends ('template')
 @section('content')
     @include('errors')
+    <!-- Modal -->
+    <div class="modal fade" id="registrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>Información del <b>Usuario</b></h3>
+                </div>
+                <div class="modal-body">
+                    @include('Users.create')
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="animated pulse slow go">
         <div class="box">
             <div class="box-header">
+                <button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#registrar">
+                    <i class="fa fa-folder-open-o"></i> Registar nuevo Usuario
+                </button>
+
                 <h3>Listado de <b>Usuarios</b></h3>
-                <a href="{{route('admin.users.create')}}" class="btn btn-info btn-lg"><i class="fa fa-folder-open-o"></i> Registar nuevo Usuario</a>
-            </div><!-- /.box-header -->
+                </div><!-- /.box-header -->
             <div class="box-body">
                 <table id="users" class="table table-bordered table-hover">
                     <thead>

@@ -65,7 +65,7 @@ class AnimalesController extends Controller
     {
         $animal = new Animal($request->all());
         $user = Auth::user();
-        $animal->id_corral = $request->input('corral');
+        $animal->id_corral = $request->input('corral');;
         $animal->save();
         $animal->corral()->increment('cantidad_animales',1);
         $fechacompra = $request->input('fecha');
@@ -155,10 +155,10 @@ class AnimalesController extends Controller
         $primerpeso = collect($pesos)->first();
         $ultimopeso = collect($pesos)->last();
         $fechaactual = Carbon::now();
-        $permanencia= $animal->created_at->diff($fechaactual)->days;
+        $permanencia= $animal->created_at->diff($fechaactual)->days+1;
 
         $beneficios = collect($pesos)->map(function($beneficio){
-            return ($beneficio-642);
+            return ($beneficio);
         });
 
 

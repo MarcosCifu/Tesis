@@ -17,6 +17,8 @@ class AddAnimalesTable extends Migration
             $table->bigInteger('DIIO');
             $table->enum('tipo',['Vaca','Novillo','Vaquilla','Ternero','Ternera']);
             $table->enum('estado',['Vivo','Muerto','Enfermo']);
+            $table->boolean('venta');
+            $table->integer('pesaje_inicial');
             $table->integer('id_corral')->unsigned();
             $table->foreign('id_corral')->references('id')->on('corrales')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

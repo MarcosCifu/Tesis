@@ -1,44 +1,49 @@
 @extends('template')
 @section('content')
     @include('errors')
-    <div class="modal modal-primary fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document" >
+    <!-- Modal -->
+    <div class="modal fade" id="registrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Datos del <b>Atributo</b></h4>
+                    <h3>Información del <b>Valor por Kilo</b></h3>
                 </div>
                 <div class="modal-body">
-                    @include('Atributos.create')
+                    @include('Precios.create')
                 </div>
             </div>
         </div>
     </div>
-    <button type="button" class="btn btn-primary btn-lg animated pulse slow go" data-toggle="modal" data-target="#myModal">
-        <i class="fa fa-folder-open-o"></i> Registar nuevo Atributo
-    </button>
     <div class="animated pulse slow go">
         <div class="box">
             <div class="box-header">
-                <h3>Listado de <b>Atributos</b></h3>
+                <button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#registrar">
+                    <i class="fa fa-folder-open-o"></i> Registar nuevo Precio
+                </button>
+
+                <h3>Listado de <b>Precios por Kilo de Carne</b></h3>
             </div><!-- /.box-header -->
             <div class="box-body">
-                <table id="materiales" class="table table-bordered table-hover">
+                <table id="precios" class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Fecha</th>
                         <th>Acción</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($atributos as $atributo)
+                    @foreach($precios as $precio)
                         <tr>
-                            <td>{{$atributo->nombre}}</td>
+                            <td>${{$precio->valor}} /Kg</td>
+                            <td>{{$precio->fecha}}</td>
+
                             <td>
-                                <a href="{{ route('admin.atributos.edit', $atributo->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
+                                <a href="{{ route('admin.precios.edit', $precio->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
 
 
-                                <a href="{{ route('admin.atributos.destroy', $atributo->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este atributo?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
+                                <a href="{{ route('admin.precios.destroy', $precio->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este material?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
                             </td>
                         </tr>
                     @endforeach
@@ -51,7 +56,7 @@
 @section('tablejs')
     <script>
         $(function () {
-            $('#materiales').DataTable({
+            $('#precios').DataTable({
                 "info": false,
                 "scrollX" : true,
                 "language": {

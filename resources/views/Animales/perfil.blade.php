@@ -4,7 +4,7 @@
         <div class="col-md-4">
             <div class="box box-primary animated pulse slow go">
                 <div class="box-header">
-                    <h3>Información del <b>Animal</b></h3>
+                    <h1>Información del <b>Animal</b></h1>
                 </div>
                 <div class="box-body box-profile">
 
@@ -14,9 +14,6 @@
                     <p class="text-muted text-center">DIIO</p>
 
                     <ul class="list-group list-group-unbordered">
-                        <li class="list-group-item">
-                            <b>Fecha de ingreso</b> <a class="pull-right">{{$animal->created_at->format('d/m/Y')}}</a>
-                        </li>
                         @foreach($animal->users as $origen)
                             <li class="list-group-item">
                                 <b>Procedencia</b> <a class="pull-right">{{$origen->pivot->procedencia or 'Se Desconoce'}}</a>
@@ -32,17 +29,49 @@
                             <b>Estado</b> <a class="pull-right">{{$animal->estado}}</a>
                         </li>
                         <li class="list-group-item">
-                            <b>Ganancia de peso total</b> <a class="pull-right">{{$ultimopeso-$primerpeso}} KG</a>
+                            <b>Ubicación</b><br>
+                            <a href="{{ route('admin.corrales.perfil', $animal->id_corral) }}" class="btn btn-success">Corral {{$animal->corral->numero}}</a>
+                            <a href="{{ route('admin.galpones.perfil', $animal->corral->id_galpon) }}" class="btn btn-success">Galpón {{$animal->corral->galpon->numero}}</a>
                         </li>
                         <li class="list-group-item">
-                            <b>Permanencia</b> <a class="pull-right">{{$permanencia}} Días</a>
+                            <b>Atributos del Corral</b><br>
+                            @foreach($animal->corral->atributos as $atributos)
+                                    <span class="btn btn-primary"> {{$atributos->nombre}} </span>
+                                @endforeach
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="col-md-8 animated pulse slow go">
-            <div class="nav-tabs-custom">
+        <div class="col-md-8">
+            <div class="row tile_count">
+                <div class="animated flipInX col-lg-4 col-xs-8 tile_stats_count">
+                    <div class="small-box bg-teal">
+                        <div class="icon">
+                            <i class="ion-arrow-graph-up-right"></i>
+                        </div>
+                        <div class="inner">
+                            <h3>{{$ultimopeso-$primerpeso}} KG
+                                </h3>
+                            <p>Peso ganado</p>
+                        </div>
+                        <h4 class="small-box-footer"><b>{{round(($ultimopeso-$primerpeso)/$permanencia,2)}} KG por día</b></h4>
+                    </div>
+                </div>
+                <div class="animated flipInX col-lg-4 col-xs-8 tile_stats_count">
+                    <div class="small-box bg-maroon">
+                        <div class="inner">
+                            <h3>{{$permanencia}} Días</h3>
+                            <p>Estadía</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion-android-calendar"></i>
+                        </div>
+                        <h4 class="small-box-footer"><b>Ingreso:</b> {{$animal->created_at->format('d/m/Y')}}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-tabs-custom animated pulse slow go">
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#resumen" role="tab" data-toggle="tab">Evolución</a></li>
                     <li role="presentation"><a href="#pesajes" role="tab" data-toggle="tab">Pesajes</a></li>
@@ -73,7 +102,7 @@
                                                     <!-- LINE CHART -->
                                             <div class="box">
                                                 <div class="box-header with-border">
-                                                    <h3 class="box-title">Beneficios</h3>
+                                                    <h3 class="box-title">Distribución</h3>
                                                 </div>
                                                 <div class="box-body">
                                                     <div class="chart">

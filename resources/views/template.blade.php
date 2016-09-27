@@ -3,6 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+
     <title>{{ $page_title or "Ancali Beef" }}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.2 -->
@@ -18,6 +19,11 @@
     <link href="{{ asset("/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset("/dist/css/skins/skin-yellow.min.css")}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset("/plugins/datatables/dataTables.bootstrap.css") }}" rel="stylesheet" />
+
+    <!--Steps -->
+    <link href="{{ asset("/plugins/steps/normalize.css") }}" rel="stylesheet" />
+    <link href="{{ asset("/plugins/steps/jquery.steps.css") }}" rel="stylesheet" />
+
 
 
 </head>
@@ -65,6 +71,8 @@
 
 <script src="{{ asset("/plugins/nprogress/nprogress.js") }}"></script>
 <script src="{{ asset("/plugins/jQuery-Smart-Wizard/js/jquery.smartWizard.js") }}"></script>
+<script src="{{ asset("/plugins/steps/jquery.steps.js") }}"></script>
+
 
 
 @yield('chartjs')

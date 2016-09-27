@@ -1,9 +1,3 @@
-@extends('template')
-
-@section('title','Crear Usuario')
-
-@section('content')
-    @include('errors')
 
     {!! Form::open(['route' => 'admin.users.store', 'method' => 'POST']) !!}
 
@@ -30,7 +24,4 @@
         </div>
 
     {!! Form::close() !!}
-
-
-@endsection
 

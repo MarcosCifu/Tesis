@@ -15,6 +15,8 @@ class AddHistorialesMedicosTable extends Migration
         Schema::create('historiales_medicos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('enfermedad');
+            $table->string('tratamiento');
+            $table->enum('estado_tratamiento',['En tratamiento','Tratamiento terminado']);
             $table->date('fecha');
             $table->integer('id_animales')->unsigned();
             $table->foreign('id_animales')->references('id')->on('animales')->onUpdate('cascade')->onDelete('cascade');
