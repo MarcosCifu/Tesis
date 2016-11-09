@@ -111,6 +111,12 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'AtributosController@destroy',
             'as' => 'admin.atributos.destroy'
         ]);
+        //rutas calendario
+        Route::resource ('calendarios','CalendariosController');
+        Route::get('cargaEventos{id?}','CalendariosController@show');
+        Route::post('guardaEventos', array('as' => 'guardaEventos','uses' => 'CalendariosController@create'));
+        Route::post('actualizaEventos','CalendariosController@update');
+        Route::post('eliminaEvento','CalendariosController@delete');
 
 
 

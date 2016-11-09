@@ -65,14 +65,18 @@ class AnimalesController extends Controller
     {
         $animal = new Animal($request->all());
         $user = Auth::user();
-        $animal->id_corral = $request->input('corral');;
+        $animal->id_corral = $request->input('corral');
         $animal->save();
+        Flash::success('El animal ' . $animal->DIIO . ' ha sido creado con exito!');
         $animal->corral()->increment('cantidad_animales',1);
         $fechacompra = $request->input('fecha');
-        $procedencia = $request->input('procedencia');
-        $numeroguia = $request->input('numero_Guia');
-        $animal->users()->attach($user->id, ['fecha_compra'=> $fechacompra, 'procedencia'=>$procedencia, 'numero_Guia'=>$numeroguia]);
-        Flash::success('El animal ' . $animal->DIIO . ' ha sido creado con exito!');
+        $peso = new Peso($request->all());
+        $peso->id_animales = $animal->id;
+        $peso->pesaje = $request->input('pesaje_inicial');
+        $peso->fecha = Carbon::now();
+        $peso->save();
+        $animal->users()->attach($user->id, ['fecha_compra'=> $fechacompra]);
+
         return redirect()->route('admin.animales.index');
     }
 
@@ -143,7 +147,6 @@ class AnimalesController extends Controller
         });
         $animal->delete();
         $animal->corral()->decrement('cantidad_animales',1);
-
         Flash::error('El animal ' . $animal->DIIO . ' ha sido eliminado con exito!');
         return redirect()->route('admin.animales.index');
     }
@@ -152,24 +155,34 @@ class AnimalesController extends Controller
         $animal = Animal::find($id);
         $pesos = Peso::where('id_animales','=', $animal->id)->orderBy('fecha', 'ASC')->lists('pesaje');
         $fecha = Peso::where('id_animales','=', $animal->id)->orderBy('fecha', 'ASC')->lists('fecha');
-        $primerpeso = collect($pesos)->first();
         $ultimopeso = collect($pesos)->last();
         $fechaactual = Carbon::now();
         $permanencia= $animal->created_at->diff($fechaactual)->days+1;
+        $ganancia = $animal->reportes;
+        dd($ganancia);
+
+
+
+
+
+
+
 
         $beneficios = collect($pesos)->map(function($beneficio){
+
             return ($beneficio);
         });
+
 
 
         return view ('Animales.perfil')
             ->with('animal',$animal)
             ->with('pesos',$pesos)
             ->with('fecha',$fecha)
-            ->with('primerpeso',$primerpeso)
             ->with('ultimopeso',$ultimopeso)
             ->with('permanencia',$permanencia)
             ->with('beneficios',$beneficios);
+
     }
     public function pesoperfil($id)
     {

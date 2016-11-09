@@ -28,7 +28,12 @@ class CorralesController extends Controller
             $corrales->galpon;
             $corrales->atributos;
         });
-        return view('Corrales.index')->with('corrales',$corrales);
+        $atributos = Atributo::orderBy('nombre', 'ASC')->lists('nombre', 'id');
+        $galpones = Galpon::orderBy('numero', 'ASC')->lists('numero', 'id');
+        return view('Corrales.index')
+            ->with('corrales',$corrales)
+            ->with('galpones', $galpones)
+            ->with('atributos', $atributos);
     }
 
     /**

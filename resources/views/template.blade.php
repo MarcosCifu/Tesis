@@ -19,10 +19,12 @@
     <link href="{{ asset("/dist/css/AdminLTE.min.css")}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset("/dist/css/skins/skin-yellow.min.css")}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset("/plugins/datatables/dataTables.bootstrap.css") }}" rel="stylesheet" />
-
     <!--Steps -->
     <link href="{{ asset("/plugins/steps/normalize.css") }}" rel="stylesheet" />
     <link href="{{ asset("/plugins/steps/jquery.steps.css") }}" rel="stylesheet" />
+    <!--FullCalendar -->
+    <link href="{{asset("/plugins/fullcalendar/fullcalendar.css")}}" rel="stylesheet" />
+    <link  href="{{asset("/plugins/fullcalendar/fullcalendar.print.css")}}" media="print" rel="stylesheet">
 
 
 
@@ -50,12 +52,18 @@
 
 <!-- REQUIRED JS SCRIPTS -->
 
-<!-- jQuery 2.1.3 -->
+<!-- jQuery 2.1.4 -->
 <script src="{{ asset ("/plugins/jQuery/jQuery-2.1.4.min.js") }}"></script>
+
+<script src="{{asset("/plugins/fullcalendar/moment.js")}}"></script>
+<script src="{{asset("/plugins/fullcalendar/fullcalendar.min.js")}}"></script>
+<script src="{{asset("/plugins/fullcalendar/es.js")}}"></script>
 <!-- Bootstrap 3.3.2 JS -->
 <script src="{{ asset ("/bootstrap/js/bootstrap.min.js") }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset ("/dist/js/app.js") }}"></script>
+
+<script src="{{asset("plugins/jquery-ui-1.12.1/jquery-ui.min.js")}}"></script>
 
 <script src="{{ asset ("/plugins/slimScroll/jquery.slimscroll.min.js") }}"></script>
 
@@ -68,11 +76,6 @@
 
 <script src="{{ asset ("/plugins/chartjs/Chart.js") }}"></script>
 <script src="{{ asset ("/plugins/chosen/chosen.jquery.js") }}"></script>
-
-<script src="{{ asset("/plugins/nprogress/nprogress.js") }}"></script>
-<script src="{{ asset("/plugins/jQuery-Smart-Wizard/js/jquery.smartWizard.js") }}"></script>
-<script src="{{ asset("/plugins/steps/jquery.steps.js") }}"></script>
-
 
 
 @yield('chartjs')

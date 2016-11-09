@@ -1,11 +1,48 @@
 @extends('template')
 @section('content')
     @include('errors')
+    <!-- Modal -->
+    <div class="modal modal-primary fade" id="registrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>Información del <b>Corral</b></h3>
+                </div>
+                <div class="modal-body">
+                    <div class="box-body">
+                        <section>
+                            {{ Form::open(['route' => 'admin.corrales.store', 'method' => 'POST']) }}
+                            <div class="form-group">
+                                {!! Form::label('numero' ,'Número') !!}
+                                {!! Form::text('numero', null, ['class' => 'form-control', 'placeholder' => 'Numero del Corral' , 'required' ]) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('id_galpon' ,'Galpón') !!}
+                                {!! Form::select('id_galpon', $galpones, null, ['class' => 'form-control', 'placeholder' => 'Seleccione una opción' , 'required' ]) !!}
+                            </div>
+                            <div class="form-group" >
+                                {!! Form::label('atributos' ,'Atributos') !!}
+                                {!! Form::select('atributos[]', $atributos, null, ['class' => 'form-control select-atributo' ,'multiple', 'required' ]) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::submit('Registrar' ,['class' => 'btn btn-success']) !!}
+                            </div>
+                            {{ Form::close() }}
+                        </section>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="animated pulse slow go">
         <div class="box">
             <div class="box-header">
+                <button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#registrar">
+                    <i class="fa fa-folder-open-o"></i> Registar nuevo Corral
+                </button>
                 <h3>Listado de <b>Corrales</b></h3>
-                <a href="{{route('admin.corrales.create')}}" class="btn btn-info btn-lg"><i class="fa fa-folder-open-o"></i> Registar nuevo Corral</a>
             </div><!-- /.box-header -->
             <div class="box-body ">
                 <table id="corrales" class="table table-bordered table-hover">
@@ -15,6 +52,7 @@
                             <th>Cantidad de Animales</th>
                             <th>Galpón</th>
                             <th>Cantidad de Alimento</th>
+                            <th>Cantidad de Agua</th>
                             <th>Acción</th>
                         </tr>
                     </thead>
@@ -24,7 +62,8 @@
                                 <td><a href="{{ route('admin.corrales.perfil', $corral->id) }}" class="btn btn-primary">Corral {{$corral->numero}}</a></td>
                                 <td>{{$corral->cantidad_animales}}</td>
                                 <td>Galpón {{$corral->galpon->numero}}</td>
-                                <td>{{$corral->cantidad_alimento}} KG</td>
+                                <td>{{$corral->cantidad_animales*8}} KG</td>
+                                <td>{{$corral->cantidad_animales*40}} LT</td>
                                 <td>
                                     <a href="{{ route('admin.corrales.edit', $corral->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
                                     <a href="{{ route('admin.corrales.destroy', $corral->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este corral?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
@@ -59,6 +98,17 @@
         });
     </script>
 @endsection
+@section('ajaxjs')
+    <script>
+        $('#registrar').on('shown.bs.modal', function () {
+            $('.select-atributo').chosen({
+                placeholder_text_multiple:'Seleccione atributos del corral'
+            });
+        });
+    </script>
+@endsection
+
+
 
 
 

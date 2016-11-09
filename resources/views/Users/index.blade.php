@@ -4,26 +4,27 @@
     <!-- Modal -->
     <div class="modal fade" id="registrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="box box-primary box-solid">
+                <div class="box-header with-border" >
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h3>Información del <b>Usuario</b></h3>
                 </div>
-                <div class="modal-body">
+                <div class="box-body">
                     @include('Users.create')
                 </div>
             </div>
         </div>
     </div>
+    <div class="animated  pulse slow go">
+        <h1>Listado de <b>Usuarios</b></h1>
+    </div>
     <div class="animated pulse slow go">
         <div class="box">
             <div class="box-header">
-                <button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#registrar">
+                <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
                     <i class="fa fa-folder-open-o"></i> Registar nuevo Usuario
-                </button>
-
-                <h3>Listado de <b>Usuarios</b></h3>
-                </div><!-- /.box-header -->
+                </a>
+            </div><!-- /.box-header -->
             <div class="box-body">
                 <table id="users" class="table table-bordered table-hover">
                     <thead>

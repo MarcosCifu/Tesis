@@ -46,16 +46,29 @@
         <div class="col-md-8">
             <div class="row tile_count">
                 <div class="animated flipInX col-lg-4 col-xs-8 tile_stats_count">
+                    <div class="small-box bg-blue">
+                        <div class="icon">
+                            <i class="ion-location"></i>
+                        </div>
+                        <div class="inner">
+                            <h3>{{$animal->pesaje_inicial}} KG
+                            </h3>
+                            <p>Peso Inicial</p>
+                        </div>
+                        <h4 class="small-box-footer"><b>{{600-$animal->pesaje_inicial}} KG para peso ideal</b></h4>
+                    </div>
+                </div>
+                <div class="animated flipInX col-lg-4 col-xs-8 tile_stats_count">
                     <div class="small-box bg-teal">
                         <div class="icon">
                             <i class="ion-arrow-graph-up-right"></i>
                         </div>
                         <div class="inner">
-                            <h3>{{$ultimopeso-$primerpeso}} KG
+                            <h3>{{$ultimopeso-$animal->pesaje_incial}} KG
                                 </h3>
                             <p>Peso ganado</p>
                         </div>
-                        <h4 class="small-box-footer"><b>{{round(($ultimopeso-$primerpeso)/$permanencia,2)}} KG por día</b></h4>
+                        <h4 class="small-box-footer"><b>{{round(($ultimopeso-$animal->pesaje_inicial)/$permanencia,2)}} KG por día</b></h4>
                     </div>
                 </div>
                 <div class="animated flipInX col-lg-4 col-xs-8 tile_stats_count">

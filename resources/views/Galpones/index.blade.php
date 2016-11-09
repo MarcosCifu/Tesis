@@ -1,11 +1,29 @@
 @extends('template')
 @section('content')
     @include('errors')
+    <!-- Modal -->
+    <div class="modal modal-primary fade" id="registrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>Información del <b>Galpón</b></h3>
+                </div>
+                <div class="modal-body">
+                    @include('Galpones.create')
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="animated pulse slow go">
         <div class="box">
             <div class="box-header">
+                <button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#registrar">
+                    <i class="fa fa-folder-open-o"></i> Registar nuevo Galpón
+                </button>
                 <h3>Listado de <b>Galpones</b></h3>
-                <a href="{{route('admin.galpones.create')}}" class="btn btn-info btn-lg"><i class="fa fa-folder-open-o"></i> Registar nuevo Galpon</a>
             </div><!-- /.box-header -->
             <div class="box-body ">
                 <table id="galpones" class="table table-bordered table-hover">
@@ -24,7 +42,6 @@
                                 <td>{{$galpon->corrales()->count()}}</td>
                                 <td></td>
                                 <td>
-                                    <a href="{{ route('admin.galpones.corralcreate', $galpon->id) }}" class="btn btn-primary"><spam  class="fa fa-tags" aria-hidden="true"></spam></a>
                                     <a href="{{ route('admin.galpones.edit', $galpon->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
                                     <a href="{{ route('admin.galpones.destroy', $galpon->id) }}" class="btn btn-danger"><spam onclick = "return confirm('¿Seguro que deseas eliminar este gapón?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
                                 </td>

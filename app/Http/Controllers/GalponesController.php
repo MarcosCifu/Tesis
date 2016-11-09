@@ -9,6 +9,7 @@ use App\Animal;
 use App\Corral;
 use Laracasts\Flash\Flash;
 use App\Http\Requests\GalponRequest;
+use App\Atributo;
 
 class GalponesController extends Controller
 {
@@ -23,6 +24,7 @@ class GalponesController extends Controller
         $galpones->each(function ($galpones){
             $galpones->corrales;
         });
+
         return view('Galpones.index')->with('galpones',$galpones);
     }
 
@@ -109,8 +111,8 @@ class GalponesController extends Controller
         $galpon = Galpon::find($id);
         $corrales = Corral::where('id_galpon','=', $galpon->id);
         $animales = $corrales->sum('cantidad_animales');
-      
-        return view ('Galpones.perfil')->with('galpon',$galpon)->with('corrales',$corrales)->with('animales',$animales);
+        $atributos = Atributo::orderBy('nombre', 'ASC')->lists('nombre', 'id');
+        return view ('Galpones.perfil')->with('atributos', $atributos)->with('galpon',$galpon)->with('corrales',$corrales)->with('animales',$animales);
     }
     public function corralcreate($id)
     {

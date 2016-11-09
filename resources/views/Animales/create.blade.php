@@ -21,24 +21,22 @@
                 {!! Form::date('fecha', $fecha) !!}
         </div>
         <div class="form-group">
+                {!! Form::label('pesaje_inicial', 'Pesaje inicial') !!}
+                {!! Form::text('pesaje_inicial', null, ['class' => 'form-control', 'placeholder' => 'Pesaje del animal en KG' , 'required' ]) !!}
+
+        </div>
+        <div class="form-group">
                 {!! Form::label('image','Imagen del Animal') !!}
                 {!! Form::file('path') !!}
-        </div>
-        <div class="form-group">
-                {!! Form::label('numero_Guia' ,'Número de Guia') !!}
-                {!! Form::text('numero_Guia', null, ['class' => 'form-control', 'placeholder' => 'Número de guia del animal' , 'required' ]) !!}
-        </div>
-        <div class="form-group">
-                {!! Form::label('procedencia' ,'Procedencia') !!}
-                {!! Form::text('procedencia', null, ['class' => 'form-control', 'placeholder' => 'Procedencia del animal' , 'required' ]) !!}
         </div>
         <div class="form-group">
                 {!! Form::hidden('user_id', Auth::user()->id , null , ['class'=>'form-control']) !!}
         </div>
 
         <div class="form-group">
-                {!! Form::submit('Registrar' ,['class' => 'btn btn-primary']) !!}
+                {!! Form::submit('Registrar' ,['class' => 'btn btn-success']) !!}
 
         </div>
         {{ Form::close() }}
+
 </div>

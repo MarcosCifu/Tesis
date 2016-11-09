@@ -25,7 +25,7 @@ class AddEstadisticasTable extends Migration
             $table->integer('distribucion');
             $table->integer('ganacia_dinero');
             $table->foreign('id_animales')->references('id')->on('animales')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('id_estadisticas')->references('id')->on('estadisticas')->onUpdate('cascade');
+            $table->foreign('id_estadisticas')->references('id')->on('estadisticas')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -38,8 +38,8 @@ class AddEstadisticasTable extends Migration
             $table->integer('ganacia_dinero');
             $table->integer('id_corrales')->unsigned();
             $table->integer('id_estadisticas')->unsigned();
-            $table->foreign('id_corrales')->references('id')->on('corrales')->onUpdate('cascade');
-            $table->foreign('id_estadisticas')->references('id')->on('estadisticas')->onUpdate('cascade');
+            $table->foreign('id_corrales')->references('id')->on('corrales')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_estadisticas')->references('id')->on('estadisticas')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
         Schema::create('estadisticas_galpones', function (Blueprint $table) {
@@ -47,8 +47,8 @@ class AddEstadisticasTable extends Migration
             $table->integer('id_galpones')->unsigned();
             $table->integer('id_estadisticas')->unsigned();
             $table->integer('pesaje_promedio');
-            $table->foreign('id_galpones')->references('id')->on('galpones')->onUpdate('cascade');
-            $table->foreign('id_estadisticas')->references('id')->on('estadisticas')->onUpdate('cascade');
+            $table->foreign('id_galpones')->references('id')->on('galpones')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_estadisticas')->references('id')->on('estadisticas')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
 

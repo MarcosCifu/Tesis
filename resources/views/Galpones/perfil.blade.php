@@ -1,5 +1,20 @@
 @extends('template')
 @section('content')
+    <!-- Modal -->
+    <div class="modal modal-primary fade" id="registrarcorral" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>Información del <b>Corral</b></h3>
+                </div>
+                <div class="modal-body">
+                    @include('Galpones.corralcreate')
+
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-4">
             <div class="box box-primary animated pulse slow go">
@@ -85,7 +100,7 @@
                                 <div class="box box-primary">
                                     <div class="box-header">
                                         <h3>Listado de <b>Corrales</b></h3>
-                                        <a href="{{route('admin.galpones.corralcreate', $galpon->id)}}" class="btn btn-info btn-lg"><i class="fa fa-tags"></i> Registar nuevo Corral</a>
+                                        <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrarcorral"><spam  class="fa fa-tags" aria-hidden="true"></spam></a>
                                     </div><!-- /.box-header -->
                                     <table id="corrales" class="table table-bordered table">
                                         <thead>

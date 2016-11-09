@@ -11,6 +11,8 @@
             <li class="{{ Request::is('admin/corrales')? "active":""}}"><a href="{{ route('admin.corrales.index')}}"><i class="fa fa-tags"></i><span>Corrales</span></a></li>
             <li class="{{ Request::is('admin/materiales')? "active":""}}"><a href="{{ route('admin.materiales.index')}}"><i class="fa fa-home"></i> <span>Bodega</span></a></li>
             <li class="{{ Request::is('admin/precios')? "active":""}}"><a href="{{ route('admin.precios.index')}}"><i class="fa fa-home"></i> <span>Precios por kilo</span></a></li>
+            <li class="{{ Request::is('admin/calendarios')? "active":""}}"><a href="{{ route('admin.calendarios.index')}}"><i class="fa fa-calendar"></i> <span>Calendario</span></a></li>
+
         </ul>
     </section>
 </aside>

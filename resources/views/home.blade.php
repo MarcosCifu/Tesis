@@ -1,6 +1,6 @@
 @extends('template')
 @section('chart')
-    <div class="animated flipInY">
+    <div class="animated pulse slow go">
         <h1>Información <b>General</b></h1>
     </div>
     <div class="row tile_count">

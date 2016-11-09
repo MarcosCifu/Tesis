@@ -21,7 +21,7 @@ class Reporte extends Model
     }
     public function animals()
     {
-        return $this->belongsToMany('App\Animal','estadisticas_animales','id_estadisticas','id_animales')
+        return $this->belongsToMany('App\Animal','estadisticas_animales','id_animales','id_estadisticas')
             ->withPivot('ganancia_peso','distribucion','ganancia_dinero');
     }
 }

@@ -16,7 +16,7 @@ class Animal extends Model implements SluggableInterface
     ];
 
     protected $table = "animales";
-    protected $fillable = ['id','DIIO','tipo','id_corral','id_pesos','estado','path','fecha_compra','fecha_venta','precio_compra','precio_venta',];
+    protected $fillable = ['id','DIIO','tipo','estado','venta','pesaje_inicial','id_corral','id_pesos','estado','path','fecha_compra','fecha_venta','precio_compra','precio_venta','ganancia_peso','distribucion','ganancia_dinero'];
 
     /**
      * @return array
@@ -50,6 +50,11 @@ class Animal extends Model implements SluggableInterface
     public function ultimopeso()
     {
         return $this->hasOne('App\Peso','id_animales')->latest();
+    }
+    public function reportes()
+    {
+        return $this->belongsToMany('App\Reporte','estadisticas_animales','id_animales','id_estadisticas')
+            ->withPivot('ganancia_peso','distribucion','ganancia_dinero');
     }
 
 }

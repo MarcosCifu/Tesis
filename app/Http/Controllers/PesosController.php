@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Peso;
 use App\Animal;
 use Carbon\Carbon;
+use App\Reporte;
 use App\Http\Requests;
 use Laracasts\Flash\Flash;
+use App\Http\Requests\PesoRequest;
 
 class PesosController extends Controller
 {
@@ -46,11 +48,15 @@ class PesosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PesoRequest $request)
     {
         $peso = new Peso ($request->all());
         $peso->save();
-        
+        $animal = Animal::find($peso->id_animales);
+        $reporte = new Reporte();
+        $reporte->save();
+        $ganancia_peso = $peso->pesaje - $animal->pesaje_inicial;
+        $animal->estadisticas()->attach($animal->id, ['ganancia_peso'=> $ganancia_peso, 'id_estadisticas' => $reporte->id]);
         Flash::success('El pesaje del animal ' . $peso->animal->DIIO . ' ha sido registrado con exito!');
         return redirect()->route('admin.pesos.index');
     }

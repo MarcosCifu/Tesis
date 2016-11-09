@@ -21,7 +21,6 @@
                 <button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#registrar">
                     <i class="fa fa-folder-open-o"></i> Registar nuevo Precio
                 </button>
-
                 <h3>Listado de <b>Precios por Kilo de Carne</b></h3>
             </div><!-- /.box-header -->
             <div class="box-body">
