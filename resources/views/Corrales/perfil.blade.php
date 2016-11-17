@@ -83,18 +83,22 @@
                             <div class="box box-primary">
                                 <div class="box-header">
                                     <h3>Listado de <b>Animales</b></h3>
+                                    @if(Auth::user()->admin())
                                     <div>
                                         <a href="{{route('admin.corrales.animalcorral', $corrales->id)}}" class="btn btn-success"><spam class="fa fa-paw"></spam> Registar <b>Animal</b></a>
                                     </div>
+                                    @endif()
                                 </div>
                                 <table id="animal" class="table table-bordered table">
                                     <thead>
                                     <tr>
-                                        <th>Pesaje</th>
+                                        <th>DIIO</th>
                                         <th>Tipo</th>
                                         <th>Estado</th>
                                         <th>Ingreso</th>
+                                        @if(Auth::user()->admin())
                                         <th>Acción</th>
+                                        @endif()
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -114,10 +118,12 @@
                                                 @endif
                                             </td>
                                             <td>{{$animales->created_at->format('m/Y')}}</td>
+                                            @if(Auth::user()->admin())
                                             <td>
                                                 <a href="{{ route('admin.animales.edit', $animales->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
                                                 <a href="{{ route('admin.animales.destroy', $animales->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este pesaje?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
                                             </td>
+                                            @endif()
                                         </tr>
                                     @endforeach
                                     </tbody>

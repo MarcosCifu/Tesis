@@ -8,7 +8,7 @@
                 </div>
                 <div class="box-body box-profile">
 
-                    <td><img class="profile-user-img img-responsive " src="{{ asset('images') }}/{{$animal->path}}"  style="width: 300px;"></td>
+                    <img class="profile-user-img img-responsive " src="{{ asset('images') }}/{{$animal->path}}"  style="width: 300px;">
 
                       <h3 class="profile-username text-center">{{$animal->DIIO}}</h3>
                     <p class="text-muted text-center">DIIO</p>
@@ -135,16 +135,20 @@
                                     <div class="box box-primary">
                                         <div class="box-header">
                                             <h3>Listado de <b>Pesajes</b></h3>
+                                            @if(Auth::user()->admin())
                                             <div>
                                                 <a href="{{route('admin.animales.pesoperfil', $animal->id)}}" class="btn btn-success"><spam class="glyphicon glyphicon-scale"></spam> Registar <b>Pesaje</b></a>
                                             </div>
+                                            @endif()
                                         </div><!-- /.box-header -->
                                         <table id="pesos" class="table table-bordered table">
                                             <thead>
                                             <tr>
                                                 <th>Pesaje</th>
                                                 <th>Fecha</th>
+                                                @if(Auth::user()->admin())
                                                 <th>Acción</th>
+                                                @endif()
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -152,10 +156,12 @@
                                                 <tr>
                                                     <td>{{$peso->pesaje}}</td>
                                                     <td>{{$peso->created_at->format('m/Y')}}</td>
+                                                    @if(Auth::user()->admin())
                                                     <td>
                                                         <a href="{{ route('admin.pesos.edit', $peso->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
                                                         <a href="{{ route('admin.pesos.destroy', $peso->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este pesaje?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
                                                     </td>
+                                                    @endif()
                                                 </tr>
                                             @endforeach
                                             </tbody>
@@ -170,9 +176,11 @@
                                     <div class="box box-primary">
                                         <div class="box-header">
                                             <h3>Listado de <b>Diagnostcos Medicos</b></h3>
+                                            @if(Auth::user()->admin())
                                             <div>
                                                 <a href="{{route('admin.animales.historialperfil', $animal->id)}}" class="btn btn-success"><i class="fa fa-stethoscope"></i> Registar <b>Diagnostico</b></a>
                                             </div>
+                                            @endif()
                                         </div><!-- /.box-header -->
 
                                         <table id="historial" class="table table-bordered table">
@@ -180,7 +188,9 @@
                                             <tr>
                                                 <th>Diagnostico</th>
                                                 <th>Fecha</th>
+                                                @if(Auth::user()->admin())
                                                 <th>Acción</th>
+                                                @endif()
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -188,10 +198,12 @@
                                                 <tr>
                                                     <td>{{$historial->enfermedad}}</td>
                                                     <td>{{$historial->created_at->format('m/Y')}}</td>
+                                                    @if(Auth::user()->admin())
                                                     <td>
                                                         <a href="{{ route('admin.historiales.edit', $historial->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
                                                         <a href="{{ route('admin.historiales.destroy', $historial->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este pesaje?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
                                                     </td>
+                                                    @endif()
                                                 </tr>
                                             @endforeach
                                             </tbody>

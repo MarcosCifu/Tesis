@@ -100,7 +100,9 @@
                                 <div class="box box-primary">
                                     <div class="box-header">
                                         <h3>Listado de <b>Corrales</b></h3>
+                                        @if(Auth::user()->admin())
                                         <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrarcorral"><spam  class="fa fa-tags" aria-hidden="true"></spam></a>
+                                        @endif()
                                     </div><!-- /.box-header -->
                                     <table id="corrales" class="table table-bordered table">
                                         <thead>
