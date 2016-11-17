@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Peso;
 use App\Animal;
 use Carbon\Carbon;
-use App\Reporte;
+use App\EstadisticaAnimal;
 use App\Http\Requests;
 use Laracasts\Flash\Flash;
 use App\Http\Requests\PesoRequest;
@@ -25,7 +25,10 @@ class PesosController extends Controller
             $pesos->animal;
 
         });
-        return view('Pesos.index')->with('pesos',$pesos);
+        $animales = Animal::orderBy('DIIO', 'ASC')->lists('DIIO', 'id');
+        $fecha = Carbon::now();
+        return view('Pesos.index')->with('pesos',$pesos)
+            ->with('animales', $animales)->with('fecha',$fecha);
     }
 
     /**
@@ -53,10 +56,10 @@ class PesosController extends Controller
         $peso = new Peso ($request->all());
         $peso->save();
         $animal = Animal::find($peso->id_animales);
-        $reporte = new Reporte();
-        $reporte->save();
-        $ganancia_peso = $peso->pesaje - $animal->pesaje_inicial;
-        $animal->estadisticas()->attach($animal->id, ['ganancia_peso'=> $ganancia_peso, 'id_estadisticas' => $reporte->id]);
+        $estadistica = new EstadisticaAnimal();
+        $estadistica->id_animal = $request->id_animales;
+        $estadistica->ganancia_peso = $peso->pesaje - $animal->pesaje_inicial;
+        $estadistica->save();
         Flash::success('El pesaje del animal ' . $peso->animal->DIIO . ' ha sido registrado con exito!');
         return redirect()->route('admin.pesos.index');
     }

@@ -1,11 +1,4 @@
-@extends('template')
-
-@section('title','Ingresar Material')
-
-
-@section('content')
-    @include('errors')
-    {{ Form::open(['route' => 'admin.materiales.store', 'method' => 'POST']) }}
+{{ Form::open(['route' => 'admin.materiales.store', 'method' => 'POST']) }}
     <div class="form-group">
         {!! Form::label('numero' ,'Número') !!}
         {!! Form::text('numero', null, ['class' => 'form-control', 'placeholder' => 'Numero del Material' , 'required' ]) !!}
@@ -28,8 +21,6 @@
     </div>
 
     <div class="form-group">
-        {!! Form::submit('Registrar' ,['class' => 'btn btn-primary']) !!}
-
+        {!! Form::submit('Registrar' ,['class' => 'btn btn-success']) !!}
     </div>
-    {{ Form::close() }}
-@endsection
+{{ Form::close() }}

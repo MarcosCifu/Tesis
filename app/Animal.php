@@ -51,10 +51,9 @@ class Animal extends Model implements SluggableInterface
     {
         return $this->hasOne('App\Peso','id_animales')->latest();
     }
-    public function reportes()
+    public function estadisticasanimales()
     {
-        return $this->belongsToMany('App\Reporte','estadisticas_animales','id_animales','id_estadisticas')
-            ->withPivot('ganancia_peso','distribucion','ganancia_dinero');
+        return $this->hasMany('App\EstadisticaAnimal','id_animal');
     }
 
 }

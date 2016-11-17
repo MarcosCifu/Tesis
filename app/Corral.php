@@ -24,5 +24,9 @@ class Corral extends Model
     {
         return $this->hasMany('App\Animal','id_corral')->where('estado','Enfermo')->count();
     }
+    public function estadisticascorrales()
+    {
+        return $this->hasMany('App\EstadisticaCorral','id_corral');
+    }
 
 }

@@ -2,14 +2,14 @@
 @section('content')
     @include('errors')
     <!-- Modal -->
-    <div class="modal modal-primary fade" id="registrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="registrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="box box-primary box-solid">
+                <div class="box-header with-border" >
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h3>Información del <b>Corral</b></h3>
                 </div>
-                <div class="modal-body">
+                <div>
                     <div class="box-body">
                         <section>
                             {{ Form::open(['route' => 'admin.corrales.store', 'method' => 'POST']) }}
@@ -31,49 +31,59 @@
                             {{ Form::close() }}
                         </section>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-    <div class="animated pulse slow go">
-        <div class="box">
-            <div class="box-header">
-                <button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#registrar">
-                    <i class="fa fa-folder-open-o"></i> Registar nuevo Corral
-                </button>
-                <h3>Listado de <b>Corrales</b></h3>
-            </div><!-- /.box-header -->
+    <div class="panel panel-default animated pulse slow go">
+        <div class="panel-heading">
+            <h1>Listado de <b>Corrales</b></h1>
+        </div>
+        <div class="panel-body">
+            <div class="box box-primary">
+                <div class="box-header">
+                    @if(Auth::user()->admin())
+                        <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
+                            <i class="fa fa-folder-open-o"></i> Registar nuevo Corral
+                        </a>
+                    @endif()
+                </div><!-- /.box-header -->
             <div class="box-body ">
                 <table id="corrales" class="table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th>Número</th>
-                            <th>Cantidad de Animales</th>
+                            <th>Animales</th>
                             <th>Galpón</th>
-                            <th>Cantidad de Alimento</th>
-                            <th>Cantidad de Agua</th>
-                            <th>Acción</th>
+                            <th>Alimento</th>
+                            <th>Agua</th>
+                            @if(Auth::user()->admin())
+                            <th> Acción</th>
+                            @endif()
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($corrales as $corral)
                             <tr>
-                                <td><a href="{{ route('admin.corrales.perfil', $corral->id) }}" class="btn btn-primary">Corral {{$corral->numero}}</a></td>
+                                <td><a href="{{ route('admin.corrales.perfil', $corral->id) }}" class="btn btn-success" >Corral {{$corral->numero}}</a></td>
                                 <td>{{$corral->cantidad_animales}}</td>
                                 <td>Galpón {{$corral->galpon->numero}}</td>
                                 <td>{{$corral->cantidad_animales*8}} KG</td>
                                 <td>{{$corral->cantidad_animales*40}} LT</td>
+                                @if(Auth::user()->admin())
                                 <td>
-                                    <a href="{{ route('admin.corrales.edit', $corral->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
-                                    <a href="{{ route('admin.corrales.destroy', $corral->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este corral?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
+                                        <a href="{{ route('admin.corrales.edit', $corral->id) }}" ><button class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></button> </a>
+                                        <a href="{{ route('admin.corrales.destroy', $corral->id) }}"><button class="btn btn-danger" onclick="return confirm('¿Seguro que deseas eliminar este corral?')"><spam class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></button> </a>
+                                        <a href="{{ route('admin.corrales.destroy', $corral->id) }}"><button class="btn btn-danger" onclick="return confirm('¿Seguro que deseas eliminar este corral?')"><spam class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></button> </a>
                                 </td>
+                                @endif()
                             </tr>
                         @endforeach
                     </tbody>
                     </table>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
+        </div>
     </div>
 @endsection
 @section('tablejs')
@@ -81,7 +91,6 @@
         $(function () {
             $('#corrales').DataTable({
                 "info": false,
-                "scrollX" : true,
                 "language": {
                     "emptyTable": "No hay datos disponibles",
                     "search": "Buscar:",
@@ -93,9 +102,11 @@
                     },
                     "lengthMenu": "Mostrar _MENU_ entradas"
                 },
-                "lengthMenu": [[10, 20, -1], [10, 20, "Todos"]]
+                "lengthMenu": [[10, 20, -1], [10, 20, "Todos"]],
+                scrollX: true
             });
         });
+
     </script>
 @endsection
 @section('ajaxjs')
@@ -107,7 +118,6 @@
         });
     </script>
 @endsection
-
 
 
 

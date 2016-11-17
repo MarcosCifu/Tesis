@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Galpon;
+use App\EstadisticaGalpon;
 use App\Animal;
 use App\Corral;
 use Laracasts\Flash\Flash;
@@ -35,7 +36,6 @@ class GalponesController extends Controller
      */
     public function create()
     {
-
         return view ('Galpones.create');
     }
 
@@ -47,6 +47,7 @@ class GalponesController extends Controller
      */
     public function store(GalponRequest $request)
     {
+
         $galpon = new Galpon($request->all());
         $galpon->save();
         Flash::success('El galpón ' . $galpon->numero . ' ha sido creado con exito!');

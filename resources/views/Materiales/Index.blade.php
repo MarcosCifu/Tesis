@@ -1,11 +1,32 @@
 @extends('template')
 @section('content')
     @include('errors')
-    <div class="animated pulse slow go">
-            <div class="box">
+    <!-- Modal -->
+    <div class="modal fade" id="registrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="box box-primary box-solid">
+                <div class="box-header with-border" >
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>Información del <b>Material</b></h3>
+                </div>
+                <div class="modal-body">
+                    @include('Materiales.create')
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default animated pulse slow go">
+        <div class="panel-heading">
+            <h1>Listado de <b>Materiales</b></h1>
+        </div>
+        <div class="panel-body">
+            <div class="box box-primary">
                 <div class="box-header">
-                    <h3>Listado de <b>Materiales</b></h3>
-                    <a href="{{route('admin.materiales.create')}}" class="btn btn-info btn-lg"><i class="fa fa-folder-open-o"></i> Registar nuevo Material</a>
+                    @if(Auth::user()->admin())
+                        <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
+                            <i class="fa fa-folder-open-o"></i> Registar nuevo Material
+                        </a>
+                    @endif()
                 </div><!-- /.box-header -->
                 <div class="box-body">
                     <table id="materiales" class="table table-bordered table-hover">
@@ -16,7 +37,9 @@
                                 <th>UMB</th>
                                 <th>Cantidad</th>
                                 <th>Observación</th>
+                                @if(Auth::user()->admin())
                                 <th>Acción</th>
+                                @endif()
                             </tr>
                         </thead>
                         <tbody>
@@ -36,12 +59,12 @@
                                         @endif
                                     </td>
                                     <td>{{$material->observacion}}</td>
+                                    @if(Auth::user()->admin())
                                     <td>
                                         <a href="{{ route('admin.materiales.edit', $material->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
-
-
                                         <a href="{{ route('admin.materiales.destroy', $material->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este material?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
                                     </td>
+                                    @endif()
                                 </tr>
                             @endforeach
                         </tbody>
@@ -49,6 +72,7 @@
                     </div>
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
+        </div>
 @endsection
 @section('tablejs')
     <script>

@@ -21,25 +21,12 @@ Route::group(['middleware' => ['web']], function () {
     });
 
     Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-        //rutas usuarios
-        Route::resource('users','UsersController');
-        Route::get('users/{id}/destroy', [
-            'uses' => 'UsersController@destroy',
-            'as' => 'admin.users.destroy'
-        ]);
+
         //rutas galpones
         Route::resource ('galpones','GalponesController');
         Route::get('galpones/{id}/perfil', [
             'uses' => 'GalponesController@perfil',
             'as' => 'admin.galpones.perfil'
-        ]);
-        Route::get('galpones/{id}/destroy', [
-            'uses' => 'GalponesController@destroy',
-            'as' => 'admin.galpones.destroy'
-        ]);
-        Route::get('galpones/{id}/corralcreate', [
-            'uses' => 'GalponesController@corralcreate',
-            'as' => 'admin.galpones.corralcreate'
         ]);
         //rutas corrales
         Route::resource ('corrales','CorralesController');
@@ -51,74 +38,136 @@ Route::group(['middleware' => ['web']], function () {
             }
 
         ]);
-        Route::get('corrales/{id}/destroy', [
-            'uses' => 'CorralesController@destroy',
-            'as' => 'admin.corrales.destroy'
-        ]);
-        Route::get('corrales/{id}/animalcorral', [
-            'uses' => 'CorralesController@animalcorral',
-            'as' => 'admin.corrales.animalcorral'
-        ]);
         //rutas animales
         Route::resource ('animales','AnimalesController');
-        Route::get('animales/{id}/edit', [
-            'uses' => 'AnimalesController@edit',
-            'as' => 'admin.animales.edit'
-        ]);
-        Route::get('animales/{id}/destroy', [
-            'uses' => 'AnimalesController@destroy',
-            'as' => 'admin.animales.destroy'
-        ]);
         Route::get('animales/{id}/perfil', [
             'uses' => 'AnimalesController@perfil',
             'as' => 'admin.animales.perfil'
         ]);
-        Route::get('animales/{id}/pesoperfil', [
-            'uses' => 'AnimalesController@pesoperfil',
-            'as' => 'admin.animales.pesoperfil'
-        ]);
-        Route::get('animales/{id}/historialperfil', [
-            'uses' => 'AnimalesController@historialperfil',
-            'as' => 'admin.animales.historialperfil'
-        ]);
         //rutas materiales
         Route::resource('materiales','MaterialesController');
-        Route::get('materiales/{id}/destroy', [
-            'uses' => 'MaterialesController@destroy',
-            'as' => 'admin.materiales.destroy'
-        ]);
         //rutas precios
         Route::resource('precios','PreciosController');
-        Route::get('precios/{id}/destroy', [
-            'uses' => 'PreciosController@destroy',
-            'as' => 'admin.precios.destroy'
-        ]);
         //rutas historiales
         Route::resource('historiales','HistorialesMedicosController');
-        Route::get('historiales/{id}/destroy', [
-            'uses' => 'HistorialesMedicosController@destroy',
-            'as' => 'admin.historiales.destroy'
-        ]);
         //rutas pesos
         Route::resource('pesos','PesosController');
-        Route::get('pesos/{id}/destroy', [
-            'uses' => 'PesosController@destroy',
-            'as' => 'admin.pesos.destroy'
-        ]);
         //rutas atributos
         Route::resource('atributos','AtributosController');
-        Route::get('atributoss/{id}/destroy', [
-            'uses' => 'AtributosController@destroy',
-            'as' => 'admin.atributos.destroy'
-        ]);
-        //rutas calendario
-        Route::resource ('calendarios','CalendariosController');
-        Route::get('cargaEventos{id?}','CalendariosController@show');
-        Route::post('guardaEventos', array('as' => 'guardaEventos','uses' => 'CalendariosController@create'));
-        Route::post('actualizaEventos','CalendariosController@update');
-        Route::post('eliminaEvento','CalendariosController@delete');
 
+        //Rutas de administrador
+        Route::group(['middleware' => 'admin'],function (){
 
+            //rutas admin usuarios
+            Route::resource('users','UsersController');
+            Route::get('users/{id}/destroy', [
+                'uses' => 'UsersController@destroy',
+                'as' => 'admin.users.destroy'
+            ]);
+            //rutas admin corrales
+            Route::post('corrales', [
+                'uses' => 'CorralesController@create',
+                'as' => 'admin.corrales.create']);
+            Route::post('corrales', [
+                'uses' => 'CorralesController@store',
+                'as' => 'admin.corrales.store']);
+            Route::get('corrales/{corrales}/edit', [
+                'uses' => 'CorralesController@edit',
+                'as' => 'admin.corrales.edit'
+            ]);
+            Route::get('corrales/{id}/destroy', [
+                'uses' => 'CorralesController@destroy',
+                'as' => 'admin.corrales.destroy'
+            ]);
+            Route::get('corrales/{id}/animalcorral', [
+                'uses' => 'CorralesController@animalcorral',
+                'as' => 'admin.corrales.animalcorral'
+            ]);
+            //rutas admin galpones
+            Route::post('galpones', [
+                'uses' => 'GalponesController@store',
+                'as' => 'admin.galpones.store']);
+            Route::get('galpones/{galpones}/edit', [
+                'uses' => 'GalponesController@edit',
+                'as' => 'admin.galpones.edit'
+            ]);
+            Route::get('galpones/{id}/destroy', [
+                'uses' => 'GalponesController@destroy',
+                'as' => 'admin.galpones.destroy'
+            ]);
+            Route::get('galpones/{galpones}/corralcreate', [
+                'uses' => 'GalponesController@corralcreate',
+                'as' => 'admin.galpones.corralcreate'
+            ]);
+            //rutas admin animales
+            Route::get('animales/{animales}/edit', [
+                'uses' => 'AnimalesController@edit',
+                'as' => 'admin.animales.edit'
+            ]);
+            Route::get('animales/{id}/destroy', [
+                'uses' => 'AnimalesController@destroy',
+                'as' => 'admin.animales.destroy'
+            ]);
+            Route::get('animales/{id}/pesoperfil', [
+                'uses' => 'AnimalesController@pesoperfil',
+                'as' => 'admin.animales.pesoperfil'
+            ]);
+            Route::get('animales/{id}/historialperfil', [
+                'uses' => 'AnimalesController@historialperfil',
+                'as' => 'admin.animales.historialperfil'
+            ]);
+            //rutas calendario
+            Route::resource ('calendarios','CalendariosController');
+            Route::get('cargaEventos{id?}','CalendariosController@show');
+            Route::post('guardaEventos', array('as' => 'guardaEventos','uses' => 'CalendariosController@create'));
+            Route::post('actualizaEventos','CalendariosController@update');
+            Route::post('eliminaEvento','CalendariosController@delete');
+            //rutas admin materiales
+            Route::get('materiales/{materiales}/edit', [
+                'uses' => 'MaterialesController@edit',
+                'as' => 'admin.materiales.edit'
+            ]);
+            Route::get('materiales/{id}/destroy', [
+                'uses' => 'MaterialesController@destroy',
+                'as' => 'admin.materiales.destroy'
+            ]);
+            //rutas admin precios
+            Route::get('precios/{precios}/edit', [
+                'uses' => 'PreciosController@edit',
+                'as' => 'admin.precios.edit'
+            ]);
+            Route::get('precios/{id}/destroy', [
+                'uses' => 'PreciosController@destroy',
+                'as' => 'admin.precios.destroy'
+            ]);
+            //rutas admin historiales
+            Route::get('historiales/{historiales}/edit', [
+                'uses' => 'HistorialesMedicosController@edit',
+                'as' => 'admin.historiales.edit'
+            ]);
+            Route::get('historiales/{id}/destroy', [
+                'uses' => 'HistorialesMedicosController@destroy',
+                'as' => 'admin.historiales.destroy'
+            ]);
+            //rutas admin pesos
+            Route::get('pesos/{pesos}/edit', [
+                'uses' => 'PesosController@edit',
+                'as' => 'admin.pesos.edit'
+            ]);
+            Route::get('pesos/{id}/destroy', [
+                'uses' => 'PesosController@destroy',
+                'as' => 'admin.pesos.destroy'
+            ]);
+            //rutas admin atributos corral
+            Route::get('atributos/{atributos}/edit', [
+                'uses' => 'AtributosController@edit',
+                'as' => 'admin.atributos.edit'
+            ]);
+            Route::get('atributoss/{id}/destroy', [
+                'uses' => 'AtributosController@destroy',
+                'as' => 'admin.atributos.destroy'
+            ]);
+        });
 
     });
 });

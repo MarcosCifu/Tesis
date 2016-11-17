@@ -15,16 +15,17 @@
             </div>
         </div>
     </div>
-    <div class="animated  pulse slow go">
-        <h1>Listado de <b>Usuarios</b></h1>
-    </div>
-    <div class="animated pulse slow go">
-        <div class="box">
-            <div class="box-header">
-                <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
-                    <i class="fa fa-folder-open-o"></i> Registar nuevo Usuario
-                </a>
-            </div><!-- /.box-header -->
+    <div class="panel panel-default animated pulse slow go">
+        <div class="panel-heading">
+            <h1>Listado de <b>Usuarios</b></h1>
+        </div>
+        <div class="panel-body">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
+                        <i class="fa fa-folder-open-o"></i> Registar nuevo Usuario
+                    </a>
+                </div><!-- /.box-header -->
             <div class="box-body">
                 <table id="users" class="table table-bordered table-hover">
                     <thead>
@@ -60,8 +61,7 @@
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
         </div>
-
-    {!! $users->render() !!}
+    </div>
 @endsection
 @section('tablejs')
     <script>

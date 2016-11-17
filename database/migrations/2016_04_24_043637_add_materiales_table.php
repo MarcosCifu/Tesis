@@ -19,7 +19,6 @@ class AddMaterialesTable extends Migration
             $table->enum('umb',['KG','UN','L']);
             $table->integer('cantidad');
             $table->text('observacion',300);
-            
             $table->integer('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users');
 

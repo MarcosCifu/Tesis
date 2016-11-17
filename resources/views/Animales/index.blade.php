@@ -24,9 +24,11 @@
         <div class="panel-body">
             <div class="box box-primary">
                 <div class="box-header">
+                    @if(Auth::user()->admin())
                     <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
                         <i class="fa fa-folder-open-o"></i> Registar nuevo Animal
                     </a>
+                    @endif()
                 </div><!-- /.box-header -->
                 <div class="box-body">
                     <table id="animales" class="table table-bordered table-hover">
@@ -40,7 +42,9 @@
                                 <th>Estado</th>
                                 <th>Fecha Ingreso</th>
                                 <th>Ultimo Pesaje</th>
-                                <th>Acción</th>
+                                @if(Auth::user()->admin())
+                                    <th>Acción</th>
+                                @endif()
                             </tr>
                         </thead>
                         <tbody>
@@ -65,10 +69,12 @@
                                 </td>
                                 <td>{{$animal->created_at->format('m/Y')}}</td>
                                 <td>{!! $animal->ultimopeso->pesaje or "0"!!}</td>
+                                @if(Auth::user()->admin())
                                 <td>
                                     <a href="{{ route('admin.animales.edit', $animal->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
                                     <a href="{{ route('admin.animales.destroy', $animal->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este animal?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
                                 </td>
+                                @endif()
                             </tr>
                         @endforeach
                         @endforeach

@@ -24,7 +24,10 @@ class HistorialesMedicosController extends Controller
             $historiales->animal;
 
         });
-        return view('HistorialesMedicos.index')->with('historiales',$historiales);
+        $animales = Animal::orderBy('DIIO', 'ASC')->lists('DIIO', 'id');
+        $fecha = Carbon::now();
+        return view('HistorialesMedicos.index')->with('historiales',$historiales)
+            ->with('animales', $animales)->with('fecha',$fecha);
     }
 
     /**

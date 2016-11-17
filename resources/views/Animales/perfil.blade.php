@@ -205,6 +205,8 @@
         </div><!-- /.nav-tabs-custom -->
     </div>
 @endsection
+
+
 @section('chartjs')
     <script>
         $(function () {
@@ -289,7 +291,7 @@
             var barChartCanvas = $("#barChart").get(0).getContext("2d");
             var barChart = new Chart(barChartCanvas);
             var barChartData = {
-                labels: {!! $fecha !!},
+                labels: {!! $fechaganancia !!},
 
                 datasets: [
                     {
@@ -300,7 +302,7 @@
                         pointStrokeColor: "rgba(60,141,188,1)",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(60,141,188,1)",
-                        data: {!!  ($beneficios) !!}
+                        data:{{$gananciapeso}}
                     }
                 ]
             };
