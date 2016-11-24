@@ -2,20 +2,20 @@
 @section('content')
     <div class="row">
         <div class="col-md-4">
-            <div class="box box-primary animated pulse slow go">
-                <div class="box-header">
-                    <h3>Información del <b>Corral</b></h3>
+            <div class="panel panel-default animated pulse slow go">
+                <div class="panel-heading">
+                    <h1>Información del <b>Corral</b></h1>
+                </div>
+                <div class="panel-body">
                     <div class="small-box bg-olive">
                         <div class="inner">
                             <div class="icon">
                                 <i class="ion ion-ios-paw"></i>
                             </div>
-                                <h2 class="text-center">Corral Número</h2>
-                                <h3 class="profile-username text-center">{{$corrales->numero}}</h3>
+                            <h2 class="text-center">Corral Número</h2>
+                            <h3 class="profile-username text-center">{{$corrales->numero}}</h3>
                         </div>
                     </div>
-                </div>
-                <div class="box-body box-profile">
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
                             <b>Fecha de creación</b> <a class="pull-right">{{$corrales->created_at->format('d/m/Y')}}</a>
@@ -29,12 +29,62 @@
                         <li class="list-group-item">
                             <b>Estado</b> <a class="pull-right"></a>
                         </li>
+                        <li class="list-group-item">
+                            <b>Atributos del Corral</b><br>
+                            @foreach($atributos as $atributo)
+                                <span class="btn btn-primary"> {{$atributo->nombre}} </span>
+                            @endforeach
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="col-md-8 animated pulse slow go">
-        <div class="nav-tabs-custom">
+        <div class="col-md-8">
+            <div class="row tile_count">
+                <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>{{$pesajepromedio}}<sup style="font-size: 20px">KG</sup></h3>
+                            <p>Pesaje Promedio</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-speedometer"></i>
+                        </div>
+                        <a href="{{ route('admin.pesos.index') }}" class="small-box-footer">
+                            Listado de Pesajes <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3>{{$pesajeminimo}}</h3>
+                            <p>Pesaje Minimo</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-arrow-graph-down-right"></i>
+                        </div>
+                        <a href="" class="small-box-footer">
+                            More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>{{$pesajemaximo}}</h3>
+                            <p>Pesaje Maximo</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-arrow-graph-up-right"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <div class="nav-tabs-custom animated pulse slow go">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#resumen" data-toggle="tab">Estadisticas</a></li>
                 <li><a href="#animales" data-toggle="tab">Animales</a></li>

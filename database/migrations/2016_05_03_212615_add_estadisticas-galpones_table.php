@@ -16,7 +16,7 @@ class AddEstadisticasGalponesTable extends Migration
             $table->increments('id');
             $table->integer('pesaje_promedio');
             $table->integer('id_galpon')->unsigned();
-            $table->foreign('id_galpon')->references('id')->on('galpones')->onUpdate('cascade');
+            $table->foreign('id_galpon')->references('id')->on('galpones')->onUpdate('cascade')->onDelete('no action');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class AddEstadisticasGalponesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('estadisticas_galpones');
     }
 }

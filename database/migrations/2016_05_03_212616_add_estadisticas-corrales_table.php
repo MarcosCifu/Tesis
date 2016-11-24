@@ -16,11 +16,13 @@ class AddEstadisticasCorralesTable extends Migration
             $table->increments('id');
             $table->integer('corralMayorGanancia');
             $table->integer('pesaje_promedio');
+            $table->integer('pesaje_maximo');
+            $table->integer('pesaje_minimo');
             $table->string('tipoMayorGanancia');
             $table->string('tipoMayorEnfermedad');
             $table->integer('ganacia_dinero');
             $table->integer('id_corral')->unsigned();
-            $table->foreign('id_corral')->references('id')->on('corrales')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_corral')->references('id')->on('corrales')->onUpdate('cascade')->onDelete('no action');
             $table->timestamps();
         });
     }
@@ -32,6 +34,6 @@ class AddEstadisticasCorralesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('estadisticas_corrales');
     }
 }

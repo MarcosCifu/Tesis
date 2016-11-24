@@ -18,7 +18,7 @@
         </div>
         <div class="form-group">
                 {!! Form::label('fecha_compra','Fecha de Ingreso') !!}<br>
-                {!! Form::date('fecha', $fecha) !!}
+                {!! Form::date('fecha',$fecha) !!}
         </div>
         <div class="form-group">
                 {!! Form::label('pesaje_inicial', 'Pesaje inicial') !!}
@@ -38,5 +38,7 @@
 
         </div>
         {{ Form::close() }}
+
+
 
 </div>
