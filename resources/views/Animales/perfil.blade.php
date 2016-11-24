@@ -2,11 +2,11 @@
 @section('content')
     <div class="row">
         <div class="col-md-4">
-            <div class="box box-primary animated pulse slow go">
-                <div class="box-header">
+            <div class="panel panel-default animated pulse slow go">
+                <div class="panel-heading">
                     <h1>Información del <b>Animal</b></h1>
                 </div>
-                <div class="box-body box-profile">
+                <div class="panel-body">
 
                     <img class="profile-user-img img-responsive " src="{{ asset('images') }}/{{$animal->path}}"  style="width: 300px;">
 
@@ -33,19 +33,13 @@
                             <a href="{{ route('admin.corrales.perfil', $animal->id_corral) }}" class="btn btn-success">Corral {{$animal->corral->numero}}</a>
                             <a href="{{ route('admin.galpones.perfil', $animal->corral->id_galpon) }}" class="btn btn-success">Galpón {{$animal->corral->galpon->numero}}</a>
                         </li>
-                        <li class="list-group-item">
-                            <b>Atributos del Corral</b><br>
-                            @foreach($animal->corral->atributos as $atributos)
-                                    <span class="btn btn-primary"> {{$atributos->nombre}} </span>
-                                @endforeach
-                        </li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="col-md-8">
             <div class="row tile_count">
-                <div class="animated flipInX col-lg-4 col-xs-8 tile_stats_count">
+                <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
                     <div class="small-box bg-blue">
                         <div class="icon">
                             <i class="ion-location"></i>
@@ -58,20 +52,20 @@
                         <h4 class="small-box-footer"><b>{{600-$animal->pesaje_inicial}} KG para peso ideal</b></h4>
                     </div>
                 </div>
-                <div class="animated flipInX col-lg-4 col-xs-8 tile_stats_count">
+                <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
                     <div class="small-box bg-teal">
                         <div class="icon">
                             <i class="ion-arrow-graph-up-right"></i>
                         </div>
                         <div class="inner">
-                            <h3>{{$ultimopeso-$animal->pesaje_incial}} KG
+                            <h3>{{$ultimopeso - $animal->pesaje_inicial}} KG
                                 </h3>
                             <p>Peso ganado</p>
                         </div>
                         <h4 class="small-box-footer"><b>{{round(($ultimopeso-$animal->pesaje_inicial)/$permanencia,2)}} KG por día</b></h4>
                     </div>
                 </div>
-                <div class="animated flipInX col-lg-4 col-xs-8 tile_stats_count">
+                <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
                     <div class="small-box bg-maroon">
                         <div class="inner">
                             <h3>{{$permanencia}} Días</h3>

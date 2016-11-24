@@ -68,9 +68,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('corrales', [
                 'uses' => 'CorralesController@create',
                 'as' => 'admin.corrales.create']);
+
             Route::post('corrales', [
                 'uses' => 'CorralesController@store',
                 'as' => 'admin.corrales.store']);
+
             Route::get('corrales/{corrales}/edit', [
                 'uses' => 'CorralesController@edit',
                 'as' => 'admin.corrales.edit'
@@ -83,7 +85,16 @@ Route::group(['middleware' => ['web']], function () {
                 'uses' => 'CorralesController@animalcorral',
                 'as' => 'admin.corrales.animalcorral'
             ]);
+            //rutas admin estaditicasCorrales
+            Route::get('estadisticascorrales/{id}', [
+                'uses' => 'EstadisticasCorralesController@estadisticascorrales',
+                'as' => 'admin.estadisticascorrales']);
+
             //rutas admin galpones
+            Route::get('galpones/create', [
+                'uses' => 'GalponesController@create',
+                'as' => 'admin.galpones.create'
+            ]);
             Route::post('galpones', [
                 'uses' => 'GalponesController@store',
                 'as' => 'admin.galpones.store']);
@@ -100,6 +111,10 @@ Route::group(['middleware' => ['web']], function () {
                 'as' => 'admin.galpones.corralcreate'
             ]);
             //rutas admin animales
+            Route::get('animales/create', [
+                'uses' => 'AnimalesController@create',
+                'as' => 'admin.animales.create'
+            ]);
             Route::get('animales/{animales}/edit', [
                 'uses' => 'AnimalesController@edit',
                 'as' => 'admin.animales.edit'
@@ -122,6 +137,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('guardaEventos', array('as' => 'guardaEventos','uses' => 'CalendariosController@create'));
             Route::post('actualizaEventos','CalendariosController@update');
             Route::post('eliminaEvento','CalendariosController@delete');
+
             //rutas admin materiales
             Route::get('materiales/{materiales}/edit', [
                 'uses' => 'MaterialesController@edit',

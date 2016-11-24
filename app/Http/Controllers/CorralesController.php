@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\EstadisticaCorral;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Corral;
 use App\Animal;
+use App\Peso;
 use App\Atributo;
 use App\Galpon;
 use Laracasts\Flash\Flash;
@@ -45,7 +47,6 @@ class CorralesController extends Controller
     {
         $atributos = Atributo::orderBy('nombre', 'ASC')->lists('nombre', 'id');
         $galpones = Galpon::orderBy('numero', 'ASC')->lists('numero', 'id');
-
         return view('Corrales.create')
             ->with('galpones', $galpones)
             ->with('atributos', $atributos);
@@ -131,14 +132,30 @@ class CorralesController extends Controller
 
         });
         $corral->delete();
-
         Flash::error('El corral ' . $corral->numero . ' en el galpón '. $corral->galpon->numero .' ha sido eliminado con exito!');
         return redirect()->route('admin.corrales.index');
     }
     public function perfil($id)
     {
         $corrales = Corral::find($id);
-        return view ('Corrales.perfil')->with('corrales',$corrales);
+        $estadisticas = EstadisticaCorral::all();
+        $atributos = $corrales->atributos;
+        $animales = $corrales->animals;
+        $pesajepromedio = $animales->avg('pesaje_actual');
+        $pesajemaximo = $animales->max('pesaje_actual');
+        $pesajeminimo = $animales->min('pesaje_actual');
+        $evolucionpesos = $estadisticas->lists('pesaje_total');
+        $fechaevolucion = $estadisticas->lists('fecha');
+
+
+
+        return view ('Corrales.perfil')->with('corrales',$corrales)
+            ->with('pesajepromedio',$pesajepromedio)
+            ->with('pesajemaximo',$pesajemaximo)
+            ->with('pesajeminimo',$pesajeminimo)
+            ->with('evolucionpesos',$evolucionpesos)
+            ->with('fechaevolucion', $fechaevolucion)
+            ->with('atributos',$atributos);
     }
     public function animalcorral($id)
     {
@@ -148,4 +165,5 @@ class CorralesController extends Controller
             ->with('corral', $corral)
             ->with('fecha',$fecha);
     }
+
 }

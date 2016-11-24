@@ -60,6 +60,8 @@ class PesosController extends Controller
         $estadistica->id_animal = $request->id_animales;
         $estadistica->ganancia_peso = $peso->pesaje - $animal->pesaje_inicial;
         $estadistica->save();
+        $animal->pesaje_actual = $peso->pesaje;
+        $animal->save();
         Flash::success('El pesaje del animal ' . $peso->animal->DIIO . ' ha sido registrado con exito!');
         return redirect()->route('admin.pesos.index');
     }
@@ -113,9 +115,21 @@ class PesosController extends Controller
     public function destroy($id)
     {
         $peso = Peso::find($id);
-        $peso->delete();
+        $animal = $peso->animal;
+        $primerpesoanimal = $animal->pesos->first();
 
-        Flash::error('El peso del animal ' . $peso->animal->DIIO . ' ha sido eliminado con exito!');
+        if ($peso = $primerpesoanimal ){
+            Flash::error('El peso del animal ' . $peso->animal->DIIO . ' no puede ser eliminado!');
+
+        }
+        else{
+            $animal = Animal::find($peso->id_animales);
+            $peso->delete();
+            Flash::error('El peso del animal ' . $peso->animal->DIIO . ' ha sido eliminado con exito!');
+            $ultimopeso = Peso::latest();
+            $animal->pesaje_actual = $ultimopeso->pesaje;
+            $animal->save();
+        }
         return redirect()->route('admin.pesos.index');
     }
     

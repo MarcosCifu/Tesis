@@ -24,7 +24,10 @@
     <link href="{{ asset("/plugins/steps/jquery.steps.css") }}" rel="stylesheet" />
     <!--FullCalendar -->
     <link href="{{asset("/plugins/fullcalendar/fullcalendar.css")}}" rel="stylesheet" />
-    <link  href="{{asset("/plugins/fullcalendar/fullcalendar.print.css")}}" media="print" rel="stylesheet">
+    <link href="{{asset("/plugins/fullcalendar/fullcalendar.print.css")}}" media="print" rel="stylesheet">
+
+
+    <link href="{{ asset("/dist/css/skins/skin-yellow.min.css")}}" rel="stylesheet" type="text/css" />
 
 
 
@@ -76,6 +79,9 @@
 
 <script src="{{ asset ("/plugins/chartjs/Chart.js") }}"></script>
 <script src="{{ asset ("/plugins/chosen/chosen.jquery.js") }}"></script>
+
+
+
 
 
 @yield('chartjs')

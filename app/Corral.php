@@ -18,7 +18,7 @@ class Corral extends Model
     }
     public function atributos()
     {
-        return $this->belongsToMany('App\Atributo','corral_atributo','id_corral','id_atributo');
+        return $this->belongsToMany('App\Atributo','corral_atributo','id_corral','id_atributo')->withPivot('id_corral','id_atributo');
     }
     public function estadoanimales()
     {
@@ -28,5 +28,6 @@ class Corral extends Model
     {
         return $this->hasMany('App\EstadisticaCorral','id_corral');
     }
+
 
 }

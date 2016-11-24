@@ -66,6 +66,7 @@ class AnimalesController extends Controller
         $animal = new Animal($request->all());
         $user = Auth::user();
         $animal->id_corral = $request->input('corral');
+        $animal->pesaje_actual = $animal->pesaje_inicial;
         $animal->save();
         Flash::success('El animal ' . $animal->DIIO . ' ha sido creado con exito!');
         $animal->corral()->increment('cantidad_animales',1);
