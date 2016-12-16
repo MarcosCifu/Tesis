@@ -18,7 +18,7 @@ class AddEstadisticasAnimalesTable extends Migration
             $table->integer('distribucion');
             $table->integer('ganacia_dinero');
             $table->integer('id_animal')->unsigned();
-            $table->foreign('id_animal')->references('id')->on('animales')->onUpdate('cascade')->onDelete('no action');
+            $table->foreign('id_animal')->references('id')->on('animales')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
 

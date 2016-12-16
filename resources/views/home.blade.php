@@ -1,154 +1,158 @@
 @extends('template')
 @section('chart')
-    <div class="animated pulse slow go">
-        <h1>Información <b>General</b></h1>
-    </div>
-    <div class="row tile_count">
-            <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
-                <div class="small-box bg-aqua">
-                        <div class="inner">
-                            <h3>{{$cantidad}}</h3>
-                            <p>Animales Registrados</p>
+    <div class="panel panel-default animated pulse slow go">
+        <div class="panel-heading">
+            <h1>Información <b>General</b></h1>
+        </div>
+        <div class="panel-body">
+            <div class="row tile_count">
+                    <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
+                        <div class="small-box bg-aqua">
+                                <div class="inner">
+                                    <h3>{{$cantidad}}</h3>
+                                    <p>Animales Registrados</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-ios-paw"></i>
+                                </div>
+                                <a href="{{ route('admin.animales.index') }}" class="small-box-footer">
+                                    Listado de Animales <i class="fa fa-arrow-circle-right"></i>
+                                </a>
                         </div>
-                        <div class="icon">
-                            <i class="ion ion-ios-paw"></i>
+                    </div>
+                    <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
+                        <div class="small-box bg-green">
+                            <div class="inner">
+                                <h3>{{ round($promedio) }}<sup style="font-size: 20px">KG</sup></h3>
+                                <p>Pesaje Promedio</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-speedometer"></i>
+                            </div>
+                            <a href="{{ route('admin.pesos.index') }}" class="small-box-footer">
+                                Listado de Pesajes <i class="fa fa-arrow-circle-right"></i>
+                            </a>
                         </div>
-                        <a href="{{ route('admin.animales.index') }}" class="small-box-footer">
-                            Listado de Animales <i class="fa fa-arrow-circle-right"></i>
-                        </a>
-                </div>
+                    </div>
+                    <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
+                        <div class="small-box bg-yellow">
+                            <div class="inner">
+                                <h3>{{$minimo or 0}}</h3>
+                                <p>Pesaje Minimo</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-arrow-graph-down-right"></i>
+                            </div>
+                            <a href="" class="small-box-footer">
+                                More info <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
+                        <div class="small-box bg-red">
+                            <div class="inner">
+                                <h3>{{$maximo or 0}}</h3>
+                                <p>Pesaje Maximo</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-arrow-graph-up-right"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">
+                                More info <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
             </div>
-            <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
-                <div class="small-box bg-green">
-                    <div class="inner">
-                        <h3>{{ round($promedio) }}<sup style="font-size: 20px">KG</sup></h3>
-                        <p>Pesaje Promedio</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-speedometer"></i>
-                    </div>
-                    <a href="{{ route('admin.pesos.index') }}" class="small-box-footer">
-                        Listado de Pesajes <i class="fa fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
-                <div class="small-box bg-yellow">
-                    <div class="inner">
-                        <h3>{{$minimo or 0}}</h3>
-                        <p>Pesaje Minimo</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-arrow-graph-down-right"></i>
-                    </div>
-                    <a href="" class="small-box-footer">
-                        More info <i class="fa fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
-                <div class="small-box bg-red">
-                    <div class="inner">
-                        <h3>{{$maximo or 0}}</h3>
-                        <p>Pesaje Maximo</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-arrow-graph-up-right"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">
-                        More info <i class="fa fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <!-- AREA CHART -->
-            <div class="box box-primary animated pulse slow go">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Evolución por Galpones</h3>
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                    </div>
-                </div>
-                <div class="box-body">
-                    <div class="chart">
-                        <canvas id="areaChart" style="height:250px"></canvas>
-                    </div>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
-
-            <!-- DONUT CHART -->
-            <div class="box box-danger animated pulse slow go">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Estado de los Animales</h3>
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                    </div>
-                </div>
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="chart-responsive">
-                                <canvas id="pieChart" style="height:250px"></canvas>
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- AREA CHART -->
+                    <div class="box box-primary animated pulse slow go">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Evolución por Galpones</h3>
+                            <div class="box-tools pull-right">
+                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <ul class="chart-legend clearfix pull-left">
-                                <li><i class="fa fa-circle-o text-green"></i> Vivos</li>
-                                <li><i class="fa fa-circle-o text-yellow"></i> Enfermos</li>
-                                <li><i class="fa fa-circle-o text-red"></i> Muertos</li>
+                        <div class="box-body">
+                            <div class="chart">
+                                <canvas id="areaChart" style="height:250px"></canvas>
+                            </div>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
 
+                    <!-- DONUT CHART -->
+                    <div class="box box-danger animated pulse slow go">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Estado de los Animales</h3>
+                            <div class="box-tools pull-right">
+                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="chart-responsive">
+                                        <canvas id="pieChart" style="height:250px"></canvas>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <ul class="chart-legend clearfix pull-left">
+                                        <li><i class="fa fa-circle-o text-green"></i> Vivos</li>
+                                        <li><i class="fa fa-circle-o text-yellow"></i> Enfermos</li>
+                                        <li><i class="fa fa-circle-o text-red"></i> Muertos</li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div><!-- /.box-body -->
+                        <div class="box-footer no-padding">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#"><span class="pull-right text-red"><i class="fa fa-angle"></i></span></a></li>
+                                <li><a href="#"><span class="pull-right text-green"><i class="fa fa-angle"></i></span></a></li>
+                                <li><a href="#"><span class="pull-right text-yellow"><i class="fa fa-angle"></i></span></a></li>
                             </ul>
                         </div>
-                    </div>
-                </div><!-- /.box-body -->
-                <div class="box-footer no-padding">
-                    <ul class="nav nav-pills nav-stacked">
-                        <li><a href="#"><span class="pull-right text-red"><i class="fa fa-angle"></i></span></a></li>
-                        <li><a href="#"><span class="pull-right text-green"><i class="fa fa-angle"></i></span></a></li>
-                        <li><a href="#"><span class="pull-right text-yellow"><i class="fa fa-angle"></i></span></a></li>
-                    </ul>
-                </div>
-            </div><!-- /.box -->
-        </div><!-- /.col (LEFT) -->
-        <div class="col-md-6">
-            <!-- LINE CHART -->
-            <div class="box box-info animated pulse slow go">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Line Chart</h3>
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                    </div>
-                </div>
-                <div class="box-body">
-                    <div class="chart">
-                        <canvas id="lineChart" style="height:250px"></canvas>
-                    </div>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
+                    </div><!-- /.box -->
+                </div><!-- /.col (LEFT) -->
+                <div class="col-md-6">
+                    <!-- LINE CHART -->
+                    <div class="box box-info animated pulse slow go">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Line Chart</h3>
+                            <div class="box-tools pull-right">
+                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="chart">
+                                <canvas id="lineChart" style="height:250px"></canvas>
+                            </div>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
 
-            <!-- BAR CHART -->
-            <div class="box box-success animated pulse slow go">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Rendimiento Mensual</h3>
-                    <div class="box-tools pull-right">
-                        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                    </div>
-                </div>
-                <div class="box-body">
-                    <div class="chart">
-                        <canvas id="barChart" style="height:264px"></canvas>
-                    </div>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
+                    <!-- BAR CHART -->
+                    <div class="box box-success animated pulse slow go">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Rendimiento Mensual</h3>
+                            <div class="box-tools pull-right">
+                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="chart">
+                                <canvas id="barChart" style="height:264px"></canvas>
+                            </div>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
 
-        </div><!-- /.col (RIGHT) -->
-    </div><!-- /.row -->
+                </div><!-- /.col (RIGHT) -->
+            </div><!-- /.row -->
+        </div>
+    </div>
 @endsection
 @section('chartjs')
     <script>
@@ -329,30 +333,32 @@
         //-------------
         //- BAR CHART -
         //-------------
+
+
         var barChartCanvas = $("#barChart").get(0).getContext("2d");
         var barChart = new Chart(barChartCanvas);
         var barChartData = {
-            labels: {!! $galpones !!},
+            labels: {!! $numerogalpones !!},
             datasets: [
                 {
-                    label: "Electronics",
-                    fillColor: "rgba(210, 214, 222, 1)",
+                    label: "Promedio actual",
+                    fillColor: "rgba(60,141,188,0.9)",
                     strokeColor: "rgba(210, 214, 222, 1)",
                     pointColor: "rgba(210, 214, 222, 1)",
                     pointStrokeColor: "#c1c7d1",
                     pointHighlightFill: "#fff",
                     pointHighlightStroke: "rgba(220,220,220,1)",
-                    data: {!! $pesosnoapto !!}
+                    data: {!! $promediogalpones !!}
                 },
                 {
-                    label: "Digital Goods",
+                    label: "Promedio inicial",
                     fillColor: "rgba(60,141,188,0.9)",
                     strokeColor: "rgba(60,141,188,0.8)",
                     pointColor: "#3b8bba",
                     pointStrokeColor: "rgba(60,141,188,1)",
                     pointHighlightFill: "#fff",
                     pointHighlightStroke: "rgba(60,141,188,1)",
-                    data: {!! $pesosnoapto !!}
+                    data: {!! $primerpromediogalpones !!}
                 }
 
 

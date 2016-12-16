@@ -1,44 +1,70 @@
 @extends('template')
 @section('content')
     <!-- Modal -->
-    <div class="modal modal-primary fade" id="registrarcorral" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="registrarcorral" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="box box-primary box-solid">
+                <div class="box-header with-border" >
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h3>Información del <b>Corral</b></h3>
                 </div>
                 <div class="modal-body">
-                    @include('Galpones.corralcreate')
-
+                    {{ Form::open(['route' => 'admin.corrales.store', 'method' => 'POST']) }}
+                    <div class="form-group">
+                        {!! Form::label('numero' ,'Número') !!}
+                        {!! Form::text('numero', null, ['class' => 'form-control', 'placeholder' => 'Numero del Corral' , 'required' ]) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('numeroGalpon' ,'Galpón') !!}
+                        {!! Form::text('numeroGalpon', $galpon->numero, ['disabled' => 'disabled','class' => 'form-control', 'placeholder' => 'Seleccione una opción' , 'required']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('tamaño' ,'Tamaño') !!}
+                        {!! Form::text('tamaño', null, ['class' => 'form-control', 'placeholder' => 'Tamaño en m2' , 'required' ]) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('atributos' ,'Atributos') !!}
+                        {!! Form::select('atributos[]', $atributos, null, ['class' => 'form-control select-atributo' ,'multiple', 'required' ]) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::submit('Registrar' ,['class' => 'btn btn-success']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::hidden('id_galpon', $galpon->id , null , ['class'=>'form-control']) !!}
+                    </div>
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-4">
-            <div class="box box-primary animated pulse slow go">
-                <div class="box-header">
-                    <h3>Información del <b>Galpón</b></h3>
-                    <div class="text-center">
-                        <div class="small-box bg-red">
-                            <div class="inner">
-                                <div class="icon">
-                                    <i class="ion ion-ios-paw"></i>
-                                </div>
-                                <h2 class="text-center">Galpón Número</h2>
-                                <h3 class="profile-username text-center">{{$galpon->numero}}</h3>
+            <div class="panel panel-default animated pulse slow go">
+                <div class="panel-heading">
+                    <h1>Información del <b>Galpón</b></h1>
+                </div>
+                <div class="panel-body">
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <div class="icon">
+                                <i class="ion ion-ios-paw"></i>
                             </div>
+                            <div>
+                            <h2 class="text-center">Galpón Número</h2>
+                            <h3 class="profile-username text-center">{{$galpon->numero}}</h3>
+                        </div>
                         </div>
                     </div>
                 </div>
                 <div class="box-body box-profile">
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Fecha de creación</b> <a class="pull-right">{{$galpon->created_at->format('d/m/Y')}}</a>
+                            <b>Fecha de creación</b><br>
+                            <a class="">{{$galpon->created_at->format('d/m/Y')}}</a>
                         </li>
                         <li class="list-group-item">
-                            <b>Cantidad total de Animales</b> <a class="pull-right">{{ $animales }}</a>
+                            <b>Cantidad total de Animales</b><br>
+                            <span class="btn btn-success">{{ $animales }}<spam>
                         </li>
                         <li class="list-group-item">
                             <b>Tipo de Animales</b> <a class="pull-right"></a>
@@ -46,11 +72,60 @@
                         <li class="list-group-item">
                             <b>Estado</b> <a class="pull-right"></a>
                         </li>
+                        @if(Auth::user()->admin())
+                            <li class="list-group-item">
+                                <a href="{{ route('admin.estadisticasgalpones', $galpon->id)}}"><span  class="btn btn-primary">Actualizar Estadisticas</span></a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>
         </div>
         <div class="col-md-8 animated pulse slow go">
+            <div class="row tile_count">
+                <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>{{$promedio}}<sup style="font-size: 20px">KG</sup></h3>
+                            <p>Pesaje Promedio</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-speedometer"></i>
+                        </div>
+                        <a href="{{ route('admin.pesos.index') }}" class="small-box-footer">
+                            Listado de Pesajes <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3>{{$minimo}}<sup style="font-size: 20px">KG</sup></h3>
+                            <p>Pesaje Minimo</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-arrow-graph-down-right"></i>
+                        </div>
+                        <a href="" class="small-box-footer">
+                            More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>{{$maximo}}<sup style="font-size: 20px">KG</sup></h3>
+                            <p>Pesaje Maximo</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-arrow-graph-up-right"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            More info <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#resumen" data-toggle="tab">Evolución</a></li>
@@ -60,13 +135,11 @@
                     <div class="tab-pane fade in active" id="resumen">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="box box-primary">
                                     <div class="box-header">
                                         <h3>Resumen <b>Evolutivo</b></h3>
                                     </div>
                                     <div class="box-body">
-                                        <div class="col-md-6">
-                                            <div class="box">
+                                        <div class="col-md-12">
                                                 <div class="box-header with-border">
                                                     <h3 class="box-title">Evolución</h3>
                                                 </div>
@@ -75,10 +148,8 @@
                                                         <canvas id="areaChart" style="height:250px"></canvas>
                                                     </div>
                                                 </div>
-                                            </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="box">
+                                        <div class="col-md-12">
                                                 <div class="box-header with-border">
                                                     <h3 class="box-title">Beneficios</h3>
                                                 </div>
@@ -87,21 +158,18 @@
                                                         <canvas id="barChart" style="height:230px"></canvas>
                                                     </div>
                                                 </div><!-- /.box-body -->
-                                            </div><!-- /.box -->
                                         </div><!-- /.col (RIGHT) -->
                                     </div>
-                                </div>
                             </div>
                         </div><!-- /.nav-tabs-custom -->
                     </div>
                     <div class="tab-pane fade" id="corrales">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="box box-primary">
                                     <div class="box-header">
                                         <h3>Listado de <b>Corrales</b></h3>
                                         @if(Auth::user()->admin())
-                                        <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrarcorral"><spam  class="fa fa-tags" aria-hidden="true"></spam></a>
+                                            <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrarcorral"><spam  class="fa fa-tags" aria-hidden="true"></spam>&nbsp; &nbsp;Registar <b>Corral</b> </a>
                                         @endif()
                                     </div><!-- /.box-header -->
                                     <table id="corrales" class="table table-bordered table">
@@ -120,7 +188,6 @@
                                         @endforeach
                                         </tbody>
                                     </table>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -150,7 +217,7 @@
             var areaChart = new Chart(areaChartCanvas);
 
             var areaChartData = {
-                labels: ,
+                labels: {!! ($fechaevolucion) !!},
                 datasets: [
                     {
                         label: "Pesajes",
@@ -160,7 +227,8 @@
                         pointStrokeColor: "rgba(60,141,188,1)",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(60,141,188,1)",
-                        data:
+                        data: {!! ($evolucion) !!}
+
                     }
                 ]
             };
@@ -169,7 +237,7 @@
                 //Boolean - If we should show the scale at all
                 showScale: true,
                 //Boolean - Whether grid lines are shown across the chart
-                scaleShowGridLines: false,
+                scaleShowGridLines: true,
                 //String - Colour of the grid lines
                 scaleGridLineColor: "rgba(0,0,0,.05)",
                 //Number - Width of the grid lines
@@ -183,7 +251,7 @@
                 //Number - Tension of the bezier curve between points
                 bezierCurveTension: 0.3,
                 //Boolean - Whether to show a dot for each point
-                pointDot: false,
+                pointDot: true,
                 //Number - Radius of each point dot in pixels
                 pointDotRadius: 4,
                 //Number - Pixel width of point dot stroke
@@ -201,10 +269,12 @@
                 maintainAspectRatio: true,
                 //Boolean - whether to make the chart responsive to window resizing
                 responsive: true
+
             };
 
             //Create the line chart
             areaChart.Line(areaChartData, areaChartOptions);
+
 
 
 
@@ -273,4 +343,13 @@
             });
         });
     </script>
+@endsection
+        @section('ajaxjs')
+            <script>
+                $('#registrarcorral').on('shown.bs.modal', function () {
+                    $('.select-atributo').chosen({
+                        placeholder_text_multiple:'Seleccione atributos del corral'
+                    });
+                });
+            </script>
 @endsection

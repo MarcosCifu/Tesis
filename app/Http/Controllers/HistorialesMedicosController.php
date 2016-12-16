@@ -54,6 +54,9 @@ class HistorialesMedicosController extends Controller
     {
         $historial = new Historial_Medico($request->all());
         $historial->save();
+        $animal = Animal::find($historial->id_animales);
+        $animal->estado = 'Enfermo';
+        $animal->save();
         Flash::success('El diagnostico ' . $historial->enfermedad . ' ha sido creado con exito!');
         return redirect()->route('admin.historiales.index');
     }

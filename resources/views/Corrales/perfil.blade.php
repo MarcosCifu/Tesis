@@ -18,13 +18,18 @@
                     </div>
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Fecha de creación</b> <a class="pull-right">{{$corrales->created_at->format('d/m/Y')}}</a>
+                            <b>Fecha de creación</b><br>
+                            <a class="">{{$corrales->created_at->format('d/m/Y')}}</a>
                         </li>
                         <li class="list-group-item">
-                            <b>Cantidad de Animales</b> <a class="pull-right">{{ $corrales->cantidad_animales or 0 }}</a>
+                            <b>Cantidad de Animales</b><br>
+                            <span class="btn btn-success">{{ $corrales->cantidad_animales or 0 }}</span>
                         </li>
                         <li class="list-group-item">
-                            <b>Tipo de Animales</b> <a class="pull-right"></a>
+                            <b>Tipo de Animales</b> <a class="pull-right"></a></br>
+                            @foreach($tipoanimales as $tipo)
+                                <span class="btn btn-primary"> {{$tipo}} </span>
+                            @endforeach
                         </li>
                         <li class="list-group-item">
                             <b>Estado</b> <a class="pull-right"></a>
@@ -35,9 +40,11 @@
                                 <span class="btn btn-primary"> {{$atributo->nombre}} </span>
                             @endforeach
                         </li>
+                        @if(Auth::user()->admin())
                         <li class="list-group-item">
                             <a href="{{ route('admin.estadisticascorrales', $corrales->id)}}"><span  class="btn btn-primary">Actualizar Estadisticas</span></a>
                         </li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -47,7 +54,7 @@
                 <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
                     <div class="small-box bg-green">
                         <div class="inner">
-                            <h3>{{$pesajepromedio}}<sup style="font-size: 20px">KG</sup></h3>
+                            <h3>{{round($pesajepromedio,1)}}<sup style="font-size: 20px">KG</sup></h3>
                             <p>Pesaje Promedio</p>
                         </div>
                         <div class="icon">
@@ -61,7 +68,7 @@
                 <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
                     <div class="small-box bg-yellow">
                         <div class="inner">
-                            <h3>{{$pesajeminimo}}</h3>
+                            <h3>{{$pesajeminimo or 0}}<sup style="font-size: 20px">KG</sup></h3>
                             <p>Pesaje Minimo</p>
                         </div>
                         <div class="icon">
@@ -75,7 +82,7 @@
                 <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
                     <div class="small-box bg-red">
                         <div class="inner">
-                            <h3>{{$pesajemaximo}}</h3>
+                            <h3>{{$pesajemaximo or 0}}<sup style="font-size: 20px">KG</sup></h3>
                             <p>Pesaje Maximo</p>
                         </div>
                         <div class="icon">
@@ -96,13 +103,13 @@
                 <div class="tab-pane fade in active" id="resumen">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="box box-primary">
+
                                 <div class="box-header">
                                     <h3>Resumen <b>Evolutivo</b></h3>
                                 </div>
                                 <div class="box-body">
-                                    <div class="col-md-6">
-                                        <div class="box">
+                                    <div class="col-md-12">
+
                                             <div class="box-header with-border">
                                                 <h3 class="box-title">Evolución</h3>
                                             </div>
@@ -111,10 +118,10 @@
                                                     <canvas id="areaChart" style="height:250px"></canvas>
                                                 </div>
                                             </div>
-                                        </div>
+
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="box">
+                                    <div class="col-md-12">
+
                                             <div class="box-header with-border">
                                                 <h3 class="box-title">Beneficios</h3>
                                             </div>
@@ -123,72 +130,70 @@
                                                     <canvas id="barChart" style="height:230px"></canvas>
                                                 </div>
                                             </div>
-                                        </div>
+
                                     </div>
                                 </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="animales">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="box box-primary">
                                 <div class="box-header">
                                     <h3>Listado de <b>Animales</b></h3>
                                     @if(Auth::user()->admin())
                                     <div>
-                                        <a href="{{route('admin.corrales.animalcorral', $corrales->id)}}" class="btn btn-success"><spam class="fa fa-paw"></spam> Registar <b>Animal</b></a>
+                                        <a href="{{route('admin.corrales.animalcorral', $corrales->id)}}" class="btn btn-success"><spam class="fa fa-paw"></spam>&nbsp; &nbsp; Registar <b>Animal</b></a>
                                     </div>
                                     @endif()
                                 </div>
-                                <table id="animal" class="table table-bordered table">
-                                    <thead>
-                                    <tr>
-                                        <th>DIIO</th>
-                                        <th>Tipo</th>
-                                        <th>Estado</th>
-                                        <th>Ingreso</th>
-                                        @if(Auth::user()->admin())
-                                        <th>Acción</th>
-                                        @endif()
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($corrales->animals as $animales)
+                                <div class="box-body">
+                                    <table id="animal" class="table table-bordered table">
+                                        <thead>
                                         <tr>
-                                            <td><a href="{{ route('admin.animales.perfil', $animales->id) }}">{{$animales->DIIO}}</a></td>
-                                            <td>{{$animales->tipo}}</td>
-                                            <td>
-                                                @if($animales->estado == "Vivo")
-                                                    <span class="label label-success">{{$animales->estado}}</span>
-                                                @else
-                                                    @if($animales->estado == "Muerto")
-                                                        <span class="label label-danger">{{$animales->estado}}</span>
-                                                    @else
-                                                        <span class="label label-warning">{{$animales->estado}}</span>
-                                                    @endif
-                                                @endif
-                                            </td>
-                                            <td>{{$animales->created_at->format('m/Y')}}</td>
+                                            <th>DIIO</th>
+                                            <th>Tipo</th>
+                                            <th>Estado</th>
+                                            <th>Ingreso</th>
                                             @if(Auth::user()->admin())
-                                            <td>
-                                                <a href="{{ route('admin.animales.edit', $animales->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
-                                                <a href="{{ route('admin.animales.destroy', $animales->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este pesaje?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
-                                            </td>
+                                            <th>Acción</th>
                                             @endif()
                                         </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($corrales->animals as $animales)
+                                                <tr>
+                                                    <td><a href="{{ route('admin.animales.perfil', $animales->id) }}">{{$animales->DIIO}}</a></td>
+                                                    <td>{{$animales->tipo}}</td>
+                                                    <td>
+                                                        @if($animales->estado == "Vivo")
+                                                            <span class="label label-success">{{$animales->estado}}</span>
+                                                        @else
+                                                            @if($animales->estado == "Muerto")
+                                                                <span class="label label-danger">{{$animales->estado}}</span>
+                                                            @else
+                                                                <span class="label label-warning">{{$animales->estado}}</span>
+                                                            @endif
+                                                        @endif
+                                                    </td>
+                                                    <td>{{$animales->created_at->format('m/Y')}}</td>
+                                                    @if(Auth::user()->admin())
+                                                    <td>
+                                                        <a href="{{ route('admin.animales.edit', $animales->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
+                                                        <a href="{{ route('admin.animales.destroy', $animales->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este pesaje?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
+                                                    </td>
+                                                    @endif()
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                     </div>
                 </div>
             </div>
     </div>
 @endsection
-
             @section('chartjs')
                 <script>
                     $(function () {
@@ -258,7 +263,7 @@
                             //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
                             maintainAspectRatio: true,
                             //Boolean - whether to make the chart responsive to window resizing
-                            responsive: true,
+                            responsive: true
 
                         };
 
@@ -273,8 +278,7 @@
                         var barChartCanvas = $("#barChart").get(0).getContext("2d");
                         var barChart = new Chart(barChartCanvas);
                         var barChartData = {
-                            labels: {!! $fechaevolucion !!},
-
+                            labels:{!! $fechaganancia !!},
                             datasets: [
                                 {
                                     label: "Pesajes",
@@ -284,7 +288,7 @@
                                     pointStrokeColor: "rgba(60,141,188,1)",
                                     pointHighlightFill: "#fff",
                                     pointHighlightStroke: "rgba(60,141,188,1)",
-                                    data:{{$evolucionpesos}}
+                                    data:{{$gananciapesos}}
                                 }
                             ]
                         };

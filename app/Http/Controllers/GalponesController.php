@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Galpon;
@@ -110,10 +111,41 @@ class GalponesController extends Controller
     public function perfil($id)
     {
         $galpon = Galpon::find($id);
-        $corrales = Corral::where('id_galpon','=', $galpon->id);
+        $corrales = $galpon->corrales;
+        $estadisticas = $galpon->estadisticasgalpones;
+        $cantidadcorrales = $corrales->count('id');
         $animales = $corrales->sum('cantidad_animales');
         $atributos = Atributo::orderBy('nombre', 'ASC')->lists('nombre', 'id');
-        return view ('Galpones.perfil')->with('atributos', $atributos)->with('galpon',$galpon)->with('corrales',$corrales)->with('animales',$animales);
+        $promedio = 0;
+        $pesajesmaximos = new Collection();
+        $pesajesminimos = new Collection();
+        foreach ($corrales as $corral){
+            $ultimaestadistica = $corral->estadisticascorrales->take(-1);
+            foreach ($ultimaestadistica as $ultima){
+                $promedio += $ultima->pesaje_promedio;
+                $pesajesmaximos->push($ultima->pesaje_maximo);
+                $pesajesminimos->push($ultima->pesaje_minimo);
+            }
+        }
+        if ($cantidadcorrales > 0){
+            $promedio = $promedio/$cantidadcorrales;
+        }
+        $maximo = $pesajesmaximos->max();
+        $minimo = $pesajesminimos->min();
+        $evolucion = $estadisticas->lists('pesaje_promedio')->take(-12)->values();
+        $fechaevolucion = $estadisticas->lists('fecha')->take(-12)->values();
+
+
+        return view ('Galpones.perfil')
+            ->with('atributos', $atributos)
+            ->with('galpon',$galpon)
+            ->with('corrales',$corrales)
+            ->with('promedio',$promedio)
+            ->with('maximo',$maximo)
+            ->with('minimo',$minimo)
+            ->with('evolucion',$evolucion)
+            ->with('fechaevolucion',$fechaevolucion)
+            ->with('animales',$animales);
     }
     public function corralcreate($id)
     {

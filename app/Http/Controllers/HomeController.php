@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Animal;
 use App\Http\Requests;
@@ -28,13 +28,21 @@ class HomeController extends Controller
 
         });
         $galpones = Galpon::all();
-        $fechaactual = Carbon::now()->month;
+        $cantidadgalpones = $galpones->count();
+        $numerogalpones = $galpones->lists('numero')->values();
+        $promediogalpones = new Collection();
+        $primerpromediogalpones = new Collection();
+        foreach ($galpones as $galpon){
+            $ultimaestadistica = $galpon->estadisticasgalpones->take(-1);
+            $primeraestadistica = $galpon->estadisticasgalpones->take(1);
+            foreach ($primeraestadistica as $primera){
+                $primerpromediogalpones->push($primera->pesaje_promedio);
+            }
+            foreach ($ultimaestadistica as $ultima){
+                $promediogalpones->push($ultima->pesaje_promedio);
+            }
+        }
         $pesos = Peso::all();
-        $corral = Corral::all();
-        $cenfermoscorral = $corral->map(function ($corral){
-            return $corral->estadoanimales();
-        });
-
         $cantidad = collect($animal)->count('id');
         $promedio = collect($pesos)->avg('pesaje');
         $vivos = $animal->where("estado",'Vivo')->count();
@@ -55,6 +63,10 @@ class HomeController extends Controller
             ->with('minimo',$minimo)
             ->with('maximo',$maximo)
             ->with('pesosnoapto', $pesosnoapto)
+            ->with('cantidadgalpones',$cantidadgalpones)
+            ->with('numerogalpones',$numerogalpones)
+            ->with('promediogalpones',$promediogalpones)
+            ->with('primerpromediogalpones',$primerpromediogalpones)
             ->with('galpones',$galpones);
     }
 

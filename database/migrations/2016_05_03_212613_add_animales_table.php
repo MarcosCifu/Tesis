@@ -20,6 +20,7 @@ class AddAnimalesTable extends Migration
             $table->boolean('venta');
             $table->integer('pesaje_inicial');
             $table->integer('pesaje_actual');
+            $table->integer('gananciaPeso_actual');
             $table->integer('id_corral')->unsigned();
             $table->foreign('id_corral')->references('id')->on('corrales')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

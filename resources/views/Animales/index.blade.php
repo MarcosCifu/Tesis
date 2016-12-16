@@ -22,7 +22,6 @@
             <h1>Listado de <b>Animales</b></h1>
         </div>
         <div class="panel-body">
-            <div class="box box-primary">
                 <div class="box-header">
                     @if(Auth::user()->admin())
                     <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
@@ -34,7 +33,6 @@
                     <table id="animales" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>Numero de Guia</th>
                                 <th>DIIO</th>
                                 <th>Tipo</th>
                                 <th>Galpón</th>
@@ -49,9 +47,8 @@
                         </thead>
                         <tbody>
                         @foreach($animales as $animal)
-                            @foreach($animal->users as $origen)
+
                             <tr>
-                                <td>{{$origen->pivot->numero_Guia or "Desconocido"}}</td>
                                 <td><a href="{{ route('admin.animales.perfil', $animal->id) }}">{{$animal->DIIO}}</a></td>
                                 <td>{{$animal->tipo}}</td>
                                 <td>Galpón {{$animal->corral->galpon->numero}}</td>
@@ -76,12 +73,11 @@
                                 </td>
                                 @endif()
                             </tr>
-                        @endforeach
+
                         @endforeach
                         </tbody>
                     </table>
                 </div><!-- /.box-body -->
-            </div><!-- /.box -->
         </div>
     </div>
 @endsection

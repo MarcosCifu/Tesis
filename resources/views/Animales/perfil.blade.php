@@ -16,7 +16,7 @@
                     <ul class="list-group list-group-unbordered">
                         @foreach($animal->users as $origen)
                             <li class="list-group-item">
-                                <b>Procedencia</b> <a class="pull-right">{{$origen->pivot->procedencia or 'Se Desconoce'}}</a>
+                                <b>Procedencia</b> <a class="pull-right">{{$origen->pivot->procedencia or "Se Desconoce"}}</a>
                             </li>
                             <li class="list-group-item">
                                 <b>Número de Guía</b> <a class="pull-right">{{($origen->pivot->numero_Guia)}}</a>
@@ -32,6 +32,10 @@
                             <b>Ubicación</b><br>
                             <a href="{{ route('admin.corrales.perfil', $animal->id_corral) }}" class="btn btn-success">Corral {{$animal->corral->numero}}</a>
                             <a href="{{ route('admin.galpones.perfil', $animal->corral->id_galpon) }}" class="btn btn-success">Galpón {{$animal->corral->galpon->numero}}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Exportar Información</b><br>
+                                <a href="{{ route('animalPDF', $animal->id) }}" class="btn btn-primary"><spam  class="glyphicon glyphicon-eye-open" aria-hidden="true"></spam>&nbsp; &nbsp;  Ver</a>
                         </li>
                     </ul>
                 </div>
@@ -88,13 +92,11 @@
                     <div role="tabpanel" class="tab-pane fade in active" id="resumen">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="box box-primary">
                                     <div class="box-header">
                                         <h3>Resumen <b>Evolutivo</b></h3>
                                     </div>
                                     <div class="box-body">
                                         <div class="col-md-6">
-                                            <div class="box">
                                                 <div class="box-header with-border">
                                                     <h3 class="box-title">Evolución</h3>
                                                 </div>
@@ -103,11 +105,8 @@
                                                         <canvas id="areaChart" style="height:250px"></canvas>
                                                     </div>
                                                 </div><!-- /.box-body -->
-                                            </div><!-- /.box -->
                                         </div>
                                         <div class="col-md-6">
-                                                    <!-- LINE CHART -->
-                                            <div class="box">
                                                 <div class="box-header with-border">
                                                     <h3 class="box-title">Distribución</h3>
                                                 </div>
@@ -116,93 +115,90 @@
                                                         <canvas id="barChart" style="height:250px"></canvas>
                                                     </div>
                                                 </div><!-- /.box-body -->
-                                            </div><!-- /.box -->
-                                            </div>
                                         </div>
                                     </div>
-                                </div><!-- /.col (RIGHT) -->
                             </div>
                         </div>
+                    </div>
                         <div role="tabpanel" class="tab-pane fade" id="pesajes">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="box box-primary">
                                         <div class="box-header">
                                             <h3>Listado de <b>Pesajes</b></h3>
                                             @if(Auth::user()->admin())
                                             <div>
-                                                <a href="{{route('admin.animales.pesoperfil', $animal->id)}}" class="btn btn-success"><spam class="glyphicon glyphicon-scale"></spam> Registar <b>Pesaje</b></a>
+                                                <a href="{{route('admin.animales.pesoperfil', $animal->id)}}" class="btn btn-success"><spam class="glyphicon glyphicon-scale"></spam> &nbsp; &nbsp;Registar <b>Pesaje</b></a>
                                             </div>
                                             @endif()
                                         </div><!-- /.box-header -->
-                                        <table id="pesos" class="table table-bordered table">
-                                            <thead>
-                                            <tr>
-                                                <th>Pesaje</th>
-                                                <th>Fecha</th>
-                                                @if(Auth::user()->admin())
-                                                <th>Acción</th>
-                                                @endif()
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($animal->pesos as $peso)
+                                        <div class="box-body">
+                                            <table id="pesos" class="table table-bordered table">
+                                                <thead>
                                                 <tr>
-                                                    <td>{{$peso->pesaje}}</td>
-                                                    <td>{{$peso->created_at->format('m/Y')}}</td>
+                                                    <th>Pesaje</th>
+                                                    <th>Fecha</th>
                                                     @if(Auth::user()->admin())
-                                                    <td>
-                                                        <a href="{{ route('admin.pesos.edit', $peso->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
-                                                        <a href="{{ route('admin.pesos.destroy', $peso->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este pesaje?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
-                                                    </td>
+                                                    <th>Acción</th>
                                                     @endif()
                                                 </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($animal->pesos as $peso)
+                                                    <tr>
+                                                        <td>{{$peso->pesaje}}</td>
+                                                        <td>{{$peso->created_at->format('m/Y')}}</td>
+                                                        @if(Auth::user()->admin())
+                                                        <td>
+                                                            <a href="{{ route('admin.pesos.edit', $peso->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
+                                                            <a href="{{ route('admin.pesos.destroy', $peso->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este pesaje?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
+                                                        </td>
+                                                        @endif()
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
                                 </div>
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="historialmedico">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="box box-primary">
                                         <div class="box-header">
                                             <h3>Listado de <b>Diagnostcos Medicos</b></h3>
                                             @if(Auth::user()->admin())
                                             <div>
-                                                <a href="{{route('admin.animales.historialperfil', $animal->id)}}" class="btn btn-success"><i class="fa fa-stethoscope"></i> Registar <b>Diagnostico</b></a>
+                                                <a href="{{route('admin.animales.historialperfil', $animal->id)}}" class="btn btn-success"><i class="fa fa-stethoscope"></i>&nbsp; &nbsp; Registar <b>Diagnostico</b></a>
                                             </div>
                                             @endif()
                                         </div><!-- /.box-header -->
-
-                                        <table id="historial" class="table table-bordered table">
-                                            <thead>
-                                            <tr>
-                                                <th>Diagnostico</th>
-                                                <th>Fecha</th>
-                                                @if(Auth::user()->admin())
-                                                <th>Acción</th>
-                                                @endif()
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($animal->historialesmedicos as $historial)
+                                        <div class="box-body">
+                                            <table id="historial" class="table table-bordered table">
+                                                <thead>
                                                 <tr>
-                                                    <td>{{$historial->enfermedad}}</td>
-                                                    <td>{{$historial->created_at->format('m/Y')}}</td>
+                                                    <th>Diagnostico</th>
+                                                    <th>Fecha</th>
                                                     @if(Auth::user()->admin())
-                                                    <td>
-                                                        <a href="{{ route('admin.historiales.edit', $historial->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
-                                                        <a href="{{ route('admin.historiales.destroy', $historial->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este pesaje?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
-                                                    </td>
+                                                    <th>Acción</th>
                                                     @endif()
                                                 </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                </div>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($animal->historialesmedicos as $historial)
+                                                    <tr>
+                                                        <td>{{$historial->enfermedad}}</td>
+                                                        <td>{{$historial->created_at->format('m/Y')}}</td>
+                                                        @if(Auth::user()->admin())
+                                                        <td>
+                                                            <a href="{{ route('admin.historiales.edit', $historial->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
+                                                            <a href="{{ route('admin.historiales.destroy', $historial->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este pesaje?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
+                                                        </td>
+                                                        @endif()
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
                             </div>
                         </div>
                     </div>

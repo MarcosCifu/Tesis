@@ -18,9 +18,12 @@ class AddEstadisticasCorralesTable extends Migration
             $table->integer('pesaje_promedio');
             $table->integer('pesaje_maximo');
             $table->integer('pesaje_minimo');
+            $table->integer('pesaje_total');
             $table->string('tipoMayorGanancia');
             $table->string('tipoMayorEnfermedad');
-            $table->integer('ganacia_dinero');
+            $table->integer('ganancia_dinero');
+            $table->integer('ganancia_peso');
+            $table->date('fecha');
             $table->integer('id_corral')->unsigned();
             $table->foreign('id_corral')->references('id')->on('corrales')->onUpdate('cascade')->onDelete('no action');
             $table->timestamps();

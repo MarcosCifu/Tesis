@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Corral extends Model
 {
     protected $table = "corrales";
-    protected $fillable = ['id','numero','cantidad_alimento','id_galpon'];
+    protected $fillable = ['id','numero','cantidad_alimento','id_galpon','pesaje_promedio','tamaño'];
     public function animals()
     {
         return $this->hasMany('App\Animal','id_corral');

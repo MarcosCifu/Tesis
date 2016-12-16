@@ -20,7 +20,6 @@
             <h1>Listado de <b>Pesajes</b></h1>
         </div>
         <div class="panel-body">
-            <div class="box box-primary">
                 <div class="box-header">
                     @if(Auth::user()->admin())
                         <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
@@ -56,7 +55,6 @@
                         </tbody>
                     </table>
                 </div><!-- /.box-body -->
-            </div><!-- /.box -->
         </div>
     </div>
 @endsection

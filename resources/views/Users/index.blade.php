@@ -20,7 +20,6 @@
             <h1>Listado de <b>Usuarios</b></h1>
         </div>
         <div class="panel-body">
-            <div class="box box-primary">
                 <div class="box-header">
                     <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
                         <i class="fa fa-folder-open-o"></i> Registar nuevo Usuario
@@ -59,7 +58,6 @@
                     </tbody>
                     </table>
                 </div><!-- /.box-body -->
-            </div><!-- /.box -->
         </div>
     </div>
 @endsection

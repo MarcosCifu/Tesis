@@ -20,7 +20,6 @@
             <h1>Listado de <b>Diagnósticos Medicos</b></h1>
         </div>
         <div class="panel-body">
-            <div class="box box-primary">
                 <div class="box-header">
                     @if(Auth::user()->admin())
                         <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
@@ -32,9 +31,12 @@
                         <thead>
                             <tr>
                                 <th>Animal</th>
-                                <th>Diagnostico</th>
-                                <th>Fecha</th>
                                 <th>Estado</th>
+                                <th>Diagnostico</th>
+                                <th>Tratamiento</th>
+                                <th>Estado Tratamiento</th>
+                                <th>Fecha</th>
+
                                 @if(Auth::user()->admin())
                                 <th>Acción</th>
                                 @endif()
@@ -44,8 +46,6 @@
                         @foreach($historiales as $historial)
                             <tr>
                                 <td><a href="{{ route('admin.animales.perfil', $historial->animal->id) }}">{{$historial->animal->DIIO}}</a></td>
-                                <td>{{$historial->enfermedad}}</td>
-                                <td>{{$historial->created_at->diffForHumans()}}</td>
                                 <td>    @if($historial->animal->estado == "vivo")
                                         <span class="label label-success">{{$historial->animal->estado}}</span>
                                     @else
@@ -56,6 +56,11 @@
                                         @endif
                                     @endif
                                 </td>
+                                <td>{{$historial->enfermedad}}</td>
+                                <td>{{$historial->tratamiento or 'Sin Tratamiento'}}</td>
+                                <td>{{$historial->estado_tratamiento}}</td>
+                                <td>{{$historial->created_at->format('Y-m-d')}}</td>
+
                                 @if(Auth::user()->admin())
                                 <td>
                                     <a href="{{ route('admin.historiales.edit', $historial->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
@@ -67,7 +72,6 @@
                         </tbody>
                     </table>
                 </div><!-- /.box-body -->
-            </div><!-- /.box -->
         </div>
     </div>
 @endsection

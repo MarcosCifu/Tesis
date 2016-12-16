@@ -3,10 +3,12 @@
     @include('errors')
     <div id="form">
         <div class="row">
-            <div class="col-lg-5">
-                <div class="box box-primary animated pulse slow go">
-                    <div class="box-body">
-                        <h3>Información del <b>Corral</b></h3>
+            <div class="col-lg-6">
+                <div class="panel panel-default animated pulse slow go">
+                    <div class="panel-heading">
+                        <h1>Información del <b>Corral</b></h1>
+                    </div>
+                    <div class="panel-body">
                         <section>
                             {{ Form::model($corral, ['route' => ['admin.corrales.update', $corral->id], 'method' => 'PUT']) }}
                                 <div class="form-group">
@@ -22,8 +24,8 @@
                                     {!! Form::select('atributos[]', $atributos, $losatributos, ['class' => 'form-control select-atributo' ,'multiple', 'required' ]) !!}
                                 </div>
                                 <div class="form-group">
-                                    {!! Form::label('cantidad_alimento' ,'Cantidad de alimento') !!}
-                                    {!! Form::text('cantidad_alimento', null, ['class' => 'form-control', 'placeholder' => 'Cantidad de alimento Mensual' , 'required' ]) !!}
+                                    {!! Form::label('tamaño' ,'Tamaño') !!}
+                                    {!! Form::text('tamaño', $tamaño, ['class' => 'form-control', 'placeholder' => 'Tamaño en m2' , 'required' ]) !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::submit('Actualizar' ,['class' => 'btn btn-primary']) !!}

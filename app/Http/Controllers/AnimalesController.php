@@ -4,16 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Animal;
-use App\User;
-use App\Historial_Medico;
 use App\Peso;
 use App\Corral;
 use App\Galpon;
-use App\Http\Requests;
 use App\Http\Requests\AnimalRequest;
 use Illuminate\Support\Facades\Auth;
 use Laracasts\Flash\Flash;
 use Carbon\Carbon;
+use PDF;
 
 
 
@@ -191,6 +189,13 @@ class AnimalesController extends Controller
         return view ('Animales.historialperfil')
             ->with('animal', $animal)
             ->with('fecha', $fecha);
+    }
+    public function crearPDF($id)
+    {
+        $animal = Animal::find($id);
+        $pdf = PDF::loadview('Animales.pdf',['animal' => $animal]);
+        return $pdf->stream('animal.pdf');
+
     }
 
 

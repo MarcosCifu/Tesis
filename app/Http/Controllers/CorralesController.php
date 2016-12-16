@@ -92,11 +92,13 @@ class CorralesController extends Controller
         $atributos = Atributo::orderBy('nombre', 'ASC')->lists('nombre', 'id');
         $galpones = Galpon::orderBy('numero', 'ASC')->lists('numero', 'id');
         $losatributos = $corral->atributos->lists('id')->ToArray();
+        $tamaño = $corral->tamaño;
 
 
         return view('Corrales.edit')
             ->with('corral',$corral)
             ->with('galpones', $galpones)
+            ->with('tamaño', $tamaño)
             ->with('atributos',$atributos)
             ->with('losatributos',$losatributos);
     }
@@ -112,6 +114,7 @@ class CorralesController extends Controller
     {
         $corral = Corral::find($id);
         $corral->fill($request->all());
+        $corral->tamaño = $request->tamaño;
         $corral->save();
         $corral->atributos()->sync($request->atributos);
         Flash::warning('El corral ' . $corral->numero . ' ha sido editado con exito!');
@@ -138,16 +141,24 @@ class CorralesController extends Controller
     public function perfil($id)
     {
         $corrales = Corral::find($id);
-        $estadisticas = EstadisticaCorral::all();
+        $estadisticas = $corrales->estadisticascorrales;
+        $ultimaestadistica = $estadisticas->last();
         $atributos = $corrales->atributos;
         $animales = $corrales->animals;
-        $pesajepromedio = $animales->avg('pesaje_actual');
-        $pesajemaximo = $animales->max('pesaje_actual');
-        $pesajeminimo = $animales->min('pesaje_actual');
-        $evolucionpesos = $estadisticas->lists('pesaje_total');
-        $fechaevolucion = $estadisticas->lists('fecha');
+        $tipoanimales = $animales->lists('tipo')->unique();
+        $pesajepromedio=0;
+        $pesajemaximo=0;
+        $pesajeminimo=0;
+        if ($ultimaestadistica != null){
+            $pesajepromedio = $ultimaestadistica->pesaje_promedio;
+            $pesajemaximo = $ultimaestadistica->pesaje_maximo;
+            $pesajeminimo = $ultimaestadistica->pesaje_minimo;
+        }
 
-
+        $evolucionpesos = $estadisticas->lists('pesaje_total')->take(-12)->values();
+        $fechaevolucion = $estadisticas->lists('fecha')->take(-12)->values();
+        $gananciapesos = $estadisticas->lists('ganancia_peso')->take(-12)->values();
+        $fechaganancia = $estadisticas->lists('fecha')->take(-12)->values();
 
         return view ('Corrales.perfil')->with('corrales',$corrales)
             ->with('pesajepromedio',$pesajepromedio)
@@ -155,6 +166,9 @@ class CorralesController extends Controller
             ->with('pesajeminimo',$pesajeminimo)
             ->with('evolucionpesos',$evolucionpesos)
             ->with('fechaevolucion', $fechaevolucion)
+            ->with('fechaganancia', $fechaganancia)
+            ->with('gananciapesos', $gananciapesos)
+            ->with('tipoanimales', $tipoanimales)
             ->with('atributos',$atributos);
     }
     public function animalcorral($id)

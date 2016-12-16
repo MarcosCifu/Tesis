@@ -8,6 +8,7 @@ use App\Peso;
 use App\Corral;
 use App\Galpon;
 use Carbon\Carbon;
+use PDF;
 
 use App\Http\Requests;
 
@@ -15,9 +16,16 @@ class ReportesController extends Controller
 {
     public function index()
     {
-        $galpones = Galpon::orderBy('numero','ASC')->lists('id');
-        $corrales = Corral::orderBy('numero','ASC')->lists('numero','id');
-        $fecha = Carbon::now();
-        return view ('reportes')->with('corrales', $corrales)->with('fecha',$fecha)->with('galpones',$galpones);
+        return view("pdf.listado_reportes");
     }
+
+
+    public function crearPDF()
+    {
+        $pdf = PDF::loadview('Estadisticas.animal');
+        return $pdf->stream('animal.pdf');
+
+
+    }
+
 }

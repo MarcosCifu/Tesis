@@ -44,6 +44,10 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'AnimalesController@perfil',
             'as' => 'admin.animales.perfil'
         ]);
+        Route::get('{id}/animalPDF', [
+            'uses' => 'AnimalesController@crearPDF',
+            'as' => 'animalPDF'
+        ]);
         //rutas materiales
         Route::resource('materiales','MaterialesController');
         //rutas precios
@@ -54,6 +58,11 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('pesos','PesosController');
         //rutas atributos
         Route::resource('atributos','AtributosController');
+        //rutas admin pdf
+        Route::get('/crearPDF', [
+            'uses' => 'ReportesController@crearPDF',
+            'as' => 'crearPDF'
+        ]);
 
         //Rutas de administrador
         Route::group(['middleware' => 'admin'],function (){
@@ -89,6 +98,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('estadisticascorrales/{id}', [
                 'uses' => 'EstadisticasCorralesController@estadisticascorrales',
                 'as' => 'admin.estadisticascorrales']);
+            //rutas admin estaditicasGalpones
+            Route::get('estadisticasgalpones/{id}', [
+                'uses' => 'EstadisticasGalponesController@estadisticasgalpones',
+                'as' => 'admin.estadisticasgalpones']);
 
             //rutas admin galpones
             Route::get('galpones/create', [
@@ -183,6 +196,7 @@ Route::group(['middleware' => ['web']], function () {
                 'uses' => 'AtributosController@destroy',
                 'as' => 'admin.atributos.destroy'
             ]);
+
         });
 
     });
