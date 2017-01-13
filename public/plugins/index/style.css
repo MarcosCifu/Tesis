@@ -1,0 +1,429 @@
+/*
+Theme Name: Ancali Theme
+Description: Ancali Theme
+Author: Angelo Terrile
+Version: 1.0
+*/
+/*=================================================================
+#tipografias
+==================================================================*/
+@font-face {
+	font-family: 'KarlaBold';
+	src: url('fonts/Karla-Bold.eot');
+	src: local('☺'), url('fonts/Karla-Bold.woff') format('woff'), url('fonts/Karla-Bold.ttf') format('truetype'), url('fonts/Karla-Bold.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'KarlaRegular';
+	src: url('fonts/Karla-Regular.eot');
+	src: local('☺'), url('fonts/Karla-Regular.woff') format('woff'), url('fonts/Karla-Regular.ttf') format('truetype'), url('fonts/Karla-Regular.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'SourceSansProBlack';
+	src: url('fonts/SourceSansPro-Black.eot');
+	src: local('☺'), url('fonts/SourceSansPro-Black.woff') format('woff'), url('fonts/SourceSansPro-Black.ttf') format('truetype'), url('fonts/SourceSansPro-Black.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'SourceSansProBold';
+	src: url('fonts/SourceSansPro-Bold.eot');
+	src: local('☺'), url('fonts/SourceSansPro-Bold.woff') format('woff'), url('fonts/SourceSansPro-Bold.ttf') format('truetype'), url('fonts/SourceSansPro-Bold.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'SourceSansProLight';
+	src: url('fonts/SourceSansPro-Light.eot');
+	src: local('☺'), url('fonts/SourceSansPro-Light.woff') format('woff'), url('fonts/SourceSansPro-Light.ttf') format('truetype'), url('fonts/SourceSansPro-Light.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'SourceSansProRegular';
+	src: url('fonts/SourceSansPro-Regular.eot');
+	src: local('☺'), url('fonts/SourceSansPro-Regular.woff') format('woff'), url('fonts/SourceSansPro-Regular.ttf') format('truetype'), url('fonts/SourceSansPro-Regular.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'SourceSansProSemibold';
+	src: url('fonts/SourceSansPro-Semibold.eot');
+	src: local('☺'), url('fonts/SourceSansPro-Semibold.woff') format('woff'), url('fonts/SourceSansPro-Semibold.ttf') format('truetype'), url('fonts/SourceSansPro-Semibold.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+body{
+    font-family: 'SourceSansProRegular', sans-serif;
+    font-size: 13px;
+    background: #cdc0b0;
+}
+.wrap{
+    width: 990px;
+    margin: 0 auto;
+    position: relative;
+}
+/*=================================================================
+#header
+==================================================================*/
+#header{
+    height: 212px;
+    position: relative;
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+body.home #header{
+    height: 0;
+}
+#header #top{
+    width: 990px;
+    height: 214px;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    z-index: 9;        
+}
+#header #top h1{
+    width: 162px;
+    height: 159px;
+    float: left;
+}
+#header #top h1 a{
+    display: block;
+    width: 162px;
+    height: 159px;
+    background: url("images/logo.jpg");
+    text-indent: -9999px;
+}
+#header #top #nav{
+    float: left;
+    margin: 0 0 0 20px
+}
+#header #top #nav li{
+    float: left;
+}
+#header #top #nav li a{
+    display: block;
+    width: 132px;
+    height: 31px;
+    font-family: 'KarlaRegular';
+    font-size: 13px;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    padding-top: 173px;
+    margin: 0 3px  0 0 ;
+}
+#header #top #nav li.empresa a{ background: url("images/bg_menu_empresa.png"); margin-left: 66px; }
+#header #top #nav li.procesos a{ background: url("images/bg_menu_procesos.png"); }
+#header #top #nav li.tecnologia a{ background: url("images/bg_menu_tecnologia.png"); }
+#header #top #nav li.sustentabilidad a{ background: url("images/bg_menu_sustentabilidad.png"); margin-right: 66px; }
+#header #top #nav li.innvacion a{ background: url("images/bg_menu_innvacion.png"); }
+#header #top #nav li.innvacion{
+    display: none;
+}
+#header #top #nav li a:hover,
+#header #top #nav li.current-menu-item a{
+    background: #ff9736;
+}
+#header .topright{
+    width: 90px;
+    float: left;
+    margin: 0 0 0 3px;
+}
+#header .topright .link_home,
+#header .topright .lang{
+    display: block;
+    width: 80px;
+    height: 27px;
+    background: black;
+    text-align: center;
+    line-height: 27px;
+    margin: 0 0 5px 0;
+    font-family: 'KarlaRegular';
+    font-size: 12px;
+}
+#header .topright .lang{
+    display: none;
+}
+#header .topright .link_home{
+    text-transform: uppercase;
+    color: white;
+}
+#header .topright .link_home:hover{
+    background: #ff9736;    
+}
+#header .topright .lang a{
+    color: #808080;
+}
+#header .topright .lang a:hover{
+    color: #ff9736;
+}
+#header .topright .lang a.current{
+    color: white;
+}
+#header .topright .lang a.current:hover{
+    color: white;
+}
+/*=================================================================
+#main
+==================================================================*/
+#main{
+}
+.exposer .item{
+    width: 100%;
+    height: 686px;
+    position: relative;
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+.exposer .item{
+    width: 100%;
+    height: 686px;
+    position: absolute;
+}
+#franja{
+    height: 242px;
+    background: black;
+    position: absolute;
+    z-index: 9;
+    top: 408px;
+    left: 0;
+    width: 100%;
+}
+#franja li{
+    height: 242px;
+    width: 990px;
+}
+#franja li span{
+    display: table-cell;
+    vertical-align: middle;
+    color: #b1b1b1;
+    font-size: 38px;
+    font-family: 'SourceSansProLight';
+    text-align: center;
+    height: 242px;
+    width: 990px;
+}
+#franja li span strong{
+    font-family: 'SourceSansProBlack';
+}
+#content{
+    background: white;
+    padding: 50px 0 100px;
+}
+/*=================================================================
+* EMPRESA
+==================================================================*/
+body.page-id-4 #header{ background-image: url("images/arriba_empresa.jpg"); }
+body.page-id-4 table td,
+body.page-id-4 table th{
+    vertical-align: top;
+}
+body.page-id-4 table th p{
+    font-family: 'SourceSansProLight';
+    font-size: 25px;
+    color: black;
+    font-weight: lighter;
+    margin: 0 0 37px 0;
+}
+body.page-id-4 table th p strong{
+    color: #FF9736;
+    font-family: 'SourceSansProBlack';
+    margin: 0 0 1px 0;
+}
+body.page-id-4 table td p{
+    color: #808080;
+    margin: 0 0 24px 0;
+    line-height: 18px;
+    font-size: 14px;
+}
+body.page-id-4 table td strong{
+    font-family: 'SourceSansProBlack';
+    font-size: 19px;
+    display: block;
+}
+body.page-id-4 table td.small{
+    padding: 50px 0 0 0;
+}
+body.page-id-4 table td.small p{
+    font-size: 12px;    
+    line-height: 14px;
+}
+body.page-id-4 table td.small p strong{
+    color: #FF9736;
+    display: inline-block;
+    padding-right: 12px;
+    font-size: 12px;
+    text-align: left;
+    background: url("images/arrow.jpg") no-repeat right center;
+}
+/*=================================================================
+* PROCESOS
+==================================================================*/
+body.page-id-5 #header{ background-image: url("images/arriba_procesos.jpg"); }
+body.page-id-5 h2{
+    color: black;
+    font-size: 42px;
+    font-family: 'SourceSansProBlack';
+    text-transform: uppercase;
+    text-align: center;
+    margin: 0 0 17px 0;
+}
+body.page-id-5 h3{
+    color: black;
+    font-size: 25px;
+    font-family: 'SourceSansProLight';
+    text-align: center;
+    font-weight: lighter;
+    margin: 0 0 15px 0;
+}
+body.page-id-5 h4{
+    color: #FF9736;
+    font-size: 25px;
+    font-family: 'SourceSansProRegular';
+    text-align: left;
+    font-weight: normal;
+    margin: 40px 0 10px 0;
+}
+body.page-id-5 .ciclo2{
+    margin: 0 40px;
+}
+#faderCiclo2{
+    width: 228px;
+    height: 228px;
+    display: inline-block;
+    margin: 0 40px;
+}
+#faderCiclo5{
+    width: 490px;
+    height: 425px;
+    display: inline-block;
+    margin: 0 0 0 40px;
+}
+/*=================================================================
+* TECNOLOGIA
+==================================================================*/
+body.page-id-6 #header{ background-image: url("images/arriba_tecnologia.jpg"); }
+body.page-id-6 blockquote{
+    font-size: 20px;
+    font-family: 'SourceSansProLight';
+    font-weight: lighter;
+    color: #FF9736;
+    margin: 0 0 44px 0;
+    line-height: 23px;
+}
+body.page-id-6 h4{
+    font-size: 40px;
+    color: black;
+    font-family: 'KarlaBold';
+    display: ;
+    border-bottom: 9px solid black;
+    cursor: pointer;
+    padding: 15px 0;
+}
+body.page-id-6 h4:hover{
+    background: #ff9736;
+}
+body.page-id-6 h4 span{
+    display: inline-block;
+    background: url("images/bg_h4.png") no-repeat right center;
+    padding-right: 35px;
+    width: auto;
+}
+body.page-id-6 .informacion{
+    display: none;
+    padding: 60px 0;
+}
+body.page-id-6 table td{
+    padding: 0 25px 0 0;
+}
+body.page-id-6 table td p{
+    font-size: 15px;
+    color: #333;
+    margin: 15px 0;
+    line-height: 18px;
+}
+body.page-id-6 table td p strong{
+    font-family: SourceSansProBlack;
+    font-weight: normal;
+}
+body.page-id-6 table td ul{
+    font-size: 15px;
+    color: #333;
+    list-style-image: url("images/bullet.png");
+    line-height: 18px;
+    margin: 0 0 0 15px;
+}
+/*=================================================================
+* SUSTENTABILIDAD
+==================================================================*/
+body.page-id-7 #header{ background-image: url("images/arriba_sustentabilidad.jpg"); }
+body.page-id-7  h3{
+    font-family: 'SourceSansProLight';
+    font-weight: lighter;
+    font-size: 39px;
+    text-transform: uppercase;
+}
+body.page-id-7  h3 strong{
+    color: #FF9736;
+    font-family: 'SourceSansProBlack';
+    font-weight: normal;
+}
+body.page-id-7 p{
+    margin: 15px 0;
+    font-size: 13px;
+    color: #333;
+    line-height: 16px;
+}
+body.page-id-7 blockquote p{
+    font-size: 16px;
+    font-family: 'SourceSansProLight';
+    font-weight: lighter;
+    color: #FF9736;
+    line-height: 19px;
+    margin: 0;
+}
+body.page-id-7 table td{
+    padding: 0 46px 0 0;
+}
+body.page-id-7 table.bordes{
+    border-top: 6px solid #E4E4E4;
+}
+body.page-id-7 table.bordes td{
+    padding: 12px 46px 12px 0;
+    font-size: 20px;
+    color: #666;
+    font-family: 'SourceSansProLight';
+    font-weight: lighter;
+}
+body.page-id-7 table.bordes td strong{
+    font-family: 'SourceSansProBlack';   
+}
+/*=================================================================
+#footer
+==================================================================*/
+#footer{
+    height: 42px;
+    line-height: 42px;
+    background: #F0F0F0;
+    text-align: center;
+    font-family: 'KarlaRegular';
+    font-size: 12px;
+    width: 100%;
+    color: #666;
+}
+#footer strong{
+    font-family: 'KarlaBold';
+    font-weight: normal;
+}
+body.home #footer{
+    z-index: 99; 
+    position: absolute; 
+    top: 650px; 
+    background: transparent;
+    color: black;
+}

@@ -9,6 +9,7 @@ use App\Peso;
 use App\Corral;
 use App\Galpon;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -19,6 +20,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         $animal = Animal::all();
         $animal->each(function($animales){
             $animales->corral->galpon;

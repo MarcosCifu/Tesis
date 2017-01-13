@@ -46,7 +46,8 @@
                         @foreach($historiales as $historial)
                             <tr>
                                 <td><a href="{{ route('admin.animales.perfil', $historial->animal->id) }}">{{$historial->animal->DIIO}}</a></td>
-                                <td>    @if($historial->animal->estado == "vivo")
+                                <td>
+                                    @if($historial->animal->estado == "vivo")
                                         <span class="label label-success">{{$historial->animal->estado}}</span>
                                     @else
                                         @if($historial->animal->estado == "muerto")

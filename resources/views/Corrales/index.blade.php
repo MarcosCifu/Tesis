@@ -39,6 +39,33 @@
             </div>
         </div>
     </div>
+    <!-- Modal  Crear-->
+    <div class="modal fade" id="registraratributo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="box box-primary box-solid">
+                <div class="box-header with-border" >
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>Información del <b>Corral</b></h3>
+                </div>
+                <div>
+                    <div class="box-body">
+                        <section>
+                                {{ Form::open(['route' => 'admin.atributos.store', 'method' => 'POST']) }}
+                                <div class="form-group">
+                                    {!! Form::label('nombre' ,'Nombre del Atributo') !!}
+                                    {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Nombre del atributo' , 'required' ]) !!}
+                                </div>
+                                <div class="form-group">
+                                    {!! Form::submit('Registrar' ,['class' => 'btn btn-primary']) !!}
+
+                                </div>
+                                {{ Form::close() }}
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="panel panel-default animated pulse slow go">
         <div class="panel-heading">
             <h1>Listado de <b>Corrales</b></h1>
@@ -46,6 +73,9 @@
         <div class="panel-body">
                 <div class="box-header">
                     @if(Auth::user()->admin())
+                        <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registraratributo">
+                            <i class="fa fa-folder-open-o"></i> Registar nuevo Atributo
+                        </a>
                         <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
                             <i class="fa fa-folder-open-o"></i> Registar nuevo Corral
                         </a>
@@ -69,7 +99,7 @@
                     <tbody>
                         @foreach($corrales as $corral)
                             <tr>
-                                <td><a href="{{ route('admin.corrales.perfil', $corral->id) }}" class="btn btn-success" >Corral {{$corral->numero}}</a></td>
+                                <td><a href="{{ route('admin.corrales.perfil', $corral->id) }}" class="badge" >Corral {{$corral->numero}}</a></td>
                                 <td>{{$corral->tamaño}} m2</td>
                                 <td>
                                     @if($corral->cantidad_animales == 0)

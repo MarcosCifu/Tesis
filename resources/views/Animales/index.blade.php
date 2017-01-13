@@ -11,7 +11,45 @@
                 </div>
                 <div>
                     <div class="box-body">
-                        @include('Animales.create')
+                            {{ Form::open(['route' => 'admin.animales.store', 'method' => 'POST', 'files'=>true, 'data-parsley' =>'', 'id' => 'registraranimal']) }}
+                            <div class="form-group">
+                                {!! Form::label('diio' ,'DIIO') !!}
+                                {!! Form::text('DIIO', null, ['class' => 'form-control', 'placeholder' => 'DIIO del animal' , 'required','minlength="7"','maxlength="8"' ]) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('type','Tipo') !!}
+                                {!! Form::select('tipo',[ 'Vaca' => 'Vaca' , 'Novillo' => 'Novillo', 'Vaquilla' => 'Vaquilla' , 'Ternero' => 'Ternero', 'Ternera' => 'Ternera'],null,['class'=> 'form-control', 'placeholder' => 'Seleccione un tipo' , 'required' ]) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('corral','Corral') !!}
+                                {!! Form::select('corral', $corrales, null ,['class'=> 'form-control', 'placeholder' => 'Seleccione un corral' , 'required']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('estado','Estado') !!}
+                                {!! Form::select('estado',[ 'Vivo' => 'Vivo' , 'Muerto' => 'Muerto', 'Enfermo' => 'Enfermo' ], 'Vivo',['class'=> 'form-control', 'placeholder' => 'Seleccione un estado' , 'required' ]) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('fecha_compra','Fecha de Ingreso') !!}<br>
+                                {!! Form::date('fecha',$fecha) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('pesaje_inicial', 'Pesaje inicial') !!}
+                                {!! Form::text('pesaje_inicial', null, ['class' => 'form-control', 'placeholder' => 'Pesaje del animal en KG' , 'required' ]) !!}
+
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('image','Imagen del Animal') !!}
+                                {!! Form::file('path') !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::hidden('user_id', Auth::user()->id , null , ['class'=>'form-control']) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::submit('Registrar' ,['class' => 'btn btn-success']) !!}
+
+                            </div>
+                            {{ Form::close() }}
                     </div>
                 </div>
             </div>
@@ -27,6 +65,9 @@
                     <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
                         <i class="fa fa-folder-open-o"></i> Registar nuevo Animal
                     </a>
+                        <a href="{{route('admin.ventas')}}" type="button" class="btn btn-primary">
+                            <i class="fa fa-folder-open-o"></i> Vender Animales
+                        </a>
                     @endif()
                 </div><!-- /.box-header -->
                 <div class="box-body">
@@ -49,7 +90,7 @@
                         @foreach($animales as $animal)
 
                             <tr>
-                                <td><a href="{{ route('admin.animales.perfil', $animal->id) }}">{{$animal->DIIO}}</a></td>
+                                <td><a href="{{ route('admin.animales.perfil', $animal->id) }}"><span class="badge">{{$animal->DIIO}}</span></a></td>
                                 <td>{{$animal->tipo}}</td>
                                 <td>Galpón {{$animal->corral->galpon->numero}}</td>
                                 <td>Corral {{$animal->corral->numero}}</td>
@@ -69,7 +110,7 @@
                                 @if(Auth::user()->admin())
                                 <td>
                                     <a href="{{ route('admin.animales.edit', $animal->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
-                                    <a href="{{ route('admin.animales.destroy', $animal->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este animal?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
+                                    <a href="{{ route('admin.animales.destroy', $animal->id) }}" class="btn btn-danger" data-toggle="confirmation" data-title="Esta Seguro?" data-btn-ok-label=" Si" data-btn-cancel-label="No"><spam class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
                                 </td>
                                 @endif()
                             </tr>
@@ -101,5 +142,12 @@
                 "lengthMenu": [[10, 20, -1], [10, 20, "Todos"]]
             });
         });
+    </script>
+    <script>
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+    </script>
+    <script>
+        $('#registraranimal').parsley();
+
     </script>
 @endsection

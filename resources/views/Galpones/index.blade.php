@@ -43,7 +43,7 @@
                         <tbody>
                             @foreach($galpones as $galpon)
                                 <tr>
-                                    <td><a href="{{ route('admin.galpones.perfil', $galpon->id) }}" class="btn btn-success">Galpón {{$galpon->numero}}</a></td>
+                                    <td><a href="{{ route('admin.galpones.perfil', $galpon->id) }}" class="badge">Galpón {{$galpon->numero}}</a></td>
                                     <td>{{$galpon->corrales()->count()}}</td>
                                     <td></td>
                                     @if(Auth::user()->admin())

@@ -161,6 +161,7 @@ class AnimalesController extends Controller
         $fechaactual = Carbon::now();
         $permanencia= $animal->created_at->diff($fechaactual)->days+1;
         $gananciapeso = $animal->estadisticasanimales->lists('ganancia_peso');
+        $distribucionapeso = $animal->estadisticasanimales->lists('distribucion');
 
         return view ('Animales.perfil')
             ->with('animal',$animal)
@@ -169,7 +170,8 @@ class AnimalesController extends Controller
             ->with('fechaganancia',$fechaganancia)
             ->with('ultimopeso',$ultimopeso)
             ->with('permanencia',$permanencia)
-            ->with('gananciapeso',$gananciapeso);
+            ->with('gananciapeso',$gananciapeso)
+            ->with('distribucionpeso',$distribucionapeso);
 
     }
     public function pesoperfil($id)
@@ -197,7 +199,17 @@ class AnimalesController extends Controller
         return $pdf->stream('animal.pdf');
 
     }
-
+    public function descargarPDF($id)
+    {
+        $animal = Animal::find($id);
+        $pdf = PDF::loadview('Animales.pdf',['animal' => $animal]);
+        return $pdf->download('animal.pdf');
+    }
+    public function ventas()
+    {
+        $animales = Animal::all();
+        return view('Animales.ventas')->with('animales',$animales);
+    }
 
 
 }

@@ -25,8 +25,8 @@
     <!--FullCalendar -->
     <link href="{{asset("/plugins/fullcalendar/fullcalendar.css")}}" rel="stylesheet" />
     <link href="{{asset("/plugins/fullcalendar/fullcalendar.print.css")}}" media="print" rel="stylesheet">
-
-
+    <!--Parsley -->
+    <link href="{{ asset("/plugins/Parsley.js/parsley.css") }}" rel="stylesheet" />
     <link href="{{ asset("/dist/css/skins/skin-yellow.min.css")}}" rel="stylesheet" type="text/css" />
 
 
@@ -57,8 +57,15 @@
 
 <!-- jQuery 2.1.4 -->
 <script src="{{ asset ("/plugins/jQuery/jQuery-2.1.4.min.js") }}"></script>
+<!-- Parsley -->
+<script src="{{ asset ("/plugins/Parsley.js/parsley.min.js") }}"></script>
+<script src="{{ asset ("/plugins/Parsley.js/es.js") }}"></script>
+
 <!-- Bootstrap 3.3.2 JS -->
 <script src="{{ asset ("/bootstrap/js/bootstrap.min.js") }}"></script>
+<script src="{{ asset ("/bootstrap/js/bootstrap-confirmation.js") }}"></script>
+<script src="{{ asset ("/bootstrap/js/bootstrap-confirmation.min.js") }}"></script>
+
 <script src="{{asset("/plugins/fullcalendar/moment.js")}}"></script>
 <script src="{{asset("/plugins/fullcalendar/fullcalendar.min.js")}}"></script>
 <script src="{{asset("/plugins/fullcalendar/es.js")}}"></script>

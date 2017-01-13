@@ -14,28 +14,33 @@
                     <p class="text-muted text-center">DIIO</p>
 
                     <ul class="list-group list-group-unbordered">
-                        @foreach($animal->users as $origen)
-                            <li class="list-group-item">
-                                <b>Procedencia</b> <a class="pull-right">{{$origen->pivot->procedencia or "Se Desconoce"}}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Número de Guía</b> <a class="pull-right">{{($origen->pivot->numero_Guia)}}</a>
-                            </li>
-                        @endforeach
                         <li class="list-group-item">
-                            <b>Tipo</b> <a class="pull-right">{{$animal->tipo}}</a>
+                            <b>Tipo</b> <span class="pull-right">{{$animal->tipo}}</span>
                         </li>
                         <li class="list-group-item">
-                            <b>Estado</b> <a class="pull-right">{{$animal->estado}}</a>
+                            <b>Estado</b>
+                            @if($animal->estado == "vivo")
+                                <a class=" pull-right">{{$animal->estado}}</a>
+                                <br>
+                            @else
+                                @if($animal->estado == "muerto")
+                                    <a class=" pull-right">{{$animal->estado}}</a>
+                                    <br>
+                                @else
+                                    <a class=" pull-right">{{$animal->estado}}</a>
+                                    <br>
+                                @endif
+                            @endif
                         </li>
                         <li class="list-group-item">
-                            <b>Ubicación</b><br>
-                            <a href="{{ route('admin.corrales.perfil', $animal->id_corral) }}" class="btn btn-success">Corral {{$animal->corral->numero}}</a>
-                            <a href="{{ route('admin.galpones.perfil', $animal->corral->id_galpon) }}" class="btn btn-success">Galpón {{$animal->corral->galpon->numero}}</a>
+                            <b>Ubicación</b>
+                            <a href="{{ route('admin.corrales.perfil', $animal->id_corral) }}" class="badge badge-info">Corral {{$animal->corral->numero}}</a>
+                            <a href="{{ route('admin.galpones.perfil', $animal->corral->id_galpon) }}" class="badge">Galpón {{$animal->corral->galpon->numero}}</a>
                         </li>
                         <li class="list-group-item">
                             <b>Exportar Información</b><br>
-                                <a href="{{ route('animalPDF', $animal->id) }}" class="btn btn-primary"><spam  class="glyphicon glyphicon-eye-open" aria-hidden="true"></spam>&nbsp; &nbsp;  Ver</a>
+                            <a href="{{ route('animalPDF', $animal->id) }}" class="btn btn-primary"><spam  class="glyphicon glyphicon-eye-open" aria-hidden="true"></spam>&nbsp; &nbsp;  Ver</a>
+                            <a href="{{ route('descargaranimalPDF', $animal->id) }}" class="btn btn-info"><spam  class="glyphicon glyphicon-download" aria-hidden="true"></spam>&nbsp; &nbsp;  Descargar</a>
                         </li>
                     </ul>
                 </div>
@@ -43,18 +48,40 @@
         </div>
         <div class="col-md-8">
             <div class="row tile_count">
-                <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
-                    <div class="small-box bg-blue">
-                        <div class="icon">
-                            <i class="ion-location"></i>
+                <div class="animated flipInX col-lg-4 col-xs-12 tile_stats_count">
+                    @if($animal->pesaje_actual>600)
+                        <div class="small-box bg-green">
+                            <div class="icon">
+                                <i class="ion-location"></i>
+                            </div>
+                            <div class="inner">
+                                <h3>{{$animal->pesaje_actual}} KG
+                                </h3>
+                                <p>Peso Actual</p>
+                            </div>
+                            @if(600-$animal->pesaje_actual<0)
+                                <h4 class="small-box-footer"><b>Apto para la venta</b></h4>
+                            @else
+                                <h4 class="small-box-footer"><b>{{600-$animal->pesaje_actual}} KG para peso de venta</b></h4>
+                            @endif
                         </div>
-                        <div class="inner">
-                            <h3>{{$animal->pesaje_inicial}} KG
-                            </h3>
-                            <p>Peso Inicial</p>
-                        </div>
-                        <h4 class="small-box-footer"><b>{{600-$animal->pesaje_inicial}} KG para peso ideal</b></h4>
-                    </div>
+                        @else
+                            <div class="small-box bg-blue">
+                                <div class="icon">
+                                    <i class="ion-location"></i>
+                                </div>
+                                <div class="inner">
+                                    <h3>{{$animal->pesaje_actual}} KG
+                                    </h3>
+                                    <p>Peso Actual</p>
+                                </div>
+                                @if(600-$animal->pesaje_actual<0)
+                                    <h4 class="small-box-footer"><b>Apto para la venta</b></h4>
+                                    @else
+                                        <h4 class="small-box-footer"><b>{{600-$animal->pesaje_actual}} KG para peso de venta</b></h4>
+                                @endif
+                            </div>
+                    @endif
                 </div>
                 <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
                     <div class="small-box bg-teal">
