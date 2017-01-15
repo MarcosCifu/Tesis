@@ -4,10 +4,6 @@
         {!! Form::text('numero', null, ['class' => 'form-control', 'placeholder' => 'Numero del Galpón' , 'required' ]) !!}
     </div>
     <div class="form-group">
-        {!! Form::label('cantidad_corrales' ,'Cantidad Estimada de Corrales') !!}
-        {!! Form::text('cantidad_corrales', null, ['class' => 'form-control', 'placeholder' => 'Cantidad Estimada de Corrales' , 'required' ]) !!}
-    </div>
-    <div class="form-group">
         {!! Form::submit('Registrar' ,['class' => 'btn btn-success']) !!}
     </div>
 {{ Form::close() }}

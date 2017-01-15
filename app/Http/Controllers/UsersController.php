@@ -17,7 +17,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-       $users = User::orderBy('id','ASC')->paginate(5);
+        $users = User::all();
         return view('Users.index')->with('users',$users);
     }
 
@@ -39,10 +39,11 @@ class UsersController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $user = new User($request ->all());
-        $user->password = bcrypt($request->password);
-        $user->save();
-        Flash::success("Se ha registrado " . $user->name . " de forma exitosa");
+            $user = new User($request ->all());
+            $user->password = bcrypt($request->password);
+            Flash::success('El usuario ' . $user->name . ' ha sido creado con exito!');
+            $user->save();
+
         return redirect()->route('admin.users.index');
     }
 
@@ -96,7 +97,6 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        Flash::error('El usuario ' . $user->name . 'ha sido borrado de forma exitosa!');
         return redirect()->route('admin.users.index');
     }
 }

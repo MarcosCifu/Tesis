@@ -49,7 +49,7 @@ class LogController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('log.index');
+        return view('index2');
     }
 
     /**
@@ -58,9 +58,9 @@ class LogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        return view('index2');
     }
 
     /**

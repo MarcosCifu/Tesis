@@ -27,6 +27,7 @@ class GalponesController extends Controller
             $galpones->corrales;
         });
 
+
         return view('Galpones.index')->with('galpones',$galpones);
     }
 
@@ -122,7 +123,11 @@ class GalponesController extends Controller
         foreach ($corrales as $corral){
             $ultimaestadistica = $corral->estadisticascorrales->take(-1);
             foreach ($ultimaestadistica as $ultima){
-                $promedio += $ultima->pesaje_promedio;
+                if($ultima->pesaje_promedio != 0)
+                {
+                    $promedio += $ultima->pesaje_promedio;
+                }
+
                 $pesajesmaximos->push($ultima->pesaje_maximo);
                 $pesajesminimos->push($ultima->pesaje_minimo);
             }

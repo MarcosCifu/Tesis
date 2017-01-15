@@ -33,8 +33,8 @@
                         <thead>
                             <tr>
                                 <th>Número</th>
-                                <th>Cantidad actual de Corrales</th>
-                                <th>Cantidad actual de Animales</th>
+                                <th>Cantidad de Corrales</th>
+                                <th>Cantidad de Animales</th>
                                 @if(Auth::user()->admin())
                                 <th>Acción</th>
                                 @endif()
@@ -43,9 +43,9 @@
                         <tbody>
                             @foreach($galpones as $galpon)
                                 <tr>
-                                    <td><a href="{{ route('admin.galpones.perfil', $galpon->id) }}" class="btn btn-success">Galpón {{$galpon->numero}}</a></td>
+                                    <td><a href="{{ route('admin.galpones.perfil', $galpon->id) }}" class="badge">Galpón {{$galpon->numero}}</a></td>
                                     <td>{{$galpon->corrales()->count()}}</td>
-                                    <td></td>
+                                    <td>{{$galpon->corrales()->sum('cantidad_animales')}}</td>
                                     @if(Auth::user()->admin())
                                     <td>
                                         <a href="{{ route('admin.galpones.edit', $galpon->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>

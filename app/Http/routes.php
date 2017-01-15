@@ -12,6 +12,7 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
+    Route::get('index','LogController@show');
     Route::resource('log','LogController');
     Route::get('logout', 'LogController@logout');
 
@@ -48,6 +49,10 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'AnimalesController@crearPDF',
             'as' => 'animalPDF'
         ]);
+        Route::get('{id}/descargaranimalPDF', [
+            'uses' => 'AnimalesController@descargarPDF',
+            'as' => 'descargaranimalPDF'
+        ]);
         //rutas materiales
         Route::resource('materiales','MaterialesController');
         //rutas precios
@@ -69,10 +74,12 @@ Route::group(['middleware' => ['web']], function () {
 
             //rutas admin usuarios
             Route::resource('users','UsersController');
-            Route::get('users/{id}/destroy', [
+            Route::delete('users/{id}/destroy', [
                 'uses' => 'UsersController@destroy',
                 'as' => 'admin.users.destroy'
-            ]);
+            ],function(){
+                Flash::error('El usuarioha sido borrado de forma exitosa!');
+            });
             //rutas admin corrales
             Route::post('corrales', [
                 'uses' => 'CorralesController@create',
@@ -143,6 +150,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('animales/{id}/historialperfil', [
                 'uses' => 'AnimalesController@historialperfil',
                 'as' => 'admin.animales.historialperfil'
+            ]);
+            Route::get('ventas', [
+                'uses' => 'AnimalesController@ventas',
+                'as' => 'admin.ventas'
             ]);
             //rutas calendario
             Route::resource ('calendarios','CalendariosController');

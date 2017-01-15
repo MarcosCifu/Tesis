@@ -41,7 +41,7 @@
                         <tbody>
                             @foreach($pesos as $peso)
                                 <tr>
-                                    <td><a href="{{ route('admin.animales.perfil', $peso->animal->id) }}">{{$peso->animal->DIIO}}</a></td>
+                                    <td><a href="{{ route('admin.animales.perfil', $peso->animal->id) }}"><span class="badge">{{$peso->animal->DIIO}}</span></a></td>
                                     <td>{{$peso->pesaje}}</td>
                                     <td>{{$peso->fecha}}</td>
                                     @if(Auth::user()->admin())

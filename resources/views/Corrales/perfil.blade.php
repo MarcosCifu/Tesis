@@ -18,31 +18,37 @@
                     </div>
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Fecha de creación</b><br>
-                            <a class="">{{$corrales->created_at->format('d/m/Y')}}</a>
+                            <b>Fecha de creación</b>
+                            <a class="  pull-right">{{$corrales->created_at->format('d/m/Y')}}</a>
                         </li>
                         <li class="list-group-item">
-                            <b>Cantidad de Animales</b><br>
-                            <span class="btn btn-success">{{ $corrales->cantidad_animales or 0 }}</span>
+                            <b>Cantidad de Animales</b>
+                            <span class="label label-danger pull-right">{{ $corrales->cantidad_animales or 0 }}</span>
                         </li>
                         <li class="list-group-item">
-                            <b>Tipo de Animales</b> <a class="pull-right"></a></br>
+                            <b>Tipo de Animales</b> <a class="pull-right"></a>
                             @foreach($tipoanimales as $tipo)
-                                <span class="btn btn-primary"> {{$tipo}} </span>
+                                <span class="badge pull-right"> {{$tipo}} </span>
                             @endforeach
                         </li>
                         <li class="list-group-item">
                             <b>Estado</b> <a class="pull-right"></a>
                         </li>
                         <li class="list-group-item">
-                            <b>Atributos del Corral</b><br>
+                            <b>Atributos del Corral</b>
                             @foreach($atributos as $atributo)
-                                <span class="btn btn-primary"> {{$atributo->nombre}} </span>
+                                <span class="badge pull-right">{{$atributo->nombre}}</span>
                             @endforeach
+                            <br>
+                            <br>
                         </li>
                         @if(Auth::user()->admin())
                         <li class="list-group-item">
-                            <a href="{{ route('admin.estadisticascorrales', $corrales->id)}}"><span  class="btn btn-primary">Actualizar Estadisticas</span></a>
+                            <b>Actualizar Estadisticas</b>
+                            <a href="{{ route('admin.estadisticascorrales', $corrales->id)}}" class="btn btn-primary pull-right"><span  class="glyphicon glyphicon-signal"></span></a>
+                            <div>
+                                <br>
+                            </div>
                         </li>
                         @endif
                     </ul>
@@ -155,6 +161,7 @@
                                             <th>DIIO</th>
                                             <th>Tipo</th>
                                             <th>Estado</th>
+                                            <th>Peso</th>
                                             <th>Ingreso</th>
                                             @if(Auth::user()->admin())
                                             <th>Acción</th>
@@ -164,7 +171,7 @@
                                         <tbody>
                                             @foreach($corrales->animals as $animales)
                                                 <tr>
-                                                    <td><a href="{{ route('admin.animales.perfil', $animales->id) }}">{{$animales->DIIO}}</a></td>
+                                                    <td><a href="{{ route('admin.animales.perfil', $animales->id) }}"><span class="badge">{{$animales->DIIO}}</span></a></td>
                                                     <td>{{$animales->tipo}}</td>
                                                     <td>
                                                         @if($animales->estado == "Vivo")
@@ -176,6 +183,9 @@
                                                                 <span class="label label-warning">{{$animales->estado}}</span>
                                                             @endif
                                                         @endif
+                                                    </td>
+                                                    <td>
+                                                        {{$animales->pesaje_actual}}
                                                     </td>
                                                     <td>{{$animales->created_at->format('m/Y')}}</td>
                                                     @if(Auth::user()->admin())
