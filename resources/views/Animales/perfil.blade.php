@@ -7,27 +7,26 @@
                     <h1>Información del <b>Animal</b></h1>
                 </div>
                 <div class="panel-body">
-
-                    <img class="profile-user-img img-responsive " src="{{ asset('images') }}/{{$animal->path}}"  style="width: 300px;">
-
-                      <h3 class="profile-username text-center">{{$animal->DIIO}}</h3>
+                        <img class="profile-user-img img-responsive " src="https://s3-us-west-2.amazonaws.com/ancalibeef/{{$animal->path}}"  style="width: 300px;">
+                    <h3 class="profile-username text-center">{{$animal->DIIO}}</h3>
                     <p class="text-muted text-center">DIIO</p>
 
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Tipo</b> <span class="pull-right">{{$animal->tipo}}</span>
+                            <b>Tipo</b>
+                            <b class="pull-right">{{$animal->tipo}}</b>
                         </li>
                         <li class="list-group-item">
                             <b>Estado</b>
-                            @if($animal->estado == "vivo")
-                                <a class=" pull-right">{{$animal->estado}}</a>
+                            @if($animal->estado == "Vivo")
+                                <b class="label label-success pull-right">{{$animal->estado}}</b>
                                 <br>
                             @else
-                                @if($animal->estado == "muerto")
-                                    <a class=" pull-right">{{$animal->estado}}</a>
+                                @if($animal->estado == "Muerto")
+                                    <b class="label label-danger pull-right">{{$animal->estado}}</b>
                                     <br>
                                 @else
-                                    <a class=" pull-right">{{$animal->estado}}</a>
+                                    <b class="label label-warning pull-right">{{$animal->estado}}</b>
                                     <br>
                                 @endif
                             @endif
@@ -36,6 +35,11 @@
                             <b>Ubicación</b>
                             <a href="{{ route('admin.corrales.perfil', $animal->id_corral) }}" class="badge badge-info">Corral {{$animal->corral->numero}}</a>
                             <a href="{{ route('admin.galpones.perfil', $animal->corral->id_galpon) }}" class="badge">Galpón {{$animal->corral->galpon->numero}}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Editar Información</b><br>
+                            <a href="{{ route('admin.animales.edit', $animal->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
+
                         </li>
                         <li class="list-group-item">
                             <b>Exportar Información</b><br>
@@ -48,7 +52,7 @@
         </div>
         <div class="col-md-8">
             <div class="row tile_count">
-                <div class="animated flipInX col-lg-4 col-xs-12 tile_stats_count">
+                <div class="animated flipInX col-lg-4 col-xs-4 tile_stats_count">
                     @if($animal->pesaje_actual>600)
                         <div class="small-box bg-green">
                             <div class="icon">
@@ -83,7 +87,7 @@
                             </div>
                     @endif
                 </div>
-                <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
+                <div class="animated flipInX col-lg-4 col-xs-4 tile_stats_count">
                     <div class="small-box bg-teal">
                         <div class="icon">
                             <i class="ion-arrow-graph-up-right"></i>
@@ -96,7 +100,7 @@
                         <h4 class="small-box-footer"><b>{{round(($ultimopeso-$animal->pesaje_inicial)/$permanencia,2)}} KG por día</b></h4>
                     </div>
                 </div>
-                <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
+                <div class="animated flipInX col-lg-4 col-xs-4 tile_stats_count">
                     <div class="small-box bg-maroon">
                         <div class="inner">
                             <h3>{{$permanencia}} Días</h3>
@@ -123,7 +127,7 @@
                                         <h3>Resumen <b>Evolutivo</b></h3>
                                     </div>
                                     <div class="box-body">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                                 <div class="box-header with-border">
                                                     <h3 class="box-title">Evolución</h3>
                                                 </div>
@@ -133,7 +137,7 @@
                                                     </div>
                                                 </div><!-- /.box-body -->
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                                 <div class="box-header with-border">
                                                     <h3 class="box-title">Distribución</h3>
                                                 </div>
@@ -172,7 +176,7 @@
                                                 <tbody>
                                                 @foreach($animal->pesos as $peso)
                                                     <tr>
-                                                        <td>{{$peso->pesaje}}</td>
+                                                        <td>{{$peso->pesaje}} KG</td>
                                                         <td>{{$peso->created_at->format('m/Y')}}</td>
                                                         @if(Auth::user()->admin())
                                                         <td>
@@ -204,6 +208,8 @@
                                                 <thead>
                                                 <tr>
                                                     <th>Diagnostico</th>
+                                                    <th>Tratamiento</th>
+                                                    <th>Estado</th>
                                                     <th>Fecha</th>
                                                     @if(Auth::user()->admin())
                                                     <th>Acción</th>
@@ -214,6 +220,18 @@
                                                 @foreach($animal->historialesmedicos as $historial)
                                                     <tr>
                                                         <td>{{$historial->enfermedad}}</td>
+                                                        <td>{{$historial->tratamiento}}</td>
+                                                        <td>
+                                                            @if($historial->estado_tratamiento == "Tratamiento terminado")
+                                                                <span class="label label-success">{{$historial->estado_tratamiento}}</span>
+                                                            @else
+                                                                @if($historial->estado_tratamiento == "Tratamiento no comenzado")
+                                                                    <span class="label label-danger">{{$historial->estado_tratamiento}}</span>
+                                                                @else
+                                                                    <span class="label label-warning">{{$historial->estado_tratamiento}}</span>
+                                                                @endif
+                                                            @endif
+                                                        </td>
                                                         <td>{{$historial->created_at->format('m/Y')}}</td>
                                                         @if(Auth::user()->admin())
                                                         <td>

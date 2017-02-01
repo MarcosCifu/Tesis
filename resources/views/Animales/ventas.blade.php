@@ -19,14 +19,11 @@
                         <th>Estado</th>
                         <th>Fecha Ingreso</th>
                         <th>Ultimo Pesaje</th>
-                        @if(Auth::user()->admin())
-                            <th><input type="checkbox" id="checkAll"/></th>
-                        @endif()
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($animales as $animal)
-                        @if($animal->pesaje_actual > 600)
+                        @if($animal->pesaje_actual >= 600 AND $animal->venta == 0)
                         <tr>
                             <td><a href="{{ route('admin.animales.perfil', $animal->id) }}"><span class="badge">{{$animal->DIIO}}</span></a></td>
                             <td>{{$animal->tipo}}</td>
@@ -47,7 +44,7 @@
                             <td>{!! $animal->ultimopeso->pesaje or "0"!!}</td>
                             @if(Auth::user()->admin())
                                 <td>
-                                    <input class="checkbox" type="checkbox" name="check[]">
+                                    <a href="{{route('admin.vender',$animal->id)}}" class="btn btn-success pull-right"><b>Vender</b></a>
                                 </td>
                             @endif()
                         </tr>
@@ -57,6 +54,9 @@
                     </tbody>
                 </table>
             </div><!-- /.box-body -->
+            <div>
+                <a href="{{route('admin.vendertodos')}}" class="btn btn-success pull-right">Vender <b>Todos</b></a>
+            </div>
         </div>
     </div>
 @endsection

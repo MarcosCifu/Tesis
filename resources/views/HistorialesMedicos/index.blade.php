@@ -23,7 +23,7 @@
                 <div class="box-header">
                     @if(Auth::user()->admin())
                         <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
-                            <i class="fa fa-folder-open-o"></i> Registar nuevo Diagnóstico
+                            Registar nuevo <b>Diagnóstico</b>&nbsp;<i class="fa fa-stethoscope"></i>
                         </a>
                     @endif() </div><!-- /.box-header -->
                 <div class="box-body">
@@ -45,12 +45,12 @@
                         <tbody>
                         @foreach($historiales as $historial)
                             <tr>
-                                <td><a href="{{ route('admin.animales.perfil', $historial->animal->id) }}">{{$historial->animal->DIIO}}</a></td>
+                                <td><a href="{{ route('admin.animales.perfil', $historial->animal->id) }}"><span class="badge">{{$historial->animal->DIIO}}</span></a></td>
                                 <td>
-                                    @if($historial->animal->estado == "vivo")
+                                    @if($historial->animal->estado == "Vivo")
                                         <span class="label label-success">{{$historial->animal->estado}}</span>
                                     @else
-                                        @if($historial->animal->estado == "muerto")
+                                        @if($historial->animal->estado == "Muerto")
                                             <span class="label label-danger">{{$historial->animal->estado}}</span>
                                         @else
                                             <span class="label label-warning">{{$historial->animal->estado}}</span>
@@ -59,7 +59,17 @@
                                 </td>
                                 <td>{{$historial->enfermedad}}</td>
                                 <td>{{$historial->tratamiento or 'Sin Tratamiento'}}</td>
-                                <td>{{$historial->estado_tratamiento}}</td>
+                                <td>
+                                    @if($historial->estado_tratamiento == "Tratamiento terminado")
+                                        <span class="label label-success">{{$historial->estado_tratamiento}}</span>
+                                    @else
+                                        @if($historial->estado_tratamiento == "Tratamiento no comenzado")
+                                            <span class="label label-danger">{{$historial->estado_tratamiento}}</span>
+                                        @else
+                                            <span class="label label-warning">{{$historial->estado_tratamiento}}</span>
+                                        @endif
+                                    @endif
+                                </td>
                                 <td>{{$historial->created_at->format('Y-m-d')}}</td>
 
                                 @if(Auth::user()->admin())
@@ -81,6 +91,7 @@
         $(function () {
             $('#historiales').DataTable({
                 "info": false,
+                "scrollX" : true,
                 "language": {
                     "emptyTable": "No hay datos disponibles",
                     "search": "Buscar:",

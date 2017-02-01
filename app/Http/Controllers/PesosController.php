@@ -21,14 +21,11 @@ class PesosController extends Controller
     public function index()
     {
         $pesos = Peso::all();
-        $pesos->each(function($pesos){
-            $pesos->animal;
-
-        });
         $animales = Animal::orderBy('DIIO', 'ASC')->lists('DIIO', 'id');
         $fecha = Carbon::now();
         return view('Pesos.index')->with('pesos',$pesos)
-            ->with('animales', $animales)->with('fecha',$fecha);
+                                    ->with('animales', $animales)
+                                    ->with('fecha',$fecha);
     }
 
     /**
@@ -134,6 +131,12 @@ class PesosController extends Controller
             return redirect()->route('admin.pesos.index');
         }
 
+
+    }
+    public function ultimospesos()
+    {
+        $ultimos = Peso::all();
+        return view('Pesos.ultimos')->with('ultimos',$ultimos);
     }
     
     

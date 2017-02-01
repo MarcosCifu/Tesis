@@ -19,7 +19,7 @@
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
                             <b>Fecha de creación</b>
-                            <a class="  pull-right">{{$corrales->created_at->format('d/m/Y')}}</a>
+                            <b class="  pull-right">{{$corrales->created_at->format('d/m/Y')}}</b>
                         </li>
                         <li class="list-group-item">
                             <b>Cantidad de Animales</b>
@@ -57,8 +57,8 @@
         </div>
         <div class="col-md-8">
             <div class="row tile_count">
-                <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
-                    <div class="small-box bg-green">
+                <div class="animated flipInX col-lg-4 col-xs-4 tile_stats_count">
+                    <div class="small-box bg-yellow">
                         <div class="inner">
                             <h3>{{round($pesajepromedio,1)}}<sup style="font-size: 20px">KG</sup></h3>
                             <p>Pesaje Promedio</p>
@@ -71,8 +71,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
-                    <div class="small-box bg-yellow">
+                <div class="animated flipInX col-lg-4 col-xs-4 tile_stats_count">
+                    <div class="small-box bg-red">
                         <div class="inner">
                             <h3>{{$pesajeminimo or 0}}<sup style="font-size: 20px">KG</sup></h3>
                             <p>Pesaje Minimo</p>
@@ -85,8 +85,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
-                    <div class="small-box bg-red">
+                <div class="animated flipInX col-lg-4 col-xs-4 tile_stats_count">
+                    <div class="small-box bg-green">
                         <div class="inner">
                             <h3>{{$pesajemaximo or 0}}<sup style="font-size: 20px">KG</sup></h3>
                             <p>Pesaje Maximo</p>
@@ -185,7 +185,7 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        {{$animales->pesaje_actual}}
+                                                        {{$animales->pesaje_actual}} KG
                                                     </td>
                                                     <td>{{$animales->created_at->format('m/Y')}}</td>
                                                     @if(Auth::user()->admin())

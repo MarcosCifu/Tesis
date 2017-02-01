@@ -17,7 +17,7 @@ class PreciosController extends Controller
      */
     public function index()
     {
-        $precios = Precio::orderBy('valor','ASC')->paginate();
+        $precios = Precio::orderBy('fecha','DESC')->paginate();
         $fecha = Carbon::now();
         return view('Precios.index')->with('precios', $precios)->with('fecha',$fecha);
     }
@@ -44,7 +44,7 @@ class PreciosController extends Controller
         $precio = new Precio($request->all());
         $precio->id_users = \Auth::user()->id;
         $precio->save();
-        Flash::success('El valor ' . $precio->valor . ' /Kg, ha sido creado con exito!');
+        Flash::success('El valor de '. $precio->tipo . ' a $' . $precio->valor . ' /Kg, ha sido creado con exito!');
         return redirect()->route('admin.precios.index');
     }
 
@@ -86,7 +86,7 @@ class PreciosController extends Controller
         $precio->fill($request->all());
         $precio->save();
 
-        Flash::warning('El valor $' . $precio->valor . '/Kg ha sido editado con exito!');
+        Flash::warning('El valor de '. $precio->tipo . ' a $' . $precio->valor . ' /Kg, ha sido editado con exito!');
         return redirect()->route('admin.precios.index');
     }
 
@@ -100,7 +100,7 @@ class PreciosController extends Controller
     {
         $precio = Precio::find($id);
         $precio->delete();
-        Flash::error('El valor $' . $precio->valor . '/Kg ha sido borrado de forma exitosa!');
+        Flash::error('El valor de '. $precio->tipo . ' a $' . $precio->valor . ' /Kg, ha sido borrado de forma exitosa!');
         return redirect()->route('admin.precios.index');
     }
 }

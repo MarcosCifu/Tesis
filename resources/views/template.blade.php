@@ -91,6 +91,8 @@
 
 
 
+
+
 @yield('chartjs')
 @yield('tablejs')
 @yield('ajaxjs')

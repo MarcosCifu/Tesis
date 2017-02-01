@@ -61,6 +61,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('historiales','HistorialesMedicosController');
         //rutas pesos
         Route::resource('pesos','PesosController');
+        Route::get('pesos/ultimos', [
+            'uses' => 'PesosController@ultimospesos',
+            'as' => 'admin.ultimospesos'
+        ]);
         //rutas atributos
         Route::resource('atributos','AtributosController');
         //rutas admin pdf
@@ -154,6 +158,14 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('ventas', [
                 'uses' => 'AnimalesController@ventas',
                 'as' => 'admin.ventas'
+            ]);
+            Route::get('/veder/{id}', [
+                'uses' => 'AnimalesController@vender',
+                'as' => 'admin.vender'
+            ]);
+            Route::get('vedertodos', [
+                'uses' => 'AnimalesController@vendertodos',
+                'as' => 'admin.vendertodos'
             ]);
             //rutas calendario
             Route::resource ('calendarios','CalendariosController');

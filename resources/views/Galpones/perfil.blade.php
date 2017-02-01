@@ -59,8 +59,8 @@
                 <div class="box-body box-profile">
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Fecha de creación</b><br>
-                            <a class="">{{$galpon->created_at->format('d/m/Y')}}</a>
+                            <b>Fecha de creación</b>
+                            <b class="pull-right">{{$galpon->created_at->format('d/m/Y')}}</b>
                         </li>
                         <li class="list-group-item">
                             <b>Cantidad total de Animales</b><br>
@@ -83,8 +83,8 @@
         </div>
         <div class="col-md-8 animated pulse slow go">
             <div class="row tile_count">
-                <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
-                    <div class="small-box bg-green">
+                <div class="animated flipInX col-lg-4 col-xs-4 tile_stats_count">
+                    <div class="small-box bg-yellow">
                         <div class="inner">
                             <h3>{{$promedio}}<sup style="font-size: 20px">KG</sup></h3>
                             <p>Pesaje Promedio</p>
@@ -97,8 +97,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
-                    <div class="small-box bg-yellow">
+                <div class="animated flipInX col-lg-4 col-xs-4 tile_stats_count">
+                    <div class="small-box bg-red">
                         <div class="inner">
                             <h3>{{$minimo}}<sup style="font-size: 20px">KG</sup></h3>
                             <p>Pesaje Minimo</p>
@@ -111,8 +111,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="animated flipInX col-lg-4 col-xs-6 tile_stats_count">
-                    <div class="small-box bg-red">
+                <div class="animated flipInX col-lg-4 col-xs-4 tile_stats_count">
+                    <div class="small-box bg-green">
                         <div class="inner">
                             <h3>{{$maximo}}<sup style="font-size: 20px">KG</sup></h3>
                             <p>Pesaje Maximo</p>

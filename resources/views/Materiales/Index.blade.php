@@ -23,7 +23,7 @@
                 <div class="box-header">
                     @if(Auth::user()->admin())
                         <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
-                            <i class="fa fa-folder-open-o"></i> Registar nuevo Material
+                            Registar nuevo <b>Material</b> &nbsp;<i class="fa fa-wrench"></i>
                         </a>
                     @endif()
                 </div><!-- /.box-header -->

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Precio extends Model
 {
     protected $table = 'precioKilo';
-    protected $fillable = ['id','valor','fecha'];
+    protected $fillable = ['id','tipo','valor','fecha'];
 
 
     public function user()
