@@ -22,10 +22,13 @@
         <div class="panel-body">
                 <div class="box-header">
                     @if(Auth::user()->admin())
-                        <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
-                            <i class="fa fa-folder-open-o"></i> Registar nuevo Pesaje
+                        <a  type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
+                            Registar nuevo <b>Pesaje</b> &nbsp;<i class="glyphicon glyphicon-scale"></i>
                         </a>
                     @endif()
+                        <a href="{{ route('admin.ultimospesos') }}" type="button" class="btn btn-primary">
+                            Ultimos <b>Pesajes</b> &nbsp;<i class="glyphicon glyphicon-scale"></i>
+                        </a>
                 </div><!-- /.box-header -->
                 <div class="box-body ">
                     <table id="pesos" class="table table-bordered table-hover">
@@ -39,6 +42,7 @@
                             @endif()
                         </tr>
                         <tbody>
+
                             @foreach($pesos as $peso)
                                 <tr>
                                     <td><a href="{{ route('admin.animales.perfil', $peso->animal->id) }}"><span class="badge">{{$peso->animal->DIIO}}</span></a></td>
@@ -47,7 +51,7 @@
                                     @if(Auth::user()->admin())
                                     <td>
                                         <a href="{{ route('admin.pesos.edit', $peso->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
-                                        <a href="{{ route('admin.pesos.destroy', $peso->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este pesaje?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
+                                        <a href="{{ route('admin.pesos.destroy', $peso->id) }}" class="btn btn-danger" data-toggle="confirmation" data-title="Esta Seguro?" data-btn-ok-label=" Si" data-btn-cancel-label="No"><spam class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
                                     </td>
                                     @endif()
                                 </tr>
@@ -78,5 +82,18 @@
                 "lengthMenu": [[10, 20, -1], [10, 20, "Todos"]]
             });
         });
+    </script>
+    <script>
+        $('#registrarpeso').parsley();
+
+    </script>
+    <script>
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]'
+            // other options
+        });
+    </script>
+    <script>
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     </script>
 @endsection

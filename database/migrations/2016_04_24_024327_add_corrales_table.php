@@ -15,6 +15,7 @@ class AddCorralesTable extends Migration
             $table->increments('id');
             $table->integer('numero');
             $table->integer('cantidad_alimento');
+            $table->integer('tamaño');
             $table->integer('cantidad_animales');
             $table->integer('nivel_confort');
             $table->integer('id_galpon')->unsigned();

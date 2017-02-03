@@ -1,4 +1,4 @@
-{{ Form::open(['route' => 'admin.historiales.store', 'method' => 'POST']) }}
+{{ Form::open(['route' => 'admin.historiales.store', 'method' => 'POST','id' => 'registrarhistorial', 'data-parsley-validate' =>'']) }}
     <div class="form-group">
         {!! Form::label('animales' ,'Animal') !!}
         {!! Form::select('id_animales', $animales, null, ['class' => 'form-control', 'placeholder' => 'Seleccione una opción' , 'required' ]) !!}

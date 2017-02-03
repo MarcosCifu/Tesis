@@ -1,14 +1,15 @@
 @extends('template')
 @section('content')
     @include('errors')
-    <div id="form">
-        <div class="row">
-            <div class="col-lg-5">
-                <div class="box box-primary animated pulse slow go">
-                    <div class="box-body">
-                        <h3>Información del <b>Usuario: {{$user->name}}</b></h3>
-                        <section>
-                            {!! Form::model($user, ['route' => ['admin.users.update', $user->id], 'method' => 'PUT']) !!}
+    <div class="row">
+        <div class="col-md-5">
+            <div class="panel panel-default animated pulse slow go">
+                <div class="panel-heading">
+                    <h1>Información del <b>Usuario</b></h1>
+                </div>
+                <div class="panel-body">
+
+                            {!! Form::model($user, ['route' => ['admin.users.update', $user->id], 'method' => 'PUT', 'files'=>true]) !!}
 
                             <div class="form-group">
                                 {!! Form::label('name','Nombre') !!}
@@ -25,6 +26,10 @@
                                 {!! Form::select('type',[ 'member' => 'Miembro' , 'admin' => 'Administrador'],null,['class'=> 'form-control']) !!}
                             </div>
                             <div class="form-group">
+                                {!! Form::label('image','Imagen del Usuario') !!}
+                                {!! Form::file('path') !!}
+                            </div>
+                            <div class="form-group">
                                 {!! Form::submit('Guardar', ['class' => 'btn btn-primary'])!!}
                             </div>
 
@@ -33,5 +38,4 @@
                 </div>
             </div>
         </div>
-    </div>
 @endsection

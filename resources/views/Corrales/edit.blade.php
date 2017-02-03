@@ -3,7 +3,7 @@
     @include('errors')
     <div id="form">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-6 col-md-6 col-xs-6">
                 <div class="panel panel-default animated pulse slow go">
                     <div class="panel-heading">
                         <h1>Información del <b>Corral</b></h1>
@@ -24,11 +24,11 @@
                                     {!! Form::select('atributos[]', $atributos, $losatributos, ['class' => 'form-control select-atributo' ,'multiple', 'required' ]) !!}
                                 </div>
                                 <div class="form-group">
-                                    {!! Form::label('tamaño' ,'Tamaño') !!}
-                                    {!! Form::text('tamaño', $tamaño, ['class' => 'form-control', 'placeholder' => 'Tamaño en m2' , 'required' ]) !!}
+                                    {!! Form::label('medida' ,'Medida') !!}
+                                    {!! Form::text('medida', $medida, ['class' => 'form-control', 'placeholder' => 'Tamaño en m2' , 'required' ]) !!}
                                 </div>
                                 <div class="form-group">
-                                    {!! Form::submit('Actualizar' ,['class' => 'btn btn-primary']) !!}
+                                    {!! Form::submit('Guardar' ,['class' => 'btn btn-primary']) !!}
                                 </div>
                             {{ Form::close() }}
                         </section>

@@ -1,4 +1,4 @@
-{{ Form::open(['route' => 'admin.materiales.store', 'method' => 'POST']) }}
+{{ Form::open(['route' => 'admin.materiales.store', 'method' => 'POST','id' => 'registrarmaterial', 'data-parsley-validate' =>'']) }}
     <div class="form-group">
         {!! Form::label('numero' ,'Número') !!}
         {!! Form::text('numero', null, ['class' => 'form-control', 'placeholder' => 'Numero del Material' , 'required' ]) !!}

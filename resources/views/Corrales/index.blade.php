@@ -12,7 +12,7 @@
                 <div>
                     <div class="box-body">
                         <section>
-                            {{ Form::open(['route' => 'admin.corrales.store', 'method' => 'POST']) }}
+                            {{ Form::open(['route' => 'admin.corrales.store', 'method' => 'POST','data-parsley' =>'', 'id' => 'registrarcorral']) }}
                             <div class="form-group">
                                 {!! Form::label('numero' ,'Número') !!}
                                 {!! Form::text('numero', null, ['class' => 'form-control', 'placeholder' => 'Numero del Corral' , 'required' ]) !!}
@@ -50,13 +50,13 @@
                 <div>
                     <div class="box-body">
                         <section>
-                                {{ Form::open(['route' => 'admin.atributos.store', 'method' => 'POST']) }}
+                                {{ Form::open(['route' => 'admin.atributos.store', 'method' => 'POST','data-parsley' =>'', 'id' => 'registraratributo']) }}
                                 <div class="form-group">
                                     {!! Form::label('nombre' ,'Nombre del Atributo') !!}
                                     {!! Form::text('nombre', null, ['class' => 'form-control', 'placeholder' => 'Nombre del atributo' , 'required' ]) !!}
                                 </div>
                                 <div class="form-group">
-                                    {!! Form::submit('Registrar' ,['class' => 'btn btn-primary']) !!}
+                                    {!! Form::submit('Registrar' ,['class' => 'btn btn-success']) !!}
 
                                 </div>
                                 {{ Form::close() }}
@@ -74,10 +74,10 @@
                 <div class="box-header">
                     @if(Auth::user()->admin())
                         <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registraratributo">
-                            <i class="fa fa-folder-open-o"></i> Registar nuevo Atributo
+                            Registar nuevo <b>Atributo</b> &nbsp; <i class="fa fa-folder-open"></i>
                         </a>
                         <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
-                            <i class="fa fa-folder-open-o"></i> Registar nuevo Corral
+                            Registar nuevo <b>Corral</b> &nbsp; <i class="fa fa-tags"></i>
                         </a>
                     @endif()
                 </div><!-- /.box-header -->
@@ -116,13 +116,13 @@
                                         @endif
                                     @endif
                                 </td>
-                                <td>Galpón {{$corral->galpon->numero}}</td>
+                                <td><a href="{{ route('admin.galpones.perfil', $corral->galpon->id) }}" class="badge" >Galpón {{$corral->galpon->numero}}</a></td>
                                 <td>{{$corral->cantidad_animales*8}} KG</td>
                                 <td>{{$corral->cantidad_animales*40}} LT</td>
                                 @if(Auth::user()->admin())
                                 <td>
                                         <a href="{{ route('admin.corrales.edit', $corral->id) }}" ><button class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></button> </a>
-                                        <a href="{{ route('admin.corrales.destroy', $corral->id) }}"><button class="btn btn-danger" onclick="return confirm('¿Seguro que deseas eliminar este corral?')"><spam class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></button> </a>
+                                        <a href="{{ route('admin.corrales.destroy', $corral->id) }}"><button class="btn btn-danger" class="btn btn-danger" data-toggle="confirmation" data-title="Esta Seguro?" data-btn-ok-label=" Si" data-btn-cancel-label="No")"><spam class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></button> </a>
                                 </td>
                                 @endif()
                             </tr>
@@ -163,6 +163,20 @@
                 placeholder_text_multiple:'Seleccione atributos del corral'
             });
         });
+    </script>
+    <script>
+        $('#registraratributo').parsley();
+        $('#registrarcorral').parsley();
+
+    </script>
+    <script>
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]'
+            // other options
+        });
+    </script>
+    <script>
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     </script>
 @endsection
 

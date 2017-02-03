@@ -10,7 +10,7 @@
                     <h3>Información del <b>Usuario</b></h3>
                 </div>
                 <div class="box-body">
-                    {!! Form::open(['route' => 'admin.users.store', 'method' => 'POST','id' => 'form-register', 'data-parsley-validate' =>'']) !!}
+                    {!! Form::open(['route' => 'admin.users.store', 'method' => 'POST','id' => 'form-register', 'data-parsley-validate' =>'', 'files'=>true]) !!}
 
                     <div class="form-group">
                         {!! Form::label('name','Nombre') !!}
@@ -29,7 +29,10 @@
                         {!! Form::label('type','Tipo') !!}
                         {!! Form::select('type',[ 'member' => 'Miembro' , 'admin' => 'Administrador'],null,['class'=> 'form-control']) !!}
                     </div>
-
+                    <div class="form-group">
+                        {!! Form::label('image','Imagen del Usuario') !!}
+                        {!! Form::file('path') !!}
+                    </div>
                     <div class="form-group">
                         {!! Form::submit('Registrar', ['class' => 'btn btn-success'])!!}
                     </div>
@@ -52,7 +55,7 @@
         <div class="panel-body">
                 <div class="box-header">
                     <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
-                        <i class="fa fa-folder-open-o"></i> Registar nuevo Usuario
+                        Registar nuevo <b>Usuario</b> &nbsp;<i class="fa fa-user"></i>
                     </a>
                 </div><!-- /.box-header -->
             <div class="box-body">

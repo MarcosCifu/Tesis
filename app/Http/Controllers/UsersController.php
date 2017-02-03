@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Laracasts\Flash\Flash;
 use App\Http\Requests\UserRequest;
 
@@ -98,5 +99,10 @@ class UsersController extends Controller
         $user = User::find($id);
         $user->delete();
         return redirect()->route('admin.users.index');
+    }
+    public function perfil()
+    {
+        $user = Auth::user();
+        return view('Users.perfil')->with('user',$user);
     }
 }

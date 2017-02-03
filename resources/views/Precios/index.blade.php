@@ -20,11 +20,10 @@
             <h1>Listado de <b>Precios por Kilo de Carne</b></h1>
         </div>
         <div class="panel-body">
-            <div class="box box-primary">
                 <div class="box-header">
                     @if(Auth::user()->admin())
                         <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
-                            <i class="fa fa-folder-open-o"></i> Registar nuevo Precio
+                            Registar nuevo <b>Precio</b> &nbsp;<i class="fa fa-dollar"></i>
                         </a>
                     @endif()
                 </div><!-- /.box-header -->
@@ -32,6 +31,7 @@
                     <table id="precios" class="table table-bordered table-hover">
                         <thead>
                         <tr>
+                            <th>Animal</th>
                             <th>Precio</th>
                             <th>Fecha</th>
                             @if(Auth::user()->admin())
@@ -42,12 +42,13 @@
                         <tbody>
                         @foreach($precios as $precio)
                             <tr>
+                                <td>{{$precio->tipo}} </td>
                                 <td>${{$precio->valor}} /Kg</td>
                                 <td>{{$precio->fecha}}</td>
                                 @if(Auth::user()->admin())
                                 <td>
                                     <a href="{{ route('admin.precios.edit', $precio->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
-                                    <a href="{{ route('admin.precios.destroy', $precio->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este material?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
+                                    <a href="{{ route('admin.precios.destroy', $precio->id) }}" class="btn btn-danger" data-toggle="confirmation" data-title="Esta Seguro?" data-btn-ok-label=" Si" data-btn-cancel-label="No"><spam  class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
                                 </td>
                                 @endif()
                             </tr>
@@ -57,7 +58,6 @@
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
         </div>
-    </div>
 @endsection
 @section('tablejs')
     <script>
@@ -78,5 +78,18 @@
                 }
             });
         });
+    </script>
+    <script>
+        $('#registrarpreciol').parsley();
+
+    </script>
+    <script>
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]'
+            // other options
+        });
+    </script>
+    <script>
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     </script>
 @endsection

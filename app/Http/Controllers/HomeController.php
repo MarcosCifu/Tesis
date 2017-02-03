@@ -44,15 +44,14 @@ class HomeController extends Controller
                 $promediogalpones->push($ultima->pesaje_promedio);
             }
         }
-        $pesos = Peso::all();
         $cantidad = collect($animal)->count('id');
-        $promedio = collect($pesos)->avg('pesaje');
         $vivos = $animal->where("estado",'Vivo')->count();
         $muertos = $animal->where("estado",'Muerto')->count();
         $enfermos = $animal->where("estado",'Enfermo')->count();
-        $minimo = $pesos->min('pesaje');
-        $maximo = $pesos->max('pesaje');
-        $pesosnoapto = Peso::where('pesaje','<', 450)->groupBy('created_at')->orderBy('fecha', 'ASC')->lists('pesaje');
+        $vendidos = $animal->where("venta",1)->count();
+        $minimo = $animal->min('pesaje_actual');
+        $maximo = $animal->max('pesaje_actual');
+        $promedio = $animal->avg('pesaje_actual');
 
 
 
@@ -63,8 +62,8 @@ class HomeController extends Controller
             ->with('muertos',$muertos)
             ->with('enfermos',$enfermos)
             ->with('minimo',$minimo)
+            ->with('vendidos',$vendidos)
             ->with('maximo',$maximo)
-            ->with('pesosnoapto', $pesosnoapto)
             ->with('cantidadgalpones',$cantidadgalpones)
             ->with('numerogalpones',$numerogalpones)
             ->with('promediogalpones',$promediogalpones)

@@ -135,8 +135,10 @@ class PesosController extends Controller
     }
     public function ultimospesos()
     {
-        $ultimos = Peso::all();
-        return view('Pesos.ultimos')->with('ultimos',$ultimos);
+        $animales = Animal::orderBy('DIIO', 'ASC')->lists('DIIO', 'id');
+        $ultimos = Animal::all();
+        $fecha = Carbon::now();
+        return view('Pesos.ultimos')->with('animales',$animales)->with('fecha',$fecha)->with('ultimos',$ultimos);
     }
     
     

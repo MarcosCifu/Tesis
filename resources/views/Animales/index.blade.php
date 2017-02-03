@@ -63,10 +63,10 @@
                 <div class="box-header">
                     @if(Auth::user()->admin())
                     <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
-                        <i class="fa fa-folder-open-o"></i> Registar nuevo Animal
+                        Registar nuevo <b>Animal</b> &nbsp; <i class="fa fa-paw"></i>
                     </a>
                         <a href="{{route('admin.ventas')}}" type="button" class="btn btn-primary">
-                            <i class="fa fa-folder-open-o"></i> Vender Animales
+                            Vender <b>Animales</b> &nbsp; <i class="fa fa-exchange"></i>
                         </a>
                     @endif()
                 </div><!-- /.box-header -->
@@ -92,8 +92,8 @@
                             <tr>
                                 <td><a href="{{ route('admin.animales.perfil', $animal->id) }}"><span class="badge">{{$animal->DIIO}}</span></a></td>
                                 <td>{{$animal->tipo}}</td>
-                                <td>Galpón {{$animal->corral->galpon->numero}}</td>
-                                <td>Corral {{$animal->corral->numero}}</td>
+                                <td><a href="{{ route('admin.galpones.perfil', $animal->corral->galpon->id) }}"><span class="badge">Galpón {{$animal->corral->galpon->numero}}</span></a></td>
+                                <td><a href="{{ route('admin.corrales.perfil', $animal->corral->id) }}"><span class="badge">Corral {{$animal->corral->numero}}</span></a></td>
                                 <td>
                                     @if($animal->estado == "Vivo")
                                         <span class="label label-success">{{$animal->estado}}</span>
@@ -141,6 +141,12 @@
                 },
                 "lengthMenu": [[10, 20, -1], [10, 20, "Todos"]]
             });
+        });
+    </script>
+    <script>
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]'
+            // other options
         });
     </script>
     <script>

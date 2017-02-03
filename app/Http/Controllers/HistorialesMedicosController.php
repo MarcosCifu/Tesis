@@ -99,6 +99,19 @@ class HistorialesMedicosController extends Controller
         $historial = Historial_Medico::find($id);
         $historial->fill($request->all());
         $historial->save();
+        if ($historial->estado_tratamiento == "Tratamiento terminado")
+        {
+            $animal = Animal::find($historial->id_animales);
+            $animal->estado = "Vivo";
+            $animal->save();
+        }
+        else
+            if ($historial->estado_tratamiento == "En tratamiento")
+            {
+                $animal = Animal::find($historial->id_animales);
+                $animal->estado = "Enfermo";
+                $animal->save();
+            }
 
         Flash::warning('El diagnostico ' . $historial->name . ' ha sido editado con exito!');
         return redirect()->route('admin.historiales.index');

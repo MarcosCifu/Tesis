@@ -41,7 +41,7 @@
                                 @endif
                             </td>
                             <td>{{$animal->created_at->format('m/Y')}}</td>
-                            <td>{!! $animal->ultimopeso->pesaje or "0"!!}</td>
+                            <td>{!! $animal->ultimopeso->pesaje or "0"!!} KG</td>
                             @if(Auth::user()->admin())
                                 <td>
                                     <a href="{{route('admin.vender',$animal->id)}}" class="btn btn-success pull-right"><b>Vender</b></a>
@@ -54,9 +54,11 @@
                     </tbody>
                 </table>
             </div><!-- /.box-body -->
+            @if($animales->whereIn('pesaje_actual', [600, 2000])->count() >= 2)
             <div>
                 <a href="{{route('admin.vendertodos')}}" class="btn btn-success pull-right">Vender <b>Todos</b></a>
             </div>
+                @endif
         </div>
     </div>
 @endsection

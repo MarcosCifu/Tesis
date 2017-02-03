@@ -6,11 +6,11 @@
         </div>
         <div class="panel-body">
             <div class="row tile_count">
-                    <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
+                    <div class="animated flipInX col-lg-2 col-xs-4 tile_stats_count">
                         <div class="small-box bg-aqua">
                                 <div class="inner">
                                     <h3>{{$cantidad}}</h3>
-                                    <p>Animales Registrados</p>
+                                    <p>Animales <br>Registrados</p>
                                 </div>
                                 <div class="icon">
                                     <i class="ion ion-ios-paw"></i>
@@ -20,11 +20,25 @@
                                 </a>
                         </div>
                     </div>
-                    <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
-                        <div class="small-box bg-green">
+                    <div class="animated flipInX col-lg-2 col-xs-4 tile_stats_count">
+                        <div class="small-box bg-blue">
+                            <div class="inner">
+                                <h3>{{$vendidos}}</h3>
+                                <p>Animales <br>Vendidos</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fa fa-exchange"></i>
+                            </div>
+                            <a href="{{ route('admin.animales.index') }}" class="small-box-footer">
+                                Listado de Animales <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="animated flipInX col-lg-2 col-xs-4 tile_stats_count">
+                        <div class="small-box bg-yellow">
                             <div class="inner">
                                 <h3>{{ round($promedio) }}<sup style="font-size: 20px">KG</sup></h3>
-                                <p>Pesaje Promedio</p>
+                                <p>Pesaje<br> Promedio</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-speedometer"></i>
@@ -34,11 +48,11 @@
                             </a>
                         </div>
                     </div>
-                    <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
-                        <div class="small-box bg-yellow">
+                    <div class="animated flipInX col-lg-2 col-xs-4 tile_stats_count">
+                        <div class="small-box bg-red">
                             <div class="inner">
-                                <h3>{{$minimo or 0}}</h3>
-                                <p>Pesaje Minimo</p>
+                                <h3>{{$minimo or 0}} <sup style="font-size: 20px">KG</sup></h3>
+                                <p>Pesaje<br>Minimo</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-arrow-graph-down-right"></i>
@@ -48,11 +62,11 @@
                             </a>
                         </div>
                     </div>
-                    <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
-                        <div class="small-box bg-red">
+                    <div class="animated flipInX col-lg-2 col-xs-4 tile_stats_count">
+                        <div class="small-box bg-green">
                             <div class="inner">
-                                <h3>{{$maximo or 0}}</h3>
-                                <p>Pesaje Maximo</p>
+                                <h3>{{$maximo or 0}}<sup style="font-size: 20px">KG</sup></h3>
+                                <p>Pesaje<br>Maximo</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-arrow-graph-up-right"></i>
@@ -62,7 +76,14 @@
                             </a>
                         </div>
                     </div>
+                    <div class="animated flipInX col-lg-2 col-xs-4 tile_stats_count">
+
+                        <a href="//hotelmix.es/weather/los-angeles-36184">
+                            <img src="//w.bookcdn.com/weather/picture/32_36184_1_4_34495e_250_2c3e50_ffffff_ffffff_1_2071c9_ffffff_0_3.png?scode=124&domid=" />
+                        </a>
+                    </div>
             </div>
+
             <div class="row">
                 <div class="col-md-6">
                     <!-- AREA CHART -->
@@ -341,16 +362,6 @@
             labels: {!! $numerogalpones !!},
             datasets: [
                 {
-                    label: "Promedio actual",
-                    fillColor: "rgba(60,141,188,0.9)",
-                    strokeColor: "rgba(210, 214, 222, 1)",
-                    pointColor: "rgba(210, 214, 222, 1)",
-                    pointStrokeColor: "#c1c7d1",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
-                    data: {!! $promediogalpones !!}
-                },
-                {
                     label: "Promedio inicial",
                     fillColor: "rgba(60,141,188,0.9)",
                     strokeColor: "rgba(60,141,188,0.8)",
@@ -359,6 +370,16 @@
                     pointHighlightFill: "#fff",
                     pointHighlightStroke: "rgba(60,141,188,1)",
                     data: {!! $primerpromediogalpones !!}
+                },
+                {
+                    label: "Promedio actual",
+                    fillColor: "rgba(60,141,188,0.9)",
+                    strokeColor: "rgba(210, 214, 222, 1)",
+                    pointColor: "rgba(210, 214, 222, 1)",
+                    pointStrokeColor: "#c1c7d1",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: {!! $promediogalpones !!}
                 }
 
 

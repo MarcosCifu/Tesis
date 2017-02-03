@@ -39,15 +39,15 @@
                         @endif()
                     </tr>
                     <tbody>
-                    @foreach($pesos as $peso)
+                    @foreach($ultimos as $animal)
                         <tr>
-                            <td><a href="{{ route('admin.animales.perfil', $peso->animal->id) }}"><span class="badge">{{$peso->animal->DIIO}}</span></a></td>
-                            <td>{{$peso->pesaje}}</td>
-                            <td>{{$peso->fecha}}</td>
+                            <td><a href="{{ route('admin.animales.perfil', $animal->id) }}"><span class="badge">{{$animal->DIIO}}</span></a></td>
+                            <td>{{$animal->ultimopeso->pesaje}}</td>
+                            <td>{{$animal->ultimopeso->fecha}}</td>
                             @if(Auth::user()->admin())
                                 <td>
-                                    <a href="{{ route('admin.pesos.edit', $peso->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
-                                    <a href="{{ route('admin.pesos.destroy', $peso->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este pesaje?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
+                                    <a href="{{ route('admin.pesos.edit', $animal->ultimopeso->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
+                                    <a href="{{ route('admin.pesos.destroy', $animal->ultimopeso->id) }}" class="btn btn-danger" data-toggle="confirmation" data-title="Esta Seguro?" data-btn-ok-label=" Si" data-btn-cancel-label="No"><spam class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
                                 </td>
                             @endif()
                         </tr>
@@ -78,5 +78,18 @@
                 "lengthMenu": [[10, 20, -1], [10, 20, "Todos"]]
             });
         });
+    </script>
+    <script>
+        $('#registrarpeso').parsley();
+
+    </script>
+    <script>
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]'
+            // other options
+        });
+    </script>
+    <script>
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     </script>
 @endsection

@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id','name', 'email', 'password', 'type','fecha_compra','fecha_venta','precio_compra','precio_venta','numero_Guia','procedencia'
+        'id','name', 'email', 'password', 'type','path','fecha_compra','fecha_venta','precio_compra','precio_venta','numero_Guia','procedencia'
     ];
 
     /**
@@ -23,6 +23,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    public function setPathAttribute($path)
+    {
+        if(!empty($path))
+        {
+            $nombre = 'ancalibeefuser' . time() . '.' . $path->getClientOriginalName();
+            $this->attributes['path'] = $nombre;
+            \Storage::disk('s3')->put($nombre, \File::get($path));
+        }
+    }
 
     public function animals()
     {

@@ -75,7 +75,7 @@
                                 @if(Auth::user()->admin())
                                 <td>
                                     <a href="{{ route('admin.historiales.edit', $historial->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
-                                    <a href="{{ route('admin.historiales.destroy', $historial->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este diagnostico?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
+                                    <a href="{{ route('admin.historiales.destroy', $historial->id) }}" class="btn btn-danger" data-toggle="confirmation" data-title="Esta Seguro?" data-btn-ok-label=" Si" data-btn-cancel-label="No"><spam  class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
                                 </td>
                                 @endif()
                             </tr>
@@ -105,5 +105,18 @@
                 }
             });
         });
+    </script>
+    <script>
+        $('#registrarhistorial').parsley();
+
+    </script>
+    <script>
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]'
+            // other options
+        });
+    </script>
+    <script>
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     </script>
 @endsection

@@ -1,4 +1,4 @@
-{{ Form::open(['route' => 'admin.galpones.store', 'method' => 'POST']) }}
+{{ Form::open(['route' => 'admin.galpones.store', 'method' => 'POST','id' => 'registrargalpon', 'data-parsley-validate' =>'']) }}
     <div class="form-group">
         {!! Form::label('numero' ,'Número') !!}
         {!! Form::text('numero', null, ['class' => 'form-control', 'placeholder' => 'Numero del Galpón' , 'required' ]) !!}

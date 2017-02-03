@@ -15,6 +15,7 @@ use PDF;
 
 
 
+
 class AnimalesController extends Controller
 {
     /**
@@ -163,8 +164,11 @@ class AnimalesController extends Controller
         $gananciapeso = $animal->estadisticasanimales->lists('ganancia_peso');
         $distribucionapeso = $animal->estadisticasanimales->lists('distribucion');
 
+
+
         return view ('Animales.perfil')
             ->with('animal',$animal)
+
             ->with('pesos',$pesos)
             ->with('fecha',$fecha)
             ->with('fechaganancia',$fechaganancia)
@@ -209,6 +213,38 @@ class AnimalesController extends Controller
     {
         $animales = Animal::all();
         return view('Animales.ventas')->with('animales',$animales);
+    }
+    public function vender($id)
+    {
+        $animal = Animal::find($id);
+        $animal->venta = 1;
+        $animal->save();
+        $user = Auth::user();
+        $fechaventa = Carbon::now();
+        $animal->users()->attach($user->id, ['fecha_venta'=> $fechaventa]);
+        $animales = Animal::all();
+        Flash::success('El animal ' . $animal->DIIO . ' ha sido vendido con exito!');
+        return view('Animales.ventas')->with('animales',$animales);
+
+    }
+    public function vendertodos()
+    {
+        $animales = Animal::all();
+        foreach ($animales as $animal)
+        {
+            if ($animal->pesaje_actual > 600 AND $animal->venta == 0)
+            {
+                $animal->venta = 1;
+                $animal->save();
+                $user = Auth::user();
+                $fechaventa = Carbon::now();
+                $animal->users()->attach($user->id, ['fecha_venta'=> $fechaventa]);
+                $animales = Animal::all();
+                Flash::success('Los animales ha sido vendidos con exito!');
+                return view('Animales.ventas')->with('animales',$animales);
+            }
+        }
+
     }
 
 

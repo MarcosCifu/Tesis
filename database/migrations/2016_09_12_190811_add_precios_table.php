@@ -15,6 +15,7 @@ class AddPreciosTable extends Migration
         Schema::create('precioKilo', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_users')->unsigned();
+            $table->enum('tipo',['Vaca','Novillo','Vaquilla','Ternero','Ternera']);
             $table->integer('valor');
             $table->date('fecha');
             $table->foreign('id_users')->references('id')->on('users')->onUpdate('cascade');

@@ -27,7 +27,7 @@ class Animal extends Model implements SluggableInterface
         {
             $nombre = 'ancalibeef' . time() . '.' . $path->getClientOriginalName();
             $this->attributes['path'] = $nombre;
-            \Storage::disk('local')->put($nombre, \File::get($path));
+            \Storage::disk('s3')->put($nombre, \File::get($path));
         }
     }
 

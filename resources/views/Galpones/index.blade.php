@@ -24,7 +24,7 @@
                 <div class="box-header">
                     @if(Auth::user()->admin())
                     <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
-                        <i class="fa fa-folder-open-o"></i> Registar nuevo Galpón
+                        Registar nuevo <b>Galpón</b>&nbsp; <i class="fa fa-building"></i>
                     </a>
                     @endif()
                 </div><!-- /.box-header -->
@@ -49,7 +49,7 @@
                                     @if(Auth::user()->admin())
                                     <td>
                                         <a href="{{ route('admin.galpones.edit', $galpon->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
-                                        <a href="{{ route('admin.galpones.destroy', $galpon->id) }}" class="btn btn-danger"><spam onclick = "return confirm('¿Seguro que deseas eliminar este gapón?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
+                                        <a href="{{ route('admin.galpones.destroy', $galpon->id) }}" class="btn btn-danger" data-toggle="confirmation" data-title="Esta Seguro?" data-btn-ok-label=" Si" data-btn-cancel-label="No"><spam class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
                                     </td>
                                     @endif()
                                 </tr>
@@ -80,5 +80,18 @@
                 "lengthMenu": [[10, 20, -1], [10, 20, "Todos"]]
             });
         });
+    </script>
+    <script>
+        $('#registrargalpon').parsley();
+
+    </script>
+    <script>
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]'
+            // other options
+        });
+    </script>
+    <script>
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     </script>
 @endsection

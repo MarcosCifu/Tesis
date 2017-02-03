@@ -92,13 +92,13 @@ class CorralesController extends Controller
         $atributos = Atributo::orderBy('nombre', 'ASC')->lists('nombre', 'id');
         $galpones = Galpon::orderBy('numero', 'ASC')->lists('numero', 'id');
         $losatributos = $corral->atributos->lists('id')->ToArray();
-        $tamaño = $corral->tamaño;
+        $medida = $corral->medida;
 
 
         return view('Corrales.edit')
             ->with('corral',$corral)
             ->with('galpones', $galpones)
-            ->with('tamaño', $tamaño)
+            ->with('medida', $medida)
             ->with('atributos',$atributos)
             ->with('losatributos',$losatributos);
     }
@@ -114,7 +114,7 @@ class CorralesController extends Controller
     {
         $corral = Corral::find($id);
         $corral->fill($request->all());
-        $corral->tamaño = $request->tamaño;
+        $corral->medida = $request->medida;
         $corral->save();
         $corral->atributos()->sync($request->atributos);
         Flash::warning('El corral ' . $corral->numero . ' ha sido editado con exito!');

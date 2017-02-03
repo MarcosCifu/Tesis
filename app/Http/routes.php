@@ -61,9 +61,14 @@ Route::group(['middleware' => ['web']], function () {
         Route::resource('historiales','HistorialesMedicosController');
         //rutas pesos
         Route::resource('pesos','PesosController');
-        Route::get('pesos/ultimos', [
+        Route::get('ultimos', [
             'uses' => 'PesosController@ultimospesos',
             'as' => 'admin.ultimospesos'
+        ]);
+        //ruta perfil
+        Route::get('perfil', [
+            'uses' => 'UsersController@perfil',
+            'as' => 'admin.perfil'
         ]);
         //rutas atributos
         Route::resource('atributos','AtributosController');

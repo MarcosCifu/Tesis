@@ -1,4 +1,4 @@
-{{ Form::open(['route' => 'admin.pesos.store', 'method' => 'POST']) }}
+{{ Form::open(['route' => 'admin.pesos.store', 'method' => 'POST','id' => 'registrarpeso', 'data-parsley-validate' =>'']) }}
     <td>
         <div class="form-group">
             {!! Form::label('animales' ,'Animal') !!}
