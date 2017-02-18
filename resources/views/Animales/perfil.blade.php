@@ -52,8 +52,8 @@
         </div>
         <div class="col-md-8">
             <div class="row tile_count">
-                <div class="animated flipInX col-lg-4 col-xs-4 tile_stats_count">
-                    @if($animal->pesaje_actual>600)
+                <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
+                    @if($animal->pesaje_actual>599)
                         <div class="small-box bg-green">
                             <div class="icon">
                                 <i class="ion-location"></i>
@@ -61,13 +61,10 @@
                             <div class="inner">
                                 <h3>{{$animal->pesaje_actual}} KG
                                 </h3>
-                                <p>Peso Actual</p>
+                                <p>Peso actual</p>
                             </div>
-                            @if(600-$animal->pesaje_actual<0)
-                                <h4 class="small-box-footer"><b>Apto para la venta</b></h4>
-                            @else
-                                <h4 class="small-box-footer"><b>{{600-$animal->pesaje_actual}} KG para peso de venta</b></h4>
-                            @endif
+                            <h4 class="small-box-footer"><b>Apto para la venta</b></h4>
+
                         </div>
                         @else
                             <div class="small-box bg-blue">
@@ -77,17 +74,13 @@
                                 <div class="inner">
                                     <h3>{{$animal->pesaje_actual}} KG
                                     </h3>
-                                    <p>Peso Actual</p>
+                                    <p>Peso actual</p>
                                 </div>
-                                @if(600-$animal->pesaje_actual<0)
-                                    <h4 class="small-box-footer"><b>Apto para la venta</b></h4>
-                                    @else
-                                        <h4 class="small-box-footer"><b>{{600-$animal->pesaje_actual}} KG para peso de venta</b></h4>
-                                @endif
+                                <h4 class="small-box-footer"><b>{{600-$animal->pesaje_actual}} KG para peso de venta</b></h4>
                             </div>
                     @endif
                 </div>
-                <div class="animated flipInX col-lg-4 col-xs-4 tile_stats_count">
+                <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
                     <div class="small-box bg-teal">
                         <div class="icon">
                             <i class="ion-arrow-graph-up-right"></i>
@@ -100,7 +93,20 @@
                         <h4 class="small-box-footer"><b>{{round(($ultimopeso-$animal->pesaje_inicial)/$permanencia,2)}} KG por día</b></h4>
                     </div>
                 </div>
-                <div class="animated flipInX col-lg-4 col-xs-4 tile_stats_count">
+                <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
+                    <div class="small-box bg-green">
+                        <div class="icon">
+                            <i class="ion-social-usd"></i>
+                        </div>
+                        <div class="inner">
+                            <h3>{{number_format(($ultimopeso - $animal->pesaje_inicial) * $ultimoprecio->valor, 0) }}
+                            </h3>
+                            <p>Ganancia estimada</p>
+                        </div>
+                        <h4 class="small-box-footer"><b>$ {{ number_format(round(($ultimopeso-$animal->pesaje_inicial)/$permanencia,0) * $ultimoprecio->valor,0)}} por día</b></h4>
+                    </div>
+                </div>
+                <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
                     <div class="small-box bg-maroon">
                         <div class="inner">
                             <h3>{{$permanencia}} Días</h3>

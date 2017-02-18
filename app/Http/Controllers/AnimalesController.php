@@ -11,6 +11,7 @@ use App\Http\Requests\AnimalRequest;
 use Illuminate\Support\Facades\Auth;
 use Laracasts\Flash\Flash;
 use Carbon\Carbon;
+use App\Precio;
 use PDF;
 
 
@@ -163,6 +164,8 @@ class AnimalesController extends Controller
         $permanencia= $animal->created_at->diff($fechaactual)->days+1;
         $gananciapeso = $animal->estadisticasanimales->lists('ganancia_peso');
         $distribucionapeso = $animal->estadisticasanimales->lists('distribucion');
+        $precios = Precio::all();
+        $ultimoprecio = $precios->where('tipo',$animal->tipo)->last();
 
 
 
@@ -171,6 +174,7 @@ class AnimalesController extends Controller
 
             ->with('pesos',$pesos)
             ->with('fecha',$fecha)
+            ->with('ultimoprecio',$ultimoprecio)
             ->with('fechaganancia',$fechaganancia)
             ->with('ultimopeso',$ultimopeso)
             ->with('permanencia',$permanencia)
@@ -199,7 +203,7 @@ class AnimalesController extends Controller
     public function crearPDF($id)
     {
         $animal = Animal::find($id);
-        $pdf = PDF::loadview('Animales.pdf',['animal' => $animal]);
+        $pdf = PDF::loadview('Animales.perfil',['animal' => $animal]);
         return $pdf->stream('animal.pdf');
 
     }
@@ -244,6 +248,13 @@ class AnimalesController extends Controller
                 return view('Animales.ventas')->with('animales',$animales);
             }
         }
+
+    }
+    public function vendidos()
+    {
+        $animal = Animal::all();
+        $vendidos = $animal->where('venta',1);
+        return view('Animales.')->with('vendidos',$vendidos);
 
     }
 

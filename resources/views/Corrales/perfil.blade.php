@@ -32,9 +32,6 @@
                             @endforeach
                         </li>
                         <li class="list-group-item">
-                            <b>Estado</b> <a class="pull-right"></a>
-                        </li>
-                        <li class="list-group-item">
                             <b>Atributos del Corral</b>
                             @foreach($atributos as $atributo)
                                 <span class="badge pull-right">{{$atributo->nombre}}</span>
@@ -66,9 +63,6 @@
                         <div class="icon">
                             <i class="ion ion-speedometer"></i>
                         </div>
-                        <a href="{{ route('admin.pesos.index') }}" class="small-box-footer">
-                            Listado de Pesajes <i class="fa fa-arrow-circle-right"></i>
-                        </a>
                     </div>
                 </div>
                 <div class="animated flipInX col-lg-4 col-xs-4 tile_stats_count">
@@ -80,9 +74,6 @@
                         <div class="icon">
                             <i class="ion ion-arrow-graph-down-right"></i>
                         </div>
-                        <a href="" class="small-box-footer">
-                            More info <i class="fa fa-arrow-circle-right"></i>
-                        </a>
                     </div>
                 </div>
                 <div class="animated flipInX col-lg-4 col-xs-4 tile_stats_count">
@@ -94,9 +85,6 @@
                         <div class="icon">
                             <i class="ion ion-arrow-graph-up-right"></i>
                         </div>
-                        <a href="#" class="small-box-footer">
-                            More info <i class="fa fa-arrow-circle-right"></i>
-                        </a>
                     </div>
                 </div>
             </div>

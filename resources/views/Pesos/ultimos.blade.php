@@ -17,7 +17,7 @@
     </div>
     <div class="panel panel-default animated pulse slow go">
         <div class="panel-heading">
-            <h1>Listado de <b>Pesajes</b></h1>
+            <h1>Listado de <b>Ultimos Pesajes</b></h1>
         </div>
         <div class="panel-body">
             <div class="box-header">

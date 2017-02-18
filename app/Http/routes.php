@@ -12,12 +12,16 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
-    Route::get('index','LogController@show');
+    Route::get('index','LogController@index');
     Route::resource('log','LogController');
     Route::get('logout', 'LogController@logout');
+    Route::get('/', [
+        'uses' => 'LogController@inicio',
+        'as' => 'inicio'
+    ]);
 
     Route::group(['middleware' => 'auth'],function (){
-        Route::resource('/','HomeController');
+        Route::resource('home','HomeController');
         Route::resource('reportes', 'ReportesController@index');
     });
 
@@ -52,6 +56,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('{id}/descargaranimalPDF', [
             'uses' => 'AnimalesController@descargarPDF',
             'as' => 'descargaranimalPDF'
+        ]);
+        Route::get('vendidos', [
+            'uses' => 'AnimalesController@vendidos',
+            'as' => 'admin.vendidos'
         ]);
         //rutas materiales
         Route::resource('materiales','MaterialesController');

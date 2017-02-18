@@ -45,6 +45,7 @@ class EstadisticasCorralesController extends Controller
         $estadisticas->pesaje_maximo = $pesajemaximo;
         $estadisticas->pesaje_minimo = $pesajeminimo;
         $estadisticas->pesaje_total = $pesajetotal;
+        $estadisticas->cantidad_enfermos = $corrales->estadoanimales();
         $estadisticas->fecha = Carbon::now()->toDateString();
         $estadisticas->ganancia_peso = $gananciapeso;
         $estadisticas->save();

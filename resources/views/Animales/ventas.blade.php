@@ -9,17 +9,18 @@
             <div class="box-header">
             </div><!-- /.box-header -->
             <div class="box-body">
-                <table id="animales" class="table table-bordered table-hover">
+                <table id="animal" class="table table-bordered table-hover">
                     <thead>
-                    <tr>
-                        <th>DIIO</th>
-                        <th>Tipo</th>
-                        <th>Galpón</th>
-                        <th>Corral</th>
-                        <th>Estado</th>
-                        <th>Fecha Ingreso</th>
-                        <th>Ultimo Pesaje</th>
-                    </tr>
+                        <tr>
+                            <th>DIIO</th>
+                            <th>Tipo</th>
+                            <th>Galpón</th>
+                            <th>Corral</th>
+                            <th>Estado</th>
+                            <th>Fecha Ingreso</th>
+                            <th>Ultimo Pesaje</th>
+                            <th>Acción</th>
+                        </tr>
                     </thead>
                     <tbody>
                     @foreach($animales as $animal)
@@ -44,19 +45,18 @@
                             <td>{!! $animal->ultimopeso->pesaje or "0"!!} KG</td>
                             @if(Auth::user()->admin())
                                 <td>
-                                    <a href="{{route('admin.vender',$animal->id)}}" class="btn btn-success pull-right"><b>Vender</b></a>
+                                    <a href="{{route('admin.vender',$animal->id)}}" class="btn btn-success pull-right" data-toggle="confirmation" data-title="Esta Seguro?" data-btn-ok-label=" Si" data-btn-cancel-label="No"><b>Vender</b></a>
                                 </td>
-                            @endif()
+                                @endif()
                         </tr>
                         @endif
-
                     @endforeach
                     </tbody>
                 </table>
             </div><!-- /.box-body -->
             @if($animales->whereIn('pesaje_actual', [600, 2000])->count() >= 2)
             <div>
-                <a href="{{route('admin.vendertodos')}}" class="btn btn-success pull-right">Vender <b>Todos</b></a>
+                <a href="{{route('admin.vendertodos')}}" class="btn btn-success pull-right" data-toggle="confirmation" data-title="Esta Seguro?" data-btn-ok-label=" Si" data-btn-cancel-label="No">Vender <b>Todos</b></a>
             </div>
                 @endif
         </div>
@@ -64,8 +64,29 @@
 @endsection
 @section('tablejs')
     <script>
-        $("#checkAll").click(function(){
-            $('input:checkbox').not(this).prop('checked', this.checked);
+        $(function () {
+            $('#animal').DataTable({
+                "info": false,
+                "scrollX" : true,
+                "language": {
+                    "emptyTable": "No hay datos disponibles",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Ultimo",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                    "lengthMenu": "Mostrar _MENU_ entradas"
+                },
+                "lengthMenu": [[10, 20, -1], [10, 20, "Todos"]]
+            });
         });
     </script>
-    @endsection
+    <script>
+        $('[data-toggle=confirmation]').confirmation({
+            rootSelector: '[data-toggle=confirmation]'
+            // other options
+        });
+    </script>
+@endsection

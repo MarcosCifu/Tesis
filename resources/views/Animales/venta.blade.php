@@ -1,8 +1,4 @@
 @extends('template')
-
-@section('title','Ingresar Animal')
-
-
 @section('content')
     @include('errors')
     {{ Form::open(['route' => 'admin.animales.store', 'method' => 'POST', 'files'=>true]) }}

@@ -16,4 +16,7 @@ class Galpon extends Model
     {
         return $this->hasMany('App\EstadisticaGalpon','id_galpon');
     }
+    public function numero(){
+        return 'Galpón ' . $this->attributes['numero'];
+    }
 }

@@ -14,7 +14,6 @@ class AddEstadisticasCorralesTable extends Migration
     {
         Schema::create('estadisticas_corrales', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('corralMayorGanancia');
             $table->integer('pesaje_promedio');
             $table->integer('pesaje_maximo');
             $table->integer('pesaje_minimo');
@@ -23,6 +22,7 @@ class AddEstadisticasCorralesTable extends Migration
             $table->string('tipoMayorEnfermedad');
             $table->integer('ganancia_dinero');
             $table->integer('ganancia_peso');
+            $table->integer('cantidad_enfermos');
             $table->date('fecha');
             $table->integer('id_corral')->unsigned();
             $table->foreign('id_corral')->references('id')->on('corrales')->onUpdate('cascade')->onDelete('no action');

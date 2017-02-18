@@ -62,11 +62,11 @@
         <div class="panel-body">
                 <div class="box-header">
                     @if(Auth::user()->admin())
-                    <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
-                        Registar nuevo <b>Animal</b> &nbsp; <i class="fa fa-paw"></i>
-                    </a>
-                        <a href="{{route('admin.ventas')}}" type="button" class="btn btn-primary">
-                            Vender <b>Animales</b> &nbsp; <i class="fa fa-exchange"></i>
+                        <a type="button" class="btn btn-primary xs" data-toggle="modal" data-target="#registrar">
+                            Nuevo <b>Animal</b> &nbsp; <i class="fa fa-paw"></i>
+                        </a>
+                        <a href="{{route('admin.ventas')}}" type="button" class="btn btn-success xs">
+                            Vender <b>Animal</b> &nbsp; <i class="fa fa-exchange"></i>
                         </a>
                     @endif()
                 </div><!-- /.box-header -->

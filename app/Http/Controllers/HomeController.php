@@ -31,10 +31,11 @@ class HomeController extends Controller
         });
         $galpones = Galpon::all();
         $cantidadgalpones = $galpones->count();
-        $numerogalpones = $galpones->lists('numero')->values();
         $promediogalpones = new Collection();
         $primerpromediogalpones = new Collection();
+        $numerogalpones = new Collection();
         foreach ($galpones as $galpon){
+            $numerogalpones->push($galpon->numero());
             $ultimaestadistica = $galpon->estadisticasgalpones->take(-1);
             $primeraestadistica = $galpon->estadisticasgalpones->take(1);
             foreach ($primeraestadistica as $primera){
@@ -44,14 +45,28 @@ class HomeController extends Controller
                 $promediogalpones->push($ultima->pesaje_promedio);
             }
         }
+        $corrales = Corral::all();
+        $cantidadenfermos = new Collection();
+        foreach ($corrales as $corral){
+            $cantidadenfermos->push($corral->estadisticascorrales->take(-1));
+
+        }
+        $masenfermos = $cantidadenfermos->sortBy('cantidad_enfermos')->last();
+        foreach ($masenfermos as $enfermos){
+            $corralenfermos = Corral::find($enfermos->id_corral);
+            $maxenfermos = $enfermos->cantidad_enfermos;
+        }
         $cantidad = collect($animal)->count('id');
         $vivos = $animal->where("estado",'Vivo')->count();
         $muertos = $animal->where("estado",'Muerto')->count();
         $enfermos = $animal->where("estado",'Enfermo')->count();
         $vendidos = $animal->where("venta",1)->count();
-        $minimo = $animal->min('pesaje_actual');
-        $maximo = $animal->max('pesaje_actual');
+        $minimo = $animal->where('venta',0)->sortBy('pesaje_actual')->first();
+        $maximo = $animal->where('venta',0)->sortBy('pesaje_actual')->last();
         $promedio = $animal->avg('pesaje_actual');
+        $aptos = $animal->filter(function ($item) {
+            return $item['pesaje_actual'] > 599;
+        });
 
 
 
@@ -60,6 +75,7 @@ class HomeController extends Controller
             ->with('cantidad', $cantidad)
             ->with('vivos',$vivos)
             ->with('muertos',$muertos)
+            ->with('aptos',$aptos)
             ->with('enfermos',$enfermos)
             ->with('minimo',$minimo)
             ->with('vendidos',$vendidos)
@@ -68,7 +84,9 @@ class HomeController extends Controller
             ->with('numerogalpones',$numerogalpones)
             ->with('promediogalpones',$promediogalpones)
             ->with('primerpromediogalpones',$primerpromediogalpones)
-            ->with('galpones',$galpones);
+            ->with('galpones',$galpones)
+            ->with('maxenfermos', $maxenfermos)
+            ->with('corralenfermos', $corralenfermos);
     }
 
     /**
@@ -82,5 +100,6 @@ class HomeController extends Controller
         $pesos = $animal->pesos->list('pesaje');
         return view('home')->with('pesos', $pesos);
     }
+
 
 }

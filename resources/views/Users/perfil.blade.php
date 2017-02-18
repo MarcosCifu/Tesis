@@ -26,7 +26,9 @@
                             <b>Animales vendidos</b> <a class="pull-right">{{$user->animals->where("venta",1)->count()}}</a>
                         </li>
                     </ul>
-                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-warning btn-block"><b>Editar</b></a>
+                    @if($user->type == 'admin')
+                        <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-warning btn-block"><b>Editar</b></a>
+                    @endif
                 </div>
                 <!-- /.box-body -->
             </div>

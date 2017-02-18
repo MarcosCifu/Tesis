@@ -47,25 +47,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="mailto:info@example.com">info@example.com</a></li>
             </ul>
         </div>
-        <div id="example2">
-            <div class="wrapper2">
-                <div class="content-wrapper2">
-                    <div class="search-button2">
-                        <span></span>
-                    </div>
-                    <div class="search-box2">
-                        <form action="#" method="post">
-                            <input type="text" name="Search" placeholder="Search Here..." required="">
-                            <input type="submit" value="Send"> <img src="{{ asset('plugins/index/web/images/close.png')}}" alt=" " />
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="w3l_header_right">
             <ul>
-                <li><a href="{{route('index')}}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>log in</a></li>
-                <li><a href="sign-up.html"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>sign up</a></li>
+
+                @if(Auth::user())
+                    <li><a href="{{route('home.index')}}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Panel de Control</a></li>
+                    @else
+                        <li><a href="{{route('log.index')}}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Ingresar</a></li>
+                @endif
             </ul>
         </div>
         <div class="clearfix"> </div>
@@ -84,7 +73,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                 </button>
                 <div class="logo">
-                    <h1><a class="navbar-brand" href="/index">A<span>n</span>cali</a></h1>
+                    <h1><a class="navbar-brand" href="{{route('inicio')}}">A<span>n</span>cali</a></h1>
                 </div>
             </div>
 

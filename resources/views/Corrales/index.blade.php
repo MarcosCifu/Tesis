@@ -1,7 +1,7 @@
 @extends('template')
 @section('content')
     @include('errors')
-    <!-- Modal  Crear-->
+    <!-- Modal  Crear Corral-->
     <div class="modal fade" id="registrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="box box-primary box-solid">
@@ -39,7 +39,7 @@
             </div>
         </div>
     </div>
-    <!-- Modal  Crear-->
+    <!-- Modal  Crear Atributo-->
     <div class="modal fade" id="registraratributo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="box box-primary box-solid">
@@ -73,11 +73,11 @@
         <div class="panel-body">
                 <div class="box-header">
                     @if(Auth::user()->admin())
-                        <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registraratributo">
-                            Registar nuevo <b>Atributo</b> &nbsp; <i class="fa fa-folder-open"></i>
+                        <a type="button" class="btn btn-primary xs" data-toggle="modal" data-target="#registrar">
+                            Nuevo <b>Corral</b> &nbsp; <i class="fa fa-tags"></i>
                         </a>
-                        <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrar">
-                            Registar nuevo <b>Corral</b> &nbsp; <i class="fa fa-tags"></i>
+                        <a type="button" class="btn btn-success xs" data-toggle="modal" data-target="#registraratributo">
+                            Nuevo <b>Atributo</b> &nbsp; <i class="fa fa-folder-open"></i>
                         </a>
                     @endif()
                 </div><!-- /.box-header -->

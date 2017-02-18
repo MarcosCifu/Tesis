@@ -47,20 +47,20 @@
                 {!! Form::label('password' ,'Contraseña') !!}
                 {!! Form::password('password', ['class' => 'form-control', 'placeholder' => '******************','required' ]) !!}
             </div>
-        <div class="row">
-            <div class="col-xs-8">
-                <div class="checkbox icheck">
-                    <label>
-                        <input type="checkbox"> Recordarme
-                    </label>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input type="checkbox"> Recordarme
+                        </label>
+                    </div>
                 </div>
+                 <!-- /.col -->
+                <div class="form-group col-xs-4">
+                    {!! Form::submit('Ingresar' ,['class' => 'btn btn-primary']) !!}
+                </div>
+                 <!-- /.col -->
             </div>
-            <!-- /.col -->
-            <div class="form-group col-xs-4">
-                {!! Form::submit('Ingresar' ,['class' => 'btn btn-primary']) !!}
-            </div>
-            <!-- /.col -->
-        </div>
 
         {!! Form::close() !!}
 

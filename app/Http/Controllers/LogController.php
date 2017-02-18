@@ -41,7 +41,7 @@ class LogController extends Controller
     public function store(loginRequest $request)
     {
         if(Auth::attempt(['email' => $request['email'], 'password' => $request['password']])){
-            return redirect()->route('index');
+            return redirect()->route('home.index');
         }
         Flash::error("Datos incorrectos");
         return redirect()->route('log.index');
@@ -60,7 +60,7 @@ class LogController extends Controller
      */
     public function show()
     {
-        return view('index2');
+        return view('login');
     }
 
     /**
@@ -95,5 +95,9 @@ class LogController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function inicio()
+    {
+        return view('index2');
     }
 }

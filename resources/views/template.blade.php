@@ -79,18 +79,11 @@
 
 <script src="{{ asset ("/plugins/fastclick/fastclick.min.js") }}"></script>
 
-<script src="{{ asset ("/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js") }}"></script>
-
 <script src="{{ asset("/plugins/datatables/jquery.dataTables.min.js") }}"></script>
 <script src="{{ asset("/plugins/datatables/dataTables.bootstrap.min.js") }}"></script>
 
 <script src="{{ asset ("/plugins/chartjs/Chart.js") }}"></script>
 <script src="{{ asset ("/plugins/chosen/chosen.jquery.js") }}"></script>
-
-
-
-
-
 
 
 @yield('chartjs')
