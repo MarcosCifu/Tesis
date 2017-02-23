@@ -49,7 +49,7 @@ class LogController extends Controller
     public function logout()
     {
         Auth::logout();
-        return view('index2');
+        return view('Index.index2');
     }
 
     /**
@@ -98,6 +98,18 @@ class LogController extends Controller
     }
     public function inicio()
     {
-        return view('index2');
+        return view('Index.index2');
+    }
+    public function about()
+    {
+        return view('Index.about');
+    }
+    public function procesos()
+    {
+        return view('Index.procesos');
+    }
+    public function sustentabilidad()
+    {
+        return view('Index.sustentabilidad');
     }
 }

@@ -127,10 +127,20 @@
                         <!-- /.box-body -->
                         <div class="box-footer no-padding">
                             <ul class="nav nav-pills nav-stacked">
-                                <li><a href="{{route('admin.corrales.perfil',$corralenfermos->id)}}">Corral con mayor cantidad de enfermos: <span class="badge">Corral {{$corralenfermos->numero}}</span>
-                                        <span class="pull-right text-red"> {{round(($maxenfermos/$enfermos)*100,2)}}%</span>
+                                @if($enfermos > 0)
+                                <li>
+                                    <a href="{{route('admin.corrales.perfil',$corralenfermos->id)}}">Corral con mas <span class="label label-warning">Enfermos : </span> <span class="badge">Corral {{$corralenfermos->numero}}</span>
+                                        <span class="pull-right text-yellow"> {{round(($maxenfermos/$enfermos)*100,1)}} %</span>
                                     </a>
                                 </li>
+                                @endif
+                                @if($muertos > 0)
+                                    <li>
+                                        <a href="{{route('admin.corrales.perfil',$corralmuertos->id)}}">Corral con mas <span class="label label-danger">Muertos : </span> <span class="badge">Corral {{$corralmuertos->numero}}</span>
+                                            <span class="pull-right text-red"> {{round(($maxmuertos/$muertos)*100,1)}} %</span>
+                                        </a>
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                         <!-- /.footer -->

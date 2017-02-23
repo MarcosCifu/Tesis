@@ -23,6 +23,7 @@ class AddEstadisticasCorralesTable extends Migration
             $table->integer('ganancia_dinero');
             $table->integer('ganancia_peso');
             $table->integer('cantidad_enfermos');
+            $table->integer('cantidad_muertos');
             $table->date('fecha');
             $table->integer('id_corral')->unsigned();
             $table->foreign('id_corral')->references('id')->on('corrales')->onUpdate('cascade')->onDelete('no action');

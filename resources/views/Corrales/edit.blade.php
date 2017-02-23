@@ -24,8 +24,8 @@
                                     {!! Form::select('atributos[]', $atributos, $losatributos, ['class' => 'form-control select-atributo' ,'multiple', 'required' ]) !!}
                                 </div>
                                 <div class="form-group">
-                                    {!! Form::label('medida' ,'Medida') !!}
-                                    {!! Form::text('medida', $medida, ['class' => 'form-control', 'placeholder' => 'Tamaño en m2' , 'required' ]) !!}
+                                    {!! Form::label('tamaño' ,'Medida') !!}
+                                    {!! Form::text('tamaño', $medida, ['class' => 'form-control', 'placeholder' => 'Tamaño en m2' , 'required' ]) !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::submit('Guardar' ,['class' => 'btn btn-primary']) !!}

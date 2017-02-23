@@ -19,6 +19,18 @@ Route::group(['middleware' => ['web']], function () {
         'uses' => 'LogController@inicio',
         'as' => 'inicio'
     ]);
+    Route::get('/about', [
+        'uses' => 'LogController@about',
+        'as' => 'about'
+    ]);
+    Route::get('/procesos', [
+        'uses' => 'LogController@procesos',
+        'as' => 'procesos'
+    ]);
+    Route::get('/sustentabilidad', [
+        'uses' => 'LogController@sustentabilidad',
+        'as' => 'sustentabilidad'
+    ]);
 
     Route::group(['middleware' => 'auth'],function (){
         Route::resource('home','HomeController');

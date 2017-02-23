@@ -253,8 +253,8 @@ class AnimalesController extends Controller
     public function vendidos()
     {
         $animal = Animal::all();
-        $vendidos = $animal->where('venta',1);
-        return view('Animales.')->with('vendidos',$vendidos);
+        $animales= $animal->where('venta',1);
+        return view('Animales.vendidos')->with('animales',$animales);
 
     }
 

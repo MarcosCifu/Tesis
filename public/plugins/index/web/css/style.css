@@ -561,7 +561,7 @@ input[type="submit"],.header_left ul li a,.agile_back_home a,.agileits_social h5
     color: #999;
 }
 .agile_text_box i{
-	background:url(../images/img-sp.png) no-repeat -12px 0px;
+	background:url(../images/cow.png) no-repeat ;
 	display:block;
 	width:64px;
 	height:64px;
@@ -604,7 +604,12 @@ i.clock{
 .banner_bottom_left h3{
 	font-size: 2em;
     color: #212121;
-    text-transform: capitalize;
+}
+h3.lowercase{
+	text-transform: lowercase;
+}
+h3.capitalize{
+	text-transform: capitalize;
 }
 .banner_bottom_left p i{
 	color:#ff9900;
@@ -684,7 +689,7 @@ p.quia{
     font-size: 1em !important;
     font-style: italic;
     margin: .5em 0 0 !important;
-    text-transform: capitalize;
+   
     font-weight: 500 !important;
 }
 .agileits_news_grids{
@@ -1052,7 +1057,7 @@ ul.social li{
 /*-- //footer --*/
 /*-- banner1 --*/
 .banner1{
-	background:url(../images/12.jpg) no-repeat 0px 0px;
+	background:url(../images/nosotros.jpg) no-repeat 0px 0px;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
@@ -1192,10 +1197,15 @@ ul.social li{
 	padding:2em 1em 0;
 }
 .agile_about_grid_right h4{
-	text-transform:capitalize;
 	font-size:1.8em;
 	color:#212121;
 	line-height:1.5em;
+}
+h4.lowercase{
+	text-transform: lowercase;
+}
+h4.capitalize{
+	text-transform: capitalize;
 }
 .agile_about_grid_right p{
 	color:#999;
@@ -1208,6 +1218,9 @@ ul.social li{
 	color:#212121;
 }
 .agile_about_grid_right p span{
+	color:#ff9900;
+}
+.agile_about_grid_right h4 span{
 	color:#ff9900;
 }
 .wthree_more3 a {

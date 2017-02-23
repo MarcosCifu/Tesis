@@ -105,13 +105,13 @@
                                     @if($corral->cantidad_animales == 0)
                                         <span class="label label-success">{{$corral->cantidad_animales}}</span>
                                     @else
-                                        @if($corral->cantidad_animales > round($corral->tamaño-20/($corral->cantidad_animales*3)+20))
-                                            <span class="label label-danger">{{$corral->cantidad_animales}}</span>
+                                        @if($corral->cantidad_animales/($corral->tamaño/3) < 0.7)
+                                            <span class="label label-primary">{{$corral->cantidad_animales}}</span>
                                         @else
-                                            @if($corral->cantidad_animales < round(($corral->tamaño/($corral->cantidad_animales*3))))
-                                                <span class="label label-primary">{{$corral->cantidad_animales}}</span>
-                                            @else
+                                            @if($corral->cantidad_animales/($corral->tamaño/3) < 0.9)
                                                 <span class="label label-warning">{{$corral->cantidad_animales}}</span>
+                                            @else
+                                                <span class="label label-danger">{{$corral->cantidad_animales}}</span>
                                             @endif
                                         @endif
                                     @endif

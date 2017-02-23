@@ -51,10 +51,15 @@ class HomeController extends Controller
             $cantidadenfermos->push($corral->estadisticascorrales->take(-1));
 
         }
+        $masmuertos = $cantidadenfermos->sortBy('cantidad_muertos')->last();
         $masenfermos = $cantidadenfermos->sortBy('cantidad_enfermos')->last();
         foreach ($masenfermos as $enfermos){
             $corralenfermos = Corral::find($enfermos->id_corral);
             $maxenfermos = $enfermos->cantidad_enfermos;
+        }
+        foreach ($masmuertos as $muertos){
+            $corralmuertos = Corral::find($muertos->id_corral);
+            $maxmuertos = $muertos->cantidad_muertos;
         }
         $cantidad = collect($animal)->count('id');
         $vivos = $animal->where("estado",'Vivo')->count();
@@ -86,7 +91,9 @@ class HomeController extends Controller
             ->with('primerpromediogalpones',$primerpromediogalpones)
             ->with('galpones',$galpones)
             ->with('maxenfermos', $maxenfermos)
-            ->with('corralenfermos', $corralenfermos);
+            ->with('corralenfermos', $corralenfermos)
+            ->with('maxmuertos', $maxmuertos)
+            ->with('corralmuertos', $corralmuertos);
     }
 
     /**

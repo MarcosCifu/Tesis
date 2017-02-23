@@ -2,7 +2,7 @@
     <section class="sidebar">
         <ul class="sidebar-menu">
             <li class="header"><i class="fa fa-gears"></i> Panel de Control</li>
-            <li class="{{ Request::is('home')? "active":""}}"><a href="{{ route('home.index')}}"><i class="glyphicon glyphicon-home"></i> <span>Inicio</span></a></li>
+            <li class="{{ Request::is('home')? "active":''}}"><a href="{{ route('home.index')}}"><i class="glyphicon glyphicon-home"></i> <span>Inicio</span></a></li>
             <li class="{{ Request::is('admin/animales')? 'active':''}}"><a href="{{ route('admin.animales.index')}}"><i class="fa  fa-paw"></i><span>Animales</span></a></li>
             <li class="{{ Request::is('admin/galpones')? 'active':''}}"><a href="{{ route('admin.galpones.index')}}"><i class="fa fa-building"></i><span>Galpones</span></a></li>
             <li class="{{ Request::is('admin/corrales')? 'active':''}}"><a href="{{ route('admin.corrales.index')}}"><i class="fa fa-tags"></i><span>Corrales</span></a></li>

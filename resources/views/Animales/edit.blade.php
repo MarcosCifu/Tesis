@@ -25,7 +25,7 @@
                             </div>
                             <div class="form-group">
                                 {!! Form::label('estado','Estado') !!}
-                                {!! Form::select('estado',[ 'Vivo' => 'Vivo' , 'Muerto' => 'Muerto', 'Enfermo' => 'Enfermo' ], 'Vivo',['class'=> 'form-control', 'placeholder' => 'Seleccione un estado' , 'required' ]) !!}
+                                {!! Form::select('estado',[ 'Vivo' => 'Vivo' , 'Muerto' => 'Muerto', 'Enfermo' => 'Enfermo' ], $animal->estado,['class'=> 'form-control', 'placeholder' => 'Seleccione un estado' , 'required' ]) !!}
                             </div>
                             <div class="form-group">
                                 {!! Form::label('fecha_compra','Fecha de Ingreso') !!}<br>
