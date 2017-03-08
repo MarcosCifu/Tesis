@@ -192,6 +192,10 @@ Route::group(['middleware' => ['web']], function () {
                 'uses' => 'AnimalesController@vendertodos',
                 'as' => 'admin.vendertodos'
             ]);
+            Route::post('enviar', [
+                'uses' => 'AnimalesController@enviarficha',
+                'as' => 'admin.animales.enviarficha'
+            ]);
             //rutas calendario
             Route::resource ('calendarios','CalendariosController');
             Route::get('cargaEventos{id?}','CalendariosController@show');

@@ -47,20 +47,20 @@ class HomeController extends Controller
         }
         $corrales = Corral::all();
         $cantidadenfermos = new Collection();
+        $cantidadmuertos = new Collection();
         foreach ($corrales as $corral){
-            $cantidadenfermos->push($corral->estadisticascorrales->take(-1));
+            $cantidadenfermos->push($corral->estadisticascorrales->pop());
+            $cantidadmuertos->push($corral->estadisticascorrales->pop());
 
         }
         $masmuertos = $cantidadenfermos->sortBy('cantidad_muertos')->last();
         $masenfermos = $cantidadenfermos->sortBy('cantidad_enfermos')->last();
-        foreach ($masenfermos as $enfermos){
-            $corralenfermos = Corral::find($enfermos->id_corral);
-            $maxenfermos = $enfermos->cantidad_enfermos;
-        }
-        foreach ($masmuertos as $muertos){
-            $corralmuertos = Corral::find($muertos->id_corral);
-            $maxmuertos = $muertos->cantidad_muertos;
-        }
+
+        $corralenfermos = Corral::find($masenfermos->id_corral);
+        $maxenfermos = $masenfermos->cantidad_enfermos;
+        $corralmuertos = Corral::find($masmuertos->id_corral);
+        $maxmuertos = $masmuertos->cantidad_muertos;
+
         $cantidad = collect($animal)->count('id');
         $vivos = $animal->where("estado",'Vivo')->count();
         $muertos = $animal->where("estado",'Muerto')->count();

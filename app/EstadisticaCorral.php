@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class EstadisticaCorral extends Model
 {
     protected $table = 'estadisticas_corrales';
-    protected $fillable = ['id','fecha','pesaje_promedio','pesaje_total','tipoMayorGanancia','tipoMayorEnfermedad','ganancia_dinero','id_corral'];
+    protected $fillable = ['id','fecha','pesaje_promedio','pesaje_total','tipoMayorGanancia','tipoMayorEnfermedad','ganancia_dinero','id_corral','cantidad_enfermos','cantidad_muertos'];
     public function corrales()
     {
         return $this->belongsTo('App\Corral','id_corral');

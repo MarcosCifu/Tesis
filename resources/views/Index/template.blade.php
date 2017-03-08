@@ -10,8 +10,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
         function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- //for-mobile-apps -->
-    <link href="{{asset("/plugins/index/web/css/bootstrap.css")}}" rel="stylesheet">
+    <link href="{{asset("/bootstrap/css/bootstrap.min.css")}}" rel="stylesheet">
+
     <link href="{{asset("/plugins/index/web/css/style.css")}}" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{{asset("plugins/iCheck/square/blue.css")}}" rel="stylesheet" >
+    <!--Parsley -->
+    <link href="{{ asset("/plugins/Parsley.js/parsley.css") }}" rel="stylesheet" />
 
     <style type="text/css">
         .timeline {
@@ -240,6 +245,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         @include('Index.footer')
 <!-- for bootstrap working -->
 <script src="{{ asset ("/plugins/index/web/js/bootstrap.js") }}"></script>
+        @yield('script')
 <!-- //for bootstrap working -->
 </body>
 </html>

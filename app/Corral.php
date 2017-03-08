@@ -20,17 +20,25 @@ class Corral extends Model
     {
         return $this->belongsToMany('App\Atributo','corral_atributo','id_corral','id_atributo')->withPivot('id_corral','id_atributo');
     }
-    public function estadoanimales()
-    {
-        return $this->hasMany('App\Animal','id_corral')->where('estado','Enfermo')->count();
-    }
     public function estadisticascorrales()
     {
         return $this->hasMany('App\EstadisticaCorral','id_corral');
     }
+    public function estadoanimales()
+    {
+        return $this->hasMany('App\Animal','id_corral')->where('estado','Enfermo')->count();
+    }
     public function estadoanimalesmuertos()
     {
         return $this->hasMany('App\Animal','id_corral')->where('estado','Muerto')->count();
+    }
+    public function animalesenfermos()
+    {
+        return $this->hasMany('App\Animal','id_corral')->where('estado','Enfermo');
+    }
+    public function animalesmuertos()
+    {
+        return $this->hasMany('App\Animal','id_corral')->where('estado','Muerto');
     }
 
 

@@ -68,6 +68,7 @@
             $('#animal').DataTable({
                 "info": false,
                 "scrollX" : true,
+                "oSearch": { "bSmart": false, "bRegex": true },
                 "language": {
                     "emptyTable": "No hay datos disponibles",
                     "search": "Buscar:",

@@ -42,8 +42,8 @@
                         <tbody>
                         @foreach($precios as $precio)
                             <tr>
-                                <td>{{$precio->tipo}} </td>
-                                <td>${{$precio->valor}} /Kg</td>
+                                <td><span class="badge">{{$precio->tipo}}</span> </td>
+                                <td><b>${{$precio->valor}} /Kg</b></td>
                                 <td>{{$precio->fecha}}</td>
                                 @if(Auth::user()->admin())
                                 <td>

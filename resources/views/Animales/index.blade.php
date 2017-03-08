@@ -62,7 +62,7 @@
         <div class="panel-body">
                 <div class="box-header">
                     @if(Auth::user()->admin())
-                        <a type="button" class="btn btn-primary xs" data-toggle="modal" data-target="#registrar">
+                        <a type="button" class="btn btn-primary xs"  data-toggle="modal" data-target="#registrar">
                             Nuevo <b>Animal</b> &nbsp; <i class="fa fa-paw"></i>
                         </a>
                         <a href="{{route('admin.ventas')}}" type="button" class="btn btn-success xs">
@@ -106,10 +106,10 @@
                                     @endif
                                 </td>
                                 <td>{{$animal->created_at->format('m/Y')}}</td>
-                                <td>{!! $animal->ultimopeso->pesaje or "0"!!}</td>
+                                <td><b>{!! $animal->ultimopeso->pesaje or "0"!!} KG</b></td>
                                 @if(Auth::user()->admin())
                                 <td>
-                                    <a href="{{ route('admin.animales.edit', $animal->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
+                                    <a href="{{ route('admin.animales.edit', $animal->id) }}" class="btn btn-warning" ><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
                                     <a href="{{ route('admin.animales.destroy', $animal->id) }}" class="btn btn-danger" data-toggle="confirmation" data-title="Esta Seguro?" data-btn-ok-label=" Si" data-btn-cancel-label="No"><spam class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
                                 </td>
                                 @endif()
@@ -128,6 +128,7 @@
             $('#animales').DataTable({
                 "info": false,
                 "scrollX" : true,
+                "oSearch": { "bSmart": false, "bRegex": true },
                 "language": {
                     "emptyTable": "No hay datos disponibles",
                     "search": "Buscar:",

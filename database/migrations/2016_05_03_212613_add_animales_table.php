@@ -43,9 +43,8 @@ class AddAnimalesTable extends Migration
     }
     public function down()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::drop('animales','user_animal');
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        Schema::drop('animales');
+        Schema::drop('user_animal');
 
     }
 }

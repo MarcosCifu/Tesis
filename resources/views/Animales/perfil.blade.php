@@ -1,5 +1,34 @@
 @extends('template')
 @section('content')
+    <!-- Modal -->
+    <div class="modal fade" id="enviarcorreo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="box box-primary box-solid">
+                <div class="box-header with-border" >
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>Enviar por <b>Correo</b></h3>
+                </div>
+                <div>
+                    <div class="box-body">
+                        {{ Form::open(['route' => 'admin.animales.enviarficha', 'method' => 'POST', 'files'=>true, 'data-parsley' =>'', 'id' => 'registraranimal']) }}
+                        {!! csrf_field() !!}
+                        <div class="form-group">
+                            {!! Form::hidden('id_animal', $animal->id , null , ['class'=>'form-control']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('email' ,'Correo Electronico') !!}
+                            {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'example@email.com','required']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::submit('Enviar' ,['class' => 'btn btn-success']) !!}
+
+                        </div>
+                        {{ Form::close() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-4">
             <div class="panel panel-default animated pulse slow go">
@@ -7,7 +36,12 @@
                     <h1>Información del <b>Animal</b></h1>
                 </div>
                 <div class="panel-body">
+                    @if($animal->path != "")
                         <img class="profile-user-img img-responsive " src="https://s3-us-west-2.amazonaws.com/ancalibeef/{{$animal->path}}"  style="width: 300px;">
+                        @else
+                        <img class="profile-user-img img-responsive " src="{{asset('images/no-photo.jpg')}}"  style="width: 300px;">
+
+                    @endif
                     <h3 class="profile-username text-center">{{$animal->DIIO}}</h3>
                     <p class="text-muted text-center">DIIO</p>
 
@@ -37,14 +71,15 @@
                             <a href="{{ route('admin.galpones.perfil', $animal->corral->id_galpon) }}" class="badge">Galpón {{$animal->corral->galpon->numero}}</a>
                         </li>
                         <li class="list-group-item">
-                            <b>Editar Información</b><br>
-                            <a href="{{ route('admin.animales.edit', $animal->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
+                            <b>Exportar Información</b><br>
+                            <a href="{{ route('animalPDF', $animal->id) }}" class="btn btn-primary"><spam  class="glyphicon glyphicon-eye-open" aria-hidden="true"></spam>&nbsp; &nbsp;  <b>Ver</b></a>
+                            <a href="{{ route('descargaranimalPDF', $animal->id) }}" class="btn btn-info"><spam  class="glyphicon glyphicon-download" aria-hidden="true"></spam>&nbsp; &nbsp;  <b>Descargar</b></a>
+                            <a class="btn btn-default" data-toggle="modal" data-target="#enviarcorreo"><spam  class="glyphicon glyphicon-envelope" aria-hidden="true"></spam>&nbsp; &nbsp;  <b>Enviar</b></a>
 
                         </li>
                         <li class="list-group-item">
-                            <b>Exportar Información</b><br>
-                            <a href="{{ route('animalPDF', $animal->id) }}" class="btn btn-primary"><spam  class="glyphicon glyphicon-eye-open" aria-hidden="true"></spam>&nbsp; &nbsp;  Ver</a>
-                            <a href="{{ route('descargaranimalPDF', $animal->id) }}" class="btn btn-info"><spam  class="glyphicon glyphicon-download" aria-hidden="true"></spam>&nbsp; &nbsp;  Descargar</a>
+                            <b>Editar Información</b><br>
+                            <a href="{{ route('admin.animales.edit', $animal->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
                         </li>
                     </ul>
                 </div>
@@ -53,13 +88,13 @@
         <div class="col-md-8">
             <div class="row tile_count">
                 <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
-                    @if($animal->pesaje_actual>599)
+                    @if($ultimopeso>450)
                         <div class="small-box bg-green">
                             <div class="icon">
                                 <i class="ion-location"></i>
                             </div>
                             <div class="inner">
-                                <h3>{{$animal->pesaje_actual}} KG
+                                <h3>{{$ultimopeso}} KG
                                 </h3>
                                 <p>Peso actual</p>
                             </div>
@@ -72,11 +107,11 @@
                                     <i class="ion-location"></i>
                                 </div>
                                 <div class="inner">
-                                    <h3>{{$animal->pesaje_actual}} KG
+                                    <h3>{{$ultimopeso}} KG
                                     </h3>
                                     <p>Peso actual</p>
                                 </div>
-                                <h4 class="small-box-footer"><b>{{600-$animal->pesaje_actual}} KG para peso de venta</b></h4>
+                                <h4 class="small-box-footer"><b>{{450-$ultimopeso}} KG para peso de venta</b></h4>
                             </div>
                     @endif
                 </div>
@@ -396,6 +431,7 @@
         $(function () {
             $('#pesos').DataTable({
                 "info": false,
+                "oSearch": { "bSmart": false, "bRegex": true },
                 "language": {
                     "emptyTable": "No hay datos disponibles",
                     "search": "Buscar:",
@@ -412,6 +448,7 @@
         $(function () {
             $('#historial').DataTable({
                 "info": false,
+                "oSearch": { "bSmart": false, "bRegex": true },
                 "language": {
                     "emptyTable": "No hay datos disponibles",
                     "search": "Buscar:",
@@ -425,5 +462,8 @@
                 }
             });
         });
+    </script>
+    <script>
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     </script>
 @endsection

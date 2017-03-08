@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Session;
 use Redirect;
+use App\Http\Controllers\URL;
 use Laracasts\Flash\Flash;
 use App\Http\Requests;
 use App\Http\Requests\loginRequest;

@@ -9,10 +9,12 @@ use App\Corral;
 use App\Galpon;
 use App\Http\Requests\AnimalRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Laracasts\Flash\Flash;
 use Carbon\Carbon;
 use App\Precio;
 use PDF;
+
 
 
 
@@ -169,9 +171,9 @@ class AnimalesController extends Controller
 
 
 
+
         return view ('Animales.perfil')
             ->with('animal',$animal)
-
             ->with('pesos',$pesos)
             ->with('fecha',$fecha)
             ->with('ultimoprecio',$ultimoprecio)
@@ -203,14 +205,36 @@ class AnimalesController extends Controller
     public function crearPDF($id)
     {
         $animal = Animal::find($id);
-        $pdf = PDF::loadview('Animales.perfil',['animal' => $animal]);
+        $pesos = Peso::where('id_animales','=', $animal->id)->orderBy('fecha', 'ASC')->lists('pesaje');
+        $ultimopeso = collect($pesos)->last();
+        $fechaactual = Carbon::now();
+        $permanencia= $animal->created_at->diff($fechaactual)->days+1;
+        $precios = Precio::all();
+        $ultimoprecio = $precios->where('tipo',$animal->tipo)->last();
+        $ultimodiagnostico = $animal->historialesmedicos->where('id_animales',$animal->id)->last();
+        $pdf = PDF::loadview('Animales.pdf',[
+            'animal' => $animal,
+            'permanencia' => $permanencia,
+            'ultimopeso' => $ultimopeso,
+            'ultimodiagnostico' => $ultimodiagnostico]);
         return $pdf->stream('animal.pdf');
 
     }
     public function descargarPDF($id)
     {
         $animal = Animal::find($id);
-        $pdf = PDF::loadview('Animales.pdf',['animal' => $animal]);
+        $pesos = Peso::where('id_animales','=', $animal->id)->orderBy('fecha', 'ASC')->lists('pesaje');
+        $ultimopeso = collect($pesos)->last();
+        $fechaactual = Carbon::now();
+        $permanencia= $animal->created_at->diff($fechaactual)->days+1;
+        $precios = Precio::all();
+        $ultimoprecio = $precios->where('tipo',$animal->tipo)->last();
+        $ultimodiagnostico = $animal->historialesmedicos->where('id_animales',$animal->id)->last();
+        $pdf = PDF::loadview('Animales.pdf',[
+            'animal' => $animal,
+            'permanencia' => $permanencia,
+            'ultimopeso' => $ultimopeso,
+            'ultimodiagnostico' => $ultimodiagnostico]);
         return $pdf->download('animal.pdf');
     }
     public function ventas()
@@ -256,6 +280,25 @@ class AnimalesController extends Controller
         $animales= $animal->where('venta',1);
         return view('Animales.vendidos')->with('animales',$animales);
 
+    }
+    public function enviarficha(Request $request)
+    {
+        $animal = Animal::find($request->id_animal);
+        $this->validate($request,[
+            'email' => 'required|email'
+        ]);
+        $data = array(
+            'email' => $request->email,
+            'subject' => 'Ficha del animal',
+            'bodyMessage' => 'Ficha del animal'
+        );
+        Mail::send('Animales.pdf2',$data, function ($message) use ($data){
+            $message->from('31f246fbb6-ebe4ad@inbox.mailtrap.io ');
+            $message->to($data['email']);
+            $message->subject($data['subject']);
+        });
+        Flash::success('La ficha ha sido enviada con exito!');
+        return redirect()->route('admin.animales.perfil',$animal->id);
     }
 
 

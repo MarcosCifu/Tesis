@@ -1,25 +1,31 @@
 @extends('template')
-
-@section('title','Editar Galpón ' . $galpon->numero)
-
 @section('content')
     @include('errors')
-    {!! Form::model($galpon, ['route' => ['admin.galpones.update', $galpon->id], 'method' => 'PUT']) !!}
+    <div id="form">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-xs-6">
+                <div class="panel panel-default animated pulse slow go">
+                    <div class="panel-heading">
+                        <h1>Información del <b>Galpón</b></h1>
+                    </div>
+                    <div class="panel-body">
+                        <section>
+                            {!! Form::model($galpon, ['route' => ['admin.galpones.update', $galpon->id], 'method' => 'PUT']) !!}
 
-    <div class="form-group">
-        {!! Form::label('numero' ,'Número') !!}
-        {!! Form::text('numero', null, ['class' => 'form-control', 'placeholder' => 'Numero del Galpón' , 'required' ]) !!}
+                            <div class="form-group">
+                                {!! Form::label('numero' ,'Número') !!}
+                                {!! Form::text('numero', null, ['class' => 'form-control', 'placeholder' => 'Numero del Galpón' , 'required' ]) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::submit('Guardar' ,['class' => 'btn btn-success']) !!}
+
+                            </div>
+
+                            {!! Form::close() !!}
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        {!! Form::label('cantidad' ,'Cantidad Estimada') !!}
-        {!! Form::text('cantidad', null, ['class' => 'form-control', 'placeholder' => 'Cantidad Estimada de Animales' , 'required' ]) !!}
-    </div>
-    <div class="form-group">
-        {!! Form::submit('Registrar' ,['class' => 'btn btn-primary']) !!}
-
-    </div>
-
-    {!! Form::close() !!}
-
-
 @endsection

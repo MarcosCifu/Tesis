@@ -116,12 +116,15 @@ class GalponesController extends Controller
         $estadisticas = $galpon->estadisticasgalpones;
         $cantidadcorrales = $corrales->count('id');
         $animales = $corrales->sum('cantidad_animales');
+        $tamaño = $corrales->sum('tamaño');
         $atributos = Atributo::orderBy('nombre', 'ASC')->lists('nombre', 'id');
         $promedio = 0;
         $pesajesmaximos = new Collection();
         $pesajesminimos = new Collection();
+        $tipoanimales = new Collection();
         foreach ($corrales as $corral){
             $ultimaestadistica = $corral->estadisticascorrales->take(-1);
+            $tipoanimales->push($corral->animals->lists('tipo')->unique());
             foreach ($ultimaestadistica as $ultima){
                 if($ultima->pesaje_promedio != 0)
                 {
@@ -132,6 +135,7 @@ class GalponesController extends Controller
                 $pesajesminimos->push($ultima->pesaje_minimo);
             }
         }
+
         if ($cantidadcorrales > 0){
             $promedio = $promedio/$cantidadcorrales;
         }
@@ -150,7 +154,9 @@ class GalponesController extends Controller
             ->with('minimo',$minimo)
             ->with('evolucion',$evolucion)
             ->with('fechaevolucion',$fechaevolucion)
-            ->with('animales',$animales);
+            ->with('animales',$animales)
+            ->with('tamaño',$tamaño)
+            ->with('tipoanimales',$tipoanimales->flatten());
     }
     public function corralcreate($id)
     {

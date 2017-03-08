@@ -13,7 +13,7 @@
                 @if(Auth::user())
                     <li><a href="{{route('home.index')}}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Panel de Control</a></li>
                 @else
-                    <li><a href="{{route('log.index')}}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Ingresar</a></li>
+                    <li><a href="{{route('log.index')}}#login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Ingresar</a></li>
                 @endif
             </ul>
         </div>

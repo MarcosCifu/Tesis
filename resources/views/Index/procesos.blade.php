@@ -23,65 +23,74 @@
             <p class="quia">En Ancali nos preocupamos de que cada proceso sea parte
                 de un ciclo cerrado, donde prime la sustentabilidad, la innovación,
                 el confort animal, el cuidado de las personas y del medio ambiente.</p>
-            <div class="w3_testimonials_grids">
-                <section class="slider">
-                        <div class="flexslider">
-                            <h2>La vida de los Alimentos</h2><br>
-                            <ul class="slides">
-                                <li>
-                                    <div class="w3_testimonials_grid">
-                                        <img src="{{ asset('plugins/index/web/images/maiz.jpg')}}" alt=" " class="img-responsive" />
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="w3_testimonials_grid">
-                                        <img src="{{ asset('plugins/index/web/images/alfalfa.jpg')}}" alt=" " class="img-responsive" />
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    <div class="flexslider">
-                        <h2>La vida de los Animales</h2><br>
-                        <ul class="slides">
-                            <li>
-                                <div class="w3_testimonials_grid">
-                                    <img src="{{ asset('plugins/index/web/images/cicloanimal.jpg')}}" alt=" " class="img-responsive" />
+            <div class="row">
+                    <div class="w3_testimonials_grids">
+                        <section class="slider">
+                            <div class="col-lg-6 col-md-6 col-xs-6">
+                                <div class="flexslider">
+                                <h2>La vida de los Alimentos</h2><br>
+                                <ul class="slides">
+                                    <li>
+                                        <div class="w3_testimonials_grid">
+                                            <img src="{{ asset('plugins/index/web/images/maiz.jpg')}}" alt=" " class="img-responsive" />
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="w3_testimonials_grid">
+                                            <img src="{{ asset('plugins/index/web/images/alfalfa.jpg')}}" alt=" " class="img-responsive" />
+                                        </div>
+                                    </li>
+                                </ul>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="w3_testimonials_grid">
-                                    <img src="{{ asset('plugins/index/web/images/vacas0.png')}}" alt=" " class="img-responsive" />
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-6">
+                                <div class="flexslider">
+                                    <h2>La vida de los Animales</h2><br>
+                                    <ul class="slides">
+                                        <li>
+                                            <div class="w3_testimonials_grid">
+                                                <img src="{{ asset('plugins/index/web/images/cicloanimal.jpg')}}" alt=" " class="img-responsive" />
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="w3_testimonials_grid">
+                                                <img src="{{ asset('plugins/index/web/images/vacas0.png')}}" alt=" " class="img-responsive" />
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="w3_testimonials_grid">
+                                                <img src="{{ asset('plugins/index/web/images/vacas1.png')}}" alt=" " class="img-responsive" />
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="w3_testimonials_grid">
+                                                <img src="{{ asset('plugins/index/web/images/vacas2.png')}}" alt=" " class="img-responsive" />
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="w3_testimonials_grid">
-                                    <img src="{{ asset('plugins/index/web/images/vacas1.png')}}" alt=" " class="img-responsive" />
-                                </div>
-                            </li>
-                            <li>
-                                <div class="w3_testimonials_grid">
-                                    <img src="{{ asset('plugins/index/web/images/vacas2.png')}}" alt=" " class="img-responsive" />
-                                </div>
-                            </li>
-                        </ul>
+                            </div>
+                        </section>
                     </div>
-                </section>
-                <!-- flexSlider -->
-                <link rel="stylesheet" href="{{ asset('plugins/index/web/css/flexslider.css')}}" type="text/css" media="screen" property="" />
-                <script defer src="{{ asset('plugins/index/web/js/jquery.flexslider.js')}}"></script>
-                <script type="text/javascript">
-                    $(window).load(function(){
-                        $('.flexslider').flexslider({
-                            animation: "slide",
-                            start: function(slider){
-                                $('body').removeClass('loading');
-                            }
-                        });
-                    });
-                </script>
-                <!-- //flexSlider -->
+
             </div>
-        </div>
+                        <!-- flexSlider -->
+                        <link rel="stylesheet" href="{{ asset('plugins/index/web/css/flexslider.css')}}" type="text/css" media="screen" property="" />
+                        <script defer src="{{ asset('plugins/index/web/js/jquery.flexslider.js')}}"></script>
+                        <script type="text/javascript">
+                            $(window).load(function(){
+                                $('.flexslider').flexslider({
+                                    animation: "slide",
+                                    start: function(slider){
+                                        $('body').removeClass('loading');
+                                    }
+                                });
+                            });
+                        </script>
+                        <!-- //flexSlider -->
+                    </div>
+                </div>
+            </div>
     </div>
     <!-- //testimonials -->
     <!-- about -->

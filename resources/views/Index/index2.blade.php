@@ -166,5 +166,31 @@
 </div>
 <!-- //testimonials -->
 @endsection
+@section('script')
+    <!-- jQuery 2.1.3 -->
+    <script src="{{ asset ("/plugins/jQuery/jQuery-2.1.4.min.js") }}"></script>
+    <script src="{{ asset ("/plugins/Parsley.js/parsley.min.js") }}"></script>
+    <script src="{{ asset ("/plugins/Parsley.js/es.js") }}"></script>
+    <!-- Bootstrap 3.3.2 JS -->
+    <script src="{{ asset ("/bootstrap/js/bootstrap.min.js") }}" type="text/javascript"></script>
+
+    <script src="{{asset("plugins/iCheck/icheck.min.js")}}"></script>
+    <script>
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+        });
+    </script>
+    <script>
+        $('#login').parsley();
+
+    </script>
+    <script>
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+    </script>
+@endsection
 
 

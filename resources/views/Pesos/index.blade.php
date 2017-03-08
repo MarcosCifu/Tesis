@@ -46,7 +46,7 @@
                             @foreach($pesos as $peso)
                                 <tr>
                                     <td><a href="{{ route('admin.animales.perfil', $peso->animal->id) }}"><span class="badge">{{$peso->animal->DIIO}}</span></a></td>
-                                    <td>{{$peso->pesaje}}</td>
+                                    <td><b>{{$peso->pesaje}} KG</b></td>
                                     <td>{{$peso->fecha}}</td>
                                     @if(Auth::user()->admin())
                                     <td>
@@ -68,6 +68,7 @@
             $('#pesos').DataTable({
                 "info": false,
                 "scrollX" : true,
+                "oSearch": { "bSmart": false, "bRegex": true },
                 "language": {
                     "emptyTable": "No hay datos disponibles",
                     "search": "Buscar:",

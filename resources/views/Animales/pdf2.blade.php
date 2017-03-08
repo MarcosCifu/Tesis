@@ -33,26 +33,21 @@
 
 
 </head>
-<body class="hold-transition skin-yellow sidebar-mini">
-<div class="wrapper">
-            <!-- Header -->
-    @include('header')
-            <!-- Sidebar -->
-    @include('sidebar')
-            <!-- Content Wrapper. Contains page content -->
-    <div class="right_col" role="main">
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <!-- Main content -->
-            <section class="panel-body">
-                    <!-- Your Page Content Here -->
-                    @include('flash::message')
-                    @yield('content')
-                    @yield('chart')
-            </section><!-- /.content -->
-        </div><!-- /.content-wrapper -->
-    </div>
-</div><!-- ./wrapper -->
+<body>
+<div>
+    <section class="panel-body">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="panel panel-default animated pulse slow go">
+                    <div class="panel-heading">
+                        <h1>Información del <b>Animal</b></h1>
+                    </div>
+
+                </div><!-- /.box -->
+            </div>
+        </div>
+    </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
 
@@ -85,11 +80,6 @@
 
 <script src="{{ asset ("/plugins/chartjs/Chart.js") }}"></script>
 <script src="{{ asset ("/plugins/chosen/chosen.jquery.js") }}"></script>
-
-
-@yield('chartjs')
-@yield('tablejs')
-@yield('ajaxjs')
 
 
 </body>

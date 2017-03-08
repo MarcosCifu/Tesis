@@ -1,44 +1,31 @@
-<!DOCTYPE html>
+@extends('Index.template')
+@section('content')
+    <!-- banner1 -->
+    <div class="banner1">
+        <div class="container">
+        </div>
+    </div>
 
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sistema Laravel | Log in</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.5 -->
-    <link href="{{ asset("/bootstrap/css/bootstrap.min.css") }}" rel="stylesheet" type="text/css" />
-    <!-- Font Awesome -->
-    <link  href="{{asset("fonts/font-awesome.min.css")}}" rel="stylesheet">
-    <!-- Ionicons -->
-    <link href="{{asset("fonts/ionicons.min.css")}}" rel="stylesheet" >
-    <!-- Theme style -->
-    <link href="{{asset("dist/css/AdminLTE.min.css")}}" rel="stylesheet" >
-    <!-- iCheck -->
-    <link href="{{asset("plugins/iCheck/square/blue.css")}}" rel="stylesheet" >
-    <!--Parsley -->
-    <link href="{{ asset("/plugins/Parsley.js/parsley.css") }}" rel="stylesheet" />
-
-
-</head>
-<body class="hold-transition login-page">
-<div class="login-box">
-    <div class="login-logo">
-        <a href="#"><b>Ancali</b>Beef</a>
-    </div><!-- /.login-logo -->
-
-    <div class="login-box-body">
-        <p class="login-box-msg"><strong>Ingrese al sistema</strong></p>
-        @if (session()->has('flash_notification.message'))
-            <div class="alert alert-{{ session('flash_notification.level') }}">
-                {!! session('flash_notification.message') !!}
-            </div>
-        @endif
-
-
-
-        {!! Form::open(['route'=> 'log.store', 'method' => 'POST','data-parsley-validate' =>'', 'id' => 'login']) !!}
+    <div class="services-breadcrumb">
+        <div class="container">
+            <ul>
+                <li><a href="{{route('inicio')}}">Inicio</a><i>|</i></li>
+                <li>Ingresar</li>
+            </ul>
+        </div>
+    </div>
+    <!-- //banner1 -->
+    <!-- login -->
+    <div class="login" id="#login">
+        <div class="container">
+            <h6>Login</h6>
+            @if (session()->has('flash_notification.message'))
+                <div class="alert alert-{{ session('flash_notification.level') }}">
+                    {!! session('flash_notification.message') !!}
+                </div>
+            @endif
+            {!! Form::open(['route'=> 'log.store', 'method' => 'POST','data-parsley-validate' =>'', 'id' => 'login']) !!}
+            {!! csrf_field() !!}
             <div class="form-group">
                 {!! Form::label('email' ,'Correo Electronico') !!}
                 {!! Form::email('email', null, ['class' => 'form-control', 'placeholder' => 'example@email.com','required']) !!}
@@ -55,21 +42,23 @@
                         </label>
                     </div>
                 </div>
-                 <!-- /.col -->
+                <!-- /.col -->
                 <div class="form-group col-xs-4">
                     {!! Form::submit('Ingresar' ,['class' => 'btn btn-primary']) !!}
                 </div>
-                 <!-- /.col -->
+                <!-- /.col -->
             </div>
 
-        {!! Form::close() !!}
+            {!! Form::close() !!}
 
-
-
-
-    </div><!-- /.login-box-body -->
-</div><!-- /.login-box -->
-
+            <div class="agile_back_home">
+                <a href="{{route('inicio')}}">volver al inicio</a>
+            </div>
+        </div>
+    </div>
+    <!-- //login -->
+@endsection
+@section('script')
 <!-- jQuery 2.1.3 -->
 <script src="{{ asset ("/plugins/jQuery/jQuery-2.1.4.min.js") }}"></script>
 <script src="{{ asset ("/plugins/Parsley.js/parsley.min.js") }}"></script>
@@ -94,5 +83,5 @@
 <script>
     $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
 </script>
-</body>
-</html>
+    @endsection
+

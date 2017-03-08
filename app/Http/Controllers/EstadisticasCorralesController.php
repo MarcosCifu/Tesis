@@ -14,6 +14,14 @@ class EstadisticasCorralesController extends Controller
     public function estadisticascorrales($id)
     {
         $corrales = Corral::find($id);
+        $animalesenfermos = $corrales->animalesenfermos;
+
+        $tiposenfermos = new Collection();
+        $tiposenfermos->push($animalesenfermos->where('tipo','Vaca'));
+        $tiposenfermos->push($animalesenfermos->where('tipo','Novillo'));
+        $tiposenfermos->push($animalesenfermos->where('tipo','Vaquilla'));
+        $tiposenfermos->push($animalesenfermos->where('tipo','Ternero'));
+        $tiposenfermos->push($animalesenfermos->where('tipo','Ternera'));
         $animales = $corrales->animals;
         $promedio = 0;
         $pesajes = new Collection();

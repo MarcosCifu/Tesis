@@ -63,18 +63,39 @@
                             <b class="pull-right">{{$galpon->created_at->format('d/m/Y')}}</b>
                         </li>
                         <li class="list-group-item">
-                            <b>Cantidad total de Animales</b><br>
-                            <span class="btn btn-success">{{ $animales }}<spam>
+                            <b>Tamaño</b>
+                            <b class="pull-right">{{$tamaño}} m2</b>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Cantidad de Animales</b>
+                            @if($animales == 0)
+                                <span class="label label-success pull-right">{{$animales}}</span>
+                            @else
+                                @if($animales/($tamaño/3) < 0.7)
+                                    <span class="label label-primary pull-right">{{$animales}}</span>
+                                @else
+                                    @if($animales/($tamaño/3) < 0.9)
+                                        <span class="label label-warning pull-right">{{$animales}}</span>
+                                    @else
+                                        <span class="label label-danger pull-right">{{$animales}}</span>
+                                    @endif
+                                @endif
+                            @endif
                         </li>
                         <li class="list-group-item">
                             <b>Tipo de Animales</b> <a class="pull-right"></a>
+                            @foreach($tipoanimales as $tipo)
+                                <span class="badge pull-right"> {{$tipo}} </span>
+                            @endforeach
                         </li>
-                        <li class="list-group-item">
-                            <b>Estado</b> <a class="pull-right"></a>
-                        </li>
+
                         @if(Auth::user()->admin())
                             <li class="list-group-item">
-                                <a href="{{ route('admin.estadisticasgalpones', $galpon->id)}}"><span  class="btn btn-primary">Actualizar Estadisticas</span></a>
+                                <b>Actualizar Estadisticas</b>
+                                  <a href="{{ route('admin.estadisticasgalpones', $galpon->id)}}" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-signal"></span></a>
+                                <div>
+                                    <br>
+                                </div>
                             </li>
                         @endif
                     </ul>
@@ -92,9 +113,6 @@
                         <div class="icon">
                             <i class="ion ion-speedometer"></i>
                         </div>
-                        <a href="{{ route('admin.pesos.index') }}" class="small-box-footer">
-                            Listado de Pesajes <i class="fa fa-arrow-circle-right"></i>
-                        </a>
                     </div>
                 </div>
                 <div class="animated flipInX col-lg-4 col-xs-4 tile_stats_count">
@@ -106,9 +124,6 @@
                         <div class="icon">
                             <i class="ion ion-arrow-graph-down-right"></i>
                         </div>
-                        <a href="" class="small-box-footer">
-                            More info <i class="fa fa-arrow-circle-right"></i>
-                        </a>
                     </div>
                 </div>
                 <div class="animated flipInX col-lg-4 col-xs-4 tile_stats_count">
@@ -120,9 +135,6 @@
                         <div class="icon">
                             <i class="ion ion-arrow-graph-up-right"></i>
                         </div>
-                        <a href="#" class="small-box-footer">
-                            More info <i class="fa fa-arrow-circle-right"></i>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -149,16 +161,6 @@
                                                     </div>
                                                 </div>
                                         </div>
-                                        <div class="col-md-12">
-                                                <div class="box-header with-border">
-                                                    <h3 class="box-title">Beneficios</h3>
-                                                </div>
-                                                <div class="box-body">
-                                                    <div class="chart">
-                                                        <canvas id="barChart" style="height:230px"></canvas>
-                                                    </div>
-                                                </div><!-- /.box-body -->
-                                        </div><!-- /.col (RIGHT) -->
                                     </div>
                             </div>
                         </div><!-- /.nav-tabs-custom -->
@@ -177,13 +179,34 @@
                                         <tr>
                                             <th>Número</th>
                                             <th>Cantidad actual de Animales</th>
+                                            <th>Acción</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($galpon->corrales as $corral)
                                             <tr>
-                                                <td><a href="{{ route('admin.corrales.perfil', $corral->id) }}" class="btn btn-success">Corral {{$corral->numero}}</a></td>
-                                                <td>{{$corral->cantidad_animales}}</td>
+                                                <td><a href="{{ route('admin.corrales.perfil', $corral->id) }}" class="badge">Corral {{$corral->numero}}</a></td>
+                                                <td>
+                                                    @if($corral->cantidad_animales == 0)
+                                                        <span class="label label-success">{{$corral->cantidad_animales}}</span>
+                                                    @else
+                                                        @if($corral->cantidad_animales/($corral->tamaño/3) < 0.7)
+                                                            <span class="label label-primary">{{$corral->cantidad_animales}}</span>
+                                                        @else
+                                                            @if($corral->cantidad_animales/($corral->tamaño/3) < 0.9)
+                                                                <span class="label label-warning">{{$corral->cantidad_animales}}</span>
+                                                            @else
+                                                                <span class="label label-danger">{{$corral->cantidad_animales}}</span>
+                                                            @endif
+                                                        @endif
+                                                    @endif
+                                                </td>
+                                                @if(Auth::user()->admin())
+                                                    <td>
+                                                        <a href="{{ route('admin.corrales.edit', $corral->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
+                                                        <a href="{{ route('admin.corrales.destroy', $corral->id) }}" class="btn btn-danger"><spam onclick="return confirm('¿Seguro que deseas eliminar este pesaje?')" class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
+                                                    </td>
+                                                @endif()
                                             </tr>
                                         @endforeach
                                         </tbody>
@@ -335,10 +358,18 @@
         $(function () {
             $('#corrales').DataTable({
                 "info": false,
-                "scrollX" : true,
-                "searching": false,
-                "lengthChange" : false,
-                "paging" : false,
+                "oSearch": { "bSmart": false, "bRegex": true },
+                "language": {
+                    "emptyTable": "No hay datos disponibles",
+                    "search": "Buscar:",
+                    "paginate": {
+                        "first":      "Primero",
+                        "last":       "Ultimo",
+                        "next":       "Siguiente",
+                        "previous":   "Anterior"
+                    },
+                    "lengthMenu": "Mostrar _MENU_ entradas"
+                },
                 "lengthMenu": [[10, 20, -1], [10, 20, "Todos"]]
             });
         });

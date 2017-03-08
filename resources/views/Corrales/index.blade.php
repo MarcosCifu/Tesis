@@ -138,6 +138,7 @@
         $(function () {
             $('#corrales').DataTable({
                 "info": false,
+                "oSearch": { "bSmart": false, "bRegex": true },
                 "language": {
                     "emptyTable": "No hay datos disponibles",
                     "search": "Buscar:",
@@ -150,7 +151,7 @@
                     "lengthMenu": "Mostrar _MENU_ entradas"
                 },
                 "lengthMenu": [[10, 20, -1], [10, 20, "Todos"]],
-                scrollX: true
+                "scrollX": true
             });
         });
 

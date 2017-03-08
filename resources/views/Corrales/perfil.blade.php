@@ -22,8 +22,24 @@
                             <b class="  pull-right">{{$corrales->created_at->format('d/m/Y')}}</b>
                         </li>
                         <li class="list-group-item">
+                            <b>Tamaño</b>
+                            <b class="  pull-right">{{$corrales->tamaño}} m2</b>
+                        </li>
+                        <li class="list-group-item">
                             <b>Cantidad de Animales</b>
-                            <span class="label label-danger pull-right">{{ $corrales->cantidad_animales or 0 }}</span>
+                            @if($corrales->cantidad_animales == 0)
+                                <span class="label label-success pull-right">{{$corrales->cantidad_animales}}</span>
+                            @else
+                                @if($corrales->cantidad_animales/($corrales->tamaño/3) < 0.7)
+                                    <span class="label label-primary pull-right">{{$corrales->cantidad_animales}}</span>
+                                @else
+                                    @if($corral->cantidad_animales/($corrales->tamaño/3) < 0.9)
+                                        <span class="label label-warning pull-right">{{$corrales->cantidad_animales}}</span>
+                                    @else
+                                        <span class="label label-danger pull-right">{{$corrales->cantidad_animales}}</span>
+                                    @endif
+                                @endif
+                            @endif
                         </li>
                         <li class="list-group-item">
                             <b>Tipo de Animales</b> <a class="pull-right"></a>
@@ -328,6 +344,7 @@
                     $(function () {
                         $('#animal').DataTable({
                             "info": false,
+                            "oSearch": { "bSmart": false, "bRegex": true },
                             "language": {
                                 "emptyTable": "No hay datos disponibles",
                                 "search": "Buscar:",

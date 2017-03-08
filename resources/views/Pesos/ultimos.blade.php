@@ -42,7 +42,7 @@
                     @foreach($ultimos as $animal)
                         <tr>
                             <td><a href="{{ route('admin.animales.perfil', $animal->id) }}"><span class="badge">{{$animal->DIIO}}</span></a></td>
-                            <td>{{$animal->ultimopeso->pesaje}}</td>
+                            <td><b>{{$animal->ultimopeso->pesaje}} KG</b></td>
                             <td>{{$animal->ultimopeso->fecha}}</td>
                             @if(Auth::user()->admin())
                                 <td>
