@@ -69,6 +69,63 @@
             </div>
         </div>
         <div class="col-md-8">
+                <!-- DONUT CHART -->
+                <div class="box box-danger animated pulse slow go">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Estado de los <b>Animales</b></h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart" style="height:250px"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="chart-legend clearfix pull-left">
+                                    <li><i class="fa fa-circle-o text-green"></i> Vivos</li>
+                                    <li><i class="fa fa-circle-o text-yellow"></i> Enfermos</li>
+                                    <li><i class="fa fa-circle-o text-red"></i> Muertos</li>
+
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="chart-legend clearfix pull-left">
+                                    @if($enfermos > 0)
+                                        <li>
+                                            Tipo con mas <span class="label label-warning">&nbsp;Enfermos : </span> <span class="badge"> &nbsp;{{$tipomasenfermos}}</span>
+                                            &nbsp;<span class="pull-right text-yellow">{{round(($cantidadtipomasenfermos*100)/$enfermos,2)}}%</span>
+
+                                        </li>
+                                    @endif
+                                    @if($muertos > 0)
+                                        <li>
+                                            Tipo con mas <span class="label label-danger">&nbsp;Muertos : </span> <span class="badge">&nbsp;{{$tipomasmuertos}}</span>
+                                            &nbsp;<span class="pull-right text-red">{{round(($cantidadtipomasmuertos*100)/$muertos,2)}}%</span>
+
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </div>
+                    </div><!-- /.box-body -->
+
+                    <!-- /.box-body -->
+                    <div class="box-footer no-padding">
+                        <ul class="nav nav-pills nav-stacked">
+
+                        </ul>
+                    </div>
+                    <!-- /.footer -->
+                </div><!-- /.box -->
+        </div>
+
+
+        <div class="col-md-8">
             <div class="row tile_count">
                 <div class="animated flipInX col-lg-4 col-xs-4 tile_stats_count">
                     <div class="small-box bg-yellow">
@@ -210,11 +267,67 @@
 @endsection
             @section('chartjs')
                 <script>
+                    //-------------
+                    //- PIE CHART -
+                    //-------------
+                    // Get context with jQuery - using jQuery's .get() method.
+                    var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
+                    var pieChart = new Chart(pieChartCanvas);
+                    var PieData = [
+                        {
+                            value: {!! $muertos !!},
+                            color: "#f56954",
+                            highlight: "#f56954",
+                            label: "Animales Muertos"
+                        },
+                        {
+                            value: {!! $vivos !!},
+                            color: "#00a65a",
+                            highlight: "#00a65a",
+                            label: "Animales Vivos"
+                        },
+                        {
+                            value: {!! $enfermos !!},
+                            color: "#f39c12",
+                            highlight: "#f39c12",
+                            label: "Animales Enfermos"
+                        }
+                    ];
+                    var pieOptions = {
+                        //Boolean - Whether we should show a stroke on each segment
+                        segmentShowStroke: true,
+                        //String - The colour of each segment stroke
+                        segmentStrokeColor: "#fff",
+                        //Number - The width of each segment stroke
+                        segmentStrokeWidth: 2,
+                        //Number - The percentage of the chart that we cut out of the middle
+                        percentageInnerCutout: 50, // This is 0 for Pie charts
+                        //Number - Amount of animation steps
+                        animationSteps: 100,
+                        //String - Animation easing effect
+                        animationEasing: "easeOutBounce",
+                        //Boolean - Whether we animate the rotation of the Doughnut
+                        animateRotate: true,
+                        //Boolean - Whether we animate scaling the Doughnut from the centre
+                        animateScale: false,
+                        //Boolean - whether to make the chart responsive to window resizing
+                        responsive: true,
+                        // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                        maintainAspectRatio: true,
+                        //String - A legend template
+                    };
+                    //Create pie or douhnut chart
+                    // You can switch between pie and douhnut using the method below.
+                    pieChart.Doughnut(PieData, pieOptions);
+                </script>
+                <script>
                     $(function () {
                         /* ChartJS
                          * -------
                          * Here we will create a few charts using ChartJS
                          */
+
+
 
                         //--------------
                         //- AREA CHART -

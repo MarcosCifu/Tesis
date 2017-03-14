@@ -143,8 +143,15 @@ class CorralesController extends Controller
         $corrales = Corral::find($id);
         $estadisticas = $corrales->estadisticascorrales;
         $ultimaestadistica = $estadisticas->last();
+        $tipomasenfermos = $ultimaestadistica->tipoMayorEnfermedad;
+        $tipomasmuertos = $ultimaestadistica->tipoMayorMuerte;
         $atributos = $corrales->atributos;
         $animales = $corrales->animals;
+        $cantidadtipomasenfermos = $animales->where('tipo',$tipomasenfermos)->where('estado','Enfermo')->count();
+        $cantidadtipomasmuertos = $animales->where('tipo',$tipomasmuertos)->where('estado','Muerto')->count();
+        $vivos = $animales->where("estado",'Vivo')->where('id_corral',$corrales->id)->count();
+        $muertos = $animales->where("estado",'Muerto')->where('id_corral',$corrales->id)->count();
+        $enfermos = $animales->where("estado",'Enfermo')->where('id_corral',$corrales->id)->count();
         $tipoanimales = $animales->lists('tipo')->unique();
         $pesajepromedio=0;
         $pesajemaximo=0;
@@ -169,7 +176,14 @@ class CorralesController extends Controller
             ->with('fechaganancia', $fechaganancia)
             ->with('gananciapesos', $gananciapesos)
             ->with('tipoanimales', $tipoanimales)
-            ->with('atributos',$atributos);
+            ->with('atributos',$atributos)
+            ->with('tipomasenfermos',$tipomasenfermos)
+            ->with('tipomasmuertos',$tipomasmuertos)
+            ->with('vivos',$vivos)
+            ->with('muertos',$muertos)
+            ->with('enfermos',$enfermos)
+            ->with('cantidadtipomasenfermos',$cantidadtipomasenfermos)
+            ->with('cantidadtipomasmuertos',$cantidadtipomasmuertos);
     }
     public function animalcorral($id)
     {

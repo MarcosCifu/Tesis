@@ -15,13 +15,50 @@ class EstadisticasCorralesController extends Controller
     {
         $corrales = Corral::find($id);
         $animalesenfermos = $corrales->animalesenfermos;
+        $tipomasenfermos=0;
+        $maxtipoenfermos=0;
+        foreach ($animalesenfermos->groupBy('tipo') as $tipo)
+        {
+            if ($tipo->count() > $tipomasenfermos){
+                $maxtipoenfermos = $tipo;
+            }
+            $tipomasenfermos = $tipo->count();
 
-        $tiposenfermos = new Collection();
-        $tiposenfermos->push($animalesenfermos->where('tipo','Vaca'));
-        $tiposenfermos->push($animalesenfermos->where('tipo','Novillo'));
-        $tiposenfermos->push($animalesenfermos->where('tipo','Vaquilla'));
-        $tiposenfermos->push($animalesenfermos->where('tipo','Ternero'));
-        $tiposenfermos->push($animalesenfermos->where('tipo','Ternera'));
+        }
+        $estadisticatipoenfermos=0;
+        if ($maxtipoenfermos != null)
+        {
+            foreach ($maxtipoenfermos as $max)
+            {
+                $estadisticatipoenfermos = $max->tipo;
+            }
+
+        }
+
+        $animalesmuertos = $corrales->animalesmuertos;
+        $tipomasmuertos=0;
+        $maxtipomuertos=0;
+        foreach ($animalesmuertos->groupBy('tipo') as $tipo)
+        {
+            if ($tipo->count() > $tipomasmuertos){
+                $maxtipomuertos = $tipo;
+            }
+            $tipomasmuertos = $tipo->count();
+
+        }
+        $estadisticatipomuerto=0;
+        if ($maxtipomuertos != null)
+        {
+            foreach ($maxtipomuertos as $max)
+            {
+                $estadisticatipomuerto = $max->tipo;
+            }
+
+        }
+
+
+
+
         $animales = $corrales->animals;
         $promedio = 0;
         $pesajes = new Collection();
@@ -57,6 +94,8 @@ class EstadisticasCorralesController extends Controller
         $estadisticas->cantidad_muertos = $corrales->estadoanimalesmuertos();
         $estadisticas->fecha = Carbon::now()->toDateString();
         $estadisticas->ganancia_peso = $gananciapeso;
+        $estadisticas->tipoMayorEnfermedad = $estadisticatipoenfermos;
+        $estadisticas->tipoMayorMuerte = $estadisticatipomuerto;
         $estadisticas->save();
         return redirect()->route('admin.corrales.perfil',$corrales->id);
     }

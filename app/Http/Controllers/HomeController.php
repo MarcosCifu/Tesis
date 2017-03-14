@@ -56,11 +56,16 @@ class HomeController extends Controller
         $masmuertos = $cantidadenfermos->sortBy('cantidad_muertos')->last();
         $masenfermos = $cantidadenfermos->sortBy('cantidad_enfermos')->last();
 
-        $corralenfermos = Corral::find($masenfermos->id_corral);
-        $maxenfermos = $masenfermos->cantidad_enfermos;
-        $corralmuertos = Corral::find($masmuertos->id_corral);
-        $maxmuertos = $masmuertos->cantidad_muertos;
-
+        if ($masenfermos != null)
+        {
+            $corralenfermos = Corral::findOrFail($masenfermos->id_corral);
+            $maxenfermos = $masenfermos->cantidad_enfermos;
+        }
+        if ($masmuertos != null)
+        {
+            $corralmuertos = Corral::findOrFail($masmuertos->id_corral);
+            $maxmuertos = $masmuertos->cantidad_muertos;
+        }
         $cantidad = collect($animal)->count('id');
         $vivos = $animal->where("estado",'Vivo')->count();
         $muertos = $animal->where("estado",'Muerto')->count();

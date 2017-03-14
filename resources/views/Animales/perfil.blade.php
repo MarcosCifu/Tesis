@@ -88,7 +88,7 @@
         <div class="col-md-8">
             <div class="row tile_count">
                 <div class="animated flipInX col-lg-3 col-xs-6 tile_stats_count">
-                    @if($ultimopeso>450)
+                    @if($ultimopeso>600)
                         <div class="small-box bg-green">
                             <div class="icon">
                                 <i class="ion-location"></i>
@@ -111,7 +111,7 @@
                                     </h3>
                                     <p>Peso actual</p>
                                 </div>
-                                <h4 class="small-box-footer"><b>{{450-$ultimopeso}} KG para peso de venta</b></h4>
+                                <h4 class="small-box-footer"><b>{{600-$ultimopeso}} KG para peso de venta</b></h4>
                             </div>
                     @endif
                 </div>

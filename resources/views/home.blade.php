@@ -71,9 +71,11 @@
                             <div class="icon">
                                 <i class="ion ion-arrow-graph-down-right"></i>
                             </div>
+                            @if($minimo != null)
                             <a href="{{ route('admin.animales.perfil', $minimo->id) }}" class="small-box-footer">
                                 Ver Animal <i class="fa fa-arrow-circle-right"></i>
                             </a>
+                            @endif
                         </div>
                     </div>
                     <div class="animated flipInX col-lg-2 col-xs-4 tile_stats_count">
@@ -85,9 +87,11 @@
                             <div class="icon">
                                 <i class="ion ion-arrow-graph-up-right"></i>
                             </div>
+                            @if($minimo != null)
                             <a href="{{ route('admin.animales.perfil', $maximo->id) }}" class="small-box-footer">
                                 Ver Animal <i class="fa fa-arrow-circle-right"></i>
                             </a>
+                            @endif
                         </div>
                     </div>
                 <!-- Widget Clima

@@ -16,7 +16,7 @@ class ReportesController extends Controller
 {
     public function index()
     {
-        return view("pdf.listado_reportes");
+        return view("Reportes.index");
     }
 
 

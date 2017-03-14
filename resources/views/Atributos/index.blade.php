@@ -14,13 +14,18 @@
             </div>
         </div>
     </div>
-    <button type="button" class="btn btn-primary btn-lg animated pulse slow go" data-toggle="modal" data-target="#myModal">
-        <i class="fa fa-folder-open-o"></i> Registar nuevo Atributo
-    </button>
-    <div class="animated pulse slow go">
-        <div class="box">
+
+    <div class="panel panel-default animated pulse slow go">
+        <div class="panel-heading">
+            <h1>Listado de <b>Atributos</b></h1>
+        </div>
+        <div class="panel-body">
             <div class="box-header">
-                <h3>Listado de <b>Atributos</b></h3>
+                @if(Auth::user()->admin())
+                    <a type="button" class="btn btn-primary xs" data-toggle="modal" data-target="#myModal">
+                        Nuevo <b>Atributo</b> &nbsp;<i class="fa fa-folder-open-o"></i>
+                    </a>
+                @endif()
             </div><!-- /.box-header -->
             <div class="box-body">
                 <table id="materiales" class="table table-bordered table-hover">

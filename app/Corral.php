@@ -10,7 +10,7 @@ class Corral extends Model
     protected $fillable = ['id','numero','cantidad_alimento','id_galpon','pesaje_promedio','tamaño'];
     public function animals()
     {
-        return $this->hasMany('App\Animal','id_corral');
+        return $this->hasMany('App\Animal','id_corral')->where('venta',0);
     }
     public function galpon()
     {
@@ -26,19 +26,19 @@ class Corral extends Model
     }
     public function estadoanimales()
     {
-        return $this->hasMany('App\Animal','id_corral')->where('estado','Enfermo')->count();
+        return $this->hasMany('App\Animal','id_corral')->where('estado','Enfermo')->where('venta',0)->count();
     }
     public function estadoanimalesmuertos()
     {
-        return $this->hasMany('App\Animal','id_corral')->where('estado','Muerto')->count();
+        return $this->hasMany('App\Animal','id_corral')->where('estado','Muerto')->where('venta',0)->count();
     }
     public function animalesenfermos()
     {
-        return $this->hasMany('App\Animal','id_corral')->where('estado','Enfermo');
+        return $this->hasMany('App\Animal','id_corral')->where('estado','Enfermo')->where('venta',0);
     }
     public function animalesmuertos()
     {
-        return $this->hasMany('App\Animal','id_corral')->where('estado','Muerto');
+        return $this->hasMany('App\Animal','id_corral')->where('estado','Muerto')->where('venta',0);
     }
 
 

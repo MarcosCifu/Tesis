@@ -80,6 +80,9 @@
                             Nuevo <b>Atributo</b> &nbsp; <i class="fa fa-folder-open"></i>
                         </a>
                     @endif()
+                        <a type="button" class="btn btn-default xs" href="{{route('admin.atributos.index')}}">
+                            Ver <b>Atributos</b> &nbsp; <i class="fa fa-folder-open"></i>
+                        </a>
                 </div><!-- /.box-header -->
             <div class="box-body ">
                 <table id="corrales" class="table table-bordered table-hover">
