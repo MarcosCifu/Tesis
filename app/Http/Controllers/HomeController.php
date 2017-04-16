@@ -55,7 +55,10 @@ class HomeController extends Controller
         }
         $masmuertos = $cantidadenfermos->sortBy('cantidad_muertos')->last();
         $masenfermos = $cantidadenfermos->sortBy('cantidad_enfermos')->last();
-
+        $corralenfermos=0;
+        $corralmuertos=0;
+        $maxmuertos=0;
+        $maxenfermos=0;
         if ($masenfermos != null)
         {
             $corralenfermos = Corral::findOrFail($masenfermos->id_corral);

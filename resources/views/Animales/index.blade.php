@@ -55,7 +55,33 @@
             </div>
         </div>
     </div>
-    <div class="panel panel-default animated pulse slow go">
+    <!-- Modal -->
+    <div class="modal fade" id="importar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="box box-primary box-solid">
+                <div class="box-header with-border" >
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>Seleccione el <b>Archivo</b></h3>
+                </div>
+                <div>
+                    <div class="box-body">
+                        {{ Form::open(['route' => 'admin.animales.importar', 'method' => 'POST', 'files'=>true]) }}
+
+                        <div class="form-group">
+                            {!! Form::label('excel','Archivo de animales') !!}
+                            {!! Form::file('excel') !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::submit('Registrar' ,['class' => 'btn btn-success']) !!}
+
+                        </div>
+                        {{ Form::close() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default ">
         <div class="panel-heading">
             <h1>Listado de <b>Animales</b></h1>
         </div>
@@ -65,8 +91,14 @@
                         <a type="button" class="btn btn-primary xs"  data-toggle="modal" data-target="#registrar">
                             Nuevo <b>Animal</b> &nbsp; <i class="fa fa-paw"></i>
                         </a>
-                        <a href="{{route('admin.ventas')}}" type="button" class="btn btn-success xs">
+                        <a href="{{route('admin.ventas')}}" type="button" class="btn bg-maroon xs">
                             Vender <b>Animal</b> &nbsp; <i class="fa fa-exchange"></i>
+                        </a>
+                        <a type="button" class="btn bg-olive xs"  data-toggle="modal" data-target="#importar">
+                            Importar <b>Animales</b> &nbsp; <i class="fa fa-file-excel-o"></i>
+                        </a>
+                        <a href="{{route('excelanimales')}}" type="button" class="btn btn-info xs">
+                            Exportar <b>Animales</b> &nbsp; <i class="glyphicon glyphicon-download"></i>
                         </a>
                     @endif()
                 </div><!-- /.box-header -->
@@ -106,7 +138,7 @@
                                     @endif
                                 </td>
                                 <td>{{$animal->created_at->format('m/Y')}}</td>
-                                <td><b>{!! $animal->ultimopeso->pesaje or "0"!!} KG</b></td>
+                                <td><b>{!! $animal->pesos->last()->pesaje !!} KG</b></td>
                                 @if(Auth::user()->admin())
                                 <td>
                                     <a href="{{ route('admin.animales.edit', $animal->id) }}" class="btn btn-warning" ><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
@@ -140,7 +172,7 @@
                     },
                     "lengthMenu": "Mostrar _MENU_ entradas"
                 },
-                "lengthMenu": [[10, 20, -1], [10, 20, "Todos"]]
+                "lengthMenu": [[30, 100, -1], [30, 100, "Todos"]]
             });
         });
     </script>

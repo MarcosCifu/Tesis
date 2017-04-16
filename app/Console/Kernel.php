@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
          Commands\ActualizarEstadisticas::class,
+        Commands\GenerarReporteAnimal::class,
     ];
 
     /**
@@ -26,5 +27,7 @@ class Kernel extends ConsoleKernel
     {
          $schedule->command('actualizar:estadisticas')
              ->everyMinute();
+        $schedule->command('generar:reporteanimal')
+            ->everyMinute();
     }
 }

@@ -1,19 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Animal;
 use App\Peso;
 use App\Corral;
 use App\Galpon;
 use App\Http\Requests\AnimalRequest;
+use App\Http\Requests\ExcelRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 use Laracasts\Flash\Flash;
 use Carbon\Carbon;
 use App\Precio;
 use PDF;
+use Excel;
 
 
 
@@ -29,19 +32,13 @@ class AnimalesController extends Controller
     public function index()
     {
 
-        $animales = Animal::all();
-        $animales->each(function($animales){
-            $animales->corral->galpon;
-            $animales->corral;
-            $animales->pesos;
-            $animales->users;
-            $animales->ultimopeso;
-
-        });
-        $corrales = Corral::orderBy('numero','ASC')->lists('numero','id');
+        $animales = Animal::with('corral.galpon','pesos')->get();
+        $corrales = Corral::with('galpon')->lists('numero','id');
         $fecha = Carbon::now();
-        return view('Animales.index')->with('animales',$animales)->with('corrales', $corrales)->with('fecha',$fecha);
+
+        return view('Animales.index')->with('animales',$animales->flatten())->with('corrales', $corrales)->with('fecha',$fecha);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -128,6 +125,9 @@ class AnimalesController extends Controller
             $animal->id_corral = $request->input('corral');
             $animal->corral()->increment('cantidad_animales',1);
         }
+        $user = Auth::user();
+        $fechacompra = $request->input('fecha');
+        $animal->users()->attach($user->id, ['fecha_compra'=> $fechacompra]);
         $animal->save();
         Flash::warning('El animal ' . $animal->DIIO . ' ha sido editado con exito!');
         return redirect()->route('admin.animales.index');
@@ -239,7 +239,8 @@ class AnimalesController extends Controller
     }
     public function ventas()
     {
-        $animales = Animal::all();
+
+        $animales = Animal::with('corral.galpon','pesos')->whereBetween('pesaje_actual', [599, 1000])->get();
         return view('Animales.ventas')->with('animales',$animales);
     }
     public function vender($id)
@@ -299,6 +300,48 @@ class AnimalesController extends Controller
         });
         Flash::success('La ficha ha sido enviada con exito!');
         return redirect()->route('admin.animales.perfil',$animal->id);
+    }
+    public function excelAnimales()
+    {
+        Excel::create('animales', function ($excel){
+           $excel->sheet('animales', function ($sheet){
+               $animales = Animal::select('DIIO','tipo','estado','pesaje_inicial','pesaje_actual','gananciaPeso_actual')->get();
+              $sheet->fromArray($animales);
+              $sheet->row(1, ['DIIO', 'Tipo', 'Estado', 'Pesaje inicial', 'Pesaje actual', 'Peso ganado']);
+           });
+        })->export('xlsx');
+    }
+    public function importar(ExcelRequest $request)
+    {
+        Excel::load(Input::file('excel'), function($reader) {
+            $reader->each(function($row) {
+
+
+                $animal = new Animal;
+                $user = Auth::user();
+                $animal->DIIO = (int)$row->diio;
+                $animal->tipo = $row->tipo;
+                $animal->pesaje_inicial = (int)$row->pesaje;
+                $animal->pesaje_actual = $animal->pesaje_inicial;
+                $animal->estado = 'Vivo';
+                $corral = Corral::where('numero',(int)$row->corral)->first();
+                $animal->id_corral = $corral->id;
+                $animal->save();
+                $animal->corral()->increment('cantidad_animales',1);
+                $fechacompra = Carbon::create(2016, 12, 25);
+                $peso = new Peso;
+                $peso->id_animales = $animal->id;
+                $peso->pesaje = $row->pesaje;
+                $peso->fecha = Carbon::now();
+                $peso->save();
+                $animal->users()->attach($user->id, ['fecha_compra'=> $fechacompra]);
+
+            });
+
+        });
+        Flash::success('Animales registrados con exito!');
+
+        return redirect()->route('admin.animales.index');
     }
 
 

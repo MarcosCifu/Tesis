@@ -99,4 +99,5 @@ class EstadisticasCorralesController extends Controller
         $estadisticas->save();
         return redirect()->route('admin.corrales.perfil',$corrales->id);
     }
+
 }

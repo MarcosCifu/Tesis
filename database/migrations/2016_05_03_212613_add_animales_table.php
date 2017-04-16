@@ -18,7 +18,6 @@ class AddAnimalesTable extends Migration
             $table->enum('tipo',['Vaca','Novillo','Vaquilla','Ternero','Ternera']);
             $table->enum('estado',['Vivo','Muerto','Enfermo']);
             $table->boolean('venta');
-            $table->string('path');
             $table->integer('pesaje_inicial');
             $table->integer('pesaje_actual');
             $table->integer('gananciaPeso_actual');

@@ -10,7 +10,30 @@
                     <h3>Información del <b>Pesaje</b></h3>
                 </div>
                 <div class="modal-body">
-                    @include('Pesos.create')
+                    {{ Form::open(['route' => 'admin.pesos.store', 'method' => 'POST','id' => 'registrarpeso', 'data-parsley-validate' =>'']) }}
+                    <td>
+                        <div class="form-group">
+                            {!! Form::label('animales' ,'Animal') !!}
+                            {!! Form::select('id_animales', $animales, null, ['class' => 'form-control select-animal', 'placeholder' => 'Seleccione un animal' , 'required' ]) !!}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            {!! Form::label('pesaje' ,'Pesaje') !!}
+                            {!! Form::text('pesaje', null, ['class' => 'form-control', 'placeholder' => 'Pesaje del Animal' , 'required' ]) !!}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            {!! Form::label('fecha' ,'Fecha del Pesaje') !!}<br>
+                            {!! Form::date('fecha', $fecha) !!}
+                        </div>
+                    </td>
+                    <td class="form-group">
+                        {!! Form::submit('Registrar' ,['class' => 'btn btn-success']) !!}
+                    </td>
+                    {{ Form::close() }}
+
                 </div>
             </div>
         </div>
@@ -42,12 +65,12 @@
                     @foreach($ultimos as $animal)
                         <tr>
                             <td><a href="{{ route('admin.animales.perfil', $animal->id) }}"><span class="badge">{{$animal->DIIO}}</span></a></td>
-                            <td><b>{{$animal->ultimopeso->pesaje}} KG</b></td>
-                            <td>{{$animal->ultimopeso->fecha}}</td>
+                            <td><b>{!! $animal->pesos->last()->pesaje !!} KG</b></td>
+                            <td>{!! $animal->pesos->last()->fecha !!}</td>
                             @if(Auth::user()->admin())
                                 <td>
-                                    <a href="{{ route('admin.pesos.edit', $animal->ultimopeso->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
-                                    <a href="{{ route('admin.pesos.destroy', $animal->ultimopeso->id) }}" class="btn btn-danger" data-toggle="confirmation" data-title="Esta Seguro?" data-btn-ok-label=" Si" data-btn-cancel-label="No"><spam class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
+                                    <a href="{{ route('admin.pesos.edit', $animal->pesos->last()->id) }}" class="btn btn-warning"><spam  class="glyphicon glyphicon-wrench" aria-hidden="true"></spam></a>
+                                    <a href="{{ route('admin.pesos.destroy', $animal->pesos->last()->id) }}" class="btn btn-danger" data-toggle="confirmation" data-title="Esta Seguro?" data-btn-ok-label=" Si" data-btn-cancel-label="No"><spam class="glyphicon glyphicon-remove-circle" aria-hidden="true"></spam></a>
                                 </td>
                             @endif()
                         </tr>

@@ -10,7 +10,30 @@
                     <h3>Información del <b>Pesaje</b></h3>
                 </div>
                 <div class="modal-body">
-                    @include('Pesos.create')
+                    {{ Form::open(['route' => 'admin.pesos.store', 'method' => 'POST','id' => 'registrarpeso', 'data-parsley-validate' =>'']) }}
+                    <td>
+                        <div class="form-group">
+                            {!! Form::label('animales' ,'Animal') !!}
+                            {!! Form::select('id_animales', $animales, null, ['class' => 'form-control select-animal', 'placeholder' => 'Seleccione un animal' , 'required' ]) !!}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            {!! Form::label('pesaje' ,'Pesaje') !!}
+                            {!! Form::text('pesaje', null, ['class' => 'form-control', 'placeholder' => 'Pesaje del Animal' , 'required' ]) !!}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            {!! Form::label('fecha' ,'Fecha del Pesaje') !!}<br>
+                            {!! Form::date('fecha', $fecha) !!}
+                        </div>
+                    </td>
+                    <td class="form-group">
+                        {!! Form::submit('Registrar' ,['class' => 'btn btn-success']) !!}
+                    </td>
+                    {{ Form::close() }}
+
                 </div>
             </div>
         </div>
@@ -64,6 +87,14 @@
 @endsection
 @section('tablejs')
     <script>
+        $('#registrar').on('shown.bs.modal', function () {
+            $('.select-animal').chosen({
+                placeholder_text_multiple:'Seleccione un animal',
+                no_results_text: "Oops, animal no encontrado!"
+            });
+        });
+    </script>
+    <script>
         $(function () {
             $('#pesos').DataTable({
                 "info": false,
@@ -97,4 +128,5 @@
     <script>
         $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
     </script>
+
 @endsection

@@ -196,6 +196,14 @@ Route::group(['middleware' => ['web']], function () {
                 'uses' => 'AnimalesController@enviarficha',
                 'as' => 'admin.animales.enviarficha'
             ]);
+            Route::get('{/excelanimales', [
+                'uses' => 'AnimalesController@excelAnimales',
+                'as' => 'excelanimales'
+            ]);
+            Route::post('importar', [
+                'uses' => 'AnimalesController@importar',
+                'as' => 'admin.animales.importar'
+            ]);
             //rutas calendario
             Route::resource ('calendarios','CalendariosController');
             Route::get('cargaEventos{id?}','CalendariosController@show');

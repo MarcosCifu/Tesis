@@ -33,7 +33,7 @@
                                 @if($corrales->cantidad_animales/($corrales->tamaño/3) < 0.7)
                                     <span class="label label-primary pull-right">{{$corrales->cantidad_animales}}</span>
                                 @else
-                                    @if($corral->cantidad_animales/($corrales->tamaño/3) < 0.9)
+                                    @if($corrales->cantidad_animales/($corrales->tamaño/3) < 0.9)
                                         <span class="label label-warning pull-right">{{$corrales->cantidad_animales}}</span>
                                     @else
                                         <span class="label label-danger pull-right">{{$corrales->cantidad_animales}}</span>

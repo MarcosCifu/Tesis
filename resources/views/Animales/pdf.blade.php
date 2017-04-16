@@ -51,44 +51,44 @@
                         @endif
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">
-                                DIIO:  <b class="pull-right">{{$animal->DIIO}}</b>&nbsp;&nbsp;
-                                Tipo: <b class="pull-right">{{$animal->tipo}}</b>&nbsp;&nbsp;
+                                DIIO:  <b>{{$animal->DIIO}}</b>&nbsp;&nbsp;
+                                Tipo: <b>{{$animal->tipo}}</b>&nbsp;&nbsp;
                             </li>
                             <li class="list-group-item">
-                                Registrado desde:  <b class="pull-right">{{$animal->created_at->format('d/m/Y')}}</b>&nbsp;&nbsp;  Estadía:  <b class="pull-right">{{$permanencia}} Dias</b>
+                                Registrado desde:  <b>{{$animal->created_at->format('d/m/Y')}}</b>&nbsp;&nbsp;  Estadía:  <b>{{$permanencia}} Dias</b>
                             </li>
                             <li class="list-group-item">
-                                Pesaje Inicial:  <b class="pull-right">{{$animal->pesaje_inicial}} KG</b>&nbsp;&nbsp;
+                                Pesaje Inicial:  <b>{{$animal->pesaje_inicial}} KG</b>&nbsp;&nbsp;
                                 @if( $ultimopeso > $animal->pesaje_inicial )
-                                    Último pesaje:  <b class="pull-right text-green">{{$ultimopeso}} KG</b>&nbsp;&nbsp;
-                                    <b class="pull-right text-green">+ {{round((($ultimopeso-$animal->pesaje_inicial)*100)/$animal->pesaje_inicial,2)}}%</b>
+                                    Último pesaje:  <b class=" text-green">{{$ultimopeso}} KG</b>&nbsp;&nbsp;
+                                    <b class="text-green">+ {{round((($ultimopeso-$animal->pesaje_inicial)*100)/$animal->pesaje_inicial,2)}}%</b>
                                 @else
                                     @if($ultimopeso < $animal->pesaje_inicial)
-                                        Último pesaje:  <b class="pull-right text-red">{{$ultimopeso}} KG</b>&nbsp;&nbsp;
-                                        <b class="pull-right text-red">- {{round((($ultimopeso-$animal->pesaje_inicial)*100)/$animal->pesaje_inicial,2)}}%</b>
+                                        Último pesaje:  <b class="text-red">{{$ultimopeso}} KG</b>&nbsp;&nbsp;
+                                        <b class="text-red">- {{round((($ultimopeso-$animal->pesaje_inicial)*100)/$animal->pesaje_inicial,2)}}%</b>
                                     @else
-                                        Último pesaje:  <b class="pull-right text-blue">{{$ultimopeso}} KG</b>&nbsp;&nbsp;
-                                        <b class="pull-right text-blue">{{round((($ultimopeso-$animal->pesaje_inicial)*100)/$animal->pesaje_inicial,2)}}%</b>
+                                        Último pesaje:  <b class="text-blue">{{$ultimopeso}} KG</b>&nbsp;&nbsp;
+                                        <b class="text-blue">{{round((($ultimopeso-$animal->pesaje_inicial)*100)/$animal->pesaje_inicial,2)}}%</b>
                                     @endif
                                 @endif
                             </li>
                             <li class="list-group-item">
                                 @if( $ultimopeso > $animal->pesaje_inicial )
-                                    Pesaje ganado:  <b class="pull-right text-green">{{round($ultimopeso-$animal->pesaje_inicial,2)}} KG</b>&nbsp;&nbsp;
+                                    Pesaje ganado:  <b class="text-green">{{round($ultimopeso-$animal->pesaje_inicial,2)}} KG</b>&nbsp;&nbsp;
                                     KG por día: <b class="text-green">{{round(($ultimopeso-$animal->pesaje_inicial)/$permanencia,2)}} KG</b>&nbsp;&nbsp;
                                 @else
                                     @if($ultimopeso < $animal->pesaje_inicial)
-                                        Pesaje ganado:  <b class="pull-right text-green">{{round($ultimopeso-$animal->pesaje_inicial,2)}} KG</b>&nbsp;&nbsp;
+                                        Pesaje ganado:  <b class="text-green">{{round($ultimopeso-$animal->pesaje_inicial,2)}} KG</b>&nbsp;&nbsp;
                                         KG por día: <b class="text-red">{{round(($ultimopeso-$animal->pesaje_inicial)/$permanencia,2)}} KG</b>&nbsp;&nbsp;
                                     @else
-                                        Pesaje ganado:  <b class="pull-right text-green">{{round($ultimopeso-$animal->pesaje_inicial,2)}} KG</b>&nbsp;&nbsp;
+                                        Pesaje ganado:  <b class="text-green">{{round($ultimopeso-$animal->pesaje_inicial,2)}} KG</b>&nbsp;&nbsp;
                                         KG por día: <b class="text-blue">{{round(($ultimopeso-$animal->pesaje_inicial)/$permanencia,2)}} KG</b>&nbsp;&nbsp;
                                     @endif
                                 @endif
 
                             </li>
                             <li class="list-group-item">
-                                Estado: <b class="pull-right">{{$animal->estado}}&nbsp;&nbsp;</b>Último Diagnostico: <b class="pull-right">{{$ultimodiagnostico->enfermedad or 'Ninguno'}}</b>
+                                Estado: <b>{{$animal->estado}}&nbsp;&nbsp;</b>Último Diagnostico: <b>{{$ultimodiagnostico->enfermedad or 'Ninguno'}}</b>
                             </li>
                         </ul>
                     </div>

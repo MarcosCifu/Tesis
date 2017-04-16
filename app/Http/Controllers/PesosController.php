@@ -20,7 +20,7 @@ class PesosController extends Controller
      */
     public function index()
     {
-        $pesos = Peso::all();
+        $pesos = Peso::with('animal')->get();
         $animales = Animal::orderBy('DIIO', 'ASC')->lists('DIIO', 'id');
         $fecha = Carbon::now();
         return view('Pesos.index')->with('pesos',$pesos)
@@ -136,7 +136,7 @@ class PesosController extends Controller
     public function ultimospesos()
     {
         $animales = Animal::orderBy('DIIO', 'ASC')->lists('DIIO', 'id');
-        $ultimos = Animal::all();
+        $ultimos = Animal::with('pesos')->get();
         $fecha = Carbon::now();
         return view('Pesos.ultimos')->with('animales',$animales)->with('fecha',$fecha)->with('ultimos',$ultimos);
     }

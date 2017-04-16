@@ -5,10 +5,7 @@
     <!-- for-mobile-apps -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Truckage Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-        function hideURLbar(){ window.scrollTo(0,1); } </script>
+
     <!-- //for-mobile-apps -->
     <link href="{{asset("/bootstrap/css/bootstrap.min.css")}}" rel="stylesheet">
 
@@ -207,21 +204,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="{{ asset ("/plugins/index/web/js/jquery-2.1.4.min.js") }}"></script>
     <!-- //js -->
     <!-- load-more -->
-    <script>
-        $(document).ready(function () {
-            size_li = $("#myList li").size();
-            x=1;
-            $('#myList li:lt('+x+')').show();
-            $('#loadMore').click(function () {
-                x= (x+1 <= size_li) ? x+1 : size_li;
-                $('#myList li:lt('+x+')').show();
-            });
-            $('#showLess').click(function () {
-                x=(x-1<0) ? 1 : x-1;
-                $('#myList li').not(':lt('+x+')').hide();
-            });
-        });
-    </script>
+
     <!-- Stats-Number-Scroller-Animation-JavaScript -->
     <script src="{{ asset ("/plugins/index/web/js/waypoints.min.js") }}"></script>
     <script src="{{ asset ("/plugins/index/web/js/counterup.min.js") }}"></script>

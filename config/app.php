@@ -160,6 +160,7 @@ return [
         Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
 
     ],
@@ -211,6 +212,7 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
         'Flash'     => Laracasts\Flash\Flash::class,
         'PDF' => 'Barryvdh\DomPDF\Facade',
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
 
 
